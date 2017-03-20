@@ -1,0 +1,42 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+0 recap.doc
+0 recap.pdf
+0 time management, feedback.xlsx
+2013_Bishkek/
+2015_Uni/
+2016_Almaty/
+2016_Uni/
+cache/
+data/
+DWDdata/
+externalfig/
+fig/
+PDF_backups, oldstuff/
+R_In_Hydro/
+ToDo Topics and Files/
+
+Advertisement_Rcourse_Berry.doc
+Rcourse_Topics.txt
+RcourseBerry-concordance.tex
+RcourseBerry_dev-concordance.tex
+RcourseBerry_dev.log
+RcourseBerry_dev.nav
+RcourseBerry_dev.snm
+RcourseBerry_dev.synctex.gz
+RcourseBerry_dev.toc
+RcourseBerry_dev.vrb
+Test-concordance.tex
+Test.log
+Test.nav
+Test.pdf
+Test.Rnw
+Test.snm
+Test.synctex.gz
+Test.tex
+Test.toc
+Test.vrb
+Topics_Outline.r

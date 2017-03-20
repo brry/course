@@ -1,0 +1,3410 @@
+\documentclass[xcolor=table, xcolor=dvipsnames]{beamer} % , handout, draft
+\usetheme{Madrid} % Madrid, Warsaw, Berlin
+\usecolortheme{beaver}
+
+\usepackage[latin1]{inputenc} % windows
+%\usepackage[utf8]{inputenc} %linux
+\usepackage[T1]{fontenc} % for textbackslash
+\usepackage[german, english]{babel}
+\usepackage{natbib} % bibliography issues. cite in a scientific way
+\usepackage{rotating} % rotate tables pictures..
+\usepackage{float} % placing floats (table and figures) at exactly the place i want them to
+\usepackage{lmodern} % warnings disappear within the beamer class
+\usepackage[capitalise, noabbrev]{cleveref} % smart referencing
+\usepackage{colortbl, tabu, multirow} % For coloring table rows and text inside them
+\usepackage[labelfont=scriptsize, font=scriptsize]{caption}
+\usepackage{url, hyperref, textcomp, amsmath, listings, datetime, graphicx, booktabs, xcolor}
+%\usepackage{booktabs} % for thick lines in tables
+%\usepackage{wasysym, breakurl}
+
+\hypersetup{pdfstartview={XYZ null null 1}}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}\hfill \hyperlink{toc}{TOC} ~~ \insertframenumber / \inserttotalframenumber~~~~~~~~~}}
+\setbeamertemplate{navigation symbols}[only frame symbol]
+
+\beamersetleftmargin{0.3cm}
+\beamersetrightmargin{0.3cm}
+
+
+
+% Reduce spacing in table of contents (toc) http://tex.stackexchange.com/questions/51452
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.1em}{}{} % vskip0.5em
+\makeatother
+
+% white letters in enumerate bullet points
+\setbeamercolor{item projected}{fg=white}%fg=blue,bg=red!75!black} % fg=white
+% Block title color
+\setbeamercolor{block title}{fg=white}%fg=blue,bg=red!75!black} % white
+
+
+% define an environment for the exercises
+\newcounter{exercisecount}
+\setcounter{exercisecount}{0}
+\newenvironment{exercise}[1]
+{% This is the begin code
+\stepcounter{exercisecount} 
+\begin{block}{Exercise \arabic{exercisecount}: #1}
+}
+{% This is the end code
+\end{block} }
+
+
+% format inline R command names in blue courier:
+\newcommand{\rcode}[1]{\texttt{\textcolor{Blue}{#1}}} % or use Blue
+
+
+% Table of data and object types, with higlighted rows
+\newcommand{\datatypes}[9]{
+\begin{frame}\frametitle{Data types}
+\begin{center}
+\begin{tabu}{| l | l | l | l |}   \hline                        
+                \textbf{Description}  & \textbf{example}     &\textbf{\rcode{typeof}} &\textbf{\rcode{class}} \\\hline  \hline
+\rowfont{\color{#1}} integer number   & 4:6                  & integer   & integer   \\ \hline 
+\rowfont{\color{#2}} decimal          & 8.7                  & double    & numeric   \\ \hline
+\rowfont{\color{#3}} character string & "homer rocks"        & character & character \\ \hline
+\rowfont{\color{#4}} category         & factor("left")       & integer   & factor    \\ \hline
+\rowfont{\color{#5}} complex          & 5+3i                 & complex   & complex   \\ \hline
+\rowfont{\color{#6}} logical          & c(T, F, FALSE, TRUE) & logical   & logical   \\ \hline
+\rowfont{\color{#7}} not available    & NA                   & logical   & logical   \\ \hline
+\rowfont{\color{#8}} empty set        & NULL                 & NULL      & NULL      \\
+  \hline  
+\end{tabu}
+\end{center}
+\color{#9}
+%See also e.g. Uwe Ligges (2006) - Programmieren mit R\\
+\rcode{as.character}\texttt{(3.14)} converts a data type;  \rcode{is.integer}\texttt{(4:6)} checks.
+\rcode{str} shows an abbreviaton of \rcode{class}.\\
+\rcode{mode} (for users) is like \rcode{typeof} (R internal), but combines integer and double to numeric (VeryAdvanced: also combines closure, special and builtin to function). Other rare typeofs: raw, environment, promise, ...
+\end{frame}
+}
+
+\newcommand{\objecttypes}[7]{
+\begin{frame}\frametitle{Object types}
+\begin{center}
+%\begin{tabu}{| l | m{4cm} | m{3cm} | l |}  \hline  
+\begin{tabu}{| l | l | l | l |}  \hline 
+    \textbf{Object} & \textbf{example}                    &  \textbf{\rcode{typeof}} & \textbf{\rcode{class}}\\ \hline   \hline  
+\rowfont{\color{#1}} vector    & see data types                            & data type           & data type  \\ \hline
+\rowfont{\color{#2}} matrix    & matrix(9:15, ncol=2)                      & integer   & matrix     \\ \hline
+\rowfont{\color{#3}} table     & \small data.frame(C1=4:5, C2=c("a","b")) & list                & data.frame \\ \hline
+\rowfont{\color{#4}} list      & list(el1=7:15, el2="big")                 & list                & list       \\ \hline
+\rowfont{\color{#5}} function  & function(x) 12+0.5*x                      & closure             & function   \\ \hline
+\rowfont{\color{#6}} ...       & lm(b $\sim$ a)                            & list                & lm         \\ \hline
+\end{tabu}
+\end{center}
+\color{#7} \small A matrix consists of only one data type. If you accidentally change one element to a character, all are converted and calculations are not possible any more. DataFrames can have multiple data types, but a column in itself also has only one type. Lists can combine anything, even other lists. \rcode{is.vector}\texttt{(Object)} returns TRUE or FALSE, \rcode{as.matrix}\texttt{(Object)} converts the class of an object by force.
+\end{frame}
+}
+
+
+% Topics yet to be included:
+% Read xls files (Excel), including sheet number
+% linear regression: calculate, coef + text, berryFunctions::linReg
+
+% See where echo=3:4 is useful, see http://yihui.name/knitr/demo/output/
+% remove empty lines between code and output. apparently hard to get rid of without turning off syntax highlighting
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+
+\title{R introductionary course}
+\author{Berry Boessenkool, \texttt{berry-b@gmx.de}}
+\date{October 2015}
+
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\begin{document}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+%\def\newblock{}	% beamer---natbib bugfix
+
+<<setup, include=FALSE>>=
+#install.packages("berryFunctions")
+
+# set global chunk options   maybe use   out.width='.55\\linewidth'
+opts_chunk$set(fig.path='./fig/', fig.align='center', fig.show='hold', out.width='.8\\textwidth', fig.height=5, fig.width=9, cache=TRUE)
+options(replace.assign=FALSE, width=40)
+#options(width = 60)
+
+# set locale to US, which makes sure that eg month names are in english
+Sys.setlocale("LC_ALL", "US") # Windows
+
+# set r course working directory
+# if(.Platform$OS.type=="unix") if(Sys.getenv("username") == "hydro")
+setwd("S:/Dropbox/Public/R_course_Berry")
+
+# par standards
+par(las=1, mar=c(4,4,.5,0.5), main="")
+
+ThemeBerry <- list(highlight="
+\\definecolor{fgcolor}{rgb}{0, 0, 0}
+\\newcommand{\\hlnum}[1]{\\textcolor[rgb]{0,0,0}{#1}}
+\\newcommand{\\hlstr}[1]{\\textcolor[rgb]{0.545,0.137,0.137}{#1}}
+\\newcommand{\\hlcom}[1]{\\textcolor[rgb]{0,0.392,0}{\\textit{#1}}}
+\\newcommand{\\hlopt}[1]{\\textcolor[rgb]{0,0,0}{#1}}
+\\newcommand{\\hlstd}[1]{\\textcolor[rgb]{0,0,0}{#1}}
+\\newcommand{\\hlkwa}[1]{\\textcolor[rgb]{1,0,0}{\\textbf{#1}}}
+\\newcommand{\\hlkwb}[1]{\\textcolor[rgb]{0,0,0}{#1}}
+\\newcommand{\\hlkwc}[1]{\\textcolor[rgb]{1,0,1}{#1}}
+\\newcommand{\\hlkwd}[1]{\\textcolor[rgb]{0,0,1}{#1}}
+", background="#F5F5F5", foreground="black")
+knit_theme$set(ThemeBerry)
+rm(ThemeBerry)
+@
+
+\AtBeginSection[]
+{
+\setbeamertemplate{headline}[default]
+% \begin{frame}<beamer>{Inhalt} % frame is only shown in beamer mode (useful for creating handouts)
+\begin{frame}\frametitle{Outline}
+\small
+\tableofcontents[hideothersubsections, sectionstyle=show/shaded]
+% currentsection, currentsubsection, hideothersubsections, sectionstyle=show/hide, subsectionstyle=show/shaded, hideallsubsections
+% see section 10.5 of the beamer user guide.
+\end{frame}
+}
+
+\AtBeginSubsection[] 
+{
+\begin{frame}%[shrink]
+\frametitle{Outline}
+\small
+\tableofcontents[sectionstyle=show/shaded, subsectionstyle=show/shaded/hide]
+\end{frame}
+}  
+
+
+%------------------------------------------------------------%
+
+\begin{frame}
+	\titlepage
+  \begin{center}
+  \alert{This is the material originally from Mathias Seibert,\\ slightly changed so the document is compiling}\\[1em]
+  German Centre for Geosciences Potsdam (GFZ) \\
+  One-week course held in Bishkek, Kygyzstan, in December 2013 \\
+  within the CaWa research framework: 
+  \href{http://www.cawa-project.net/story/300}{www.cawa-project.net}\\[1em]
+  \tiny  PDF created on \today\ at \currenttime\ \\
+  \small get current main \href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/RcourseBerry.pdf}{pdf} (\href{http://bit.ly/rcBerry}{bit.ly/rcBerry}) or 
+  \href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/RcourseBerry.Rnw}{rnw}
+  \end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Outline}
+\tableofcontents[hideallsubsections]
+\label{toc}
+\end{frame}
+
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\section{Linear models in R}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Linear Regression}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+
+% maybe first something on ANOVA
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Linear Regression} 
+%cite{Crawley2005},
+% make note to first slide clickable.
+This section (linear models) was originally written by Matthias Seibert (see note on the first slide). I heavily borrowed from his slides and wish to thankfully acknowledge his work!\\[\baselineskip]
+Large parts of this section are oriented on \\ (Crawley, 2005) an introductory book on statistics using R, aimed at environmental scientists \\ and (Crawley, 2007) an extensive book on statistics in R. I recommend the book for students who want to learn how to apply statistics in R with little theory. 
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Regression types}
+\pause
+\begin{description}[<+->]
+\item[linear regression] the simplest, and the most frequently used
+\item[polynomial regression] often used to test for non-linearity in a relationship
+\item[piecewise regression] two or more adjacent straight lines
+\item[robust regression] models that are less sensitive to outliers
+\item[multiple regression] where there are numerous explanatory variables
+\item[non-linear regression] to fit a specified non-linear model to data
+\item[non-parametric regression] used when there is no obvious functional form
+\end{description}
+\end{frame}
+
+%------------------------------------------------------------%
+% 
+% <<linreg, include=FALSE>>=
+% pdf("./externalfig/linear_regression.pdf", width=5, height=3)
+% par(mar=c(2,2,.5,.5))
+% plot(1, type="n", xlim=c(0,1), ylim=c(0,1), ylab="", xlab="")
+% abline(0.4,0.5, lwd=2)
+% dev.off()
+% @
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Linear Regression}
+  The most simple linear model:
+  \[
+  y=a+bx
+  \]
+\onslide<2->
+  \begin{center}
+  \begin{tabular}{ll}
+  $y$ & predictand, or response variable\\
+  $x$ & predictor, or explanatory variable\\
+  $a$ & intercept\\
+  $b$ & slope, or gradient\\
+  \end{tabular}
+\onslide<3>
+\includegraphics[width=0.5\textwidth]{./externalfig/linear_regression.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Linear models: Not only linear ...}
+ \begin{block}{It is not that simple...}
+ Be aware that with linear models only the parameterisation is linear.\\ The function can also be nonlinear.\\
+ \(  y=ax -bx +cx^2  \) is a linear model\\
+ \(  y=ax_1^2 +b \frac{x_2 + 1}{\sqrt{x_2-1}} +cx_3 *x_4^3  \) is a linear model\\
+\end{block}
+<<lmex1, out.width="0.3\\textwidth", eval=TRUE>>=
+plot(function(x) 1*x -I(2*x) + I(3*x^2), xlim=c(-100, 100))
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Linear Regression}
+<<mcregdata>>=
+reg.data <- read.table("data/tannin.txt",header=T)
+attach(reg.data); names(reg.data)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Linear Regression}
+<<mcregdataplot>>=
+plot(tannin, growth)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Assumptions and rules of Linear Regression}
+\begin{itemize}
+\item The variance in y is constant (i.e. does not change as y gets bigger).
+\item The explanatory variable, x, is measured without error.
+\item The difference between a measured value of y and the value predicted by the model for
+the same value of x is called a residual.
+\item Residuals are measured on the scale of y (i.e. parallel to the y axis).
+\item The residuals are normally distributed
+\end{itemize}
+\begin{center}
+\includegraphics[width=0.4\textwidth]{./externalfig/tannin_residualsplot.png}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Fitting a linear model: specify a formula}
+<<lmxy,  out.width='.4\\textwidth', fig.height=4, fig.width=4>>=
+mod <- lm(growth~tannin)
+# visualise the model in a plot
+plot(growth~tannin)
+# easily done with abline
+abline(mod)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Structure of an lm object I}
+<<lmstr1, size="scriptsize">>=
+str(mod, give.attr=FALSE)
+@
+\end{frame}
+
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Structure of an lm object II}
+<<lmstr2, size="scriptsize">>=
+str(mod[1:6])
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Structure of an lm object III}
+<<lmstr3, size="footnotesize">>=
+str(mod[7:10])
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Structure of an lm object IV}
+<<lmstr4, size="scriptsize">>=
+str(mod[11])
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Structure of an lm object V}
+<<lmstr5, size="scriptsize">>=
+str(mod[12])
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Standard output of an lm object}
+<<lmprint>>=
+mod
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Your turn to practice regression ...}
+\begin{exercise}{Explore the methods for lm} %ex12
+\begin{enumerate}
+\item read and plot the tannin data, fit and plot the linear model
+\item Check out the following \rcode{lm} methods:
+\begin{enumerate}
+  \item \rcode{summary()}
+  \item \rcode{fitted.values}
+  \item \rcode{residuals}
+  \item \rcode{anova}
+  \item \rcode{plot} (click or press enter to continue)
+\end{enumerate}
+\item Bonus: plot the data, linear model, and add the line parameters into the plot
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Generic methods for linear model objects}
+\begin{description}
+\item[print]{standard output, returns formula and estimated coefficients}
+\item[summary]{very infomative summary of the fit including statistics}
+\item[coefficients]{shows the estimated values for the model coefficients}
+\item[fitted.values]{returns the fitted values for the input dataset}
+\item[update]{by specifying a formula, you can add or remove parameters from a model}
+\item[residuals]{returns the residuals (unexplained variation)}
+\item[deviance]{returns the sum of squares of the residuals (RSS)}
+\item[anova]{returns an ANOVA table of the results}
+\item[lm.influence]{identifies observations of high influence}
+\item[predict]{use a model predict from a new dataset}
+\item[plot]{diagnostic plot to analyse the quality of fit}
+\end{description}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.1}
+<<ex11sola, eval=FALSE, size="small">>=
+# Data with plant growth and tannin level (a biomolecule)
+plants <- read.table("data/tannin.txt", header=TRUE)
+str(plants)
+
+attach(plant_data) # Not good practice! confusing scoping!
+# attach creates objects of each column in the sub-environment:
+ls(pos=2)
+detach(plant_data)
+
+# rather use:
+plot(growth ~ tannin, data=plants)
+
+# linear model (lm) of growth depending on tannin:
+model <- lm(growth ~ tannin, data=plants)
+model
+abline(model) # adds line to current plot
+str(model)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.2}
+<<ex11solb, eval=FALSE>>=
+summary(model)
+# Goodness of fit , coefficient of determination
+summary(model)$r.squared # 0.8: pretty good, not perfect
+
+# what values are expected by the model:
+fitted.values(model)
+points(plants$tannin, fitted.values(model), pch=16, col=2)
+# difference between each observation and modeled value:
+residuals(model)
+
+# Analysis of Variance (see the statistics books mentioned)
+anova(model)
+# many plots with statistical information are available:
+plot(model)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.3}
+<<ex11solc, eval=FALSE>>=
+# write Parameters of fit into the graph:
+plot(growth ~ tannin, data=plants)
+abline(model, col=2)
+coef(model)
+# y = m*x + b
+r <- round( summary(model)$r.squared ,digits=2)
+m <- round( coef(model)[2] ,2 ) 
+b <- round( coef(model)[1] ,2 )
+Txt <- paste("y =", m, "* x +", b, "\nR^2 =", r)
+Txt  #\n for line break
+text(5,10, Txt, adj=0, col=2)
+
+library(berryFunctions)
+linReg(plants$tannin, plants$growth) # for a quick lmplot
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Summary of an lm object}
+<<lmsummary, size="scriptsize">>=
+oo <- options(width=150)
+summary(mod)
+@
+<<lmsummary2, echo=FALSE>>=
+options(oo)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Elements in the summary of a an lm object}
+Here is an explanation of the terms in the summary \\[\baselineskip]
+\small{
+\begin{tabular}{ll}%{rlp{.5\textwidth}}
+\texttt{Call:}              &  the way \rcode{lm} was called\\
+\texttt{Residuals:}         &  descriptive statistics about the residuals\\
+\texttt{Coefficients:}      &  statistical result for the estimated parameters\\
+\texttt{- Estimate}         &  estimated value in the fit\\
+\texttt{- Std Error}        &  standard error of the estimate \\
+\texttt{- t value}          &  t value for the test statistic\\
+\texttt{- Pr(\textgreater \textbar t\textbar)} & probability for the estimate to be 0\\
+\texttt{Multiple R-squared} &  coefficient of determination (explained variation)\\
+\texttt{Adjusted R-squared} &  adjusted for sample size and number of parameters\\
+\texttt{degrees of freedom} &  sample size - number of predictors -1\\
+% F-statistic & what is this?
+\texttt{p-value}            &  significance of the regression \\
+\end{tabular}
+}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Coefficient of determination}
+The coefficient of determination it a measure of how well a model fits to the data.\\
+It shows you the part of variation within the data that is explained by the model.\\
+
+\[R^2 \equiv 1 - \frac{SS_{\rm res}}{SS_{\rm tot}} \] 
+
+with\\[\baselineskip]
+\begin{tabular}{ll}
+\(SS_{tot}=\sum_i (y_i-\bar{y})^2 \) & total sum of squares\\
+\(SS_{reg}=\sum_i (f_i -\bar{y})^2 \)& regression (explained) sum of squares\\
+\(SS_{res}=\sum_i (y_i - f_i)^2\ \) & sum of squares of residuals\\
+\end{tabular} \\[\baselineskip]
+
+Speak: \textit{The model explains XX \% of the variation.}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{$R^2$ is not to be confused with Pearson r (correlation)}
+
+The Pearson product-moment correlation coefficient r (also $\rho$):
+\[ r_{xy} = \frac{
+\sum_i^n(x_i - \bar{x})(y_i - \bar{y})
+}{
+\sqrt{\sum_i^n(x_i - \bar{x})^2 \sum_i^n(y_i - \bar{y})^2}}
+\]
+
+For the case of a linear model with a single variable $r=\sqrt{R^2}$
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{$R^2$ is not to be confused with Pearson r (correlation)}
+For the case of a linear model with a single variable \[r=\sqrt{R^2}\]
+
+<<r2vsr>>=
+# Pearson r
+cor(tannin, growth)
+
+# R-squared
+sqrt(summary(mod)$r.squared)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+%summary
+%% measures of fit
+%% significance: intercept
+%% significance: slope
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Diagnostic plot of an lm object I}
+As you saw before, for visualisation of the line you have to add it via \rcode{abline}, the \rcode{plot} function does a diagnostic plot:
+%, tidy=T
+<<lmdiagplot, eval=F>>=
+# allow 4 subplots with par(mfrow=c(2,2))
+par(mfrow=c(2,2)); plot(mod)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+%, tidy=T
+<<lmdiagploteval, eval=T, include=FALSE, fig.height=6>>=
+# allow 4 subplots with par(mfrow=c(2,2))
+pdf(file="./externalfig/lmplot.pdf")
+par(mfrow=c(2,2)); plot(mod)
+dev.off()
+@
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Diagnostic plot of an lm object II}
+\begin{center}
+\includegraphics[width=.6\textwidth]{./externalfig/lmplot.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Measures of fit}
+Corrected sums of squares and sums of products
+\begin{description}
+\item [y sums of squares] \( SSY=\sum y^2 - \frac{(\sum y)^2}{n}\)
+\item [x sums of squares] \( SSX=\sum x^2 - \frac{(\sum x)^2}{n}\)
+\item [$x*y$ sums of squares] \( SSXY=\sum xy - \frac{(\sum x)(\sum y)}{n}\)
+\end{description}
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Multivariate linear model}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Multivariate linear model I}
+Before we actually look at multivariate models, let's examine another dataset:
+<<tree_examine>>=
+class(trees)
+head(trees)
+@ 
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Multivariate linear model II}
+<<tree_height>>=
+# Model with just Height:
+treemod_vh <- lm(trees$Volume ~ trees$Height)
+summary(treemod_vh)$r.squared # 0.3579026
+cor(trees$Volume, trees$Height)^2 # 0.3579026 - the same
+@
+\onslide<2>
+<<tree_heightb, eval=FALSE>>=
+# low correlation also visible:
+plot(trees$Volume ~ trees$Height)
+abline(treemod_vh, col=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Multivariate linear model III}
+<<tree_heightc, echo=FALSE, out.width='0.96\\textwidth'>>=
+plot(trees$Volume ~ trees$Height) 
+abline(treemod_vh, col=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Multivariate linear model IV}
+<<tree_heightd>>=
+# Just Height, but without intercept
+# (we know: Height=0 --> Vol=0)
+treemod_vh_noint <- update(treemod_vh, .~. -1)
+treemod_vh_noint
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Multivariate linear model V}
+<<tree_heighte, out.width='0.85\\textwidth'>>=
+plot(trees$Volume ~ trees$Height) 
+abline(treemod_vh, col=2)
+abline(treemod_vh_noint, col=4)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Multivariate linear model VI}
+<<tree_girth, out.width="0.7\\textwidth">>=
+# just Girth:
+cor(trees$Volume, trees$Girth)^2 # 0.9353199 
+plot(trees$Girth, trees$Volume, pch=16)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Multivariate linear model VII}
+To include several predictors, use \rcode{+} in the lm formula.
+<<tree_both, size="small">>=
+# Both:
+treemod_vhg <- lm(Volume ~ Height + Girth, data=trees)
+treemod_vhg
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Multivariate linear model VIII}
+<<tree_both2>>=
+# Both:
+summary(treemod_vhg)$r.squared 
+@
+Volume prediction from Height not good, from Girth pretty OK.\\
+Prediction from both variables not much better than just Girth.
+\onslide<2>
+<<tree_both3>>=
+# Both:
+summary(treemod_vhg)$r.squared 
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Your turn  ...}
+\begin{exercise}{multivariate model} %ex13
+We measured another tree. The girth is 15 inches and height 70 feet.
+\begin{enumerate}
+\item Estimate the wood volume by using the \rcode{coef}\texttt{ficients} of the linear model that just uses height as predictor.
+\item Estimate it with another regression just using girth.
+\item Use the multivariate model to estimate wood volume.
+\item What are possibilities and dangers of linear regression models?
+\item Bonus: Give uncertainty ranges for the model parameters
+\item Bonus: Give uncertainty ranges for the estimates
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.2-3}
+<<ex12sola, eval=TRUE>>=
+coef( lm(trees$Volume ~ trees$Girth) )
+coef(treemod_vhg)
+@
+\onslide<2>
+<<ex12solb, eval=FALSE>>=
+0.339 * 70  +  4.708 * 15  -  57.988 # 36.36 
+5.066 * 15  -  36.943 # 39.05        cubic feet
+@
+There is some variation naturally, so we don't know which result is "correct".
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.5-6}
+<<ex12solc, eval=TRUE>>=
+# prediction confidence interval:
+predict(treemod_vhg, newdata=
+    data.frame(Girth=15, Height=70), interval="conf")
+
+# parameter uncertainty:
+confint(treemod_vhg)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.5 II}
+<<ex12sold, eval=FALSE>>=
+library("berryFunctions") # for addAlpha
+plot(Volume~Girth, data=trees, las=1)
+mod <- lm(Volume~Girth, data=trees)
+x <- 7:22
+mod_p <- predict(mod, newdata=data.frame(Girth=x), 
+                 interval="conf")
+polygon(x=c(x, rev(x)), 
+        y=c(mod_p[,2], rev(mod_p[,3])), col=addAlpha(8))
+abline(mod, col=2, lwd=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.5 III}
+<<ex12sole, echo=FALSE, out.width="1\\textwidth">>=
+library("berryFunctions") # for addAlpha
+par(mar=c(3, 3, 2, 0), mgp=c(2, 0.7, 0), cex=1.2)
+plot(Volume~Girth, data=trees, las=1)
+mod <- lm(Volume~Girth, data=trees)
+x <- 7:22
+mod_p <- predict(mod, newdata=data.frame(Girth=x), interval="conf")
+polygon(x=c(x, rev(x)), y=c(mod_p[,2], rev(mod_p[,3])), col=addAlpha(8))
+abline(mod, col=2, lwd=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Multiple linear model (ANCOVA)}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Multiple linear models (MLM)}
+\begin{description}
+\item [y sums of squares] \( SSY=\sum y^2 - \frac{(\sum y)^2}{n}\)
+\item [x sums of squares] \( SSX=\sum x^2 - \frac{(\sum x)^2}{n}\)
+\item [$x*y$ sums of squares] \( SSXY=\sum xy - \frac{(\sum x)(\sum y)}{n}\)
+\end{description}
+\end{frame}
+
+%------------------------------------------------------------%
+
+% use of glm: some more comfortable features
+
+% %------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example: The ANalysis of COVAriance}
+In this example we will look at a special case of the multiple linear model: The ANalysis of COVAriance (ANCOVA).\\[\baselineskip]
+You will improve your knowledge about:
+\begin{itemize}
+\item how to specify a formula
+\item how to combine continous and nominally scaled predictors
+\item introduction of interaction
+\item an alternative plotting environment
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset}
+Overview of the correlation structure
+<<iriscorr>>=
+cor(iris[,1:4])
+@
+We will attempt to set up a model for Sepal.Width
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset}
+Get to know the data: specify a plotting formula
+
+<<irisexpplotexc, include=F>>=
+attach(iris)
+@
+
+<<irisexpplot, size="small", out.width="0.8\\linewidth">>=
+par(mfrow=c(2,2), mar=c(4,4,1,1))
+plot(Sepal.Width ~ Sepal.Length + Petal.Length + 
+       Petal.Width + Species, col=Species)
+@
+<<irisexpplotexc2, include=F>>=
+detach(iris)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset}
+For you to take a closer look at: A classical Scatterplot
+<<irissplom>>=
+library(lattice)
+splom(iris)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+
+% ANCOVA for Sepal.Length ~ Sepal.Length
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset}
+<<irissepwidthplot>>=
+# lattice library xyplot for groups highlighting
+xyplot(data=iris, Sepal.Width ~ Sepal.Length, 
+       groups=Species, auto.key=T)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset I}
+Fitting a linear model using \rcode{glm} since it has some comfortable arguments.\\[\baselineskip]
+Both species \textit{Iris versicolor} and  \textit{Iris virginica} have a slope significantly different from  \textit{Iris setosa}, as can be seen in the next slide:
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset II}
+<<optwidth1, echo=FALSE, cache=FALSE>>=
+oo <- options(width=150)
+@
+<<irissepwidthmodel, size="tiny">>=
+summary(glm(Sepal.Width ~ Sepal.Length * Species, data=iris))
+@
+<<optwidth2, echo=FALSE, cache=FALSE>>=
+options(oo)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset III}
+We remove \textit{Iris setosa} from the plot by introducing a \rcode{subset}.
+<<irisswsubsplot>>=
+xyplot(data=iris, Sepal.Width ~ Sepal.Length, 
+  groups=Species, auto.key=T, subset=Species!="setosa")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset IV}
+%In the same way we remove \textit{Iris setosa} from the model with a \rcode{subset}.
+% , tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)
+
+<<optwidth3, echo=FALSE, cache=FALSE>>=
+oo <- options(width=150)
+@
+<<irisswsubsmo, size="tiny">>=
+ summary(glm(Sepal.Width ~ Sepal.Length * Species, data=iris, subset=Species!="setosa"))
+@
+<<optwidth4, echo=FALSE, cache=FALSE>>=
+options(oo)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset}
+Neither the slope nor the intercept of \textit{Iris versiculor} and  \textit{Iris virginica} are significantly different. \\
+\medskip
+For the model we can group them by creating a new factor.
+<<irisswmonewfactor>>=
+iris$SETOSA <- iris$Species
+levels(iris$SETOSA)=c("setosa", "other", "other")
+summary(iris$SETOSA)
+@
+Now we can go back to the full data set and create a model with the new factor: (next slide)
+
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset}
+% xyplot(data=iris, Sepal.Width ~ Sepal.Length, groups=SETOSA, auto.key=T)
+<<optwidth5, echo=FALSE, cache=FALSE>>=
+oo <- options(width=150)
+@
+<<irisswnewmodel, size="tiny">>=
+summary(sw.lm <- glm(Sepal.Width ~ Sepal.Length * SETOSA, data=iris))
+@
+<<optwidth6, echo=FALSE, cache=FALSE>>=
+options(oo)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset}
+Plotting using lattice is powerful but takes some time getting used to it.
+<<irisswnewmodelplot, eval=F, size="small">>=
+xyplot(data=iris, Sepal.Width ~ Sepal.Length, groups=SETOSA, 
+       auto.key=T, col=c("darkslateblue", "tomato2"), 
+        panel=function(x,y,...)
+          {panel.xyplot(x,y,...)
+          panel.abline(coef(sw.lm)[1:2], 
+                       col="darkslateblue", lwd=2)
+          panel.abline(coef(sw.lm)[3:4] + coef(sw.lm)[1:2], 
+                       col="tomato2", lwd=2)})
+ @
+\end{frame}
+
+%------------------------------------------------------------%
+
+<<irisswnewmodelploteval, include=FALSE>>=
+pdf(file="./externalfig/sepalwidth_ancovaplot.pdf", width=7, height=5)
+xyplot(data=iris, Sepal.Width ~ Sepal.Length, groups=SETOSA, auto.key=T, col=c("darkslateblue", "tomato2"), 
+        panel=function(x,y,...){panel.xyplot(x,y,...)
+                                panel.abline(coef(sw.lm)[1:2], col="darkslateblue", lwd=2)
+                                panel.abline(coef(sw.lm)[3:4] + coef(sw.lm)[1:2], col="tomato2", lwd=2)})
+dev.off()
+@
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{MLM example with the iris dataset}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{./externalfig/sepalwidth_ancovaplot.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Specifying a formula}
+\begin{block}{Formula operators used for \rcode{lm}, \rcode{anova}, \rcode{lattice}, ...}
+\begin{tabular}{ll}
+$\sim$ & ...\\
+1 & intercept\\
+: & interaction term\\
+* & factor crossing, a*b is same as a+b+a:b\\
+\^{} & crossing to the specified degree\\
+- & removes specified term when updating a model\\
+%\%in\% & left term nested within the right: \texttt{a + b \%in\% a} is same as \texttt{a + a:b} \\
+\rcode{I}() & operators inside parenthesis are used literally\\
+. & used for \rcode{update} of a formula, refers to the existing parameters\\
+\textbar & conditional on\\
+\end{tabular}
+\end{block}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Your turn ...}
+\begin{exercise}{Fit a model for \texttt{Petal.Width} and \texttt{Sepal.Width}} %ex14
+\begin{enumerate}
+\item Find out if there is a relation between Petal.Width and Petal.Length. Is it significant? What is the coefficient of determination? Interpret the graph.
+\item Is there a relationship between Sepal.Width and Petal.Width? Is there a difference between species? Create a model based on the relationships you find. Only use significant variables.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+% \begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.1}
+% <<ex13sola, eval=FALSE>>=
+% # ToDo
+% @
+% \end{frame}
+
+%------------------------------------------------------------%
+
+% % Bad boxes!
+% % exercise with Petal.Width ~ Petal.Length
+% <<irispetwidlm>>=
+% attach(iris)
+% plot(Petal.Width ~ Petal.Length) # grouping of points
+% # fit a model anyways
+% abline(pw.lm <- lm(Petal.Width ~ Petal.Length))
+% summary(pw.lm)
+% par(mfrow=c(2,2), mar=c(4,4,3,0.5)); plot(pw.lm)
+% detach(iris)
+% @
+% 
+% % exercise with Sepal.Width ~ Petal.Width
+% <<irissepwidex>>=
+% xyplot(data=iris, Sepal.Width ~ Petal.Width, groups=Species, auto.key=T)
+% summary(model0 <- glm(Sepal.Width ~ Petal.Width * Species, data=iris))
+% summary(glm(Sepal.Width ~ Petal.Width, subset=Species=="setosa", data=iris))
+% xyplot(data=iris, Sepal.Width ~ Petal.Width, groups=Species, subset=Species!="setosa", col=c("darkslateblue", "tomato2"))
+% summary(swlm1 <- glm(Sepal.Width ~ Petal.Width * Species, data=iris, subset=Species!="setosa"))
+% # There is a significant difference in the intercept, but not in the slope, lets remove the interaction, then
+% swlm2 <- update(swlm1, ~ . - Petal.Width:Species)
+% summary(swlm2)
+% xyplot(data=iris, Sepal.Width ~ Petal.Width, groups=Species, subset=Species!="setosa", col=c("darkslateblue", "tomato2"), panel=function(x,y,...){panel.xyplot(x,y,...)
+%                                panel.abline(coef(swlm2)[1:2], col="tomato2", lwd=2)
+%                                panel.abline(coef(swlm2)[1:2] + c(coef(swlm2)[3],0), col="darkslateblue", lwd=2)})
+% # conclusions: versicolor and virginica differ in the intercept, but not in their slope
+% @
+% 
+% <<irisancovaplot>>=
+% plot(data=iris, Sepal.Width ~ Sepal.Length, groups=Species, auto.key=T)
+% @
+% 
+% 9:00 - 10:30: linear models, regression (spearman), ANOVA, histogram, ks.test
+% 11:00 - 12:30: exercise
+
+% linear regression
+% SSE, SSR, SSY, SSX, SSXY
+% formula definition
+% return values of lm
+% multiple linear model
+% sepal oder DEWFORA
+% scatterplot
+% update
+% overfitting
+% correlation matrix
+% aicfit
+% exercise with relating snow cover to elevation -> after spatial lesson is done
+
+%\href{http://www.statmethods.net/stats/regression.html}{statmethods.net/stats/regression}
+
+%------------------------------------------------------------%
+
+% \begin{frame}[fragile]\frametitle{Ideas for more} 
+% \begin{itemize}
+% \item Find a correct solution for a model of tree volume as a function of tree height and girth
+% \item PERSIANN rainfall data from binary files
+% \end{itemize}
+% \end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\section{Time series handling and analysis}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Background on time series}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Authorship note} 
+% make note to first slide clickable.
+This section (time series) was originally written by Matthias Seibert (see note on the first slide). I heavily borrowed from his slides and wish to thankfully acknowledge his work!
+
+<<librariests>>=
+library(xts)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Types of time series}
+\begin{itemize}
+\item regularly spaced time series
+% , cache=T, dev='pdf', out.width=".9\\linewidth">>=
+<<regularts, echo=F, fig.height=2, fig.width=7>>= 
+# create fictive random walk time series
+set.seed(42)
+x <- cumsum(rnorm(10*12))
+# make it a time series object
+x <- ts(data=x, start=1960, end=1969, freq=12)
+x <- as.xts(x)
+# plot with the default plotting command and custom x axis
+par(mar=c(2,2,0.5, 1))
+plot(time(x), x, type="b", axes=F, lwd=2, ylab="", main="", xlab="", cex=0.7)
+box()
+axis(2)
+axis(1, at=time(x)[0:10*12+1])
+@
+\item irregularly spaced time series
+<<irregularts, echo=F, fig.height=2, fig.width=7>>=
+# sample
+x1 <- sample(x, floor(0.4*length(x)))
+# plot with the default plotting command and custom x axis
+par(mar=c(2,2,0.5, 1))
+plot(time(x1), x1[,1], type="h", axes=F, lwd=2, ylab="", main="", xlab="")
+box()
+axis(2)
+axis(1, at=1960:1969)
+@
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Complexity of time objects}
+\begin{itemize}
+\item time zones \medskip\\
+\includegraphics[width=0.4\textwidth]{externalfig/timezones.png}
+\item various formats
+\begin{itemize}
+  \item \texttt{11.12.2013 12:00}
+  \item \texttt{2013-12-11 12:00:00 GMT}
+  \item \texttt{12/11/2013 12:00 am}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{The benefit of using time series classes}
+\begin{itemize}
+\item adjusted plotting
+\item make the computer "understand" time: rules for addition, subtraction
+\item deal with leap years
+\item aggregation
+\item reformatting and conversion: for example julian days to date
+\item advanced time series analysis \footnote{usage of time classes are not a precondition in general}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{General information and packages}
+  There's a lot of information on the \href{http://cran.r-project.org/web/views/TimeSeries.html}{R Task view on time series}.
+
+  \vspace{2em}
+
+	This workshop will mainly deal with the libraries: 
+	\begin{itemize}
+		\item \href{http://cran.r-project.org/web/packages/zoo/index.html}{\texttt{zoo}} 
+		\item \href{http://cran.r-project.org/web/packages/xts/index.html}{\texttt{xts}}
+	\end{itemize}
+	and methods associated with those classes.
+
+	\vspace{2em}
+
+	We (Mathias and Berry) consider "time" as a very complicated thing, which
+	means, we have some knowledge gaps about that topic, too.
+
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{We will have to deal with two aspects in the following section}
+  learn how to deal with:
+  \begin{description}
+  \item[time itself]{handling time objects}
+  \item[time series]{handling time series objects}
+  \end{description}
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Importing time series information}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Where we want to get in this lecture ...}
+At the end of the part of this lecture we want to create a time series of monthly temperature of a station in Tien Shan
+\begin{figure}[h]
+\includegraphics[width=0.9\textwidth]{./externalfig/SS_Tyan-Shyan_monthly_txt.png}
+\caption{Format of the file \texttt{data/Tyan-Shyan\_monthly.txt}, monthly and annual temp}
+\end{figure}
+% \begin{itemize}
+% \end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+<<txttimeex, include=FALSE>>=
+extimes <- seq(ISOdate(1991,8,31), ISOdate(2010,6,27), by="days")
+write(format(extimes, "%d.%m.%Y"), file="data/days.txt") # time from the independence until Kir became a parlamentary republic
+write(format(extimes, "%Y-%j"), file="data/juliandays.txt") # %Y-%j julian days
+write(format(extimes, "%Y-%d-%m_(%H:%M)"), file="data/daystimes.txt") # date and time
+write(format(extimes, "Year:%Y_Month:%m_Day:%d"), file="data/daystext.txt") # date and time
+write(format(extimes, "%d_day_of_%B_%Y"), file="data/daysmonthtext.txt") # date and time
+@
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Reading time series data from textfiles}
+  \begin{itemize}
+ \item simple example: \includegraphics[scale=0.4]{./externalfig/SS_days.png}
+ \item Dates in a standard format
+ \end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Main function \rcode{strptime}}
+\begin{itemize}
+\item from character to time (POSIXct)
+<<strptimedef, eval=FALSE>>=
+strptime(x, format, tz = "")
+@
+\item from time to character
+<<formatdef, eval=FALSE>>=
+format(x, format = "", tz = "", usetz = FALSE, ...)
+@
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Specifiying the input format of the time input}
+% charcters in the format string not interpretable as conversions specificators
+\begin{block}{POSIX standard for text-dat/time conversion specifications}
+\begin{tabular}{ll}
+\texttt{\%A (\%a)} & Full (abbreviated) weekday name \footnote{in the current locale}\\
+\texttt{\%B (\%b)} & Full (abbreviated) month name \footnote{in the current locale}\\
+\texttt{\%d} & Day of the month as decimal number (01-31)\\
+\texttt{\%m} & Month as decimal number (01-12)\\
+\texttt{\%Y (\%y)} & Year with (without) century (00-99)\\
+\texttt{\%H} & Hours as decimal number (00-23)\\
+\texttt{\%M} & Minute as decimal number (00-59)\\
+\texttt{\%S} & Second as decimal number (00-61)\footnote{accepts up to two leap seconds}\\
+\texttt{\%j} & Day of year as decimal number (001-366)\\
+\end{tabular}
+\end{block}
+see \rcode{help(strptime)} for details and more 
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Importing \texttt{days.txt}}
+<<importdaytxt, eval=TRUE, include=TRUE>>=
+days.o <- scan(file="data/days.txt", what="character")
+days1 <- strptime(x=days.o, format="%d.%m.%Y")
+head(days1)
+days2 <- as.Date(x=days.o, format="%d.%m.%Y")
+head(days2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Your turn ...}
+  \begin{exercise}{Import times from a text file} %ex15
+  \label{ex:importtime}
+Practice the specification of the \rcode{format} in \rcode{strptime} or \rcode{as.Date} by adapting it to the formats in the following files, which you will find in the \texttt{data} directory:
+\begin{enumerate}
+    \item \texttt{juliandays.txt}
+    \item \texttt{daystimes.txt}
+    \item \texttt{daystext.txt}
+    \item \texttt{daysmonthtext.txt}
+    \end{enumerate}
+  \end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}}
+<<SOLimporttime, size="tiny">>=
+file1 <- strptime(format="%Y-%j", x=scan("data/juliandays.txt", what="character"))
+file2 <- strptime(format="%Y-%d-%m_(%H:%M)", x=scan("data/daystimes.txt", what="character"))
+file3 <- strptime(format="Year:%Y_Month:%m_Day:%d", x=scan("data/daystext.txt", what="character"))
+file4 <- strptime(format="%d_day_of_%B_%Y", x=scan("data/daysmonthtext.txt", what="character"))
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.1}
+<<SOLimporttime1, tidy=FALSE>>=
+time1 <- scan("data/juliandays.txt", what="character")
+str(time1)
+time1 <- strptime(x=time1, format="%Y-%j")
+str(time1)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.I}
+<<SOLimporttime2, tidy=FALSE>>=
+time2 <- scan("data/daystimes.txt", what="character")
+str(time2)
+time2 <- strptime(x=time2, format="%Y-%d-%m_(%H:%M)")
+str(time2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.II}
+<<SOLimporttime3, tidy=FALSE>>=
+t3 <- scan("data/daystext.txt", what="character")
+str(t3)
+t3 <- strptime(x=t3, format="Year:%Y_Month:%m_Day:%d")
+str(t3)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.V}
+<<SOLimporttime4, tidy=FALSE>>=
+time4 <- scan("data/daysmonthtext.txt", what="character")
+str(time4)
+time4 <- strptime(x=time4, format="%d_day_of_%B_%Y")
+str(time4)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Difference of \texttt{strptime} and \texttt{as.Date} I}
+<<strptimevsasdate, eval=TRUE, include=TRUE>>=
+# Remember:
+days1 <- strptime(x=days.o, format="%d.%m.%Y")
+days2 <-  as.Date(x=days.o, format="%d.%m.%Y")
+
+# the strptime object
+str(days1)
+
+# the as.Date object
+str(days2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Difference of \texttt{strptime} and \texttt{as.Date} II}
+<<strptimevsasdate2, eval=TRUE, include=TRUE>>=
+# the strptime object
+head(as.numeric(days1))
+# the as.Date object
+head(as.numeric(days2))
+@
+\begin{itemize}
+\item Internally, the two objects are saved differently
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Date and time objects}
+There are several classes that deal specifically with time and date objects
+\begin{description}
+\item[POSIX] class with Portable Operating System Interface standard (POSIXct, POSIXlt) is the do-it-all option with support of date and time, timezones and daylight/standard times, saved as seconds since  January 1, 1970 GMT (POSIXct)\\
+%\item[chron] dates and times also represented as days since January 1, 1970 only represents year and month, hence only suitable for monthly data\\
+\item[Date] class for date only, infrastructure for regular and irregular time series, represents number of days since 1970-01-01, with negative values for earlier dates\\
+\item[zoo::yearmon] only represents year and month, hence only suitable for monthly data, internally it saves data as the year + 0 for January and  year + 1/12 for February and so on\\
+%datetime
+% classes
+\end{description}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Let us understand a little bit more about R ...}
+Wikipedia: 
+\begin{quote}
+Object-oriented programming (OOP) is a programming paradigm that represents concepts as "objects" that have data fields (attributes that describe the object) and associated procedures known as methods.
+\end{quote}
+\begin{block}{Classes in R}
+\begin{description}
+\item[classes] in R are definitions of object structures.
+\item[methods] are functions that are adapted to the class
+\item[inheritance] means that one class can extend on another class while keeping its structure and associated methods. 
+\end{description}
+\end{block}
+% example: str summary applicable to many objects
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Class inquiry}
+Retrieving class information 
+% , tidy=T
+<<classes, echo=T, eval=T>>=
+class(days1)
+str(days1)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Class inquiry}
+Retrieving information about a class 
+% , tidy=T
+<<getclasses, echo=T, eval=T>>=
+getClass("POSIXct")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Importing a time series from a text file}
+Back to the example of the monthly temperature of Tien Shan
+\begin{figure}[h]
+\includegraphics[width=0.5\textwidth]{./externalfig/SS_Tyan-Shyan_monthly_txt.png}
+\end{figure}
+ \begin{itemize}
+\item tab delimited text
+\item monthly and annual means in one file
+\item one header in 2nd line
+\item only years are supplied
+ \end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Importing a time series from a text file}
+first, import the text file
+<<optwidth7, echo=FALSE, cache=FALSE>>=
+oo <- options(width=150)
+@
+<<tyanshyan1a>>=
+TienShan.dat <- read.table("data/Tyan-Shyan_monthly.txt", 
+                           header = T,sep="\t", skip=1)
+@
+<<tyanshyan1b, size="tiny">>=
+head(TienShan.dat) # display the data frame
+@
+<<optwidth8, echo=FALSE, cache=FALSE>>=
+options(oo)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Importing a time series from a text file}
+from the \rcode{data.frame} we can extract the monthly and/or the annual values:
+<<tyanshyan2>>=
+# create xts object of the annual temperatures
+# create time object from supplied dates
+annt <- as.yearmon(paste("Dec", TienShan.dat[,1]))
+tann.tiens <- xts(TienShan.dat[,14], order.by=annt)
+colnames(tann.tiens) <- "TIENSHAN"
+head(tann.tiens,3)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Importing a time series from a text file}
+from the \rcode{data.frame} we can extract the monthly and/or the annual values:
+<<tyanshyan3>>=
+# create xts object of the monthly temperatures
+timerange <- as.Date(paste(range(TienShan.dat[,1]), 
+                           c("-01-01", "-12-01"), sep=""))
+# create time:
+mont <- seq(first(timerange), last(timerange), by="month")
+mont <- as.yearmon(mont)
+tmon.tiens <- xts(c(t(TienShan.dat[,2:13])), order.by=mont)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Manipulation of time series}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Methods for date and time objects I}
+Make functions from package "zoo" available:
+<<dtmeth1a, echo=T, eval=T>>=
+library(zoo)
+now <- Sys.time()
+now
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Methods for date and time objects II}
+Conversion from one class to another follows the \rcode{as.*} syntax
+<<dtmeth1b, echo=T, eval=T>>=
+class(now)
+as.Date(now)
+as.yearmon(now)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Methods for date and time objects III}
+you can do simple calculation with time % , tidy=T
+<<dtmeth2a, echo=T, eval=T>>=
+print(now)
+sixminago <- now - 360
+print(sixminago)
+lastyear <- now - 365*24*60*60 # %d * %H * %M * %S
+print(lastyear)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Methods for date and time objects IV}
+<<dtmeth2b>>=
+Sys.time() - sixminago
+Sys.time() - lastyear
+sixminago < now
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Methods for date and time objects V}
+and you can round a time % , tidy=T
+<<dtmeth5, echo=T, eval=T>>=
+round(now, "hours")
+round(now, "days")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Creating time sequences}
+there is also a method for the \rcode{seq} function with POSIX ... % , tidy=T
+<<dtmeth3, echo=T, eval=T>>=
+seq(ISOdate(2013, 12,9), ISOdate(2013, 12,11), by="day")
+seq(as.Date("2013-12-9"), as.Date("2013-12-11"), by="day")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Creating time sequences}
+\begin{block}{Options for time sequences with \texttt{seq} in POSIXt method}
+for the argument \rcode{by} you can specify (see also \rcode{?seq.POSIXt}):
+\begin{itemize}
+\item number in seconds
+\item \rcode{difftime} object
+\item a character string like: "sec", "min", "hour", "day", "DSTday", "week", "month" or "year"
+\end{itemize}
+\end{block}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Your turn ...}
+  \begin{exercise}{How old are you?} %ex16
+  Use \rcode{seq} to estimate the number of 
+  \begin{enumerate}
+  \item years,
+  \item months,
+  \item days,
+  \item hours
+  \end{enumerate}
+  you already live.
+  \end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}}
+<<timeseq1>>=
+birthday <- ISOdatetime(1984,5,26,20,7,0)
+# number of hours since birthday (rounded)
+length(seq(birthday, Sys.time(), "years"))
+@
+The "cannot allocate error" occurs if an object is too large for your RAM Memory. See \rcode{?memory.size}.\\ 
+\onslide<2->
+Computationally it is much faster to obtain time differences:
+<<timeseq2, size="small", results="hold">>=
+difft <- difftime( Sys.time(), ISOdatetime(1984,5,26, 20,7,0), 
+                   units="days")
+as.numeric(difft/365.242199) # to get rid of the description
+# that comes from the difftime class
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Notable "isssues" with daylight saving time}
+<<timeseq3, eval=FALSE>>=
+# Days for each year
+dpy <- difftime(ISOdatetime(1:3000+1,1,1, 0,0,0), 
+                ISOdatetime(1:3000,1,1, 0,0,0))
+table(dpy)
+725 / (727+2272+2) # ca 1/4th of all years. 
+# OK, but: 365.041667 365.958333 ??
+# Leap hours? .0416667*24 -> 1 hr
+which(dpy != 365 & dpy != 366) 
+# 1940 1942 --> Daylight Saving Times issues.
+@
+\href{http://de.wikipedia.org/wiki/Sommerzeit\#Deutschland}{http://de.wikipedia.org/wiki/Sommerzeit\#Deutschland}\\
+\href{http://www.horlogeparlante.com/history.html?city=2950159}{http://www.horlogeparlante.com/history.html?city=2950159}
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Managing time series objects}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Main packages}
+\begin{description}
+\item[\texttt{ts}] basic class for managing single vector regular time series\\
+\item[\texttt{zoo}/\texttt{xts}] Infrastructure for regular and irregular time series and multiple variables\\
+\end{description}
+\href{http://www.cru.uea.ac.uk/cru/data/temperature/CRUTEM4-gl.dat}{www.cru.uea.ac.uk/cru/data/temperature/CRUTEM4-gl.dat}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Help for date and time objects}
+\emph{When considering which class to use, always choose the least complex class.}
+%\medskip\\
+
+Details on classes during everyday use, check out R help on:  % , tidy=FALSE
+<<datetimeclasses, eval=FALSE, echo=TRUE>>=
+?DateTimeClasses;
+
+?strptime
+@
+
+R Help Desk: Date and Time Classes in R by Gabor Grothendieck and Thomas Petzoldt in R News 4(1) , 29-32.
+%\href{http://cran.r-project.org/doc/Rnews/Rnews_2004-1.pdf}{Rnews 2004-1}
+
+and of course: consult the package vignettes, for example %#http://cran.r-project.org/web/packages/xts/vignettes/xts.pdf
+<<zoovignette, eval=F>>= 
+
+vignette("xts", package="xts")
+vignette("zoo-quickref", package="zoo")
+@
+\end{frame}
+
+% %------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Example: Regular time series with \rcode{ts}}
+ specify \rcode{ts} by 
+<<tsfunc, eval=FALSE>>= 
+ts(data, start, end, frequency,...)
+@
+
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Example: Global mean temperature}
+Example with global mean temperature anomalies from \href{http://www.cru.uea.ac.uk/cru/data/temperature/CRUTEM4-gl.dat}{CRUTEM4}, which has the format
+\begin{verbatim}
+for year = 1850 to endyear
+  format(i5,13f7.3) year, 12 * monthly values, annual value
+  format(i5,12i7)   year, 12 * percentage coverage of 
+                               hemisphere or globe
+\end{verbatim} % , tidy=T
+<<globtempdownload, eval=FALSE, echo=TRUE, size="footnotesize">>=
+globtemp <- scan("data/CRUTEM4-gl.dat", sep="\n", what="character")
+globtemp <- globtemp[seq(2,length(globtemp), by =2)* -1]
+write("YEAR Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec MEAN", 
+      file="data/t_global.txt")
+write(globtemp, file="data/t_global.txt", append=T)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Example: Regular time series with \rcode{ts}}  % , tidy=T
+<<globtempscan, eval=TRUE, echo=TRUE>>=
+# load the data set t_global.txt and prepare
+globtemp <- read.table("data/t_global.txt", header=T)
+globtemp <- globtemp[,-14]
+globtempvector <- c(t(globtemp[,-1]))
+globtemp.ts <- ts(globtempvector, 
+                  start=c(head(globtemp[,1],1),1), 
+                  end=c(tail(globtemp[,1],1),12), fr=12)
+# aggregation to annual scale 
+# (one period, as specified by the frequency)
+globtemp.annual <- aggregate(globtemp.ts, FUN = mean)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Example: Regular time series in \rcode{ts}} % , tidy=T
+<<globtempplot, eval=TRUE, echo=TRUE>>=
+plot(globtemp.ts, col="grey20")
+lines(globtemp.annual, col="red", lwd=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Example: Regular time series in \rcode{ts}} % , tidy=T
+<<globtempdecompose, eval=TRUE, echo=TRUE, fig.height=5, fig.width=9>>=
+plot(decompose(globtemp.ts))
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Example: Regular time series in \rcode{ts}}
+\rcode{ts}
+\begin{itemize}
+\item basic time series objects
+\item no irregularly spaced time series
+\item no use of advanced time object classes
+\item single variables only
+\end{itemize}
+<<libts>>=
+library(xts)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Conversion of a \rcode{ts} object to \rcode{xts} or \rcode{zoo}}
+conversion to zoo or xts % , tidy=T
+<<globtemp2xts, eval=TRUE, echo=TRUE>>=
+# conversion to xts
+globtemp.xts <- as.xts(globtemp.ts)
+head(globtemp.xts,3) # time converted to yearmon
+# conversion to zoo
+globtemp.zoo <- as.zoo(globtemp.ts)
+head(globtemp.zoo,3) # time still in ts formatting
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Different methods for \rcode{xts} or \rcode{zoo}}
+plotting of the \rcode{xts} object % , tidy=T
+<<globtempxtsplot, eval=TRUE, echo=TRUE>>=
+plot(globtemp.xts)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Different methods for \rcode{xts} or \rcode{zoo}}
+plotting of the \rcode{zoo} object % , tidy=T
+<<globtempzooplot, eval=TRUE, echo=TRUE>>=
+plot(globtemp.zoo)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Different methods for \rcode{xts} or \rcode{zoo}}
+Selection of items for
+\begin{itemize}
+\item \rcode{zoo} objects
+<<globtempzoosel, eval=TRUE, echo=TRUE>>=
+globtemp.zoo[1:3]
+@
+\item \rcode{xts} objects
+<<globtempxtssel, eval=TRUE, echo=TRUE>>=
+globtemp.xts[1:3,1]
+@
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Methods for quick access to first and last elements}
+
+\begin{itemize}
+\item Selection of first and last elements
+<<zoofirstlast, eval=TRUE, echo=TRUE>>=
+first(globtemp.zoo)
+last(globtemp.zoo)
+@
+\item Selection of start and end times
+<<zoostartend, eval=TRUE, echo=TRUE>>=
+start(globtemp.zoo)
+end(globtemp.zoo)
+@
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Aggregation and smoothing of a time series}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Aggregating a time series with \rcode{aggregate}}
+using the monthly time series we can easily \rcode{aggregate} to annual
+<<tyanshyanagg>>=
+# create xts object of the annual temperatures
+tannagg.tiens <- aggregate(tmon.tiens, 
+                           by=format(time(tmon.tiens),
+                                     format="%Y"), 
+                           FUN=mean)
+# note that the time series class is kept:
+class(tannagg.tiens)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Aggregating a time series with \rcode{xts}-methods}
+\begin{block}{\rcode{period.apply} method of the \texttt{xts} package and wrappers}
+\begin{tabular}{rp{8cm}}
+\rcode{period.apply} & apply \rcode{FUN}ction to customized periods, supplied as an \rcode{INDEX} of period endpoints\\
+\rcode{apply.daily} & daily application of \rcode{FUN}ction \\
+\rcode{apply.weekly} & weekly application of \rcode{FUN}ction \\
+\rcode{apply.monthly} & monthly application of \rcode{FUN}ction \\
+\rcode{apply.quarterly} & quaterly application of \rcode{FUN}ction \\
+\rcode{apply.yearly} & annualy application of \rcode{FUN}ction \\
+\end{tabular}
+\end{block}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Aggregating a time series with \rcode{xts}-methods}
+The \rcode{xts} package provides a number methods for aggregation often used.
+We do the same step as before with the \rcode{apply.yearly} method 
+<<tyanshyanpapply>>=
+# create xts object of the monthly temperatures
+tannagg2.tiens <- apply.yearly(tmon.tiens, FUN=mean)
+# note that the time series class is kept:
+class(tannagg2.tiens)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Merging several time series I}
+Time series can be merged even if they cover different periods
+<<tiensmerge1, size="small">>=
+# merge time series of Tien Shan, having the same period
+annt.globtiens <- merge(XTS_AGG=tannagg2.tiens, tann.tiens)
+time(tannagg.tiens) <- time(tannagg2.tiens)
+annt.globtiens <- merge(TS_AGG=tannagg.tiens, annt.globtiens)
+str(annt.globtiens)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Merging several time series II}
+Time series can be merged even if they cover different periods
+<<tiensmerge2, size="small">>=
+# merge the Tien Shan with the global mean temperature series
+## prepare the global temperature
+annt.glob <- as.xts(globtemp.annual)
+## synchronize time format 
+time(annt.glob) <- as.yearmon(time(annt.glob)+11*31)
+## merge one data set
+annt.globtiens <- merge(annt.globtiens, GLOBAL=annt.glob)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Plot merged}
+Plot of the annual means of the Tien Shan station and the global mean temperature anomaly. What is the problem with this plot?
+<<tempplot, fig.height=3.5>>=
+plot.xts(annt.globtiens[,1], type="l", 
+         ylim=range(annt.globtiens, na.rm=T), main="")
+lines(annt.globtiens[,4], col="darkblue", lwd=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Your turn ...}
+  \begin{exercise}{Read data and create a time series object} %ex17
+  In the example of the Tien Shan time series
+  \begin{enumerate}
+  \item You have three time series with annual temperatures for the Tien Shan station from the lecture. One was provided, one was created by \rcode{aggregate} and with \rcode{apply.yearly}. Compare them and explain the differences. (object \rcode{annt.globtiens})
+  \item Import the monthly Tien Shan temperatures by combining colnames with years of the first column to a character string (use the \rcode{paste} function). Then convert it to a time object and create a time series object (for example \rcode{zoo})
+  merge temperature with monthly tienshan
+  \end{enumerate}
+  \end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+% Make better object names!!
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.1 I}
+<<tienshantscomp1, size="scriptsize">>=
+# Compare  aggregation methods:  original dataset:
+str(TienShan.dat$Mean.ann, vec.len=2)
+# from aggregate ( xts ( TienShan.dat ) ):
+str(tannagg.tiens, vec.len=2)
+# from apply.yearly( xts ( TienShan.dat ) ):
+str(tannagg2.tiens, vec.len=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.1 II}
+<<tienshantscomp2, size="small", out.width='.6\\textwidth'>>=
+plot(as.numeric(tannagg.tiens), type="l")
+lines(as.numeric(tannagg2.tiens), col=2)
+lines(TienShan.dat$Mean.ann, col=4)
+@
+The values provided in the dataset are somewhat different! To be able to judge this, we need to know, how the MEAN in the file was calculated, eg with weighted mean, or a median, or something else...
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.1 III}
+<<tienshantscomp3, size="small">>=
+# Examine differences
+plot(as.numeric(tannagg.tiens) - TienShan.dat$Mean.ann, type="l",
+     ylab="Aggregated - Provided averages")
+# no obvious pattern in differences; they are small anyway
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.1 IV}
+<<tienshantscomp4, size="small">>=
+plot(x=as.numeric(tannagg.tiens), y=TienShan.dat$Mean.ann,
+     xlab="Aggregated averages", ylab="Provided averages")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.1 V}
+<<tienshantscomp5, size="small">>=
+# maybe rounding the means yields the data
+round(as.numeric(tannagg.tiens),1) - TienShan.dat$Mean.ann
+# all zero, so differences came from rounding the mean
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.1 VI}
+<<tienshanmeanscomp1, size="small">>=
+# comparing the aggregation approaches by mean difference
+annt.tiens <- na.trim(annt.globtiens, is.na="any")
+all((annt.tiens$TS_AGG - annt.tiens$XTS_AGG)==0)
+all((annt.tiens$TS_AGG - annt.tiens$TIENSHAN)==0)
+mean(annt.tiens$TS_AGG - annt.tiens$TIENSHAN)
+mean(round(annt.tiens$TS_AGG, 1) - annt.tiens$TIENSHAN)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.1 VII}
+<<tienshanmeanscomp2, size="small">>=
+all((annt.globtiens$TS_AGG - annt.globtiens$XTS_AGG)==0)
+all((annt.globtiens$TS_AGG - annt.globtiens$TIENSHAN)==0)
+mean(annt.globtiens$TS_AGG - annt.globtiens$TIENSHAN)
+mean(round(annt.globtiens$TS_AGG, 1) - annt.globtiens$TIENSHAN)
+@
+difference is caused by rounding
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.2 I}
+ <<tsalimport, size="small">>=
+# pasting the years and the column names 
+# to create the monthly time object
+mont2 <- paste(colnames(TienShan.dat)[c(-1,-14)], 
+               rep(TienShan.dat[,1], each=12))
+mont2 <- as.yearmon(mont2, format="%b %Y")
+tmon.tiens <- zoo(c(t(TienShan.dat[,2:13])), order.by=mont2)
+str(tmon.tiens, vec.len=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.2 II}
+ <<tsalimport2, eval=FALSE, size="small">>=
+any( is.na(mont2) ) 
+# if TRUE, change the locale to english, so "Dec" is
+# recognized as December:
+Sys.setlocale("LC_ALL", "US")
+mont2 <- as.yearmon(mont2, format="%b %Y")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Moving average}
+\begin{description}
+\item[moving average]{is the mean in a window of width X (X observations), which is shifted along the time series}
+\end{description}
+implemented in
+\begin{description}
+\item[\rcode{zoo}]{ as 
+<<rollapply, eval=FALSE>>=
+rollapply(data, width, FUN, ...)
+@
+}
+\item[\rcode{stats}]{ as
+<<filter, eval=FALSE>>=
+filter(x, filter, method = "convolution",
+       sides = 2, circular = FALSE, init)
+@
+}
+\end{description}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Moving average of the Tien Shan time series}
+Moving average over an annual scale (12 months centered, requires weighting)
+<<tiensma, size="small", eval=FALSE>>=
+tmon.ma12.tiens <- rollapply(tmon.tiens, width=12, FUN=mean)
+tmon.ma24.tiens <- rollapply(tmon.tiens, width=24, FUN=mean)
+tmon.ma60.tiens <- rollapply(tmon.tiens, width=60, FUN=mean)
+# plotting the results
+plot.xts(tmon.tiens, type="n", main="")
+lines(tmon.tiens, col="cadetblue1", lwd=1)
+lines(tmon.ma12.tiens, col="cadetblue3", lwd=2)
+lines(tmon.ma24.tiens, col="cadetblue", lwd=2)
+lines(tmon.ma60.tiens, col="cyan", lwd=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+<<tiensmaeval, eval=TRUE, include=FALSE>>=
+tmon.ma12.tiens <- rollapply(tmon.tiens, width=12, FUN=mean)
+tmon.ma24.tiens <- rollapply(tmon.tiens, width=24, FUN=mean)
+tmon.ma60.tiens <- rollapply(tmon.tiens, width=60, FUN=mean)
+# plotting the results
+pdf(file="./externalfig/tiens_ma.pdf", width=9, height=5)
+plot.xts(tmon.tiens, type="n", main="")
+lines(tmon.tiens, col="cadetblue1", lwd=1)
+lines(tmon.ma12.tiens, col="cadetblue3", lwd=2)
+lines(tmon.ma24.tiens, col="cadetblue", lwd=2)
+lines(tmon.ma60.tiens, col="cyan", lwd=2)
+legend("top", legend=c("monthly", "MA12", "MA24", "MA60"), lwd=c(1,2,2,2), col=c("cadetblue1", "cadetblue3", "cadetblue", "cyan4"), ncol=4, bg="transparent")
+dev.off()
+@
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Moving average of the Tien Shan time series}
+\includegraphics[width=0.9\textwidth]{./externalfig/tiens_ma.pdf}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Interpolation of missing values}
+\begin{itemize}
+\item{\textbf{IMPORTANT!} Interpolation should be applied carefully, since you change your data and you can introduce errors.}
+\item{simple methods for interpolation}
+    \begin{itemize}
+    \item Linear interpolation
+    <<lininterp, eval=FALSE>>=
+na.approx(object, ...)
+@
+    \item Spline interpolation
+    <<splineinterp, eval=FALSE>>=
+na.spline(object, ...)
+@
+    \item Last Observation Carried Forward
+    <<locfinterp, eval=FALSE>>=
+na.locf(object, na.rm = TRUE, ...)
+@
+    \end{itemize}
+\item with \rcode{maxgap} you can always specifiy the maximum gap length which should be interpolated. For example with \rcode{maxgap=2} only gaps up to a length of 2 observations woud be interpolated
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Your turn ...}
+  \begin{exercise}{The temperature data of station Fergana} %ex18
+  Load the monthly temperature of station Fergana (\texttt{data/Fergana.txt}) or refer to any other station of your choice and do the following steps.
+  \begin{enumerate}
+  \item Calculate annual minimum, maximum and mean temperatures
+  \item Calculate a moving average to smoothen the time series. Use a window length of 12 months.
+  \item Merge the monthly temperatures of Ferdana with Tien Shan and plot them. Add the smoothed time series for both time series.
+  \item Calculate seasonal mean temperatures (\rcode{period.apply}).
+  \item Extra: We cannot compare the global monthly temperature anomalies to the monthly temperature averages of the stations. Why? Create a plot of monthly temperature anomalies.
+  \end{enumerate}
+  \end{exercise}
+  \small{Make sure your working directory is set correctly!}
+\end{frame}
+
+%------------------------------------------------------------%
+
+% Daten Stationszeitreihen - Webportale:
+% Climate databases:
+% \href{http://www.webpages.uidaho.edu/cae/data/cad/gmap.html}{webpages.uidaho.edu/cae/data/cad/gmap} (monthly data series, Central Asia)
+% http://nsidc.org/data/docs/noaa/g02174_central_asia_data/index.html (monthly data series, former Soviet Union)
+% http://climexp.knmi.nl (global)
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}}
+Load the Fergana station data
+ <<ferglimport, size="footnotesize">>=
+ferg.orig <- read.table("data/Fergana.txt", header=F, 
+                        skip=4, na.strings="-99999")
+timerange <- paste(range(ferg.orig[,1]), c("-01-01", "-12-01"), sep="")
+timerange <- as.Date(timerange)
+# create monthly time sequence
+mont <- as.yearmon(seq(first(timerange), last(timerange), by="month"))
+tmon.ferg <- xts(c(t(ferg.orig[,-1])), order.by=mont)
+str(tmon.ferg)
+@
+\end{frame}
+  
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.1}
+  \begin{enumerate}
+  \item[1.] Calculate annual minimum, maximum and mean temperatures
+ <<fergaggreg, eval=FALSE>>=
+apply.yearly(tmon.ferg, FUN=min)
+apply.yearly(tmon.ferg, FUN=max)
+apply.yearly(tmon.ferg, FUN=mean)
+@
+  \end{enumerate}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.2}
+  \begin{enumerate}
+  \item[2.] Calculate a moving average to smoothen the time series. Use a window length of 12 months.
+  \end{enumerate}
+<<fergama, eval=TRUE, out.width='.9\\textwidth', fig.height=3.5, fig.width=9>>=
+tmon.ma.ferg <- rollapply(tmon.ferg, width=12, FUN=mean)
+plot(tmon.ferg, type="n")
+lines(tmon.ferg, lwd=2, col="grey80")
+lines(tmon.ma.ferg, lwd=2, col="darkblue")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.3}
+  \begin{enumerate}
+  \item[3.] Merge the monthly temperatures of Ferdana with Tien Shan plot them. Add the smoothed (12) time series for both time series.
+  \end{enumerate}
+ <<fergmerge, size="small">>=
+# merge the monthly data
+tmon <- merge(FERGANA=tmon.ferg, TIENSHAN=as.xts(tmon.tiens))
+# calculate smoothing for Tien Shan
+tmon.ma.tiens <- rollapply(tmon.tiens, width=12, FUN=mean)
+# merge with the monthly data
+tmon <- merge(tmon, FERGANAma=tmon.ma.ferg)
+tmon <- merge(tmon, TIENSHANma=as.xts(tmon.ma.tiens))
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.3}
+ <<fergmerge_b, size="scriptsize">>=
+str(tmon, vec.len=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.3}
+<<libbf, echo=FALSE>>=
+library(berryFunctions)
+@
+<<fergmergeplot, size="scriptsize", fig.height=4, tidy=FALSE, eval=TRUE>>=
+plot(tmon[,1], ylim=range(tmon, na.rm=T), type="n", main="")
+suppressWarnings(mycol <- c(addAlpha("deepskyblue", c(.5,1)),
+                            addAlpha("firebrick3",  c(.5,1))))
+lines(tmon[,1], col=mycol[1]); lines(tmon[,2], col=mycol[3])
+lines(tmon[,3], col=mycol[2], lwd=2);
+lines(tmon[,4], col=mycol[4], lwd=2)
+legend("bottomleft", c("Fergana, monthly","moving average","Tien Shan, monthly", 
+"moving average"), col=mycol, bg="transparent", lwd=c(1,2), ncol=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for Exercise \arabic{exercisecount}.4}
+  \begin{enumerate}
+  \item[4.] Calculate seasonal mean temperatures for spring, summer, autumn and winter (\rcode{period.apply}).
+  \end{enumerate}
+<<fergseasavg, eval=FALSE, size="small", tidy.opts=list(width.cutoff=45)>>=
+# quarterly means
+apply.quarterly(tmon.ferg, mean)# not adapted to seasons
+# We have do that manually
+btime <- format(time(tmon.ferg), "%b")
+seas.index <- c(0, which(btime %in% c("Feb","May","Aug","Nov")))
+# last months per season: djF, amM, jjA, soN
+seas.mean <- period.apply(tmon.ferg, INDEX=seas.index, FUN=mean)
+##  we have to rejoin the time information
+seas.mean <- xts(seas.mean[,1], 
+                 order.by=time(tmon.ferg)[seas.index])
+@
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Trend analysis of time series}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+% trend in general
+% decompose(empirical)
+% wavelet, ssa to remove noise
+% linear trend
+% global T anom
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Trend in the global annual mean temperature anomalies}
+Plot global annual mean temperatures with a moving average, a local polynomial regression fit and a linear trend
+<<globannttrend, eval=FALSE>>=
+anngt.zoo <- as.zoo(globtemp.annual)
+plot(anngt.zoo)
+anngt.lm <- lm(anngt.zoo ~ time(anngt.zoo))
+abline(anngt.lm)
+lines(time(anngt.zoo), predict(anngt.lm))
+lines(time(anngt.zoo), predict(loess(anngt.zoo ~ 
+                                time(anngt.zoo))))
+anngtma.zoo <- rollapply(anngt.zoo,31, mean)
+lines(time(anngtma.zoo), anngtma.zoo)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+<<globannttrendpdf, eval=TRUE, include=FALSE>>=
+pdf(file="./externalfig/globalannt_trend.pdf", width=9, height=5)
+anngt.zoo <- as.zoo(globtemp.annual)
+plot(anngt.zoo, col="cadetblue1", lwd=1, ylab="temperature anomaly [?C]")
+anngtma.zoo <- rollapply(anngt.zoo,31, mean)
+lines(time(anngtma.zoo), anngtma.zoo, col="cadetblue3", lwd=2)
+lines(time(anngt.zoo), predict(loess(anngt.zoo ~ time(anngt.zoo))), col="darkolivegreen", lwd=2)
+anngt.lm <- lm(anngt.zoo ~ time(anngt.zoo))
+abline(anngt.lm, col="cyan4", lwd=2)
+legend("topleft", legend=c("annual mean", "moving average (31 a)", "LOESS", "linear"), lwd=c(1,2,2,2), col=c("cadetblue1", "cadetblue3", "darkolivegreen", "cyan4"), ncol=2, bg="transparent")
+dev.off()
+@
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Assessing trend in the global annual temperature anomaly time series}
+The climate is variable and therefore trend analysis complex
+\includegraphics[width=0.9\textwidth]{./externalfig/globalannt_trend.pdf}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Linear model for testing of a trend in time series}
+Linear models are not the best choice
+\begin{itemize}
+\item when there is autocorrelation in the time series
+\item linear models assume independence of residuals
+\item trends don't have to be linear 
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Nonparametric methods for trend analysis}
+\begin{figure}[H]
+\includegraphics[width=0.8\textwidth]{externalfig/nonparametrictrend_tab_hipel94.png}\\
+\begin{flushright}\tiny{from cite{Hipel1994}}\end{flushright} %need a proper CITE here
+\end{figure}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Nonparametric methods for trend analysis}
+Wikipedia:
+\begin{quote}
+"In statistics, the term non-parametric statistics refers to statistics that do not assume the data or population have any characteristic structure or parameters."
+\end{quote}
+\begin{itemize}
+\item{For example, this means there are no assumptions made regarding the sample distribution}
+\item nonparametric methods are often designed for nominally or ordinally scaled variables
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{The Mann-Kendall test}
+theoretical basis of Mann-Kendall
+\begin{description}
+ \item[$H_0$:] {data is from a population of random independent variables}
+ \item[$H_1$:] {data follows a monotonic trend}
+\end{description}
+cite{Hipel1994}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{The Mann-Kendall test statistic}
+Mann-Kendall test statistic is
+\[ S = \sum_{k=1}^{n-1} \sum_{j=k+1}^{n} sgn(x_j -x_k)\]
+where
+ \[
+sgn(x)=\begin{cases}
+              1 & x>0\\
+              0 & x=0\\
+              -1 & x<0
+              \end{cases}
+ \]
+ As a result, the time series is transformed to a series of 1,0,-1 and $S$ is asymptotically normally distributed.
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{The Mann-Kendall test}
+\begin{description}
+\item[Positive values] for $S$ result in a postive trend
+\item[Negative values] for $S$ result in a negative trend
+\end{description}
+\begin{itemize}
+\item If $S$ is significantly different from 0, then there is a trend.
+\item The Kendall $\tau$ is related to $S$ so the significance can be calculated 
+\item The Mann-Kendall test is applicable for annual data, there are adaptions to deal with seasonal variation, though.
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{The Mann-Kendall test for global annual mean temperature anomalies}
+The Mann-Kendall test is implemented in the package \rcode{Kendall}
+<<mktestannglobal>>=
+# package for the test
+library(Kendall)
+# execution of test
+MannKendall(anngt.zoo)
+@
+The low p value indicates that the $H_0$ was rejected - there is a significant trend.
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Assessing trend in the global annual temperature anomaly time series}
+The test highlights the clear trend 
+\includegraphics[width=0.9\textwidth]{./externalfig/globalannt_trend.pdf}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Your turn ...}
+\begin{exercise}{Trendanalysis of the Tien Shan dataset} %ex19
+Analyse if there is a significant trend in the Tien Shan time series. Compare different periods of the record.
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}}
+It seems that the temperature started to increase in the 70ies. Was there a significant trend before? This time we use an improved test that returns more information, called Yue Pilon method of computing nonlinear prewhitened trends.
+<<yptestannglobalpre70>>=
+# load the package
+library(zyp)
+# execution of test: zyp.yuepilon
+@
+\end{frame}
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{The Mann-Kendall test for global annual mean temperature anomalies}
+<<yptestannglobalpre70_b, size="footnotesize">>=
+zyp.yuepilon(anngt.zoo[time(anngt.zoo) < 1970], 
+             conf.intervals=TRUE)
+@
+The low p value indicates that the $H_0$ was rejected - there was a significant trend already before 1970.
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Variability of the temperature trend at the station Tien Shan}
+cite{katy2013} showed that the test result is affected by the chosen period.
+\begin{figure}[H]
+\includegraphics[width=0.9\textwidth]{externalfig/Trend_TienShan_katy2013.png}\\
+\begin{flushright}\tiny{from cite{katy2013}}\end{flushright} %need a proper CITE here
+\end{figure}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Climate projection with a weather generator}
+\includegraphics[width=0.9\textwidth]{./externalfig/remo_screenshot}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Your turn ...}
+ \begin{exercise}{Analysis of a REMO climate projection of Fergana station} %ex20
+In this exercise we will work with the projected climate data of REMO. The REMO data is saved within the file \texttt{remo\_t2m\_CAstations.dat}. The time series is regular and extends from 1.1.1950 to 31.12.2100.
+\begin{enumerate}
+\item Read the data and extract the 75th temperature data column which contains the Fergana data. This a large file and if your computer is slow, please skip this step. The reason is that the file is big and it asks you to read 226 * 55153 = 12464578 data points. To do this ask the teachers for help.
+\item Calculate annual means and plot the result. What do you see?
+\item Calculate climatology (means per every month) for the past (before 2000), the near future (until 2050) and the far future (after 2050) and display. What do you see?
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Help on exercise \arabic{exercisecount}.1}
+\begin{enumerate}
+\item use \rcode{read.table} to read the file
+\item retrieve the temporal information from the rownames with \rcode{as.Date}
+\item create a xts class object
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Help on exercise \arabic{exercisecount}.2}
+\begin{enumerate}
+\item Use \rcode{apply.yearly} for the calculation of annual means.
+\item For plotting you can just use the standard \rcode{plot}ting command.
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Help on exercise \arabic{exercisecount}.3}
+Congratulations for making it to this point!
+\begin{enumerate}
+\item Calculate monthly means with with \rcode{apply.monthly}.
+\item Create a \rcode{data.frame} that contains three columns named
+\begin{description}
+\item[T2m] {the monthly temperature means of Fergana}
+\item[MONTH] {the names of the months as created by \rcode{format(YOUR TIME, format="\%b")}, saved as ordered factors}
+\item[PERIOD] {the periods "past", "near future" and "far future" as factors}
+\end{description}
+\item For plotting you can then use the elegant \rcode{bwplot(data=YOUR DATA NAME, T2m $\sim$  MONTH \textbar PERIOD)} command.
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Attention!}
+The following solutions are not a perfect example of the best statistical approach to analyse REMO data. It is just an exercise for us to practice.
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.1}
+<<remoanalysis1, eval=FALSE>>=
+# use read.table to read the file
+allremo <- read.table("data/remo_T2m_CAstations.dat")
+# retrieve the temporal information from the rownames
+times <- as.Date(rownames(allremo), format="%d%m%Y")
+# create a xts class object
+ferremo <- xts(allremo[,75], times)
+@
+\small at this point remove unneccessary data with \rcode{rm(allremo); gc()}
+% <<saveferremo, include=FALSE, eval=FALSE>>=
+%  save(ferremo, file="data/fergana_remo.Rdata")
+% @
+<<loadferremo, include=FALSE>>=
+ load(file="data/fergana_remo.Rdata") 
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.2}
+<<remoanalysis2>>=
+annferremo <- apply.yearly(ferremo, mean)
+plot(annferremo)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.3}
+<<remoanalysis3, size="footnotesize">>=
+monferremo <- apply.monthly(ferremo, mean)
+monferremo.df <- data.frame(T2m=as.numeric(monferremo), 
+                    MONTH=format(time(monferremo), "%b"), PERIOD=1)
+monferremo.df$PERIOD[ time(monferremo) > as.Date("2000-01-01")] <- 2
+monferremo.df$PERIOD[ time(monferremo) > as.Date("2050-01-01")] <- 3
+monferremo.df$PERIOD <- factor(monferremo.df$PERIOD, 
+        labels=c("past", "near future", "far future"))
+monferremo.df$MONTH <- ordered(monferremo.df$MONTH, 
+ c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", 
+   "Aug", "Sep","Oct", "Nov", "Dec"))
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.3}
+<<remoanalysis3a>>=
+library(lattice)
+bwplot(data=monferremo.df, T2m ~ MONTH | PERIOD)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.3}
+<<remoanalysis3b>>=
+bwplot(data=monferremo.df, T2m ~ PERIOD | MONTH)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+% 
+% <<remoanalysis2_b>>=
+% # monthly acf
+% monferremo <- apply.monthly(ferremo, mean)
+% time(monferremo) <- as.yearmon(time(monferremo))
+% pasttmon.ferg <- tmon.ferg[time(tmon.ferg) >= as.yearmon( "Jan 1950") & time(tmon.ferg) < as.yearmon( "Jan 2000")]
+% # quick and dirty interpolation of missing values (do not try this at home!)
+% pasttmon.ferg <- na.approx(pasttmon.ferg)
+% pastmonferremo <- monferremo[time(monferremo) >= as.yearmon( "Jan 1950") & time(monferremo) < as.yearmon( "Jan 2000")]
+% par(mfrow=c(2,2))
+% acf(pasttmon.ferg)
+% pacf(pasttmon.ferg)
+% acf(pastmonferremo)
+% pacf(pastmonferremo)
+% @
+% 
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Summary: Methods for time series}
+
+\begin{table}
+  \begin{center}
+	\label{tab:ts_methods}
+	\begin{tabular}{ll}
+		\toprule
+		Function & description \\
+		\midrule
+		strptime &  read various time formats \\
+		as.POSIXct & convert a time format to the POSIXct format \\
+    period.apply& apply a function to number of periods\\
+    apply.monthly& monthwise application of a function\\
+    aggregate& aggregation for the \rcode{ts} class or \rcode{data.frames}\\
+    merge& merge two time series\\
+    na.approx & linear interpolation of missing values\\
+    na.trim& remove leading and tailing NAs\\
+    rollapply & apply a function to window which is slided \\
+    & along the time series\\
+		\bottomrule
+	\end{tabular}
+  \end{center}
+\end{table}
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+%\subsection{Packages for managing time series}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Time series Summary} 
+You learned
+\begin{itemize}
+\item about linear models in R
+\item about a few time series classes and related packages
+\item how to import and create time and time series objects
+\item how to aggregate
+\item how to calculate a running mean
+\item how to merge time series
+\item how to fit a linear regression
+\item how to analyse the regression fit
+\item how to perform the Mann-Kendall test
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\section{Spatial data and GIS functionality}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Spatial Intro}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}\frametitle{Authorship note} 
+% make note to first slide clickable.
+This section (spatial data / GIS) was originally written by Matthias Seibert (see note on the first slide). I heavily borrowed from his slides and wish to thankfully acknowledge his work!
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{GIS functionality of R}
+\begin{itemize}[<+->]
+\item advanced topic, not one of the core topics
+\item substantial functionality is there, see the \href{http://cran.r-project.org/web/views/Spatial.html}{spatial task view}
+\item interfaces to SAGA GIS, GRASS, combination
+\item there could be a single course about open source GIS:\\ \textbf{ARCGIS prison break}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{GIS functionality of R}
+Basically, R is used for almost everything ...
+<<onlyhow>>=
+library(fortunes)
+oo <- options(width=60)
+fortune("only how")
+options(oo)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{How convinced are R enthusiasts about R as a GIS?}
+  Last year I attended a VERY recommendable course (\href{http://geostat-course.org/}{geostat-course.org}) for the promotion of statistical analysis of spatial and spatio-temporal data using open source / free GIS tools. We did the following poll:
+  \includegraphics[width=0.8\textwidth]{./externalfig/GEOSTAT_poll.png}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Good resources to learn how to use R as a GIS}
+\begin{itemize}[<+->]
+\item UseR series: Applied Spatial Data Analysis (cite{Bivand2008})
+\item package manuals for: \rcode{sp}, \rcode{raster}, \rcode{spacetime}
+\item and especially the vignettes of \rcode{sp}, \rcode{raster}, \rcode{spacetime}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Spatial data}
+Spatial data refresher:\\
+\begin{center}
+\includegraphics[width=0.5\textwidth]{./externalfig/gis_datatypes.jpg}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Spatial data}
+Spatial data refresher:
+\begin{itemize}[<+->]
+\item points, lines, polygons, grids
+\item storage: shapefiles, grid files, in- or out-of-memory
+\item data bases (e.g. PostGIS): geometry + attributes
+\item topology representation of polygons
+\item spatial indexes
+\item projected data, or long/lat?
+\end{itemize}
+\tiny{tribute to Edzer Pebesma}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{What makes a GIS a GIS?}
+GIS refresher:
+\begin{itemize}[<+->]
+\item store, retrieve spatial data
+\item visualize spatial data
+\item analyze, model spatial data
+\begin{itemize}
+  \item analyze attributes, as in a data base
+  \item analyze geometries, or attributes depending on geometry
+\end{itemize}
+\item "A geographic information system is a system designed to capture,
+store, manipulate, analyze, manage, and present all types of
+geographical data" (wikipedia, from esri.com)
+\item "In the simplest terms, GIS is the merging of cartography,
+statistical analysis, and database technology."  (wikipedia)
+\end{itemize}
+\tiny{tribute to Edzer Pebesma}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Where to get our data?}
+\begin{itemize}[<+->]
+\item data that come with R: see Spatial Task View
+\item R packages: maps, mapdata, maptools (GSHHS shoreline files),
+\item Landsat, MODIS, SRTM, corine, ...
+\item gadm.org: Even .RData files!
+\item read, search r-sig-geo
+\item search, talk, ask, ...
+\end{itemize}
+\tiny{tribute to Edzer Pebesma}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Open source GIS}
+There are a number of open source GIS solutions
+\begin{itemize}[<+->]
+\item \href{http://postgis.net/}{PostGIS}
+\item \href{http://www.saga-gis.org/en/index.html}{Saga}
+\item \href{http://grass.osgeo.org/}{GRASS GIS}
+\item \href{http://qgis.org/en/site/}{Quantum GIS}
+\end{itemize}
+\onslide<5> it is possible to link R to libraries of these programs and include functions.
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Classes for spatial data}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Classes for spatial data?}
+Important packages are the \rcode{raster} and the \rcode{sp} package
+<<spatial, size="scriptsize">>=
+library(sp)
+getClass("Spatial")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{The \texttt{Spatial} class}
+The class defines that every object needs information about
+\pause
+\begin{description}[<+->]
+\item[boundary box]{\rcode{bbox} is a matrix that defines the range of the spatial object}
+\item[projection]{the spatial reference is saved as PROJ4 text string, which is called by \rcode{CRS}}
+\end{description}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Classes for spatial data}
+\footnotesize
+\begin{tabular}{llll}
+data type & class                    & attributes & contains\\
+\hline
+points    & SpatialPoints            & No         & Spatial*\\
+points    & SpatialPointsDataFrame   & data.frame & SpatialPoints*\\
+pixels    & SpatialPixels            & No         & SpatialPoints*\\
+pixels    & SpatialPixelsDataFrame   & data.frame & SpatialPixels*,\\
+          &                          &            & SpatialPointsDataFrame**\\
+full grid & SpatialGrid              & No         & SpatialPixels*\\
+full grid & SpatialGridDataFrame     & data.frame & SpatialGrid*\\
+line      & Line                     & No         & \\
+lines     & Lines                    & No         & Line list\\
+lines     & SpatialLines             & No         & Spatial*, Lines list\\
+lines     & SpatialLinesDataFrame    & data.frame & SpatialLines*\\
+rings     & Polygon                  & No         & Line*\\
+rings     & Polygons                 & No         & Polygon list \\
+rings     & SpatialPolygons          & No         & Spatial*, Polygons list \\
+rings     & SpatialPolygonsDataFrame & data.frame & SpatialPolygons*\\
+\end{tabular}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{The \texttt{Spatial point} classes}
+The class distiguishes 
+\pause
+\begin{description}[<+->]
+\item[\rcode{points}]{irregularly arranged points, any combination of coordinates}
+\item[\rcode{pixels}]{regularly spaced points, saves the coordinates of every grid cell for partial grids}
+\item[\rcode{grid}]{rectangular raster with regular spacing of points}
+\end{description}
+\end{frame}
+
+%------------------------------------------------------------%
+
+% points: stations in ca
+% pixels= regularly spaced points
+% grid= rectangular regularly spaced grid
+% lines= streams
+% polygons= catchments
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Importing spatial data}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+% importing shapefiles: OGR and GDAL readOGR, writeOGR
+% shapefiles
+% Missing files:
+% data/GIS/zerafshan_ezg.shp
+% data/GIS/Zerafshan_river_network.shp
+% data/GIS/zerafshan_dem500m.asc
+% data/GIS/MODIS/karadarya/2013/Step8//2013003_cloud_free.asc
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Needed library}
+<<librgdal>>=
+library(rgdal)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Shapefile: The outline for the catchment}
+<<Zerafshan_shapefile_import, eval=FALSE, out.width='0.3\textwidth'>>=
+# read a shapefile with the Zerafshan catchment
+ogrListLayers("data/GIS/zerafshan_ezg.shp")
+ogrInfo("data/GIS/zerafshan_ezg.shp", 
+        layer="zerafshan_ezg")
+zercatch <- readOGR("data/GIS/zerafshan_ezg.shp", 
+                    layer="zerafshan_ezg")
+plot(zercatch, col="lightblue")
+@
+\begin{center}
+\includegraphics[width=.55\textwidth]{./externalfig/Zerafshan_shapefile_import.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{shapefile with the central asian catchments I}
+<<Central_asia_shapefile_import1, size="tiny">>=
+ogrListLayers("data/GIS/ca_catchments.shp")
+ogrInfo("data/GIS/ca_catchments.shp", layer="ca_catchments")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{shapefile with the central asian catchments II}
+<<Central_asia_shapefile_import2, size="footnotesize">>=
+cacatch <- readOGR("data/GIS/ca_catchments.shp", 
+                   layer="ca_catchments")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{shapefile with the central asian catchments III}
+<<Central_asia_shapefile_import3, size="footnotesize">>=
+str(cacatch, max.lev=2)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{shapefile with the central asian catchments IV}
+<<Central_asia_shapefile_import4>>=
+plot(cacatch)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Shapefile: The river lines for the Zarafshan catchment}
+% eval=TRUE
+<<Zerafshan_river_shapefile_import, eval=FALSE, out.width='0.3\textwidth', size="small">>=
+# read a shapefile with the Zerafshan river
+ogrListLayers("data/GIS/Zerafshan_river_network.shp")
+ogrInfo("data/GIS/Zerafshan_river_network.shp", 
+        layer="Zerafshan_river_network")
+zerriver <- readOGR("data/GIS/Zerafshan_river_network.shp", 
+                    layer="Zerafshan_river_network")
+plot(zerriver, add=T, col="darkblue")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Textfile: List of meteorological stations with coordinates}
+<<Stationlist_import, out.width='0.3\textwidth', size="footnotesize">>=
+# read a textfile containing coordinates
+metstations <- read.table("data/stationdata_10.dat")
+str(metstations, vec.len=2)
+colnames(metstations) <- c("INDEX", "LAT", "LONG", "UN1", "UN2", 
+                           "UN3", "STATION")
+library(sp)
+coordinates(metstations) <- ~ LONG + LAT
+@
+% zer.metstations <- point.in.polygon(metstations, 
+% plot(metstations, add=T)
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Ascii grid: The DEM for the Zarafshan catchment I}
+% eval=TRUE
+<<Zerafshan_DEM_import, eval=FALSE, out.width='0.3\textwidth'>>=
+# DEM of Zerafshan 500m resolution as background
+zerdem500 <- readGDAL("data/GIS/zerafshan_dem500m.asc")
+image(zerdem500, col=terrain.colors(100))
+plot(metstations, add=T, col="darkgrey")
+plot(zercatch, add=T, lwd=2)
+plot(zerriver, col="blue", add=T)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Ascii grid: The DEM for the Zarafshan catchment II}
+\begin{center}
+\includegraphics[width=0.96\textwidth]{./externalfig/Zerafshan_DEM_import1.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Plotting with basic commands}
+<<basic_plotting, eval=FALSE>>=
+image(zerdem500, col=terrain.colors(100))
+plot(metstations, add=T, col="darkgrey")
+plot(zercatch, add=T, lwd=2)
+plot(zerriver, col="blue", add=T)
+@
+\begin{center}
+\includegraphics[width=0.75\textwidth]{./externalfig/basic_plotting.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+% # read country boundaries
+% load("data/GIS/GADM/KGZ_adm0.RData")
+% kgz0 <- gadm
+% plot(kgz0, add=T)
+% load("data/GIS/GADM/TJK_adm0.RData")
+% tjk0 <- gadm
+% plot(tjk0, add=T)
+% load("data/GIS/GADM/KAZ_adm0.RData")
+% kaz0 <- gadm
+% plot(kaz0, add=T)
+% load("data/GIS/GADM/UZB_adm0.RData")
+% uzb0 <- gadm
+% plot(uzb0, add=T)
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Plotting with \rcode{spplot}}
+% eval=TRUE
+<<advanced_plotting_with_standard_spplot, eval=FALSE>>=
+# prepare an spplot
+spplot(zerdem500)
+@
+\begin{center}
+\includegraphics[width=0.9\textwidth]{./externalfig/advanced_plotting_with_standard_spplot.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Plotting with \rcode{spplot}}
+% eval=TRUE
+<< advanced_plotting_with_splayout_specification, eval=FALSE, size="scriptsize">>=
+# prepare a spplot
+spl.zercatch <- list("sp.polygons", first=F, zercatch, col="lightblue", lwd=2)
+spl.zerriver <- list("sp.lines", first=F, col=addAlpha("blue",0.7), zerriver)
+spl.stat <- list("sp.points", first=F, col="grey20", metstations)
+spl.text <- list("sp.text", first=F, col="grey20", loc=coordinates(metstations), 
+                 txt=metstations$STATION, cex=0.7, adj=1)
+@
+\onslide<2>
+Transparency of colors: addAlpha in these slides is referring to 
+<<addalpha, eval=FALSE>>=
+install.packages("berryFunctions")
+library(berryFunctions)
+?addAlpha
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Plotting with \rcode{spplot}}
+% eval=TRUE
+<<spplot_advanced_plotting, eval=FALSE>>=
+# prepare a spplot
+spplot(zerdem500, scales=list(draw=T), 
+       col.regions=addAlpha(terrain.colors(200), 0.6), 
+       sp.layout=list(spl.zercatch, spl.zerriver, 
+                      spl.stat, spl.text, spl.scale))
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+% ascii raster
+% <<asciiraster>>=
+% library(rgdal)
+% GDALinfo("data/GIS/MODIS/karadarya/2013/Step8//2013003_cloud_free.asc")
+% modis2013.3 <- readGDAL("data/GIS/MODIS/karadarya/2013/Step8//2013003_cloud_free.asc")
+% str(modis2013.3)
+% @
+
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Visualising spatial data}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Overlay: visual - using compound plot functions}
+For plotting we can use the \rcode{sp} functionality
+<< Plotting_with_the_sp_package, eval=FALSE>>=
+library(sp)
+demo(meuse)
+size = meuse$zinc / mean(meuse$zinc)
+pts = list("sp.points", meuse, pch = 1, cex = size)
+riv = list("sp.polygons", meuse.riv)
+plt = spplot(meuse.grid["dist"], sp.layout=list(pts, riv))
+class(plt)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Overlay: visual - using compound plot functions}
+<< Plotting_with_the_sp_package_print, eval=FALSE>>=
+print(plt)
+@
+\begin{center}
+\includegraphics[width=0.9\textwidth]{./externalfig/Plotting_with_the_sp_package_print.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Cartography?}
+\pause
+\begin{itemize}[<+->]
+\item A map is a plot with longitude and latitude, and a controlled aspect ratio; 
+\item any plotting software can "do" maps, however
+\item reference comes from coast lines, rivers, lakes, topography, political boundaries, cities, land use etc.
+\item reference grid lines (parallels, meridians) may be required, and be non-straight
+\item axes tics usually show little, but some information
+\item custom elements are often present (arrow, scale bar, multi-type legend)
+\item label placement is challenging (but see: \rcode{rgeos::polyLabel})
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Plot example: Overlaying a grid with polygons to give the viewer reference}
+from some of my work I brought the following
+\pause
+\begin{itemize}[<+->]
+\item gridded monthly drought composites of sea surface temperature anomalies in the Limpopo basin (Southern Africa)
+\item country border and continent polygons
+\item river and catchment
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{The El Nino phenomenon}
+  El Nino is an anomaly of sea surface temperatures in the Pacific. It is related to climate anomalies around the globe.
+  \begin{figure}[h]
+    \begin{center}
+    \includegraphics[width=.8\linewidth]{./externalfig/ninoareas_c.jpg}
+    \caption{El nino southern Oscillation (ENSO) regions (NOAA webpage).}
+  	\label{fig:ensoreg}
+    \end{center}
+	\end{figure}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Calculating composites}
+The purpose of composites is to identify anomalies in meteorological data that are associated to an specific pattern or an unusual occurence (p.g. extreme events). Here:
+\pause
+\begin{itemize}[<+->]
+\item Times were identified at which there was a drought in the Limpopo basin
+\item Sea surface temperatures in the surrounding oceans were averaged for these times
+\item anomalies were tested for significance (were there deviations from non-drought times?)
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Composite example plot}
+<<loadcompdata1, size="small">>=
+# the was saved as Rdata
+load("data/GIS/composites/comp2_HydD_Limpopo_HadISST.Rdata")
+class(c2sst)
+# one composite per month
+
+library(spacetime)
+suppressMessages( library(zoo) )
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Composite example plot}
+<<loadcompdata2>>=
+# There was one composite per month
+# convert data to a SpatialPixelsDataFrame
+c2sst.HD <- as(c2sst, "Spatial")
+class(c2sst.HD)
+# change column names (you recognise the functions?!)
+names(c2sst.HD) <- format(time(c2sst), "%B")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Composite example plot}
+<< plain_composite_plot>>=
+spplot(c2sst.HD)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Composite example plot}
+For reference we want to plot the continent outlines and the Limpopo basin on top of the composite grid
+<<loadcompdata3, size="small">>=
+library(maps)
+suppressMessages(  library(maptools)  )
+# create a world map
+worldb <- map('world', interior=F, plot=F, fill=T, 
+              col="transparent") 
+# convert it to the necessary SpatialPolygons class
+IDs <- sapply(strsplit(worldb$names, ":"), "[", 1)
+worldb <- map2SpatialPolygons(worldb, ID=IDs, 
+          proj4string=CRS("+proj=longlat +datum=WGS84"))
+class(worldb)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Composite example plot}
+<<load_the_outlines_of_the_catchment_from_the_shapefile, size="tiny">>=
+ogrListLayers("data/GIS/HYDROSHEDS_Limpopo_catchment.shp")
+ogrInfo("data/GIS/HYDROSHEDS_Limpopo_catchment.shp", layer="HYDROSHEDS_Limpopo_catchment")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Composite example plot}
+<<load_the_outlines_of_the_catchment_from_the_shapefile2, size="tiny">>=
+limpopocatch <- readOGR("data/GIS/HYDROSHEDS_Limpopo_catchment.shp", 
+                        layer="HYDROSHEDS_Limpopo_catchment")
+@
+\end{frame}
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Composite example plot}
+We build up the plot layer by layer by specifying  sp.layout
+% eval=TRUE
+<<define_the_layers_to_plot_ontop_of_the_map, eval=TRUE>>=
+sp.layout <- list(
+  list("sp.polygons", worldb, first=F, 
+       col="grey80", fill="grey80"),
+  list("sp.polygons", limpopocatch, first=F, 
+       col="grey60", fill="transparent")
+)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Composite example plot}
+Finally, plot the designed maps
+<<plot_the_composites_with_overlaid_layers, eval=FALSE>>=
+spplot(c2sst.HD, sp.layout=sp.layout, scales=list(draw=T))
+@
+% This takes long, so I set eval=FALSE after ther first time
+\begin{center}
+\includegraphics[width=0.9\textwidth]{./fig/plot_the_composites_with_overlaid_layers.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Your turn ...}
+This is R programming for experienced users, so take some time and try to understand the example.
+\begin{exercise}{Create the same plot with the provided data set (\small{\texttt{data/GIS/composites/comp2\_HydD\_ELNINO\_Limpopo\_HadISST.Rdata}})} %ex21
+\begin{enumerate}
+\item \rcode{load} the new data set 
+\item Plot it by using the code provided above
+\item Check the help on \rcode{spplot} and plot "May" only
+\item Adjust the color of the superimposed catchment outline and give it a blue touch.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+% \begin{frame}[fragile]\frametitle{Solution for exercise \arabic{exercisecount}.1}
+% <<ex19sola, eval=FALSE>>=
+% # ToDo
+% @
+% \end{frame}
+
+%------------------------------------------------------------%
+
+% EDZER
+% Cartography?
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{What is R good at?}
+\pause
+\begin{itemize}[<+->]
+\item repetitive graphs:
+  \begin{itemize}
+  \item many, similar graphs, over different pages
+  \item many graphs combined in a lattice (grid: lattice, ggplot)
+  \end{itemize}
+\item non-interactive, reproducible use
+\item control of all details
+\item richness of graphics devices,
+\item portability, cross-platform, options for deployment
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{What is R bad at?}
+\pause
+\begin{itemize}[<+->]
+\item interactive use: zoom, pan, edit graph element etc.
+\item control is not trivial
+\item incompatible plotting systems: base, lattice, ggplot, ...
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+% own example of overlays with polygons, grid and more
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+% \subsection{More methods for spatial data}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+% methods for spatial classes
+% outlook: gstat with meuse kriging and so on
+
+% EDZER
+% Two work horses: rgdal, rgeos
+% library(rgdal);  library(rgeos)
+% rgdal links to the GDAL (raster) and OGR (vector) data I/O library, as well as PROJ.4 for CRS (coordinate reference systems) (re)projections
+% rgeos links to the GEOS (Geometry Open Source) library, which powers PostGIS: does the \usual"geometry operations for features
+
+% What is numerical overlay?
+% Method over(x,y) provides: consistent spatial overlay for points, grids, lines and polygons
+% at the spatial locations of object x, retrieve the indexes or attributes from spatial object y and NA in case of no match (index vector if y has only geometry, attribute data.frame if it has attributes too).
+% library(sp); loadMeuse()
+% over(meuse, geometry(meuse.grid))[1:10]
+% over(meuse, meuse.grid)[1:3,]
+% In SQL, this resembles a left outer join of two tables
+
+% Aggregation, the R way, for a data.frame, based on a table column:
+% m = as(meuse, "data.frame")[c("zinc", "lead")]
+% aggregate(m, by = list(ffreq = meuse$ffreq), mean)
+% # create a coarse grid:
+% off = gridparameters(meuse.grid)$cellcentre.offset + 20
+% gt = GridTopology(off, c(400,400), c(8,11))
+% SG = SpatialGrid(gt)
+% proj4string(SG) = proj4string(meuse.grid)
+% # for a Spatial object, based on another Spatial object:
+% agg = aggregate(meuse[c("zinc","lead")], SG, FUN = mean)
+% spplot(agg, sp.layout = pts)
+
+% Which pixels are covered by points? Selection with over
+% SP = as(SG, "SpatialPolygons")
+% over(SP, geometry(meuse))
+% length(SP[!is.na(over(SP, geometry(meuse)))])
+% length(SP[meuse]) # equivalent!
+% plot(as(SP[meuse], "SpatialPolygons"))
+% points(meuse, col = 'red')
+
+% raster package
+
+% Open street maps: osmar
+% library(osmar)
+% api = osmsource_api()
+% pt = c(7.609983,51.940812) # ifgi
+% size = 0.005
+% bb = do.call(corner_bbox, as.list(c(pt - size, pt + size)))
+% ifgi = get_osm(bb, source = api)
+% plot(ifgi)
+% dx = c(-1, 1, 1, -1, -1)
+% dy = c(-1, -1, 1, 1, -1)
+% lines(pt[1] + dx * size, pt[2] + dy * size, col = 'red')
+% lapply(as_sp(ifgi), class)
+% class(as_igraph(ifgi))
+% seems to give access to all vector data, in sp or igraph0 format!
+% more openstreetmap eyecandy here:
+% http://www.r-bloggers.com/the-openstreetmap-package-opens-up/
+
+% block kriging example
+
+% create a map  showing the outlines of Afghanistan and Pakistan
+% library(maps)
+% library(maptools)
+% map("worldHires")
+% map("worldHires", regions=c("Afghanistan", "Pakistan", "Tajikistan", "Kyrgystan", "Iran"), interior=T) # very embarassing: data is from before 1991
+% map('rivers', add=TRUE, col="blue")
+% ?worldHires
+
+% plot of composites to show plotting capabilities with lattice
+% quicker with maptools
+% limpopocatch <-  readShapePoly ("data/GIS/HYDROSHEDS_Limpopo_catchment.shp", proj4string=CRS("+proj=longlat +datum=WGS84"))
+% limpopo.river <- readShapeLines("data/GIS/HYDROSHEDS_Limpopo_river.shp",     proj4string=CRS("+proj=longlat +datum=WGS84"))
+
+% example: plotting GADM Zimbabwe with Limpopo ERA I DI as background
+% prepare data by reducing stfdf.limpopo to one SpatialGridDataFrame
+
+% exercise: Download Rdata from GADM for central asia and plot dem with boundaries on top
+% read dem
+% read GADM
+% merging of all polygons to one?
+% plot all
+
+% read prepared MODIS
+% try to understand the report function
+%source("F:/matsei/Documents/R/Introduction to R//R-Course_Bischkek/original_data//Material_Abror/R_Kurs//modsnow/skripte/modsnow_functions.R")
+% impossible
+
+% read dem
+% read catchment 
+% zerafshan
+% Karadarya (MODIS available)
+% Naryn (MODIS available)
+% clip dem for a catchment
+% add stations
+% read modis
+% Karadarya
+% Naryn
+% plot: overlay dem with snow data
+% setwd("~/Documents/R/R-Course_Bischkek/original_data/Material_Abror/R_Kurs/modsnow/output/karadarya/2013/Step8")
+% library(rgdal)
+
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Handling spatiotemporal data}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+% spacetime package: classes, plotting, aggregation, animation
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Great vignettes to get started with the \texttt{spacetime} package}
+<<libspactetime>>=
+library(spacetime)
+@
+Vignettes on:
+\pause
+\begin{itemize}[<+->]
+\item spacetime: Spatio-Temporal Data in R
+<<stvignjss816, eval=FALSE>>=
+vignette("jss816", package="spacetime")
+@
+\item Spatio-temporal overlay and aggregation
+<<stvignsto, eval=FALSE>>=
+vignette("sto", package="spacetime")
+@
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+% example of MODIS 
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]\frametitle{Layouts for spatiotemporal data in \texttt{spacetime}}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{./externalfig/spacetime_layouts.png}
+\end{center}
+\end{frame}
+
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\end{document}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
