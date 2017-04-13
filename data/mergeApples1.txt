@@ -1,0 +1,10 @@
+Person	Apples
+David	2
+Elizabeth	16
+James	4
+Jennifer	6
+John	17
+Mary	1
+Patricia	10
+Robert	7
+William	11

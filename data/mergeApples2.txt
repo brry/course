@@ -1,0 +1,5 @@
+Person	Apples
+Richard	3
+Charles	9
+Susan	5
+Nancy	12

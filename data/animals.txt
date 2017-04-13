@@ -1,0 +1,7 @@
+Name	Class	can fly	color	n legs	cuteness
+Frog	Amphibian	F	green	4	1,3
+Merl	Bird	T	black	2	6,5
+Doe	Mammal	F	brown	4	9,8
+Elephant	Mammal	F	gray	4	6,3
+Sparrow	Bird	T	brown	4	5,8
+Ape	Mammal	F	brown	2	4,5

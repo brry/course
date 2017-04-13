@@ -1,0 +1,9 @@
+Name	Age
+Barbara	17
+David	40
+James	30
+Jennifer	53
+Linda	21
+Mary	4
+Michael	23
+Robert	44
