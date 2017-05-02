@@ -1,4 +1,4 @@
-\documentclass[xcolor=table,           xcolor=dvipsnames]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+\documentclass[xcolor=table,       handout,    xcolor=dvipsnames]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
 %% maxwidth is the original width if it is less than linewidth
 %% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -108,7 +108,7 @@
 \newcommand{\rcode}[1]{\texttt{\textcolor{Blue}{#1}}} % or use Blue
 
 % links to files
-\newcommand{\datalink}[1]{\href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/data/#1?dl=1}{#1}}
+\newcommand{\datalink}[1]{\href{https://raw.githubusercontent.com/brry/course/master/data/#1}{#1}}
 
 % remove empty lines between code and output. apparently hard to get rid of without turning off syntax highlighting
 
@@ -570,7 +570,7 @@ In the console, calculate ~ 21+21 ~,~ 7*6 ~ and ~ $\frac{0,3}{4}*\sqrt{313600}$
 \vspace{-1em}
 \pause
 \begin{itemize}[<+->]
-  \item objects: assignment with ~ \rcode{$<-$} \\
+  \item objects: assignment with ~ \rcode{$<-$} ~ Rstudio Keyboard shortcut:  \rcode{ALT} + \rcode{-}  \\
         \rcode{nstudents <- 15\\nstudents\\nstudents > 12}
   \item What's a good object name? \onslide<+-> $\rightarrow$ short, but explanatory,
         \onslide<+-> lowerCamelStandard.or.dot\_or\_underscore are good naming conventions
@@ -967,7 +967,7 @@ General code for scatterplots: \rcode{plot(x, y, ...)}
 \begin{itemize}[<+->]
   \item Many people write code for specific tasks and publish it on CRAN, the Comprehensive R Archive Network
   \item Packages for a range of topics: \href{http://cran.r-project.org/web/views/}{cran.r-project.org/web/views}
-\item All >8000 available packages: \href{http://cran.r-project.org/web/packages/}{cran.r-project.org/web/packages}
+\item All $>$10'500 available packages: \href{http://cran.r-project.org/web/packages/}{cran.r-project.org/web/packages}
   \item \rcode{install.packages("berryFunctions")} to download and install.\\ \footnotesize (only needs to be executed once, works on user level, no admin rights required) \normalsize
   \item \rcode{library("berryFunctions")} to load it (in every new R session)
 \end{itemize}
@@ -2990,8 +2990,11 @@ function         & ncol                 & closure   & \textbf{function}  \\ \hli
 \pause
 %See also e.g. Uwe Ligges (2006) - Programmieren mit R\\
 \rcode{as.character}\texttt{(3.14)} converts a data type;  \pause \rcode{is.integer}\texttt{(4:6)} checks. \pause
-\rcode{str} shows an abbreviation of \rcode{class}.\\ \pause
-\rcode{mode} (for users) is like \rcode{typeof} (R internal), but combines integer and double to numeric (\& closure, special and builtin to function). \pause Other rare typeofs: raw, environment, promise, ... \pause When mixing date/time with others, the order of appearance determines the output class.
+\rcode{str} shows an abbreviation of \rcode{class}. \pause
+\rcode{mode} (for users) is like \rcode{typeof} (R internal), but combines 
+integer and double to numeric (\& closure, special and builtin to function). \pause 
+Other rare typeofs: raw, environment, promise, ... \pause 
+When mixing date/time with others, the order of appearance determines the output class.
 \label{datatypes}
 \end{frame}
 
@@ -4678,41 +4681,6 @@ if condition == FALSE, then expression2 is evaluated.\\[1em]
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Notes on logical values}
-\begin{itemize}[<+->]
-\item as you might have seen in \rcode{read.table(header=T)}, logical values (TRUE, FALSE) can be abbreviated.
-\item If you want to play a mean prank on someone, write\\ \rcode{T <- FALSE; F <- TRUE} in their \href{https://rclickhandbuch.wordpress.com/install-r/rprofile/}{Rprofile} (see \rcode{?Startup}).
-\item Logical (boolean) values F and T internally are often converted to integers 0 and 1, thus \rcode{sum(c(T,F,F,T,T,T,F,F,T))} is the number of TRUEs in a vector, \rcode{mean} yields the proportion of TRUEs.
-\item \rcode{which(logicalVec)} gives the indices (positions) of TRUE values.
-\item \rcode{Vec[logicalVec]} returns only the values of vec corresponding to TRUE in logicalVec (No need to wrap it into \rcode{which}).
-\item Logical operators: \rcode{!, \&, |, xor()} (not, and, or, exclusive or)
-% \item \rcode{cat(T, letters[c(12,15,22,5)])}
-\end{itemize}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Notes on conditional code execution}
-\begin{itemize}[<+->]
-\item \rcode{\alert{if}(c)\{ex1\}} is valid code, thus R doesn't expect \alert{else} anymore.
-\item If you execute code line by line (in a script, for example), \alert{\}} and \alert{else} must be on the same line.
-\item Many people consider it good practice to do this in functions as well, but for machine-readability, it is technically fine to write\\
-\texttt{\alert{if}(cond)\\
-~~\{\\
-~~ex1a\\
-~~ex1b\\
-~~\} \\
-\alert{else}\\
-~~ex2}
-\item \rcode{\alert{if}(logicalValue==TRUE) ...} is usually unnecessary, you can write\\
-\onslide<+-> \rcode{\alert{if}(logicalValue) ...}, but sometimes,\\
-\onslide<+->  \rcode{\alert{if}(isTRUE(logicalValue)) ...} helps to deal with NAs.
-% \item \rcode{cat(T, letters[c(12,15,22,5)])}
-\end{itemize}
-\end{frame}
-
-%------------------------------------------------------------%
-
 \begin{frame}[fragile]{Time to practice}
 \begin{exercise}{if else - Conditional code execution} %ex
 \begin{enumerate}
@@ -4833,6 +4801,41 @@ if condition == FALSE, then expression2 is evaluated.\\[1em]
 
 %------------------------------------------------------------%
 
+\begin{frame}[fragile]{Notes on logical values}
+\begin{itemize}[<+->]
+\item as you might have seen in \rcode{read.table(header=T)}, logical values (TRUE, FALSE) can be abbreviated.
+\item If you want to play a mean prank on someone, write\\ \rcode{T <- FALSE; F <- TRUE} in their \href{https://rclickhandbuch.wordpress.com/install-r/rprofile/}{Rprofile} (see \rcode{?Startup}).
+\item Logical (boolean) values F and T internally are often converted to integers 0 and 1, thus \rcode{sum(c(T,F,F,T,T,T,F,F,T))} is the number of TRUEs in a vector, \rcode{mean} yields the proportion of TRUEs.
+\item \rcode{which(logicalVec)} gives the indices (positions) of TRUE values.
+\item \rcode{Vec[logicalVec]} returns only the values of vec corresponding to TRUE in logicalVec (No need to wrap it into \rcode{which}).
+\item Logical operators: \rcode{!, \&, |, xor()} (not, and, or, exclusive or)
+% \item \rcode{cat(T, letters[c(12,15,22,5)])}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Notes on conditional code execution}
+\begin{itemize}[<+->]
+\item \rcode{\alert{if}(c)\{ex1\}} is valid code, thus R doesn't expect \alert{else} anymore.
+\item If you execute code line by line (in a script, for example), \alert{\}} and \alert{else} must be on the same line.
+\item Many people consider it good practice to do this in functions as well, but for machine-readability, it is technically fine to write\\
+\texttt{\alert{if}(cond)\\
+~~\{\\
+~~ex1a\\
+~~ex1b\\
+~~\} \\
+\alert{else}\\
+~~ex2}
+\item \rcode{\alert{if}(logicalValue==TRUE) ...} is usually unnecessary, you can write\\
+\onslide<+-> \rcode{\alert{if}(logicalValue) ...}, but sometimes,\\
+\onslide<+->  \rcode{\alert{if}(isTRUE(logicalValue)) ...} helps to deal with NAs.
+% \item \rcode{cat(T, letters[c(12,15,22,5)])}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}{Actual usage of if else statements}
 See the \rcode{hist} source code: \\
 \href{https://github.com/wch/r-source/blob/trunk/src/library/graphics/R/hist.R}{github.com/wch/r-source ~ -> ~ src / library / graphics / R / hist.R}\\[1em]
@@ -4903,7 +4906,7 @@ This is easier and less prone to human errors with:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlstd{v} \hlkwb{<-} \hlkwd{vector}\hlstd{(}\hlstr{"numeric"}\hlstd{,} \hlnum{20}\hlstd{)}
+\hlstd{v} \hlkwb{<-} \hlkwd{vector}\hlstd{(}\hlkwc{mode}\hlstd{=}\hlstr{"numeric"}\hlstd{,} \hlkwc{length}\hlstd{=}\hlnum{20}\hlstd{)}
 \hlstd{v}
 \end{alltt}
 \begin{verbatim}
@@ -5613,7 +5616,7 @@ What are the chances of survival for each of the two?\\
 \hlstd{n} \hlkwb{<-} \hlnum{0} \hlcom{# number of rounds}
 \hlkwa{while}\hlstd{(a}\hlopt{&}\hlstd{b)}
   \hlstd{\{}
-  \hlkwa{if}\hlstd{(}\hlkwd{runif}\hlstd{(}\hlnum{1}\hlstd{)}\hlopt{<}\hlnum{0.3}\hlstd{) b} \hlkwb{<-} \hlnum{FALSE} \hlcom{# = 0 = dead}
+  \hlkwa{if}\hlstd{(}  \hlkwd{runif}\hlstd{(}\hlnum{1}\hlstd{)}\hlopt{<}\hlnum{0.3}\hlstd{) b} \hlkwb{<-} \hlnum{FALSE} \hlcom{# = 0 = dead}
   \hlkwa{if}\hlstd{(b}\hlopt{&}\hlkwd{runif}\hlstd{(}\hlnum{1}\hlstd{)}\hlopt{<}\hlnum{0.4}\hlstd{) a} \hlkwb{<-} \hlnum{FALSE}
   \hlstd{n} \hlkwb{<-} \hlstd{n}\hlopt{+}\hlnum{1}
   \hlstd{\}}
