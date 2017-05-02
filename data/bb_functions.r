@@ -2,7 +2,7 @@
 # Berry Boessenkool,   berry-b@gmx.de
 # Code for debugging exercise
 
-# content:
+# content:     Rstudio "Show document outline" (CTRL + SHIFT + O)
 # bb_lsc
 # bb_unitHydrograph
 # bb_superPos
@@ -11,12 +11,8 @@
 # calib  (dataset)
 # valid
 
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
 
-
-
-# linear storage cascade
+# linear storage cascade ----
 # fit parameters, simulate discharge, and plot:
 bb_lsc <- function(P,
                 Q,
@@ -91,12 +87,8 @@ else return(c(n=as.vector(optimized["n"]), k=as.vector(optimized["k"]), NSE=bb_n
 } # end of funtion
 
 
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
 
-
-
-# Unit Hydrograph
+# Unit Hydrograph ----
 # Berry Boessenkool   July 2013    berry-b@gmx.de
 # continuous UH:
 bb_unitHydrograph <- function(
@@ -112,12 +104,7 @@ t^(n-1) / k^n / gamma(n) * exp(-t/k)  # some say /k^(n-1) for the second term!
 
 
 
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-
-
-
-# Unit Hydrograph - superposition
+# Unit Hydrograph - superposition ----
 # Berry Boessenkool   July 2013    berry-b@gmx.de
 
 # simulate Q from P:
@@ -133,12 +120,7 @@ qsim
 
 
 
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-
-
-
-# Nash-Sutcliffe efficiency
+# Nash-Sutcliffe efficiency ----
 # Berry Boessenkool, July 2013, based on eval.NSeff  in RHydro Package
 bb_nse <- function(
                 obs,
@@ -158,12 +140,7 @@ if(any(is.na(obs)|is.na(sim)))
 
 
 
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-
-
-
-# root mean square error
+# root mean square error ----
 bb_rmse <- function(
                 a,
                 b,
@@ -182,12 +159,8 @@ sqrt( sum((a-b)^2)/length(b) )
 
 
 
-
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-
-
-# data obtained with dput from ?lsc in library(berryFunctions)
+# data  ----
+# obtained with dput from ?lsc in library(berryFunctions)
 
 
 calib <- data.frame(Q = c(0.089, 0.089, 0.089, NA, 0.089, 0.089,
