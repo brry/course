@@ -1,4 +1,4 @@
-\documentclass[xcolor=table,           xcolor=dvipsnames]{beamer} % , handout, draft
+\documentclass[xcolor=table,       handout,    xcolor=dvipsnames]{beamer} % , handout, draft
 \usetheme{Madrid} % Madrid, Warsaw, Berlin
 \usecolortheme{beaver}
 
@@ -57,7 +57,7 @@
 \newcommand{\rcode}[1]{\texttt{\textcolor{Blue}{#1}}} % or use Blue
 
 % links to files
-\newcommand{\datalink}[1]{\href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/data/#1?dl=1}{#1}}
+\newcommand{\datalink}[1]{\href{https://raw.githubusercontent.com/brry/course/master/data/#1}{#1}}
 
 % remove empty lines between code and output. apparently hard to get rid of without turning off syntax highlighting
 
@@ -543,7 +543,7 @@ In the console, calculate ~ 21+21 ~,~ 7*6 ~ and ~ $\frac{0,3}{4}*\sqrt{313600}$
 \vspace{-1em}
 \pause
 \begin{itemize}[<+->]
-  \item objects: assignment with ~ \rcode{$<-$} \\
+  \item objects: assignment with ~ \rcode{$<-$} ~ Rstudio Keyboard shortcut:  \rcode{ALT} + \rcode{-}  \\
         \rcode{nstudents <- 15\\nstudents\\nstudents > 12}
   \item What's a good object name? \onslide<+-> $\rightarrow$ short, but explanatory,
         \onslide<+-> lowerCamelStandard.or.dot\_or\_underscore are good naming conventions
@@ -821,7 +821,7 @@ xaxt="n" # axis type (none to suppress axis)
 \begin{itemize}[<+->]
   \item Many people write code for specific tasks and publish it on CRAN, the Comprehensive R Archive Network
   \item Packages for a range of topics: \href{http://cran.r-project.org/web/views/}{cran.r-project.org/web/views}
-\item All >8000 available packages: \href{http://cran.r-project.org/web/packages/}{cran.r-project.org/web/packages}
+\item All $>$10'500 available packages: \href{http://cran.r-project.org/web/packages/}{cran.r-project.org/web/packages}
   \item \rcode{install.packages("berryFunctions")} to download and install.\\ \footnotesize (only needs to be executed once, works on user level, no admin rights required) \normalsize
   \item \rcode{library("berryFunctions")} to load it (in every new R session)
 \end{itemize}
