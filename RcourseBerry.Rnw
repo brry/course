@@ -10,7 +10,6 @@
 \usepackage{lmodern} % make tiny font shape warnings within the beamer class diappear
 \usepackage{tabu, multirow, url, hyperref, textcomp, amsmath, listings, datetime, graphicx, booktabs, xcolor, multicol}
 \usepackage[absolute,overlay,showboxes]{textpos}
-\textblockrulecolour{red}
 
 \hypersetup{pdfstartview={XYZ null null 1}}
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
@@ -28,7 +27,7 @@
 \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.1em}{}{} % vskip0.5em
 \makeatother
 
-% Remove Bullets and Numbers in TOC: http://tex.stackexchange.com/questions/54656/remove-the-bullets-in-beamers-table-of-contents
+% Remove Bullets and Numbers in TOC: http://tex.stackexchange.com/questions/54656
 \setbeamertemplate{sections/subsections in toc}[default]
 
 % white letters in enumerate bullet points
@@ -58,6 +57,9 @@
 
 % links to files
 \newcommand{\datalink}[1]{\href{https://raw.githubusercontent.com/brry/course/master/data/#1}{#1}}
+
+% Format month with leading zero:
+\newcommand{\leadingzero}[1]{\ifnum #1<10 0\the#1\else\the#1\fi}
 
 % remove empty lines between code and output. apparently hard to get rid of without turning off syntax highlighting
 
@@ -140,23 +142,23 @@ for(i in 1:50)
 \begin{frame}
 \begin{center}
     \begin{columns}
-    \column{20.2em}
-    \begin{block}{}{\Large Introductionary + advanced R course}
+    \column{22.0em}
+    \begin{block}{}{\Large ~Introductionary + advanced \includegraphics[width=0.7cm]{externalfig/Rlogo.png} ~course}
     \end{block}
     \end{columns}
 \vspace{1em}
 Berry Boessenkool, \texttt{berry-b@gmx.de}\\
 Hints and corrections are very welcome!\\[1em]
-This course is rated \includegraphics[width=0.7cm]{externalfig/Rlogo.png}\\[1em]
-% \alert{guest account. example PC: ~ Einstein, 141.89.114.20\\user: gast\_20, ~ pw: 20-einstein. (mind the dot)}\\[2em]
+Download the current slides, source code and datasets at\\
+\Large
+\href{https://github.com/brry/course}{github.com/brry/course}\\[1em]
+\normalsize
+These slides are licenced under 
+\href{https://creativecommons.org/licenses/by/4.0}{\includegraphics[width=3em]{externalfig/ccby.png}},\\
+so you can use the material freely as long as you cite me.\\[2em]
+% \alert{guest account. example PC: ~ Einstein, 141.89.114.20\\user: gast\_20 ~ pw: 20-einstein. (mind the dot)}\\[1em]
 \scriptsize
-PDF created on \today\ at \currenttime\ \\[1em]
-DOWNLOAD:\\
-\href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/RcourseBerry.pdf?dl=1}{Current PDF slides} (shortlink \href{http://bit.ly/rcBerry}{bit.ly/rcBerry})\\
-\href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/RcourseBerry pres.pdf}{Animated presentation}\\
-\href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/RcourseBerry_dev.Rnw}{Rnw source code}\\
-\href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/data.zip}{data.zip}\\[1em]
-\href{https://dl.dropboxusercontent.com/u/4836866/Rclick/Anhang.pdf}{Rclick Anhang}
+PDF created on \the\year-\leadingzero{\month}-\the\day, \currenttime\ \\[1em]
 \end{center}
 \end{frame}
 }
@@ -546,7 +548,7 @@ In the console, calculate ~ 21+21 ~,~ 7*6 ~ and ~ $\frac{0,3}{4}*\sqrt{313600}$
   \item objects: assignment with ~ \rcode{$<-$} ~ Rstudio Keyboard shortcut:  \rcode{ALT} + \rcode{-}  \\
         \rcode{nstudents <- 15\\nstudents\\nstudents > 12}
   \item What's a good object name? \onslide<+-> $\rightarrow$ short, but explanatory,
-        \onslide<+-> lowerCamelStandard.or.dot\_or\_underscore are good naming conventions
+        \onslide<+-> lowerCamelStandard\_or\_underscore are good naming conventions
   \item comments: \texttt{\textcolor[rgb]{0,0.392,0}{\# everything after a hashtag is not executed.}}
   \item scripts: Rstudio
 \end{itemize}
@@ -563,7 +565,7 @@ In the console, calculate ~ 21+21 ~,~ 7*6 ~ and ~ $\frac{0,3}{4}*\sqrt{313600}$
 \onslide<+->
 \begin{exercise}{Vector indexing}
 \begin{enumerate}
-  \item Create a vector with body sizes of people around you. You can also use the values 1.75, 1.76, 1.83, 1.84, 1.77, 1.76, 1.77, 1.66, 1.86, 1.76
+  \item Create a vector with body sizes of people around you. You can also use the values 1.75, 1.76, 1.83, 1.84, 1.77, 1.76, 1.77, 1.66, 1.86, 1.76. Assign it to an object with a useful name (\rcode{YourObject} is not one!).
   \item What does \rcode{3:6} create? What does \rcode{YourObject[3:6]} do?
   \item What does \rcode{YourObject[-4]} do?
   \item BONUS (for fast people): Analyze the descriptive statistics: \rcode{mean(YourObject), median, min, max, range, quantile}
@@ -623,9 +625,11 @@ Copy the file \datalink{treesize.txt} and tell R where to look for it with:\\
   \onslide<+-> \rcode{str(YourObject)} must yield the column data types: \texttt{num, num, factor}. \\
   \onslide<+-> You need to set the argument \texttt{header}.
   \end{exercise}
-% \vspace{-1em}
-\onslide<+->
-\vspace{-0.5em}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Solution to exercise \arabic{exercisecount}: Reading files}
 <<solreadfile, eval=F>>=
 treesize <- read.table(file="treesize.txt", header=TRUE)
 @
@@ -816,19 +820,28 @@ xaxt="n" # axis type (none to suppress axis)
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
-\begin{frame}{Packages, linear regression}
-\vspace{-0.5em}
+\begin{frame}[fragile]{R Packages}
 \begin{itemize}[<+->]
-  \item Many people write code for specific tasks and publish it on CRAN, the Comprehensive R Archive Network
-  \item Packages for a range of topics: \href{http://cran.r-project.org/web/views/}{cran.r-project.org/web/views}
+\item Many people write code for specific tasks and publish it on CRAN, the Comprehensive R Archive Network
+\item Packages for a range of topics: \href{http://cran.r-project.org/web/views/}{cran.r-project.org/web/views}
 \item All $>$10'500 available packages: \href{http://cran.r-project.org/web/packages/}{cran.r-project.org/web/packages}
-  \item \rcode{install.packages("berryFunctions")} to download and install.\\ \footnotesize (only needs to be executed once, works on user level, no admin rights required) \normalsize
-  \item \rcode{library("berryFunctions")} to load it (in every new R session)
+\item \rcode{install.packages("ggplot2")} to download and install.\\ 
+      \footnotesize (only needs to be executed once, works on user level, no admin rights required)\\
+      You can do this in Rstudio \normalsize
+\item \rcode{library("ggplot2")} to load it \\
+      \footnotesize (needed in every new R session) Put this in the script for reproducibility \normalsize
+\item Better to use the \rcode{package::function} syntax
+\item Regularly run \rcode{update.packages()} or use the Rstudio button
+\item Rarely needed: \rcode{remove.packages("packagename")}
 \end{itemize}
-\vspace{-0.5em}
-\onslide<+->
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Packages and linear regression}
 \begin{exercise}{Packages, linear regression}
 \begin{enumerate}
+  \item Install and load the package \rcode{berryFunctions}
   \item How can we pass the treesize data to \rcode{?linReg} with a formula?
   \item Describe the resulting graph (height vs age).
   \item Look into the source code of \rcode{linReg}. What is actually the backbone for the calculation of the function?
@@ -2224,7 +2237,7 @@ Alternatives to read.table:
   \item[scan]     At the core of read.table - for complicated things
   \item[read.csv] comma separated values (different defaults than read.table)
   \item[read.fwf] fixed width formatted data
-  \item[read\_excel] Excel files (install package, see \href{https://github.com/hadley/readxl#readxl}{github.com/hadley/readxl})
+  \item[read\_excel] Excel files (install package, see \href{https://github.com/hadley/readxl#overview}{github.com/hadley/readxl})
 \end{description}
 \end{frame}
 
@@ -3170,7 +3183,7 @@ tolower(schoko)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{7. Programming: conditions, loops, functions}
+\section{7. Conditions \& loops}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -3494,6 +3507,7 @@ plot(x, 12.5*10/factorial(10-1)*(x/8*10)^(10-1)*exp(-x/8*10),
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{For loops: execute code multiple times II}
+\textblockrulecolour{red}
 <<for3, echo=-1, size="footnotesize">>=
 par(mar=c(3,3,1,1), mgp=c(2,0.8,0), las=1)
 x <- seq(0,25,0.1)
@@ -4012,6 +4026,12 @@ options(width=50)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
+\section{8. Functions \& packages}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
 \subsection{Functions}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
@@ -4214,10 +4234,168 @@ index_1(5); index_2(5)
 @
 \end{frame}
 
+%------------------------------------------------------------%
+
+\subsection{Writing R packages}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{debugging: useful functions}
+\begin{frame}{Why you should write R packages}
+\pause
+\begin{itemize}[<+->]
+\item Collect your own functions in one place
+\item Combine functions and documentation in the right way
+\item Share code with others
+\item Make your research reproducible !
+\end{itemize}
+\onslide<+->
+\vspace{1em}
+Good introductions linked here:
+\href{https://github.com/brry/misc\#package-development-with-rstudio-and-github}{github.com/brry/misc}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Devtools for package structure creation}
+<<devtools, eval=FALSE>>=
+dir.create("subfolder") ; setwd("subfolder") # optional
+
+library(devtools)
+
+create("packageName")
+setup() # if repos is initialized on github, see next slide
+
+check()
+@
+
+\pause
+\begin{exercise}{create the package structure}
+\begin{enumerate}
+\item Create a package for the linear storage cascade functions we provide.
+\item BONUS: Use git from the beginning (see next slide)
+\item Check the package, correct decription file and check again.
+\item Now add the functions in \datalink{lsc\_functions.zip} to the R folder
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+% ---------------------------
+
+\begin{frame}[fragile]{Version control with github}
+\begin{itemize}%[<+->]
+\item Connect git to Rstudio (\href{http://kbroman.org/github_tutorial/}{kbroman.org/github\_tutorial})
+\item github.com, log in, on "+" in top-right select "New repository", initialize with readme!
+\item clone or download: copy link
+\item Rstudio - file - new project - version control - git: paste url and create
+\item \rcode{devtools::setup()}, choose option number to Overwrite 'yourPackage.Rproj'
+\item Work. Commit. Push. Repeat.
+\end{itemize}
+\end{frame}
+
+% ---------------------------
+
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: create the package structure}
+<<solcreate, eval=FALSE>>=
+devtools::create("lsc")
+devtools::check()
+@
+\end{frame}
+
+% ---------------------------
+
+\begin{frame}[fragile]{Roxygen for Documentation}
+Rstudio - Code - Insert Roxygen Skeleton (\rcode{CTRL} + \rcode{ALT} + \rcode{SHIFT} + \rcode{R})\\
+New: \href{http://r-posts.com/adding-sinew-to-roxygen2-skeletons/}{r-posts.com/adding-sinew-to-roxygen2-skeletons}
+\pause
+
+<<document, eval=FALSE>>=
+devtools::document() # calls roxygen2::roxygenise()
+
+check() # will also update documentation
+install() # install the package locally
+load_all(".") # CTRL + SHIFT + L    - faster than install!
+@
+
+\pause
+\begin{exercise}{Document functions}
+\begin{enumerate}
+\item Document the nse function (we'll do this one together)
+\item Create datasets within the package (following instructions in data.R)
+\item Document the rmse function
+\item Check and install the package
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+% ---------------------------
+
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Documenting functions}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
+\texttt{\textcolor[rgb]{0,0.392,0}{
+\#' \textcolor{blue}{@title} Nash-Sutcliffe efficiency\\
+\#' \textcolor{blue}{@details} Nash-Sutcliffe efficiency as a measure of goodness of fit.\\
+\#' ~~~~~~~~ Removes incomplete observations with a warning.\\
+\#' \textcolor{blue}{@return} Single numerical value\\
+\#' \textcolor{blue}{@export}\\
+\#' \textcolor{blue}{@seealso} \textbackslash \textcolor{blue}{code}\{\textbackslash \textcolor{blue}{link}\{rmse\}\}\\
+\#' \textcolor{blue}{@references} based on eval.NSeff  in RHydro Package\\
+\#' ~~~~~~~~~~~ \textbackslash \textcolor{blue}{url}\{https://r-forge.r-project.org/R/?group\_id=411\}\\
+\#' \textcolor{blue}{@examples}\\
+\#' x <- rnorm(20) ;  y <- 2*x + rnorm(20)\\
+\#' x[2:4] <- NA\\
+\#' nse(x,y)\\
+\#' \\
+\#' \textcolor{blue}{@param} obs Numerical vector with observed values\\
+\#' \textcolor{blue}{@param} sim Simulated values (Num vector with same length as \textbackslash \textcolor{blue}{code}\{obs\})\\
+\#'}}
+\end{kframe}
+\end{knitrout}
+\vspace{-1.5em}
+<<fundoc, eval=FALSE, size="scriptsize">>=
+nse <- function(obs, sim)
+{
+if(!(is.vector(obs) & is.vector(sim))) stop("Input is not a vector.")
+if(length(obs) != length(sim)) stop("Vectors are not of equal length.")
+#[...]
+1 - ( sum((obs - sim)^2) / sum((obs - mean(obs))^2) )
+}
+@
+
+\end{frame}
+
+% ---------------------------
+
+\subsection{Debugging}
+
+% ---------------------------
+
+\begin{frame}[fragile]{Debugging}
+\begin{itemize}[<+->]
+\item Your code throws an error.
+You didn't call the mentioned function. 
+Obviously, your code calls some function calling some function calling some function calling [you get the idea] which in the end creates an error.
+To trace back this path, you can use \rcode{traceback()}.
+
+\item Now that you know where the error originates from, you set \rcode{options(error=recover)}.
+You run your code again, but this time R waits at the level creating an error.
+You examine the environment within the function, play around with the objects and internal function code, until the bug has been fixed. 
+You have just debugged a function.
+
+\item You want to step into the function you are developing at a specific point.
+You add \rcode{browser()} at that point of the code.
+You want to go line by line in one specific function. You set \rcode{debug(thatFunction)}.
+
+\item You want to learn about lexical scoping (Where does R find variables?).\\
+\small
+\href{http://trestletech.com/2013/04/package-wide-variablescache-in-r-package/}{http://trestletech.com/2013/04/package-wide-variablescache-in-r-package/}
+\href{http://adv-r.had.co.nz/Environments.html}{http://adv-r.had.co.nz/Environments.html}
+\end{itemize}
+\end{frame}
+
+% ---------------------------
+
+\begin{frame}[fragile]{Debugging: useful functions}
 \begin{tabular}{ll}
 \pause source("projectFuns.R") & execute complete file\\
 \pause traceback() & find error source in sequence of function calls\\
@@ -4246,34 +4424,33 @@ Example: \href{https://www.r-bloggers.com/tracking-down-errors-in-r/}{Pete Werne
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{practice debugging}
-\begin{exercise}{debugging} %ex
-Load the objects in \datalink{bb\_functions.r} and correct the functions until\\ \rcode{bb\_lsc(calib\$P, calib\$Q, area=1.6)} returns the result below.\\
+\begin{frame}[fragile]{Practice debugging}
+\begin{exercise}{Debugging}
+\begin{enumerate}
+\item Load your package and the datasets. Correct the functions until\\
+\rcode{lsc(calib\$P, calib\$Q, area=1.6)} returns the result below.
+\item BONUS: commit each change to git.
+\end{enumerate}
 \end{exercise}
-<<PQ_lsc, echo=F, warning=F>>=
+
+<<PQ_lsc, echo=F, warning=F, fig.height=2.8>>=
 qpfile <- system.file("extdata/Q_P.txt", package="berryFunctions")
 qp <- read.table(qpfile, sep="\t", dec=",", header=TRUE)
 calib <- qp[1:90, ]
 valid <- qp[-(1:90), ]
-lsc_cal <- lsc(calib$P, calib$Q, area=1.6)
+lsc_cal <- berryFunctions::lsc(calib$P, calib$Q, area=1.6)
 @
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{debugging solution}
-<<debug, eval=FALSE>>=
-source("data/bb_functions.r")
-bb_lsc(calib$P, calib$Q, area=1.6)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Lexical scoping}
-Where R finds variables\\
-\href{http://trestletech.com/2013/04/package-wide-variablescache-in-r-package/}{http://trestletech.com/2013/04/package-wide-variablescache-in-r-package/}
-\href{http://adv-r.had.co.nz/Environments.html}{http://adv-r.had.co.nz/Environments.html}
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Debugging}
+\begin{itemize}
+\item \rcode{stupid error you can easily remove} - traceback - find location of error - lsc\#75 - just comment it out
+\item \rcode{harder to find but still stupid} - traceback - nse\#22 - ditto
+\item \rcode{Error in plot: need finite 'ylim' value} - debug/browser/options(error=recover) - lsc\#107 - NAs in Q - range(Q, na.rm=TRUE) - also in other applicable locations
+\item \rcode{There were 50 or more warnings} - come from rmse being called in optimization - add argument quietNA (or similar) to lsc that is passed to rmse in lsc\#81
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -4551,7 +4728,7 @@ for(nm in rownames(res_lapply))
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{8. Distributions}
+\section{9. Distributions}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5204,7 +5381,7 @@ distLfit(x, breaks=30, nbest=11, legargs=c(x="left"), quiet=T)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{9. Statistics}
+\section{10. Statistics}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5509,7 +5686,7 @@ It is excluded from this main document and can be obtained as \href{https://dl.d
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{10. Time series handling and analysis}
+\section{11. Time series handling and analysis}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5561,7 +5738,7 @@ library(xts)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{11. Spatial data and GIS functionality}
+\section{12. Spatial data and GIS functionality}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5821,7 +5998,7 @@ That material is currently excluded from this main document but can be obtained 
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{12. Final tasks}
+\section{13. Final tasks}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
