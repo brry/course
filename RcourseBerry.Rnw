@@ -1,4 +1,4 @@
-\documentclass[xcolor=table,       handout,    xcolor=dvipsnames]{beamer} % , handout, draft
+\documentclass[xcolor=table,      handout ,    xcolor=dvipsnames]{beamer} % , handout, draft
 \usetheme{Madrid} % Madrid, Warsaw, Berlin
 \usecolortheme{beaver}
 
@@ -5199,10 +5199,7 @@ Large $\alpha$: HDI (Highest Density Interval) more to the \only<beamer>{\only<+
 \vspace{1.5em}
 \onslide<+->
 <<betadist1, eval=FALSE>>=
-devtools::install_github("brry/berryFunctions")
-# or
-source("http://bit.ly/github_brry_instgit")
-instgithub("brry/berryFunctions")
+install.packages("berryFunctions")
 @
 \onslide<+->
 <<betadist1b, eval=FALSE>>=
@@ -5373,7 +5370,7 @@ par(mar=c(2,5,2,0.5), mgp=c(3,0.7,0))
 m <- 120 ; n <- 570; set.seed(1)
 x <- rbeta(800,30,4) * (n-m)+m
 library(extremeStat) # github.com/brry/extremeStat
-distLfit(x, breaks=30, nbest=11, legargs=c(x="left"), quiet=T)
+plotLfit(distLfit(x, quiet=T), breaks=30, nbest=11, legargs=c(x="left"))
 @
 \end{frame}
 
