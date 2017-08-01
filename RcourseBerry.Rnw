@@ -15,7 +15,9 @@
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}\hfill \hyperlink{toc}{TOC} ~~ \insertframenumber / \inserttotalframenumber~~~~~~~~~}}
+  \parbox{\linewidth}{\vspace*{-8pt}
+  \href{https://github.com/brry/course\#slides}{github.com/brry/course} \hfill 
+  \hyperlink{toc}{TOC} ~~ \insertframenumber / \inserttotalframenumber~~~~~~~~~}}
 \setbeamertemplate{navigation symbols}[only frame symbol]
 
 \beamersetleftmargin{0.3cm}
