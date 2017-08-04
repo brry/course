@@ -16,7 +16,7 @@
 
 \setbeamertemplate{footline}[text line]{%
   \parbox{\linewidth}{\vspace*{-8pt}
-  \href{https://github.com/brry/course\#slides}{github.com/brry/course} \hfill 
+  \href{https://github.com/brry/course\#slides}{github.com/brry/course} \hfill
   \hyperlink{toc}{TOC} ~~ \insertframenumber / \inserttotalframenumber~~~~~~~~~}}
 \setbeamertemplate{navigation symbols}[only frame symbol]
 
@@ -86,8 +86,8 @@
 <<setup, include=FALSE>>=
 # install packages, if not available
 packinst <- function(n) if(!requireNamespace(n, quietly=TRUE)) install.packages(n)
-dummy <- sapply(c("berryFunctions", "numbers", "TeachingDemos", "devtools", 
-                  "microbenchmark", "zoo", "extremeStat", "nortest", "xts", 
+dummy <- sapply(c("berryFunctions", "numbers", "TeachingDemos", "devtools",
+                  "microbenchmark", "zoo", "extremeStat", "nortest", "xts",
                   "maptools", "rgeos", "sp", "geoR"), packinst)
 
 # set global chunk options   maybe use   out.width='.55\\linewidth'
@@ -155,7 +155,7 @@ Download the current slides, source code and datasets at\\
 \Large
 \href{https://github.com/brry/course}{github.com/brry/course}\\[1em]
 \normalsize
-These slides are licenced under 
+These slides are licenced under
 \href{https://creativecommons.org/licenses/by/4.0}{\includegraphics[width=3em]{externalfig/ccby.png}},\\
 so you can use the material freely as long as you cite me.\\[2em]
 % \alert{guest account. example PC: ~ Einstein, 141.89.114.20\\user: gast\_20 ~ pw: 20-einstein. (mind the dot)}\\[1em]
@@ -827,7 +827,7 @@ xaxt="n" # axis type (none to suppress axis)
 \item Many people write code for specific tasks and publish it on CRAN, the Comprehensive R Archive Network
 \item Packages for a range of topics: \href{http://cran.r-project.org/web/views/}{cran.r-project.org/web/views}
 \item All $>$10'500 available packages: \href{http://cran.r-project.org/web/packages/}{cran.r-project.org/web/packages}
-\item \rcode{install.packages("ggplot2")} to download and install.\\ 
+\item \rcode{install.packages("ggplot2")} to download and install.\\
       \footnotesize (only needs to be executed once, works on user level, no admin rights required)\\
       You can do this in Rstudio \normalsize
 \item \rcode{library("ggplot2")} to load it \\
@@ -1363,7 +1363,7 @@ One convention is lowerCamel:\\
 \onslide<+->
 Don't use \rcode{=} for assignments. R users usually prefer " <- ", (\href{http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml}{style guide}) and "=" is only allowed on the top level.\\ \onslide<+->
 \rcode{median(x <- 1:10)} also creates the object in \rcode{globalenv()}, while \rcode{median(x=1:10)} does not.
-Used in \rcode{NCOL}, for example.\\ 
+Used in \rcode{NCOL}, for example.\\
 \onslide<+->
 \footnotesize{
 \href{http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html}{http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html}
@@ -2025,7 +2025,7 @@ lapply(c(6,2,13), sample, x=1:100)
 \begin{frame}[fragile]{matrix + list: solutions}
 <<matlistsol, eval=FALSE>>=
 mat <- matrix(c(42,007,123,7777,-17,88), ncol=2)
-mylist <- list(matrix=mat, creator="Berry", 
+mylist <- list(matrix=mat, creator="Berry",
      created=Sys.time(), exerciseNumber=11,
      haircolor=c("brunette", "red", "blonde", "blonde")  )
 sapply(mylist, length) # matrix length is 6 (=ncol*nrow)
@@ -2104,7 +2104,7 @@ With \rcode{View}, you can look at a table in an external viewer. This is useful
 \scriptsize In order of coercion (if mixed, TRUE is converted to 1,~  3.14 to "3.14" etc)
 \small
 <<coercion, eval=FALSE, echo=FALSE>>=
-l <- list(null=NULL, na=NA, logi=TRUE, factor=as.factor("hi"), int=7L, double=3.14, 
+l <- list(null=NULL, na=NA, logi=TRUE, factor=as.factor("hi"), int=7L, double=3.14,
           complex=5+3i, char="hello", time=Sys.time(), date=as.Date("2017-05-02"), func=ncol)
 sapply(l, function(x) c(mode=mode(x), typeof=typeof(x), class=class(x)[1]))
 sapply(l, function(x) sapply(l, function(y)  class(c(x,y))[1] ))
@@ -2127,15 +2127,15 @@ function         & ncol                 & closure   & \textbf{function}  \\ \hli
 \end{tabu}
 \end{center}
 \scriptsize
-\pause 
-\href{http://adv-r.had.co.nz/Data-structures.html}{adv-r.had.co.nz/Data-structures}. 
+\pause
+\href{http://adv-r.had.co.nz/Data-structures.html}{adv-r.had.co.nz/Data-structures}.
 \pause
 %See also e.g. Uwe Ligges (2006) - Programmieren mit R\\
 \rcode{as.character}\texttt{(3.14)} converts a data type;  \pause \rcode{is.integer}\texttt{(4:6)} checks. \pause
 \rcode{str} shows an abbreviation of \rcode{class}. \pause
-\rcode{mode} (for users) is like \rcode{typeof} (R internal), but combines 
-integer and double to numeric (\& closure, special and builtin to function). \pause 
-Other rare typeofs: raw, environment, promise, ... \pause 
+\rcode{mode} (for users) is like \rcode{typeof} (R internal), but combines
+integer and double to numeric (\& closure, special and builtin to function). \pause
+Other rare typeofs: raw, environment, promise, ... \pause
 When mixing date/time with others, the order of appearance determines the output class.
 \label{datatypes}
 \end{frame}
@@ -2158,7 +2158,7 @@ function   & function(x) 12+0.5*x                      & closure             & f
 \end{tabu}
 \end{center}
 \vspace{-0.5em}
-\pause A \rcode{matrix} consists of only one data type. 
+\pause A \rcode{matrix} consists of only one data type.
 If you accidentally change one element to a character, all are converted and calculations are not possible any more
 (See coercion order in previous slide).\\
 \pause \rcode{data.frame}s can have multiple data types, but a column in itself also has only one type.\\
@@ -2672,7 +2672,7 @@ Here are some tips by Hadley:
 \item \href{http://www.dwd.de}{DWD} Climate Data Center: \href{ftp://ftp-cdc.dwd.de/pub/CDC/observations\_germany/climate/hourly/precipitation/recent/}{CDC/observations\_germany/climate}
 <<klima_ftp, eval=FALSE, size="footnotesize">>=
 library(rdwd) # github.com/brry/rdwd
-clim <- dataDWD(selectDWD(id=02080, res="daily", var="kl", 
+clim <- dataDWD(selectDWD(id=02080, res="daily", var="kl",
                           time="hist"), dir=tempdir())
 @
 \item \href{http://data.unicef.org/}{data.unicef.org} (potentially add .xls etc as file extension)
@@ -3489,7 +3489,7 @@ options(width=50)
 @
 \pause \vspace{-0.5em}
 See \href{https://rclickhandbuch.wordpress.com/hauptseite/}{Rclick 10.4} for a realistic for loop example.\\
-\pause 
+\pause
 In R, \rcode{for} loops are slow. Always try to vectorize (the best option, not always possible) or use \rcode{lapply} (saves you the initiation of the empty vector, easier to parallize).
 \end{frame}
 
@@ -3580,18 +3580,18 @@ lines(x, 12.5*n/factorial(n-1)*(x/8*n)^(n-1)*exp(-x/8*n), col=2)
 # Download current datasets:
 if(!requireNamespace(quantmod)) install.packages("quantmod")
 if(!requireNamespace(pbapply))  install.packages("pbapply")
-dummy <- pbapply::pblapply(c("F","VLKAY", "AMZN","AAPL","GOOG","YHOO"), 
-   function(x) zoo::write.zoo(x=quantmod::getSymbols(x, auto.assign=FALSE)[,6], 
+dummy <- pbapply::pblapply(c("F","VLKAY", "AMZN","AAPL","GOOG","YHOO"),
+   function(x) zoo::write.zoo(x=quantmod::getSymbols(x, auto.assign=FALSE)[,6],
                            file=paste0("data/finance/",x,".txt"), col.names=T))
 
 # read single files to R and merge into one file:
-stocks <- lapply(dir("data/finance", full=TRUE), 
+stocks <- lapply(dir("data/finance", full=TRUE),
                   read.table, as.is=TRUE, header=TRUE)
 stocks <- Reduce(function(...) merge(..., all=T), stocks)
 
 # Get nicer column names:
 names <- sapply(strsplit(colnames(stocks), ".", fix=TRUE),"[", 1)
-colnames(stocks) <- c(Index="Date", F="FORD", VLKAY="VOLKSWAGEN", 
+colnames(stocks) <- c(Index="Date", F="FORD", VLKAY="VOLKSWAGEN",
               AMZN="AMAZON", AAPL="APPLE", GOOG="GOOGLE", YHOO="YAHOO")[names]
 
 # Save to disc:
@@ -3635,12 +3635,12 @@ mtext("stocks this decade", line=0, outer=TRUE)
 \vspace{-1em}
 <<forpanel2, size="scriptsize", fig.height=2.5>>=
 par(mfrow=c(1,2), mar=c(4,4,2,0.1), mgp=c(2.5,0.7,0), cex=0.7, las=1)
-for(i in 2:3) 
+for(i in 2:3)
  {
- plot(stocks[ stocks$Date>as.Date("2015-04-01") , c(1,i) ], 
-      main=colnames(stocks)[i], xaxt="n", type="l", xlab=" ", 
+ plot(stocks[ stocks$Date>as.Date("2015-04-01") , c(1,i) ],
+      main=colnames(stocks)[i], xaxt="n", type="l", xlab=" ",
       ylab=if(i==2) "Adjusted daily share price  [USD]" else "")
- berryFunctions::monthAxis(ym=TRUE) 
+ berryFunctions::monthAxis(ym=TRUE)
  }
 @
 \end{frame}
@@ -3702,7 +3702,7 @@ dfs <-   lapply(X=files, FUN=read.csv, as.is=TRUE)
 \pause \vspace{-3.48em}
 <<for_lapply7, eval=FALSE>>=
 # progress bar with remaining time
-library("pbapply") 
+library("pbapply")
 dfs <- pblapply(X=files, FUN=read.csv, as.is=TRUE)
 
 #
@@ -3729,7 +3729,7 @@ sapply(dfs, "[", 5,    )
 \begin{frame}[fragile]{for -> lapply IIIa: parallel on multiple CPU cores}
 \vspace{-1em}
 <<for_lapply10, eval=FALSE>>=
-library("parallel") # already comes with R 
+library("parallel") # already comes with R
 # -> don't try to  install.packages("parallel")
 nc <- detectCores()-1
 
@@ -3739,7 +3739,7 @@ nc <- detectCores()-1
 <<for_lapply11, eval=FALSE>>=
 # multicore parallel execution
 dfs <-        lapply(X=files, FUN=read.csv, as.is=TRUE)
-dfs <-      mclapply(X=files, FUN=read.csv, as.is=TRUE, 
+dfs <-      mclapply(X=files, FUN=read.csv, as.is=TRUE,
                      mc.cores=nc) # easy on linux
 
 #
@@ -3766,7 +3766,7 @@ clusterEvalQ(cl, library("somePackage"))
 \begin{frame}[fragile]{for -> lapply IIIb: parallel AND progress bar}
 \vspace{-1em}
 <<for_lapply11b, eval=FALSE>>=
-library(parallel) 
+library(parallel)
 library(pbapply) # (>2016-10-30)
 cl <- makeCluster( detectCores()-1 )
 myfun <- function(...) mean(rnorm(1e6))
@@ -3818,7 +3818,7 @@ mb <- microbenchmark(forbad(2000), forgood(2000))  ;  mb
 Loops are fast in C++, so outsource that part of your code into C.
 The package \rcode{Rcpp} will compile it for you and make it available as a normally accessible R function.\\
 \pause
-Start learning at 
+Start learning at
 \url{https://adv-r.had.co.nz/Rcpp.html}\\
 \pause
 Speed gain is highly variable, of course, but you might be able to reduce your computing time from 2 hours to 20 seconds!\\[1em]
@@ -4258,69 +4258,33 @@ Good introductions linked here:
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Devtools for package structure creation}
-<<devtools, eval=FALSE>>=
-dir.create("subfolder") ; setwd("subfolder") # optional
+\begin{frame}[fragile]{Package development: devtools + github}
+We'll create a cat package together following the instructions in
+\datalink{packdev.R}.\\[1em]
 
-library(devtools)
-
-create("packageName")
-setup() # if repos is initialized on github, see next slide
-
-check()
-@
-
-\pause
-\begin{exercise}{create the package structure}
-\begin{enumerate}
-\item Create a package for the linear storage cascade functions we provide.
-\item BONUS: Use git from the beginning (see next slide)
-\item Check the package, correct decription file and check again.
-\item Now add the functions in \datalink{lsc\_functions.zip} to the R folder
-\end{enumerate}
-\end{exercise}
-\end{frame}
-
-% ---------------------------
-
-\begin{frame}[fragile]{Version control with github}
+Version control with github:
 \begin{itemize}%[<+->]
-\item Connect git to Rstudio (\href{http://kbroman.org/github_tutorial/}{kbroman.org/github\_tutorial})
+\item \textcolor{Gray}{Once only: Create a github account (free), set up git on your computer, connect it to Rstudio.
+This is all very unfun and tedious, but at least there is a good guide that also includes a first test of the system:
+\href{https://www.r-bloggers.com/rstudio-and-github/}{r-bloggers.com/rstudio-and-github}.
+See also \href{http://kbroman.org/github_tutorial/}{kbroman.org/github\_tutorial} for a good intro.}
 \item github.com, log in, on "+" in top-right select "New repository", initialize with readme!
-\item clone or download: copy link
+\item On the green field "clone or download": copy link
 \item Rstudio - file - new project - version control - git: paste url and create
 \item \rcode{devtools::setup()}, choose option number to Overwrite 'yourPackage.Rproj'
 \item Work. Commit. Push. Repeat.
 \end{itemize}
 \end{frame}
 
-% ---------------------------
+%------------------------------------------------------------%
 
-\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: create the package structure}
-<<solcreate, eval=FALSE>>=
-devtools::create("lsc")
-devtools::check()
-@
-\end{frame}
-
-% ---------------------------
-
-\begin{frame}[fragile]{Roxygen for Documentation}
-Rstudio - Code - Insert Roxygen Skeleton (\rcode{CTRL} + \rcode{ALT} + \rcode{SHIFT} + \rcode{R})\\
-New: \href{http://r-posts.com/adding-sinew-to-roxygen2-skeletons/}{r-posts.com/adding-sinew-to-roxygen2-skeletons}
-\pause
-
-<<document, eval=FALSE>>=
-devtools::document() # calls roxygen2::roxygenise()
-
-check() # will also update documentation
-install() # install the package locally
-load_all(".") # CTRL + SHIFT + L    - faster than install!
-@
-
-\pause
-\begin{exercise}{Document functions}
+\begin{frame}[fragile]{Package exercise}
+\begin{exercise}{create LSC package (solutions on next 2 slides)}
 \begin{enumerate}
+\item Create a package for linear storage cascade functions (lsc)
+\item BONUS: Use git from the beginning, commit often!
+\item Check the package, correct description file and check again
+\item Now add the functions in \datalink{lsc\_functions.zip} to the R folder
 \item Document the nse function (we'll do this one together)
 \item Create datasets within the package (following instructions in data.R)
 \item Document the rmse function
@@ -4331,12 +4295,25 @@ load_all(".") # CTRL + SHIFT + L    - faster than install!
 
 % ---------------------------
 
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: create LSC package}
+<<solcreate, eval=FALSE>>=
+library(devtools)
+create("lsc") # or devtools::setup() if using git
+document() # calls roxygen2::roxygenise()
+check() # will also update documentation
+install() # install the package locally
+load_all(".") # CTRL + SHIFT + L    - faster than install!
+@
+\end{frame}
+
+% ---------------------------
+
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Documenting functions}
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \texttt{\textcolor[rgb]{0,0.392,0}{
 \#' \textcolor{blue}{@title} Nash-Sutcliffe efficiency\\
-\#' \textcolor{blue}{@details} Nash-Sutcliffe efficiency as a measure of goodness of fit.\\
+\#' \textcolor{blue}{@description} Nash-Sutcliffe efficiency as a measure of goodness of fit.\\
 \#' ~~~~~~~~ Removes incomplete observations with a warning.\\
 \#' \textcolor{blue}{@return} Single numerical value\\
 \#' \textcolor{blue}{@export}\\
@@ -4375,13 +4352,13 @@ if(length(obs) != length(sim)) stop("Vectors are not of equal length.")
 \begin{frame}[fragile]{Debugging}
 \begin{itemize}[<+->]
 \item Your code throws an error.
-You didn't call the mentioned function. 
+You didn't call the mentioned function.
 Obviously, your code calls some function calling some function calling some function calling [you get the idea] which in the end creates an error.
 To trace back this path, you can use \rcode{traceback()}.
 
 \item Now that you know where the error originates from, you set \rcode{options(error=recover)}.
 You run your code again, but this time R waits at the level creating an error.
-You examine the environment within the function, play around with the objects and internal function code, until the bug has been fixed. 
+You examine the environment within the function, play around with the objects and internal function code, until the bug has been fixed.
 You have just debugged a function.
 
 \item You want to step into the function you are developing at a specific point.
@@ -5004,7 +4981,7 @@ qnorm(c(0.025, 0.975), 85, 4.5) # 76.2 - 93.8
 data <- rnorm(1000, mean=97, sd=8.9)
 shapiro.test(data)
 ks.test(data, "pnorm", mean(data), sd(data))
-# if p > 0.05: accept Nullhypothesis 
+# if p > 0.05: accept Nullhypothesis
 # (that data are normally distributed.)
 @
 More on \hyperlink{nortest}{slide \ref{nortest}} et sequentes.
@@ -5915,7 +5892,7 @@ x <- gCentroid(p, TRUE)@coords[ ,"x"]
 y <- gCentroid(p, TRUE)@coords[ ,"y"]
 
 pcol <- colorRampPalette(c("red","yellow","blue"))(50)
-colPoints(x, y, p@data$P1, add=T, legargs=list(y1=0.8,y2=1), 
+colPoints(x, y, p@data$P1, add=T, legargs=list(y1=0.8,y2=1),
           col=pcol)
 @
 \end{frame}
