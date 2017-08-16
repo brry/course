@@ -63,6 +63,9 @@
 % Format month with leading zero:
 \newcommand{\leadingzero}[1]{\ifnum #1<10 0\the#1\else\the#1\fi}
 
+% "#' " for doc files:
+\newcommand{\doc}{\#\textquotesingle~}
+
 % remove empty lines between code and output. apparently hard to get rid of without turning off syntax highlighting
 
 
@@ -4312,22 +4315,22 @@ load_all(".") # CTRL + SHIFT + L    - faster than install!
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.961, 0.961, 0.961}\color{fgcolor}\begin{kframe}
 \texttt{\textcolor[rgb]{0,0.392,0}{
-\#' \textcolor{blue}{@title} Nash-Sutcliffe efficiency\\
-\#' \textcolor{blue}{@description} Nash-Sutcliffe efficiency as a measure of goodness of fit.\\
-\#' ~~~~~~~~ Removes incomplete observations with a warning.\\
-\#' \textcolor{blue}{@return} Single numerical value\\
-\#' \textcolor{blue}{@export}\\
-\#' \textcolor{blue}{@seealso} \textbackslash \textcolor{blue}{code}\{\textbackslash \textcolor{blue}{link}\{rmse\}\}\\
-\#' \textcolor{blue}{@references} based on eval.NSeff  in RHydro Package\\
-\#' ~~~~~~~~~~~ \textbackslash \textcolor{blue}{url}\{https://r-forge.r-project.org/R/?group\_id=411\}\\
-\#' \textcolor{blue}{@examples}\\
-\#' x <- rnorm(20) ;  y <- 2*x + rnorm(20)\\
-\#' x[2:4] <- NA\\
-\#' nse(x,y)\\
-\#' \\
-\#' \textcolor{blue}{@param} obs Numerical vector with observed values\\
-\#' \textcolor{blue}{@param} sim Simulated values (Num vector with same length as \textbackslash \textcolor{blue}{code}\{obs\})\\
-\#'}}
+\doc \textcolor{blue}{@title} ~~~~~~Nash-Sutcliffe efficiency\\
+\doc \textcolor{blue}{@description} Nash-Sutcliffe efficiency as a measure of goodness of fit.\\
+\doc ~~~~~~~~~~~~ Removes incomplete observations with a warning.\\
+\doc \textcolor{blue}{@return} ~~~~~Single numerical value\\
+\doc \textcolor{blue}{@export}\\
+\doc \textcolor{blue}{@seealso} ~~~~\textbackslash \textcolor{blue}{code}\{\textbackslash \textcolor{blue}{link}\{rmse\}\}\\
+\doc \textcolor{blue}{@references} ~based on eval.NSeff  in RHydro Package\\
+\doc ~~~~~~~~~~~~ \textbackslash \textcolor{blue}{url}\{https://r-forge.r-project.org/R/?group\_id=411\}\\
+\doc \textcolor{blue}{@examples}\\
+\doc x <- rnorm(20) ;  y <- 2*x + rnorm(20)\\
+\doc x[2:4] <- NA\\
+\doc nse(x,y)\\
+\doc \\
+\doc \textcolor{blue}{@param} obs Numerical vector with observed values\\
+\doc \textcolor{blue}{@param} sim Simulated values (Num vector with same length as \textbackslash \textcolor{blue}{code}\{obs\})\\
+\doc}}
 \end{kframe}
 \end{knitrout}
 \vspace{-1.5em}
