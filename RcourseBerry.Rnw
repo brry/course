@@ -4265,7 +4265,7 @@ Good introductions linked here:
 We'll create a cat package together following the instructions in
 \datalink{packdev.R}.\\[1em]
 
-Version control with github:
+Version control with git:
 \begin{itemize}%[<+->]
 \item \textcolor{Gray}{Once only: Create a github account (free), set up git on your computer, connect it to Rstudio.
 This is all very unfun and tedious, but at least there is a good guide that also includes a first test of the system:
@@ -4274,7 +4274,7 @@ See also \href{http://kbroman.org/github_tutorial/}{kbroman.org/github\_tutorial
 \item github.com, log in, on "+" in top-right select "New repository", initialize with readme!
 \item On the green field "clone or download": copy link
 \item Rstudio - file - new project - version control - git: paste url and create
-\item \rcode{devtools::setup()}, choose option number to Overwrite 'yourPackage.Rproj'
+\item \rcode{devtools::setup()} instead of \rcode{create}, choose option number to Overwrite 'yourPackage.Rproj'
 \item Work. Commit. Push. Repeat.
 \end{itemize}
 \end{frame}
@@ -4288,6 +4288,7 @@ See also \href{http://kbroman.org/github_tutorial/}{kbroman.org/github\_tutorial
 \item BONUS: Use git from the beginning, commit often!
 \item Check the package, correct description file and check again
 \item Now add the functions in \datalink{lsc\_functions.zip} to the R folder
+\item Done? Help your peers.
 \item Document the nse function (we'll do this one together)
 \item Create datasets within the package (following instructions in data.R)
 \item Document the rmse function
@@ -4343,7 +4344,6 @@ if(length(obs) != length(sim)) stop("Vectors are not of equal length.")
 1 - ( sum((obs - sim)^2) / sum((obs - mean(obs))^2) )
 }
 @
-
 \end{frame}
 
 % ---------------------------
