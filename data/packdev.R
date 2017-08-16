@@ -14,6 +14,7 @@ install.packages(c("devtools","roxygen2","berryFunctions"))
 getwd() # setwd("../otherFolder") if you want to create your package elsewhere
 devtools::create("catPack")
 # now open the catPack.Proj file with Rstudio
+berryFunctions::openFile("catPack/catPack.Proj")
 
 
 # Step 2: check whether package is working ----
