@@ -5743,18 +5743,18 @@ Geostatistics: Kriging - spatial interpolation between points, using semivarianc
 \begin{frame}[fragile]{Kriging: packages}
 <<krig_pack_inst, eval=FALSE>>=
 install.packages("rgeos")
-install.packages("maptools")
+install.packages("sf")
 install.packages("geoR")
 @
 <<krig_pack_lib, eval=FALSE>>=
-library(rgeos)    # for gCentroid, gArea, gUnion
-library(maptools) # for ReadShapeSpatial
-library(geoR)     # as.geodata, variog, variofit,
-# krige.control, krige.conv, legend.krige
+library(sf)   # for st_read (read shapefiles), 
+              # st_centroid, st_area, st_union
+library(geoR) # as.geodata, variog, variofit,
+              # krige.control, krige.conv, legend.krige
 @
 <<krig_pack_lib2, echo=FALSE>>=
 suppressMessages(library(rgeos))
-suppressMessages(library(maptools))
+suppressMessages(library(sf))
 suppressMessages(library(geoR))
 @
 \end{frame}
@@ -5809,7 +5809,7 @@ grid <- expand.grid(seq(min(x),max(x),res),
 krico <- krige.control(type.krige="OK",
                        obj.model=FIT_VARIOGRAM)
 krobj <- krige.conv(GEODATA,
-                    loc=grid, krige=krico)
+                    locations=grid, krige=krico)
 # KRigingObjekt
 @
 \end{frame}
@@ -5869,7 +5869,7 @@ Precipitation from ca 250 gauges in Brandenburg as Thiessen Polygons with steep 
 \begin{frame}[fragile]{Time for a real dataset}
 \begin{exercise}{Kriging} %ex
 \begin{enumerate}
-  \item Load and plot the shapefile in \datalink{PrecBrandenburg.zip}.
+  \item Load and plot the shapefile in \datalink{PrecBrandenburg.zip} with \rcode{sf::st\_read}.
   \item With \rcode{colPoints} in the package \texttt{berryFunctions}, add the precipitation values at the centroids of the polygons.
   \item Calculate the variogram and fit a semivariance curve.
   \item Perform kriging on a grid with a useful resolution (keep in mind that computing time rises exponentially with grid size).
@@ -5879,33 +5879,44 @@ Precipitation from ca 250 gauges in Brandenburg as Thiessen Polygons with steep 
 \end{exercise}
 \end{frame}
 
-\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.1-2: Kriging}
-<<ex_krig_sola, eval=T, size="small", fig.show="hide">>=
-library(maptools)
-library(geoR)
-library(berryFunctions)
-library(rgeos)
+%------------------------------------------------------------%
 
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.1-2: Kriging Data}
+<<ex_krig_data, eval=T, size="small", fig.show="hide">>=
 # Shapefile:
-p <- readShapeSpatial("data/PrecBrandenburg/niederschlag.shp")
-plot(p) # p: Precipitation
-
-# kriging coordinates
-x <- gCentroid(p, TRUE)@coords[ ,"x"]
-y <- gCentroid(p, TRUE)@coords[ ,"y"]
-
+p <- sf::st_read("data/PrecBrandenburg/niederschlag.shp", 
+                 quiet=TRUE)
+# Plot prep
 pcol <- colorRampPalette(c("red","yellow","blue"))(50)
-colPoints(x, y, p@data$P1, add=T, legargs=list(y1=0.8,y2=1),
-          col=pcol)
+clss <- berryFunctions::classify(p$P1, breaks=50)$index
+# Plot
+par(mar = c(0,0,1.2,0))
+plot(p, col=pcol[clss], max.plot=1) # P1: Precipitation
+# kriging coordinates
+cent <- sf::st_centroid(p)
+berryFunctions::colPoints(cent$x, cent$y, p$P1, add=T, cex=0.7,
+                          legargs=list(y1=0.8,y2=1), col=pcol)
+points(cent$x, cent$y, cex=0.7)
+@
+
+<<ex_krig_oldwithsp, eval=FALSE, echo=FALSE>>=
+library(maptools)
+p2 <- rgdal::readOGR("data/PrecBrandenburg/niederschlag.shp", verbose=FALSE)
+cent2 <- as.data.frame(rgeos::gCentroid(p2, byid=TRUE)@coords)
+plot(p2, col=pcol[clss])
+colPoints(cent2$x, cent2$y, p2$P1, add=T,legend=T,legargs=list(y1=0.8,y2=1), col=pcol); points(cent2$x, cent2$y)
+colPoints(p2$x, p2$y, p2$P1, add=F, asp=1)
+plot(p2, add=T)
 @
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.3: Kriging}
-<<ex_krig_solb, eval=T, size="scriptsize", fig.show="hide">>=
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.3: Variogram}
+<<ex_krig_vario, eval=T, size="scriptsize", fig.show="hide">>=
+library(geoR)
 # Semivariance:
-geoprec <- as.geodata(cbind(x,y,p@data$P1))
+geoprec <- as.geodata(cbind(cent$x,cent$y,p$P1))
 vario <- variog(geoprec, max.dist=130000)
 fit <- variofit(vario)
 @
@@ -5913,14 +5924,13 @@ fit <- variofit(vario)
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.3: Kriging}
-<<ex_krig_solb2, eval=T, size="scriptsize", fig.show="hide">>=
-plot(vario)
-lines(fit)
-
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.3: Variogram}
+<<ex_krig_visvario, echo=-1, size="scriptsize", fig.height=2.5>>=
+par(mfrow=c(1,2), mar=c(3,4,2,0.2), mgp=c(2,0.7,0))
+plot(vario) ; lines(fit)
 # distance to closest other point:
-d <- sapply(1:length(x), function(i)
-            min(distance(x[i], y[i], x[-i], y[-i])))
+d <- sapply(1:nrow(cent), function(i) min(berryFunctions::distance(
+                          cent$x[i], cent$y[i], cent$x[-i], cent$y[-i])))
 hist(d/1000, breaks=20, main="distance to closest gauge [km]")
 mean(d) # 8 km
 @
@@ -5928,40 +5938,35 @@ mean(d) # 8 km
 
 %------------------------------------------------------------%
 
-
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.4-5: Kriging}
-<<ex_krig_solc, eval=T, size="small", fig.show="hide">>=
+<<ex_krig_kriging, eval=T, size="small", fig.show="hide">>=
 # Kriging:
 res <- 1000 # 1 km, since stations are 8 km apart on average
-grid <- expand.grid(seq(min(x),max(x),res),
-                    seq(min(y),max(y),res))
+grid <- expand.grid(seq(min(cent$x),max(cent$x),res),
+                    seq(min(cent$y),max(cent$y),res))
 krico <- krige.control(type.krige="OK", obj.model=fit)
-krobj <- krige.conv(geoprec, loc=grid, krige=krico)
+krobj <- krige.conv(geoprec, locations=grid, krige=krico)
 
-save(krobj, grid, geoprec, p, x, y, pcol,
-     file="data/kriging.Rdata")
-
-# Visualization:
-image(krobj, col=pcol)
-colPoints(x, y, p@data$P1, legargs=list(y1=0.8,y2=1), col=pcol)
-points(x,y)
-plot(p, add=T)
+# Set values outside of Brandenburg to NA:
+grid_sf <- sf::st_as_sf(grid, coords=1:2, crs=sf::st_crs(p))
+isinp <- sapply(sf::st_within(grid_sf, p), length) > 0
+krobj2 <- krobj
+krobj2$predict[!isinp] <- NA
 @
 \end{frame}
 
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.5: Kriging Visualization}
-<<ex_krig_sold, echo=F, out.width="\\textwidth">>=
-load("data/kriging.Rdata")
+<<ex_krig_vis, echo=-(1:2), size="small", fig.height=2.5>>=
 par(mar=c(0,3,0,3))
-geoR:::image.kriging(krobj, col=pcol)
-colPoints(x, y, p@data$P1, col=pcol, legargs=list(horiz=F, title="Prec"))
-points(x,y)
-sp:::plot.SpatialPolygons(p, add=T)
+p <- sf::st_read("data/PrecBrandenburg/niederschlag.shp", quiet=TRUE)
+geoR:::image.kriging(krobj2, col=pcol)
+colPoints(cent$x, cent$y, p$P1, col=pcol, zlab="Prec", cex=0.7,
+          legargs=list(y1=0.1,y2=0.8, x1=0.78, x2=0.87, horiz=F))
+plot(p, add=T, col=NA, border=8)#; points(cent$x,cent$y, cex=0.7)
 @
 \end{frame}
-
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
@@ -5970,9 +5975,11 @@ sp:::plot.SpatialPolygons(p, add=T)
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{R geo, further material}
+Use the sf, mapview, osmar and osmplotr packages!\\[1em]
 Combine city names with geolocations:\\ \href{http://blog.revolutionanalytics.com/2015/11/marriott.html}{blog.revolutionanalytics.com/2015/11/marriott.html}\\[1em]
-For this section (spatial data / GIS), a lot was originally written by Matthias Seibert (GFZ). \\
-That material is currently excluded from this main document but can be obtained as \href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/RcourseBerry_Mathias.pdf}{pdf}.
+For this section (spatial data / GIS), a lot was originally written by Matthias Seibert (GFZ). 
+With the advance of the \rcode{sf} package (late 2016), that material is mostly outdated.
+Until new material is created here, his slides can be obtained as \href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/RcourseBerry_Mathias.pdf}{pdf}.
 \end{frame}
 
 %------------------------------------------------------------%
