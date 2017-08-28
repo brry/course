@@ -191,7 +191,7 @@ PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ 
 \begin{frame}{\rcode{print("Hello world!")}}
 \begin{itemize}[<+->]
 \item Berry Boessenkool $\rightarrow$ berry-b@gmx.de
-\item Geoecology @ Potsdam University \onslide<+-> - BSc\onslide<+->, MSc\onslide<+->, \textit{PhD (trying)}
+\item Geoecology @ Potsdam University
 \item R Fan\onslide<+->atic \onslide<+-> since 2010
 \item Teaching: \href{https://rclickhandbuch.wordpress.com}{RclickHandbuch.wordpress.com} (German)
 \item Programming: \href{https://github.com/brry}{github.com/brry/\texttt{extremeStat}}, \onslide<+->\href{https://cran.r-project.org/package=berryFunctions}{cran.r-project.org/package=\texttt{berryFunctions}}
