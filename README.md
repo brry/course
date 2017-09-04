@@ -16,7 +16,7 @@ The presentation template is available through
 First install R itself and then Rstudio:
 
 * **R Windows**: windows -> base -> download at https://cloud.r-project.org (update through [installr](https://github.com/talgalili/installr/blob/master/README.md))
-* **R Mac**: follow e.g. these instructions: https://www.r-bloggers.com/installing-r-on-os-x/
+* **R Mac**: follow e.g. these instructions: https://www.r-bloggers.com/installing-r-on-os-x
 * **R Linux Ubuntu**: open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines.  
 (from [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) and [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)). 
 Replace `xenial` with e.g. `trusty` if you have another Ubuntu version:  
