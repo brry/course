@@ -58,8 +58,11 @@
 \newcommand{\rcode}[1]{\texttt{\textcolor{Blue}{#1}}} % or use Blue
 
 % links to files
-\newcommand{\datalink}[1]{\href{https://raw.githubusercontent.com/brry/course/master/data/#1}{#1}}
-
+\newcommand{\datalinkRaw}[1]{\href{https://raw.githubusercontent.com/brry/course/master/data/#1}{#1}}
+\newcommand{\datalinkBlob}[1]{\href{https://github.com/brry/course/blob/master/data/#1}{#1}}
+\newcommand{\datalinkText}[1]{\href{https://github.com/brry/course/blob/master/data/#1}{#1} 
+                            {\footnotesize \textit{(rightclick \textbf{Raw}, save as)}}}
+                           
 % Format month with leading zero:
 \newcommand{\leadingzero}[1]{\ifnum #1<10 0\the#1\else\the#1\fi}
 
@@ -237,6 +240,14 @@ I find that when someone's taking time to do something right in the present, the
 
 %------------------------------------------------------------%
 
+\begin{frame}{Integrated Development Environment (IDE): RStudio}
+  \begin{figure}
+  \includegraphics[width=0.95\textwidth]{./externalfig/Rstudio2.png}
+  \end{figure}
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}{Get started in R}
 \pause
 \begin{exercise}{R is an awesome calculator}
@@ -321,12 +332,13 @@ plot(height~age, data=treesize, col=measured)
 @
 \onslide<+->
 \begin{exercise}{Reading files}
-Copy the file \datalink{treesize.txt} and tell R where to look for it with:\\
+Copy the file \datalinkText{treesize.txt} and tell R where to look for it with:\\
 \rcode{setwd("C:/path/to/input")} \texttt{\textcolor[rgb]{0,0.392,0}{ \# change back- to forwardslashes}}\\
-  \onslide<+-> Read the file into R with the command \rcode{read.table}.\\
-  \onslide<+-> If R tells you "no such file" exists, check the output of \rcode{dir()}.\\
+  \onslide<+-> Read the file into R with the command \rcode{read.table}, assigning it to an object with a good name.\\
   \onslide<+-> Use the documentation to find out the correct settings of the arguments:\\
   \onslide<+-> \rcode{help(read.table)}, \rcode{?read.table}, or press F1.\\
+  \onslide<+-> If R tells you "no such file" exists, check the output of \rcode{dir()}.\\
+  \onslide<+-> Check the object with \rcode{head(YourObject)}.\\
   \onslide<+-> \rcode{str(YourObject)} must yield the column data types: \texttt{num, num, factor}. \\
   \onslide<+-> You need to set the argument \texttt{header}.
   \end{exercise}
@@ -380,7 +392,7 @@ treesize$measurement=="A"
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Solution to exercise \arabic{exercisecount}: subsetting data.frames II}
-<<sol_treessubset2, eval=T, echo=-1, size="scriptsize">>=
+<<sol_treessubset2, size="scriptsize">>=
 treesize[ treesize$age >= 23.5 , "height"]
 @
 <<sol_treessubset3, eval=F, size="scriptsize">>=
@@ -910,8 +922,10 @@ help.start() # html help Manuals, Material, search engine
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Good References, books }%(\datalink{books.zip})}
+\begin{frame}[fragile]{Good References, books }%(\datalinkRaw{books.zip})}
+\vspace{-0.8em}
 \begin{itemize}[<+->]
+\item Grolemund \& Wickham (2017) \href{http://r4ds.had.co.nz/}{R for Data Science}
 \item J. Adler (2010): R in a Nutshell
 \item U. Ligges (2008): Programmieren mit R (German)
 \item M. Crawley (2007): The R-book
@@ -923,13 +937,14 @@ help.start() # html help Manuals, Material, search engine
 \end{itemize}
 \onslide<+-> Tutorials:
 \begin{itemize}[<+->]
-\item \href{http://RclickHandbuch.wordpress.com}{RclickHandbuch.wordpress.com} (German)
+%\item \href{http://RclickHandbuch.wordpress.com}{RclickHandbuch.wordpress.com} (German)
 \item \href{https://www.edx.org/course/introduction-r-programming-microsoft-dat204x-0#!}{Microsoft + Datacamp} (best course I know of, with login, but free)
 \item \href{http://tryr.codeschool.com/levels/1/challenges/1}{tryR.codeschool.com} (interactive)
 \item \href{http://stat545-ubc.github.io/topics.html}{STAT 545}
 \end{itemize}
 \label{books}
 \end{frame}
+
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
@@ -1951,14 +1966,14 @@ Alternatives to read.table:
 \begin{frame}[fragile]{Practice reading tables and subsetting data.frames}
 \begin{exercise}{data.frames - working with tables} %ex3
 \begin{enumerate}
-  \item Read the file "\datalink{animals.txt}" with the correct settings for each needed argument and assign it to an object.
+  \item Read the file \datalinkText{animals.txt} with the correct settings for each needed argument and assign it to an object.
   \item Check whether everything is read correctly with \rcode{str}.
   \item Print only the first column (BONUS: in 3 different ways of subsetting).
   \item \rcode{which} element of this vector is equal to (\rcode{==}) "Sparrow"?
   \item Can the elephant fly? Find out with a logical query.
   \item Find out how many legs the mammals have on average. Interpret the result.
   \item BONUS 1: Use \rcode{tapply} to find the average cuteness score for each animal class.
-  \item BONUS 2: Read the file "\datalink{days.txt}" in a way that days, months, and years each have their own column. What other function besides \rcode{read.table} might be useful for that?
+  \item BONUS 2: Read the file "\datalinkBlob{days.txt}" in a way that days, months, and years each have their own column. What other function besides \rcode{read.table} might be useful for that?
 \end{enumerate}
 \end{exercise}
 \end{frame}
@@ -2081,7 +2096,7 @@ as.numeric(iris$Species)[c(1,63,105)]
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{factors, explained with \datalink{animals.txt}: the danger}
+\begin{frame}[fragile]{factors, explained with \datalinkBlob{animals.txt}: the danger}
 \vspace{-0.9em} \pause
 <<factorissue1a, size="footnotesize">>=
 ac <- read.table(file="data/animals.txt", sep="\t", header=T)$cuteness
@@ -2104,7 +2119,7 @@ as.numeric(sub(",",".", char))
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{factors, explained with \datalink{animals.txt}: the solution}
+\begin{frame}[fragile]{factors, explained with \datalinkBlob{animals.txt}: the solution}
 \vspace{-0.9em} \pause
 <<factorissue2sol, size="footnotesize">>=
 df <- read.table(file="data/animals.txt", sep="\t", header=T, as.is=TRUE)
@@ -2184,9 +2199,9 @@ options(width=50)
 \begin{frame}{Merge (join) tables}
 \begin{exercise}{Merge} %ex4
 \begin{enumerate}
-  \item Read the files \datalink{mergeApples1.txt} and \datalink{mergeApples2.txt} into separate data.frames.
+  \item Read the files \datalinkText{mergeApples1.txt} and \datalinkBlob{mergeApples2.txt} into separate data.frames.
   \item Use \rcode{rbind} to combine both tables line-wise and assign the output to e.g. \rcode{apples}.
-  \item Read \datalink{mergeAge.txt} into e.g. \rcode{age}.
+  \item Read \datalinkBlob{mergeAge.txt} into e.g. \rcode{age}.
   \item Describe what \rcode{merge(age, apples, by.x="Name", by.y="Person")} does.
   \item What happens if you set \texttt{all} or \texttt{all.x} = TRUE?
   \item BONUS 1: What is the difference between \rcode{cbind} and \rcode{rbind}?
@@ -3309,14 +3324,14 @@ write.table(stocks, file="data/stocks.txt", row.names=F, quote=F)
 \begin{frame}[fragile]{For loops: multipanel graphics: the task}
 \begin{exercise}{for loop}
 \begin{enumerate}
-\item Read \datalink{stocks.txt}, so that there are no factors in the data.frame
+\item Read \datalinkText{stocks.txt}, so that there are no factors in the data.frame
 \item Change the first column type from \texttt{char} to \texttt{date} with \rcode{?as.Date}
 \item What do you get with \rcode{plot(stocks[ ,1:2])}? Make it a line graph.
 \item With \rcode{par(mfrow...}, set up a two by three panel plot
 \item With a for loop, fill those with each stock time series
 \item BONUS 1: Make good annotations, including a main title (par oma, \rcode{mtext} with the outer argument)
 \item BONUS 2: Make the plot margins smaller (par mar), turn y axis labels upright (las) and move the axis labels closer to the plots (mgp).
-\item BONUS 3: Understand and comment each line of the data preparation. %Get your own files or use mine: \footnotesize{\datalink{finance/AAPL.txt}, \datalink{finance/AMZN.txt}, \datalink{finance/F.txt}, \datalink{finance/GOOG.txt}, \datalink{finance/VLKAY.txt}, \datalink{finance/YHOO.txt}}
+\item BONUS 3: Understand and comment each line of the data preparation. %Get your own files or use mine: \footnotesize{\datalinkBlob{finance/AAPL.txt}, \datalinkBlob{finance/AMZN.txt}, \datalinkBlob{finance/F.txt}, \datalinkBlob{finance/GOOG.txt}, \datalinkBlob{finance/VLKAY.txt}, \datalinkBlob{finance/YHOO.txt}}
 \end{enumerate}
 \end{exercise}
 \end{frame}
@@ -3965,7 +3980,7 @@ Good introductions linked here:
 
 \begin{frame}[fragile]{Package development: devtools + github}
 We'll create a cat package together following the instructions in
-\datalink{packdev.R}.\\[1em]
+\datalinkText{packdev.R}.\\[1em]
 
 Version control with git:
 \begin{itemize}%[<+->]
@@ -3989,7 +4004,7 @@ See also \href{http://kbroman.org/github_tutorial/}{kbroman.org/github\_tutorial
 \item Create a package for linear storage cascade functions (lsc)
 \item BONUS: Use git from the beginning, commit often!
 \item Check the package, correct description file and check again
-\item Now add the functions in \datalink{lsc\_functions.zip} to the R folder
+\item Now add the functions in \datalinkRaw{lsc\_functions.zip} to the R folder
 \item Done? Help your peers.
 \item Document the nse function (we'll do this one together)
 \item Create datasets within the package (following instructions in data.R)
@@ -5111,7 +5126,7 @@ When the \textcolor{red}{less effective treatment (small puncture)} is applied m
 
 \begin{frame}{Simpson's Exercise}
 \begin{exercise}{Simpson}
-Visualize \datalink{farming.txt}, a fictional dataset measuring crop yield on 30 study fields after pesticide application.
+Visualize \datalinkText{farming.txt}, a fictional dataset measuring crop yield on 30 study fields after pesticide application.
 \end{exercise}
 \end{frame}
 
@@ -5381,7 +5396,7 @@ It is excluded from this main document and can be obtained as \href{https://dl.d
 \pause
 Your professor asks you to visually examine temperature and precipitation trends
 at certain meteorological stations in Germany.
-She hands you the files \datalink{Potsdam.txt} and \datalink{Zugspitze.txt}.
+She hands you the files \datalinkBlob{Potsdam.txt} and \datalinkText{Zugspitze.txt}.
 How do you approach the project?\\[1em]
 \pause
 \scriptsize Data selection, download, processing and saving:\\[-1em]
@@ -5571,7 +5586,7 @@ Precipitation from ca 250 gauges in Brandenburg as Thiessen Polygons with steep 
 \begin{frame}[fragile]{Time for a real dataset}
 \begin{exercise}{Kriging} %ex
 \begin{enumerate}
-  \item Load and plot the shapefile in \datalink{PrecBrandenburg.zip} with \rcode{sf::st\_read}.
+  \item Load and plot the shapefile in \datalinkRaw{PrecBrandenburg.zip} with \rcode{sf::st\_read}.
   \item With \rcode{colPoints} in the package \texttt{berryFunctions}, add the precipitation values at the centroids of the polygons.
   \item Calculate the variogram and fit a semivariance curve.
   \item Perform kriging on a grid with a useful resolution (keep in mind that computing time rises exponentially with grid size).
@@ -5716,7 +5731,8 @@ Until new material is created here, his slides can be obtained as \href{https://
 \begin{frame}
 \begin{exercise}{Final exercises to solve at home II} %ex23
 \begin{enumerate}
-  \item How often is Peter Pan mentioned in the E-book (\datalink{peterpan.txt})? Exclude the meta data about the book!
+  \item How often is Peter Pan mentioned in the E-book? \datalinkText{peterpan.txt}. 
+        Exclude the meta data about the book!
   \item Interpret the results from \rcode{pairs(iris)} and \rcode{cor(iris[ ,1:4])}. Why does \rcode{cor(iris)} not work?
   \item What are the most important functions and arguments for creating graphics?
   \item Write a for loop including a while statement to distribute points randomly, but with a certain minimal distance to each other, along a line (segment sampling design). A solution is in my \href{http://rclickHandbuch.wordpress.com/hauptseite}{RclickHandbuch} Chapter 10.4.
@@ -5892,7 +5908,7 @@ Please write down the answers to the following questions / instructions as pseud
 \begin{itemize}
 \item What do you do to start a (small) research project?
 \item Read a file into R where columns are tab-separated and the decimal marker is German.
-\item In a data set with monthly weather records (\datalink{Potsdam.txt}): Get the average temperature of months with more than 90 mm rainfall.
+\item In a data set with monthly weather records (\datalinkText{Potsdam.txt}): Get the average temperature of months with more than 90 mm rainfall.
 \item Visually compare wind speed and rainfall.
 \item Describe and visualize the distribution of relative humidity.
 \end{itemize}
