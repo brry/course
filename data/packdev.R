@@ -119,7 +119,7 @@ devtools::check()
 ?Rprofile.site # https://rclickhandbuch.wordpress.com/install-r/rprofile/
 
 # locally:
-cat("library(devtools)\n", file=".Rprofile")
+cat("\nlibrary(devtools)\n", file=".Rprofile", append=TRUE)
 # CTRL + SHIFT + F10 to restart R
 document() # quicker to type without devtools::
 
