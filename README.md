@@ -86,6 +86,9 @@ researchers worldwide enjoy the benefits of structured and reproducible scientif
 
 The course takes place on 7 Tuesdays during the first half of the semester 
 at 12:15-15:15 o'clock in the computer pool in the house 25 on campus Golm, room D0.02. 
+
+Currently, you can [vote for a second course](https://doodle.com/poll/yqvanrccvmkeff5d) in German, which will be held if enough people register.
+
 Each participant must already have a 
 [PC-pool account](https://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html) 
 or bring a laptop with [WiFi](http://www.zeik.uni-potsdam.de/wlan.html), 
@@ -94,7 +97,7 @@ It will be necessary to complete homework exercises taking about 1-4 hours per w
 The course is held in German or English, depending on the participants. 
 
 #### registration 
-Please register per [email](berry-b@gmx.de) or via the 
+Please register per [email](mailto:berry-b@gmx.de) or via the 
 [moodle course](https://moodle2.uni-potsdam.de/course/view.php?id=14800).
 Students in the Geoecology module "numeric and simulation" will be enrolled first, 
 remaining seats assigned by registration date. 
