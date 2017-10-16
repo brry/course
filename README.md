@@ -84,17 +84,17 @@ researchers worldwide enjoy the benefits of structured and reproducible scientif
 
 #### organization
 
-The course takes place on 7 Tuesdays during the first half of the semester 
-at 12:15-15:15 o'clock in the computer pool in the house 25 on campus Golm, room D0.02. 
+The course takes place in 7 three-hour sessions during the first half of the semester.
+There are two options, both on campus Golm:
 
-Currently, you can [vote for a second course](https://doodle.com/poll/yqvanrccvmkeff5d) in German, which will be held if enough people register.
+* tuesdays, 12:15-15:15, house 25, room D0.02, main language English
+* wednesdays, 12:15-15:15, house 1, PC Pool (guest account provided), mainly German
 
-Each participant must already have a 
+Each participant of the tuesday course must already have a 
 [PC-pool account](https://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html) 
 or bring a laptop with [WiFi](http://www.zeik.uni-potsdam.de/wlan.html), 
 recent R and Rstudio (see section [install](#install) above). 
 It will be necessary to complete homework exercises taking about 1-4 hours per week. 
-The course is held in German or English, depending on the participants. 
 
 #### registration 
 Please register per [email](mailto:berry-b@gmx.de) or via the 
