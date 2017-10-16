@@ -196,11 +196,17 @@ PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ 
 \item Berry Boessenkool $\rightarrow$ berry-b@gmx.de
 \item Geoecology @ Potsdam University
 \item R Fan\onslide<+->atic \onslide<+-> since 2010
-\item Teaching: \href{https://rclickhandbuch.wordpress.com}{RclickHandbuch.wordpress.com} (German)
-\item Programming: \href{https://github.com/brry}{github.com/brry/\texttt{extremeStat}}, \onslide<+->\href{https://cran.r-project.org/package=berryFunctions}{cran.r-project.org/package=\texttt{berryFunctions}}
+\begin{itemize}
+\item Teaching: \href{https://rclickhandbuch.wordpress.com}{RclickHandbuch.wordpress.com} (German) + this course
+\item Programming: \href{https://github.com/brry/extremeStat}{\texttt{extremeStat}}, 
+      \onslide<+->\href{https://cran.r-project.org/package=berryFunctions}{\texttt{berryFunctions}}, 
+      \onslide<+->\href{https://github.com/brry/rdwd\#rdwd}{\texttt{rdwd}}, 
+      \onslide<+->\href{https://github.com/brry/OSMscale}{\texttt{OSMscale}}
+\item Community: \href{https://www.meetup.com/de-DE/Berlin-R-Users-Group/}{\includegraphics[width=3em]{externalfig/BRUG_full.png}}
+\end{itemize}
 %\item \alert{Jump to beta distribution \hyperlink{beta}{example lecture}}
 \item These slides were originally based on a one week course held in 2013 for \href{http://www.cawa-project.net/story/300}{CaWa} with Mathias Seibert (GFZ) in Bishkek, Kyrgyzstan
-\item \alert{If we're proceeding too fast, please interrupt me!}
+\item \alert{If we're proceeding too fast, please interrupt!}
 \end{itemize}
 \end{frame}
 
@@ -240,7 +246,17 @@ I find that when someone's taking time to do something right in the present, the
 
 %------------------------------------------------------------%
 
+\begin{frame}{Course plan}
+\hyperlink{plansessionone}{Jump to plan Session 1}\\[2em]
+
+One slide about Rstudio, and then we'll finally start...
+
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}{Integrated Development Environment (IDE): RStudio}
+\label{iderstudio}
   \begin{figure}
   \includegraphics[width=0.95\textwidth]{./externalfig/Rstudio2.png}
   \end{figure}
@@ -740,6 +756,7 @@ linReg(Volume~Girth, data=trees, col="forestgreen", pos1="topleft")
 
 \begin{frame}{R - What and Why?}
 \pause
+\vspace{-0.5em}
 \begin{itemize}%[<+->]
 \item R is a standard environment for statistical computing
 \item and an object-oriented programming language.
@@ -756,7 +773,7 @@ linReg(Volume~Girth, data=trees, col="forestgreen", pos1="topleft")
 \item Being capable of programming helps finding a job
 \item and the best part: \textcolor{green}{R is open source and free!}
 \end{itemize}
-\pause
+% \pause
 \small \href{http://fantasyfootballanalytics.net/2014/01/why-r-is-better-than-excel.html}{fantasyfootballanalytics.net/2014/01/why-r-is-better-than-excel.html}
 \href{http://thegrantlab.org/bio3d/tutorials/79-static-content/85-why-use-r}{thegrantlab.org/bio3d/tutorials/79-static-content/85-why-use-r}
 \end{frame}
@@ -787,12 +804,15 @@ linReg(Volume~Girth, data=trees, col="forestgreen", pos1="topleft")
 \begin{frame}{Where to get R}
 %\pause
 \begin{itemize}%[<+->]
-  \item base R itself: \href{https://cloud.r-project.org/}{r-project.org}.\\
-        \href{https://cran.r-project.org/bin/linux/ubuntu/README.html}{Official} and \href{https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus/}{helpful} hints for Linux Ubuntu users.
-  \item Use an Editor to work with script files:
-  \item \href{https://www.rstudio.com/products/rstudio/\#Desktop}{R-Studio} (widely spread, easy to use)
-  \item \href{http://sourceforge.net/projects/tinn-r/}{Tinn-R} (only for Windows OS, flexible window arrangement).\\
-         Needs some initial tweaking, see \href{https://rclickhandbuch.wordpress.com/install-r/tinn-r_english}{Berry's TinnR Page} % pdf cannot be completed without this percent sign
+%   \item base R itself: \href{https://cloud.r-project.org/}{r-project.org}.\\
+%         \href{https://cran.r-project.org/bin/linux/ubuntu/README.html}{Official} and \href{https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus/}{helpful} hints for Linux Ubuntu users.
+%   \item \href{https://www.rstudio.com/products/rstudio/\#Desktop}{R-Studio} (widely spread, easy to use)
+%   
+\item Instructions online: \href{https://github.com/brry/course\#install}{github.com/brry/course\#install}
+\item Base R itself
+\item Suggested editor to work with script files: Rstudio
+\item \href{http://sourceforge.net/projects/tinn-r/}{Tinn-R} (only for Windows OS, flexible window arrangement).\\
+      Needs some initial tweaking, see \href{https://rclickhandbuch.wordpress.com/install-r/tinn-r_english}{Berry's TinnR Page} % pdf cannot be completed without this percent sign
 \end{itemize}
 \label{installR}
 \end{frame}
@@ -843,7 +863,7 @@ Line ending conversion: \textbf{Windows (CR/LF)}
 \begin{frame}[fragile]{Tinn R}
   \begin{figure}[h]
     \begin{center}
-    \includegraphics[width=.8\linewidth]{./externalfig/TinnR_gui.png}
+    \includegraphics[width=.8\linewidth]{./externalfig/TinnR_gui.PNG}
 		\caption{screenshot Tinn-R}
 		\label{fig:how to start R from Tinn-R}
     \end{center}
@@ -5578,7 +5598,7 @@ colPoints(grid[ ,1], grid[ ,2], krobj$predict, add=F,
 
 \begin{frame}[fragile]{Time for a real dataset}
 Precipitation from ca 250 gauges in Brandenburg as Thiessen Polygons with steep gradients at edges:\\[\baselineskip]
-\includegraphics[width=\textwidth]{./externalfig/PrecBRB.png}
+\includegraphics[width=\textwidth]{./externalfig/PrecBRB.PNG}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -5776,12 +5796,13 @@ Until new material is created here, his slides can be obtained as \href{https://
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 1/4: Why R, read file, select and plot data}
+\subsection{Session 1/7: Why R, read file, select and plot data}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
 \begin{frame}{Session 1: Aim (Chapter 1)}
-\pause - get a general impression on how R works, without going too much into technical detail\\
+\label{plansessionone}
+\pause get a general impression on how R works, without going too much into technical detail\\
 \pause afterwards, you should be able to:
 \pause
 \begin{itemize}[<+->]
@@ -5790,9 +5811,10 @@ Until new material is created here, his slides can be obtained as \href{https://
 \item select a column and rows that fullfill a certain criterion
 \item generate basic graphics with annotation and added elements
 \item open and read the documentation for R functions
-\item install and load add-on packages written by the R community
-\item perform and visualize linear regression
 \end{itemize}
+\onslide<+->
+\vspace{2em}
+\hyperlink{iderstudio}{Jump to Rstudio}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -5803,7 +5825,6 @@ Until new material is created here, his slides can be obtained as \href{https://
   \item R is awesome. You're here, thus you will be R-some, too
   \item Console for code execution (R), ready with \rcode{$>$}, waiting with \rcode{$+$}
   \item Script for code writing (you) + exchange
-  \item Packages are basically (documented) scripts from other people $\rightarrow$ \rcode{install.packages} and \rcode{library}
   \item Objects are created with the assignment operator \rcode{$<$-}, see \rcode{ls()} % in the workspace
   \item Get help with \rcode{help(median)}, \rcode{?matrix}, or pressing F1
   \item Create vectors with \rcode{c(42,3,-4)}, \rcode{1:n}, \rcode{seq(2,5,len=30)}
@@ -5820,17 +5841,17 @@ Until new material is created here, his slides can be obtained as \href{https://
 \begin{frame}{Session 1: Homework}
 \pause
 \begin{itemize}[<+->]
-  \item If not already done, install R and Rstudio (see \hyperlink{installR}{slide \ref{installR}})
+  \item If not already done, install R and Rstudio (see \href{https://github.com/brry/course\#install}{github.com/brry/course\#install})
   \item If you still need it, get a \href{http://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html}{PC-Pool Account} \\(Laptop with \href{http://www.zeik.uni-potsdam.de/wlan.html}{WLAN access} is fine, too)
   \item Complete all unfinished exercises from today
-  \item Print a RefCard, see \hyperlink{refcards}{slide \ref{refcards}} and mark all the items that you have understood
-  \item BONUS: Read about Simpson's paradox and solve the first corresponding exercise, see \hyperlink{simpson}{slide \ref{simpson}} et sequentes.
+  \item Print a RefCard (see \hyperlink{refcards}{slide \ref{refcards}}) and mark all the items that you have understood
+  % \item BONUS: Read about Simpson's paradox and solve the first corresponding exercise, see \hyperlink{simpson}{slide \ref{simpson}} et sequentes.
 \end{itemize}
 \end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 2/4: Objects, file reading, data merging}
+\subsection{Session 2/7: Objects, file reading, data merging}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5840,6 +5861,8 @@ Until new material is created here, his slides can be obtained as \href{https://
 \pause afterwards, you should be able to:
 \pause
 \begin{itemize}[<+->]
+\item install and load add-on packages written by the R community
+\item perform and visualize linear regression
 \item find the appropriate place and way to get help if you're stuck
 \item sketch an overview of common data types
 \item explain the difference between object types and data types
@@ -5857,6 +5880,8 @@ Until new material is created here, his slides can be obtained as \href{https://
 
 \begin{frame}[fragile]{Session 2: Recap}
 \begin{itemize}[<+->]
+  \item Packages are basically (documented) scripts from other people $\rightarrow$ \rcode{install.packages} and \rcode{library}
+
 \item Reading data: \rcode{setwd}, \rcode{dir}, \rcode{read.table}, \rcode{str}
 \item \rcode{read.table} arguments: header=TRUE, sep="\textbackslash t", dec=",", skip, fill, comment.char, na.strings, \textit{many more}
 \item Function documentation with \rcode{help} (or F1), \href{www.StackOverflow.com}{StackOverflow} for questions, Reference Cards (\hyperlink{refcards}{slide \ref{refcards}}) for an overview and books / tutorials (\hyperlink{books}{slide \ref{books}}) for self-learning
@@ -5886,7 +5911,7 @@ You can send me your homework if you want comments.
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 3/4: small research project, export of publication-ready graphics}
+\subsection{Session 3/7: publication-ready graphics, if-else conditionals}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5963,7 +5988,7 @@ The class will pick a winner from the submissions based on graph appearance, art
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 4/4: if-else statements, for loops}
+\subsection{Session 4/7: for loops, apply functions}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6017,8 +6042,36 @@ Please email me how much time you spent on each task and how solvable it was (di
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 5/4: Additional material}
+\subsection{Session 5/7: functions}
 %------------------------------------------------------------%
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Session 6/7: statistics}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Session 7/7: shapefiles (R as GIS)}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Feedback, additional material}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}{Feedback}
+\center{
+Please fill out the feedback form at\\[1em]
+\href{https://goo.gl/jVgqge}{goo.gl/jVgqge}\\[1em]
+(it only takes 2 minutes)\\[1em]
+Thanks!\\[1em]
+}
+\end{frame}
+
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{recap \alert{if else} I}
@@ -6053,20 +6106,6 @@ if(!requireNamespace("quantmod")) install.packages("quantmod")
 @
 \end{frame}
 
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-\subsection{Feedback}
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-
-\begin{frame}{Feedback}
-\center{
-Please fill out the feedback form at\\[1em]
-\href{https://goo.gl/jVgqge}{goo.gl/jVgqge}\\[1em]
-(it only takes 2 minutes)\\[1em]
-Thanks!\\[1em]
-}
-\end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
