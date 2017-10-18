@@ -267,7 +267,8 @@ One slide about Rstudio, and then we'll finally start...
 \begin{frame}{Get started in R}
 \pause
 \begin{exercise}{R is an awesome calculator}
-In the console, calculate ~ 21+21 ~,~ 7*6 ~ and ~ $\frac{0,3}{4}*\sqrt{313600}$
+In the console, calculate ~ 21+21 ~,~ 7*6 ~ and ~ $\frac{0,3}{4}*\sqrt{313600}$\\
+\textit{If you don't know how to compute a square root in R, you can google it!}
 \end{exercise}
 \vspace{-1em}
 \pause
