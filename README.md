@@ -1,3 +1,5 @@
+Jump to [slides](#slides), [install](#install), [settings](#settings), [packages](#packages), [resources](#resources), [uni](#uni)
+
 ### slides
 
 Here are the slides I use for R courses in several versions:
@@ -33,6 +35,23 @@ sudo apt-get install r-base r-base-dev
 
 * **Rstudio on all platforms**: https://www.rstudio.com/products/rstudio/download/#Desk
 
+### settings
+
+Suggested Rstudio settings (for reproducibility and compatibility):
+
+- Tools - Global Options - General
+    - **ON**: Restore previously open source documents at startup  
+    - **OFF**: Restore .Rdata into workspace at startup  
+    - Save workspace to .RData on exit: **NEVER**  
+Instead use `save(object, file="object.Rdata")` after long computations.  
+You can load them later with `load("object.Rdata")`.
+- Tools - Global Options - Code - Display
+    - **ON**: Show margin (Margin column:80)  *People hate horizontal scrolling!*
+- Tools - Global Options - Code - Saving
+    - Line ending conversion: **Windows (CR/LF)**
+    - Default Text Encoding: **UTF-8**
+- Tools - Modify Keyboard Shortcuts
+    - remove `CTRL+Y` from the command "paste last yank" (if you want it to mean "redo" as in other programs)
 
 
 ### packages
