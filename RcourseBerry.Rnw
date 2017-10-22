@@ -578,9 +578,12 @@ xaxt="n" # axis type (none to suppress axis)
   \item Install and load the package \rcode{berryFunctions}
   \item How can we pass the treesize data to \rcode{?linReg} with a formula?
   \item Describe the resulting graph (height vs age).
-  \item Look into the source code of \rcode{linReg}. What is actually the backbone for the calculation of the function?
+  \item Look into the source code of \rcode{linReg}. 
+        \textit{If you don't know how to view the source code of a function in R, you can google it!}
+        What is actually the backbone for the calculation of the function?
   \item Feed the data into \rcode{lm}, assign the output to an object (useful name!).
   \item Briefly explain the \rcode{summary} of the linear model.
+  \item BONUS: install \href{https://github.com/brry/rskey\#rskey}{rskey}, set a keyboard shortcut for \rcode{funSource} and use it to get the source code of some function.
 \end{enumerate}
 \end{exercise}
 \end{frame}
@@ -5852,13 +5855,48 @@ Until new material is created here, his slides can be obtained as \href{https://
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 2/7: Objects, file reading, data merging}
+\subsection{Session 2/7: Objects, file reading, NAs, data merging}
 %------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Repetition / application of content from last week}
+\begin{footnotesize}
+In groups of two or three, please take turns solving the following tasks. 
+Pseudo-Code is fine, als long as the syntax is correct.
+This is for real life, not school, so feel free to use any source of help and inspiration ;-)
+\begin{enumerate}
+\item What program do we use to access R and what is typically in the four panels?
+\item Assign a vector with the names of your group (character strings!) to an object with a useful name.
+\item Return all values of that vector except for the second.
+\item What is the easiest way to open the help documentation of a command?
+\item In a project handling several files, where, why and how do you use \rcode{setwd()}?
+\item Read the data in the imaginary file \texttt{Wolf\_Observations.txt} into R.
+\item What are the two important functions to check whether it was read correctly?
+\item Code two ways to select a column from a \rcode{data.frame}.
+\item Get all the data in the 6th and 8th row of a df.
+\item How would you plot the wolf pack size over the distance from the coast?
+\item With which arguments to \rcode{plot()} would you make the graph more informative and appealing?
+\end{enumerate}
+\end{footnotesize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Please judge the difficulty of the previous tasks}
+<<taskdifficulty, fig.height=2, echo=-1>>=
+par(mar=c(2,0,0,0), mgp=c(3,0.5,0), cex=2)
+plot(1:10, type="n", xlim=c(-1,11), ann=FALSE, axes=FALSE)
+axis(side=1, at=c(0,5,10))
+text(x=c(0,5,10), y=rep(6,3), c("too\neasy", 
+     "just\nright", "too\nhard"))
+@
+\end{frame}
+
 %------------------------------------------------------------%
 
 \begin{frame}{Session 2: Aim (Chapters 2  - 4.3)}
 \pause - itensify and fortify the knowledge obtained in session 1\\
-\pause - learn about data merging\\
+\pause - learn about NAs and data merging\\
 \pause afterwards, you should be able to:
 \pause
 \begin{itemize}[<+->]
@@ -5904,8 +5942,6 @@ Until new material is created here, his slides can be obtained as \href{https://
 \item BONUS 3: Solve exercise 13 (factors, tapply) using chapter 4.2
 \end{enumerate}
 \pause
-Please email me the approximate time you spend on each task separately, so I can manage your future homework load.
-Please note how much you needed the solutions.\\
 You can send me your homework if you want comments.
 \label{hw2}
 \end{frame}
