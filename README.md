@@ -50,8 +50,11 @@ You can load them later with `load("object.Rdata")`.
 - Tools - Global Options - Code - Saving
     - Line ending conversion: **Windows (CR/LF)**
     - Default Text Encoding: **UTF-8**
+- Tools - Global Options - Sweave
+    - Weave Rnw files using: **knitr**
 - Tools - Modify Keyboard Shortcuts
     - remove `CTRL+Y` from the command "paste last yank" (if you want it to mean "redo" as in other programs)
+    - Set Working Directory to Current Document's Directory: `CTRL + H`
 
 
 ### packages
