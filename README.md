@@ -47,9 +47,14 @@ Instead use `save(object, file="object.Rdata")` after long computations.
 You can load them later with `load("object.Rdata")`.
 - Tools - Global Options - Code - Display
     - **ON**: Show margin (Margin column:80)  *People hate horizontal scrolling!*
+    - **ON**: Highlight R function calls
+
 - Tools - Global Options - Code - Saving
     - Line ending conversion: **Windows (CR/LF)**
     - Default Text Encoding: **UTF-8**
+- Tools - Global Options - Code - Completion - Completion Delay
+    - Show completions after characters entered: **2**
+    - Show completions after keyboard idle (ms): **0**
 - Tools - Global Options - Sweave
     - Weave Rnw files using: **knitr**
 - Tools - Modify Keyboard Shortcuts
