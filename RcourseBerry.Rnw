@@ -206,6 +206,7 @@ PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ 
 \end{itemize}
 %\item \alert{Jump to beta distribution \hyperlink{beta}{example lecture}}
 \item These slides were originally based on a one week course held in 2013 for \href{http://www.cawa-project.net/story/300}{CaWa} with Mathias Seibert (GFZ) in Bishkek, Kyrgyzstan
+\item R installation instructions: \href{https://github.com/brry/course\#install}{github.com/brry/course\#install}
 \item \alert{If we're proceeding too fast, please interrupt!}
 \end{itemize}
 \end{frame}
@@ -576,7 +577,8 @@ xaxt="n" # axis type (none to suppress axis)
 \begin{exercise}{Packages, linear regression}
 \begin{enumerate}
   \item Install and load the package \rcode{berryFunctions}
-  \item How can we pass the treesize data to \rcode{?linReg} with a formula?
+  \item How can we pass the treesize data to \rcode{?linReg} with a formula?\\
+        \textit{Hint: Read the "Examples" section of the function manual.}
   \item Describe the resulting graph (height vs age).
   \item Look into the source code of \rcode{linReg}. 
         \textit{If you don't know how to view the source code of a function in R, you can google it!}
@@ -807,16 +809,16 @@ linReg(Volume~Girth, data=trees, col="forestgreen", pos1="topleft")
 
 \begin{frame}{Where to get R}
 %\pause
+Instructions online: \href{https://github.com/brry/course\#install}{github.com/brry/course\#install}\\[1em]
 \begin{itemize}%[<+->]
 %   \item base R itself: \href{https://cloud.r-project.org/}{r-project.org}.\\
 %         \href{https://cran.r-project.org/bin/linux/ubuntu/README.html}{Official} and \href{https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus/}{helpful} hints for Linux Ubuntu users.
 %   \item \href{https://www.rstudio.com/products/rstudio/\#Desktop}{R-Studio} (widely spread, easy to use)
 %   
-\item Instructions online: \href{https://github.com/brry/course\#install}{github.com/brry/course\#install}
-\item Base R itself
-\item Suggested editor to work with script files: Rstudio
-\item \href{http://sourceforge.net/projects/tinn-r/}{Tinn-R} (only for Windows OS, flexible window arrangement).\\
-      Needs some initial tweaking, see \href{https://rclickhandbuch.wordpress.com/install-r/tinn-r_english}{Berry's TinnR Page} % pdf cannot be completed without this percent sign
+\item Editor alternative to Rstudio: \href{http://sourceforge.net/projects/tinn-r/}{Tinn-R}
+\item Only for Windows OS, but flexible window arrangement
+\item Needs some initial tweaking, see \href{https://rclickhandbuch.wordpress.com/install-r/tinn-r_english}{Berry's TinnR Page} % pdf cannot be completed without this percent sign
+\item Since Rstudio has become so incredibly awesome, you should use it!
 \end{itemize}
 \label{installR}
 \end{frame}
@@ -848,18 +850,13 @@ linReg(Volume~Girth, data=trees, col="forestgreen", pos1="topleft")
 \pause
 Recommended settings for reproducible research under\\
 \alert{Tools - Global Options - General}\\
-\textbf{ON}: Restore previously open source documents at startup\\
 \textbf{OFF}: Restore .Rdata into workspace at startup\\
 Save workspace to .RData on exit: \textbf{NEVER}\\[0.5em]
-% \textbf{OFF}: Always save history (even when not saving .RData)\\[0.5em]
 \pause
 \textit{Instead use \rcode{save(object, file="object.Rdata")} after long computations.
 You can load them later with \rcode{load("object.Rdata")}.}\\[1em]
 \pause
-\alert{Tools - Global Options - Code - Display}\\
-\textbf{ON}: Show margin (Margin column:80) ~~~~\textit{People \textbf{hate} horizontal scrolling!}\\[0.5em]
-\alert{Tools - Global Options - Code - Saving}\\
-Line ending conversion: \textbf{Windows (CR/LF)}
+More at \href{https://github.com/brry/course\#settings}{github.com/brry/course\#settings}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -1092,20 +1089,28 @@ A # not an existing object (R is case sensitive)
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Assignment:  Create an object with data in the workspace II}
-Don't assign to existing objects or functions like \rcode{mean, c, T, data, sin}; \onslide<+-> Later on, you will hardly be able to distinguish what object (original or custom) you are referring to.\\ % \onslide<+-> (Advanced users: your own funtions will be lost if you overwrite them).\\
+\vspace{-0.5em}
+Don't assign to existing objects or functions like \rcode{mean, c, T, data, sin}; 
+\onslide<+-> Later on, you will hardly be able to distinguish what object 
+(original or custom) you are referring to.\\ 
+% \onslide<+-> (Advanced users: your own funtions will be lost if you overwrite them).\\
 \onslide<+->
-As R is Case SeNsitivE, \rcode{Data} would be OK, but it's not useful. Use object names that are short, but still meaningful.\\
+As R is Case SeNsitivE, \rcode{Data} would be OK, but it's not useful. 
+Use object names that are short, but still meaningful.\\
 \onslide<+->
 One convention is lowerCamel:\\
-\rcode{dailyRainBerlin} is short and readable through capital letters
+\rcode{dailyRainBerlin} is short and readable through capital letters.
+\vspace{-0.5em}
 \onslide<+->
 <<rstudio_assign>>=
 # Rstudio: press 'ALT' + '-'  for   " <- "
 @
 \onslide<+->
-Don't use \rcode{=} for assignments. R users usually prefer " <- ", (\href{http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml}{style guide}) and "=" is only allowed on the top level.\\ \onslide<+->
-\rcode{median(x <- 1:10)} also creates the object in \rcode{globalenv()}, while \rcode{median(x=1:10)} does not.
-Used in \rcode{NCOL}, for example.\\
+Don't use \rcode{=} for assignments. Most R users connotate "=" with function 
+arguments and prefer " <- " for objects (\href{http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml}{style guide}).
+Also, "=" is only allowed on the top level:\\ \onslide<+->
+\rcode{median(x <- 1:10)} also creates the object in \rcode{globalenv()}, 
+while \rcode{median(x=1:10)} does not. This is used in \rcode{NCOL}, for example.\\
 \onslide<+->
 \footnotesize{
 \href{http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html}{http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html}
@@ -1378,7 +1383,7 @@ abline(v=c(172.9-15.3, 172.9+15.3), lwd=3)
 \begin{frame}[fragile]{data.frames}
 \rcode{data.frame}s are the most common form of tables in R. \onslide<2-> Each column can have a different data type (numeric, character, factor, etc), but within a column, it stays the same.\\
 \onslide<3->
-Columns as well as rows can have names (\rcode{colnames, rownames}). If these start with a number, an "X" will be prefixed. \onslide<4-> This happens frequently when reading data, which is usually stored as a \rcode{data.frame} in R.\\
+Columns as well as rows can have names (\rcode{colnames, rownames}). If these start with a number, an "X" will be prefixed. \onslide<4-> This may happen when reading data, which is usually stored as a \rcode{data.frame} in R.\\
 \onslide<5->
 <<df0, eval=FALSE>>=
 ?data.frame
@@ -5859,6 +5864,31 @@ Until new material is created here, his slides can be obtained as \href{https://
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
+\begin{frame}{Session 2: Aim (Chapters 2  - 4.3)}
+\pause - itensify and fortify the knowledge obtained in session 1\\
+\pause - learn about NAs and data merging\\[0.5em]
+\pause afterwards, you should be able to:
+\pause
+\begin{itemize}[<+->]
+\item install and load add-on packages written by the R community
+\item perform and visualize linear regression
+\item find the appropriate place and way to get help if you're stuck
+\item find an overview of common data and object types
+% \item explain the difference between object types and data types
+% \item read 'medium difficult' files into R
+\item merge two datasets together
+\item ignore NAs
+\item apply a function to each column / row of a dataset
+% \item know where to look if you need to
+%    \begin{itemize}[<+->]
+%    \item create matrices and lists and index each to get subsets
+%    \item apply a function to each element in a list (or vector)
+%    \end{itemize}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}[fragile]{Repetition / application of content from last week}
 \begin{footnotesize}
 In groups of two or three, please take turns solving the following tasks. 
@@ -5866,7 +5896,7 @@ Pseudo-Code is fine, als long as the syntax is correct.
 This is for real life, not school, so feel free to use any source of help and inspiration ;-)
 \begin{enumerate}
 \item What program do we use to access R and what is typically in the four panels?
-\item Assign a vector with the names of your group (character strings!) to an object with a useful name.
+\item Assign a vector with the names of your group members (character strings!) to an object with a useful name.
 \item Return all values of that vector except for the second.
 \item What is the easiest way to open the help documentation of a command?
 \item In a project handling several files, where, why and how do you use \rcode{setwd()}?
@@ -5894,39 +5924,16 @@ text(x=c(0,5,10), y=rep(6,3), c("too\neasy",
 
 %------------------------------------------------------------%
 
-\begin{frame}{Session 2: Aim (Chapters 2  - 4.3)}
-\pause - itensify and fortify the knowledge obtained in session 1\\
-\pause - learn about NAs and data merging\\
-\pause afterwards, you should be able to:
-\pause
-\begin{itemize}[<+->]
-\item install and load add-on packages written by the R community
-\item perform and visualize linear regression
-\item find the appropriate place and way to get help if you're stuck
-\item sketch an overview of common data types
-\item explain the difference between object types and data types
-\item read 'medium difficult' files into R
-\item merge two datasets together
-\item know where to look if you need to
-   \begin{itemize}[<+->]
-   \item create matrices and lists and index each to get subsets
-   \item apply a function to each element in a list (or vector)
-   \end{itemize}
-\end{itemize}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Session 2: Recap}
+\begin{frame}[fragile]{Session 2: Take home message}
 \begin{itemize}[<+->]
   \item Packages are basically (documented) scripts from other people $\rightarrow$ \rcode{install.packages} and \rcode{library}
-
 \item Reading data: \rcode{setwd}, \rcode{dir}, \rcode{read.table}, \rcode{str}
-\item \rcode{read.table} arguments: header=TRUE, sep="\textbackslash t", dec=",", skip, fill, comment.char, na.strings, \textit{many more}
+% \item \rcode{read.table} arguments: header=TRUE, sep="\textbackslash t", dec=",", skip, fill, comment.char, na.strings, \textit{many more}
 \item Function documentation with \rcode{help} (or F1), \href{www.StackOverflow.com}{StackOverflow} for questions, Reference Cards (\hyperlink{refcards}{slide \ref{refcards}}) for an overview and books / tutorials (\hyperlink{books}{slide \ref{books}}) for self-learning
-\item factors (categories, groups) are integers internally, useful for color specification in plotting, dangerous when converting to \rcode{as.numeric}!
+% \item factors (categories, groups) are integers internally, useful for color specification in plotting, dangerous when converting to \rcode{as.numeric}!
 \item Objects (vector, data.frame, matrix, list, function) can have several data types (numeric, logical, character), see \hyperlink{datatypes}{slide \ref{datatypes}}
 \item \rcode{rbind} and \rcode{cbind} to join data.frames, \rcode{merge} to (surprise) merge them.
+\item \rcode{na.rm} argument in many functions, \rcode{na.omit} command otherwise
 \end{itemize}
 \end{frame}
 
