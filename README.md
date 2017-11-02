@@ -48,7 +48,6 @@ You can load them later with `load("object.Rdata")`.
 - Tools - Global Options - Code - Display
     - **ON**: Show margin (Margin column:80)  *People hate horizontal scrolling!*
     - **ON**: Highlight R function calls
-
 - Tools - Global Options - Code - Saving
     - Line ending conversion: **Windows (CR/LF)**
     - Default Text Encoding: **UTF-8**
