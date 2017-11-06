@@ -133,11 +133,11 @@ If you already know the basics from the first sessions, you can join later
 #### planned session curriculum
 - 2017-10-17: one-session-intro: how and why use R, read files, select data and display it graphically
 - 2017-10-24: consolidate the contents of the first session, manage NAs, merge data
-- 2017-10-31: Reformation day - official holiday, time to relax
+- *2017-10-31: Reformation day - official holiday, time to relax*
 - 2017-11-07: export publication-ready graphics, use if-else conditionals
 - 2017-11-14: program loops (for loops, apply functions)
 - 2017-11-21: write and debug functions
-- 2017-11-28: apply statistical methods like distribution normality tests, linear regression, EDA
+- 2017-11-28: aggregate time series / apply statistical methods like distribution normality tests, linear regression, EDA
 - 2017-12-05: read shapefile, plot + edit interactively, export as html (sf, mapview, mapedit)
 - Additionally if desired:  Rmarkdown, reproducible workflow, version control with git+github, package development
 
