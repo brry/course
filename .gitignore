@@ -35,6 +35,10 @@ RcourseBerry.synctex.gz
 RcourseBerry.tex
 RcourseBerry.toc
 RcourseBerry.vrb
+RcourseBerry.aux
+RcourseBerry.out
+RcourseBerry.knitlog
+RcourseBerry pres.knitlog
 Test-concordance.tex
 Test.log
 Test.nav
@@ -45,5 +49,8 @@ Test.synctex.gz
 Test.tex
 Test.toc
 Test.vrb
+Test.aux
+Test.knitlog
+Test.out
 Topics_Outline.r
 RcourseBerry_Mathias.tex
