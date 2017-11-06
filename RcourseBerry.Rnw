@@ -90,6 +90,7 @@
 %\def\newblock{}	% beamer---natbib bugfix
 
 <<setup, include=FALSE>>=
+library(knitr)
 # install packages, if not available
 packinst <- function(n) if(!requireNamespace(n, quietly=TRUE)) install.packages(n)
 dummy <- sapply(c("berryFunctions", "numbers", "TeachingDemos", "devtools",
@@ -389,7 +390,7 @@ treesize <- read.table(file="treesize.txt", header=TRUE)
   \item The maximum "Height" (the maximum of the values in that column)
   \item For each entry: is the measurement equal to (\rcode{==}) A?
   \item BONUS 1: The height entries for trees older than 23.5 years
-  \item BONUS 2: All rows, excluding rows 3, 7,8,9,...,20
+  \item BONUS 2: All rows, excluding rows 3,7,8,9,...,90
   \end{enumerate}
 \end{exercise}
 \end{frame}
@@ -543,7 +544,7 @@ main="Graph title", # title
 cex=1.8, # character expansion (symbol size)
 type="l", # draw lines instead of points
 lwd=3, # line width (thickness of lines)
-las=1, # label axis type (axis numbers upright)
+las=1, # label axis style (axis numbers upright)
 xaxt="n" # axis type (none to suppress axis)
 )
 @
@@ -577,7 +578,7 @@ xaxt="n" # axis type (none to suppress axis)
 \begin{exercise}{Packages, linear regression}
 \begin{enumerate}
   \item Install and load the package \rcode{berryFunctions}
-  \item How can we pass the treesize data to \rcode{?linReg} with a formula?\\
+  \item How can we pass the \datalinkRaw{treesize} data to \rcode{?linReg} with a formula?\\
         \textit{Hint: Read the "Examples" section of the function manual.}
   \item Describe the resulting graph (height vs age).
   \item Look into the source code of \rcode{linReg}. 
@@ -585,7 +586,7 @@ xaxt="n" # axis type (none to suppress axis)
         What is actually the backbone for the calculation of the function?
   \item Feed the data into \rcode{lm}, assign the output to an object (useful name!).
   \item Briefly explain the \rcode{summary} of the linear model.
-  \item BONUS: install \href{https://github.com/brry/rskey\#rskey}{rskey}, set a keyboard shortcut for \rcode{funSource} and use it to get the source code of some function.
+  \item BONUS: install \href{https://github.com/brry/rskey\#rskey}{rskey (via github)}, set a keyboard shortcut for \rcode{funSource} and use it to get the source code of some function.
 \end{enumerate}
 \end{exercise}
 \end{frame}
@@ -2491,7 +2492,7 @@ plot(beaver2$time, beaver2$temp, pch=2, cex=2.8, las=1)
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Overview of Point CHaracters (more in \href{https://dl.dropboxusercontent.com/u/4836866/Rclick/Anhang.pdf}{Rclick Anhang})}
+\begin{frame}[fragile]{Overview of Point CHaracters (more in \href{https://www.dropbox.com/s/ogonyju4fumrupa/Anhang.pdf?dl=0}{bF Anhang})}
 <<pch, echo=F, eval=T, tidy=FALSE, fig.width=4, out.width='0.7\\textwidth'>>=
 par(mar=c(0,0,2,0))
 PCH <- 0:25
@@ -2551,7 +2552,7 @@ plot(k, type="o", lty=2)
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Overview of types (more in \href{https://dl.dropboxusercontent.com/u/4836866/Rclick/Anhang.pdf}{Rclick Anhang})}
+\begin{frame}[fragile]{Overview of types (more in \href{https://www.dropbox.com/s/ogonyju4fumrupa/Anhang.pdf?dl=0}{bF Anhang})}
 <<plot_types, echo=F>>=
 par(mar=c(0,0,2,0), cex=1.5)
 a=1:4; b=c(0.5,4,2,1)  ; tp=c("p","l","b","o","c","n","s","S","h")
@@ -2570,7 +2571,7 @@ box("plot")
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Overview of line types (more in \href{https://dl.dropboxusercontent.com/u/4836866/Rclick/Anhang.pdf}{Rclick Anhang})}
+\begin{frame}[fragile]{Overview of line types (more in \href{https://www.dropbox.com/s/ogonyju4fumrupa/Anhang.pdf?dl=0}{bF Anhang})}
 <<plot_lty, echo=F>>=
 x <- c(4, 8, 9)
 y <- c(8, 8, 9)
@@ -2632,6 +2633,51 @@ lines(x=c(5,120,514,918), y=c(37,39,38,37.5), col=3, type="b")
 @
 \end{frame}
 
+%------------------------------------------------------------%
+
+\begin{frame}{Now it's your turn...}
+\begin{exercise}{Plotting} %ex5
+\begin{enumerate}
+  \item Plot a dataset of your choice (eg from \rcode{library(help = "datasets")}).
+  \item Add some red dotted lines between big quadratic points, filled with blue color.
+  \item Label the axis and give your graph a big italic header with \texttt{cex.main, font.main}, see \rcode{?par}.
+  \item Plot with a logarithmic scale on one axis.
+  \item Set the axis to a certain limit. With \texttt{yaxs}, suppress the default 4\% range extension.
+  \item Using \texttt{xaxt}, plot without an x-axis. Look in the help of \rcode{par} how this can be done. Then add a custom \rcode{axis}.
+  \item Add a \rcode{legend} to the plot and thick-lined \rcode{box} around the final plot.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Plotting I}
+<<ex5sola, size="small", eval=T, fig.height=3.6, fig.show="hide">>=
+# generate "random" data:
+set.seed(42) ; numbers <- cumsum(rnorm(40)) + 20
+x <- c(10, 15, 31, 33); y <- c(19, 22, 17, 23)
+# Basic plot:
+plot(numbers, type="l", xlab="Time",
+     main="Fake Time Series", cex.main=3, font.main=3,
+     log="y", xlim=c(0,50), xaxs="i", xaxt="n" )
+# Add points and lines
+points(x=x, y=y, pch=22, type="p", cex=3, col="orange",
+      bg="green")
+lines(x=c(10, 15, 31, 33), y=c(-6, -3, -8, -2)+25, col=2,
+      lty="dashed")
+# Custom axis, legend and box around plot:
+axis(side=1, at=c(0, 15, 30, 45)  )
+legend("topright", legend=c("ts", "more fake stuff"),
+       lty=c(1,2), col=c(1,2) )
+box(lwd=5)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Plotting II}
+\includegraphics[width=.99\textwidth]{fig/ex5sola-1.pdf}
+\end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
@@ -2710,8 +2756,6 @@ barplot(yhist$counts, axes = FALSE, xlim = c(0, top), space = 0, horiz = TRUE)
 @
 \end{frame}
 
-
-
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Box}
@@ -2731,48 +2775,42 @@ legend("center", c("'plot'","'figure', after par(mfrow) or layout()","'inner'","
 
 %------------------------------------------------------------%
 
-\begin{frame}{Now it's your turn...}
-\begin{exercise}{Plotting} %ex5
+\begin{frame}{Enough talk, action...}
+\begin{exercise}{Export (multipanel) plots} %ex5
 \begin{enumerate}
-  \item Plot a dataset of your choice (eg from \rcode{library(help = "datasets")}).
-  \item Add some red dotted lines between big quadratic points, filled with blue color.
-  \item Label the axis and give your graph a big italic header with \texttt{cex.main, font.main}, see \rcode{?par}.
-  \item Plot with a logarithmic scale on one axis.
-  \item Set the axis to a certain limit. With \texttt{yaxs}, suppress the default 4\% range extension.
-  \item Using \texttt{xaxt}, plot without an x-axis. Look in the help of \rcode{par} how this can be done. Then add a custom \rcode{axis}.
-  \item Add a \rcode{legend} to the plot and thick-lined \rcode{box} around the final plot.
+  \item Read \datalinkText{Zugspitze.txt} with monthly weather records
+  \item With \rcode{par(mfrow=...)}, set up a figure with two panels (left and right)
+  \item Plot a histogram of the LUFTTEMPERATUR records in the left panel
+  \item Plot a line graph of the first 50 months in the right panel
+  \item Now export this graph as png with useful size and resolution
+  \item BONUS 1: also export as a vector graph (e.g. PDF, EPS, SVG, svglite package)
+  \item BONUS 2: Set smaller margins (\rcode{mar}) around each panel
+  \item BONUS 3: Set an outer margin (\rcode{oma}) with an outer \rcode{title} for the entire figure
 \end{enumerate}
 \end{exercise}
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Plotting I}
-<<ex5sola, size="small", eval=T, fig.height=3.6, fig.show="hide">>=
-# generate "random" data:
-set.seed(42) ; numbers <- cumsum(rnorm(40)) + 20
-x <- c(10, 15, 31, 33); y <- c(19, 22, 17, 23)
-# Basic plot:
-plot(numbers, type="l", xlab="Time",
-     main="Fake Time Series", cex.main=3, font.main=3,
-     log="y", xlim=c(0,50), xaxs="i", xaxt="n" )
-# Add points and lines
-points(x=x, y=y, pch=22, type="p", cex=3, col="orange",
-      bg="green")
-lines(x=c(10, 15, 31, 33), y=c(-6, -3, -8, -2)+25, col=2,
-      lty="dashed")
-# Custom axis, legend and box around plot:
-axis(side=1, at=c(0, 15, 30, 45)  )
-legend("topright", legend=c("ts", "more fake stuff"),
-       lty=c(1,2), col=c(1,2) )
-box(lwd=5)
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Export (multipanel) plots I}
+<<explotexport>>=
+wzug <- read.table("data/Zugspitze.txt", header=TRUE)
+
+pdf("fig/zugspitze.pdf", height=4)
+par(mfrow=c(1,2), mar=c(3,3,1,1), oma=c(0,0,2,0), las=1)
+hist(wzug$LUFTTEMPERATUR, col="coral", breaks=25,
+     main="Histogram monthly values")
+plot(wzug$LUFTTEMPERATUR[1:50], type="l", lwd=2, 
+     col="darkorchid", main="First 50 months")
+title(main="Temperature Zugspitze 1900:2015", outer=TRUE)
+dev.off()
 @
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Plotting II}
-\includegraphics[width=.99\textwidth]{fig/ex5sola-1.pdf}
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Export (multipanel) plots II}
+\includegraphics[width=.99\textwidth]{fig/zugspitze.pdf}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -2942,17 +2980,6 @@ tolower(schoko)
 %------------------------------------------------------------%
 \subsection{Conditions}
 %------------------------------------------------------------%
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{to R or not to R}
-\begin{center}
-\pause
-\textit{Lucius Annaeus Seneca (4BC - 65AD):}\\[2em]
-\pause To err is human\\[1em]
-\pause to \includegraphics[width=1cm]{externalfig/Rlogo.png} ~ is better
-\end{center}
-\end{frame}
-
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Conditional execution I}
@@ -5122,6 +5149,7 @@ plotLfit(distLfit(x, quiet=T), breaks=30, nbest=11, legargs=c(x="left"))
 \item \href{http://vudlab.com/simpsons/}{vudlab app}
 \item \href{https://en.wikipedia.org/wiki/Simpson\%27s\_paradox\#Examples}{Wikipedia entry}
 \item 2016 example: \href{http://www.nytimes.com/2016/09/28/us/murder-rate-cities.html}{development of crime rates in the USA}
+\item \href{https://youtu.be/ebEkn-BiW5k}{minutephysics video (2017)}
 \end{itemize}
 \label{simpson}
 \end{frame}
@@ -5834,7 +5862,7 @@ Until new material is created here, his slides can be obtained as \href{https://
   \item R is awesome. You're here, thus you will be R-some, too
   \item Console for code execution (R), ready with \rcode{$>$}, waiting with \rcode{$+$}
   \item Script for code writing (you) + exchange
-  \item Objects are created with the assignment operator \rcode{$<$-}, see \rcode{ls()} % in the workspace
+  \item Objects are created with the assignment operator \rcode{$<$-}%, see \rcode{ls()} % in the workspace
   \item Get help with \rcode{help(median)}, \rcode{?matrix}, or pressing F1
   \item Create vectors with \rcode{c(42,3,-4)}, \rcode{1:n}, \rcode{seq(2,5,len=30)}
   \item \rcode{data.frame}s hold tables with one data type per column
@@ -5912,6 +5940,25 @@ This is for real life, not school, so feel free to use any source of help and in
 
 %------------------------------------------------------------%
 
+\begin{frame}{Recap solutions}
+\begin{enumerate}
+\item Rstudio: Scripts, Code execution, Workspace/history, help/packages/plots
+\item groupnames <- c("AA","BB","CC","DD")
+\item groupnames[-2]
+\item put the cursor on it, press key F1
+\item At top of script, setwd("C:/Some/path"), so we can use relative filenames
+      because they are short and make scripts easier to share
+\item wolf <- read.table("Wolf\_Observations.txt", header=TRUE)
+\item head(wolf); str(wolf)
+\item df\$column; df[ ,"column"]
+\item df[c(6,8), ]
+\item plot(wolf\$packsize, wolf\$distance\_coast)
+\item main="Title", las=1, xlab="label", ylab="label"
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}[fragile]{Please judge the difficulty of the previous tasks}
 <<taskdifficulty, fig.height=2, echo=-1>>=
 par(mar=c(2,0,0,0), mgp=c(3,0.5,0), cex=2)
@@ -5959,53 +6006,59 @@ You can send me your homework if you want comments.
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
-\begin{frame}{Session 3: Aim (Chapter 5)}
-\pause - small research project\\
-\pause - export of publication-ready graphics\\
+\begin{frame}[fragile]{to R or not to R}
+\begin{center}
+\pause
+\textit{Lucius Annaeus Seneca (4BC - 65AD):}\\[2em]
+\pause To err is human\\[1em]
+\pause to \includegraphics[width=1cm]{externalfig/Rlogo.png} ~ is better
+\end{center}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}{Session 3: Aim (Chapter 5 + 7.1)}
+\pause - export publication-ready graphics\\
+\pause - conditional code execution (if-else)\\
 \pause afterwards, you should be able to:
 \pause
 \begin{itemize}[<+->]
 \item create a plot with multiple panels
-\item reproducibly save plots with useful settings
+\item reproducibly save figures with useful settings
+\item make reasonable guesses about logical values by looking at code
+\item write conditionally executed code using if/else
+\item decide whether to use \rcode{if(cond) A else B} or \rcode{ifelse(cond, A, B)}
 \end{itemize}
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}{Session 3: Task small research project}
-Please write down the answers to the following questions / instructions as pseudocode
-\begin{itemize}
-\item What do you do to start a (small) research project?
-\item Read a file into R where columns are tab-separated and the decimal marker is German.
-\item In a data set with monthly weather records (\datalinkText{Potsdam.txt}): Get the average temperature of months with more than 90 mm rainfall.
-\item Visually compare wind speed and rainfall.
-\item Describe and visualize the distribution of relative humidity.
-\end{itemize}
+\begin{frame}{Recap from last two sessions}
+Please fill out the recap online:\\[1em]
+\href{http://bit.ly/recapR}{bit.ly/recapR}
 \end{frame}
-
-<<weatherproject, eval=FALSE, echo=FALSE>>=
-wetter <- read.table("data/Potsdam.txt", header=T)
-hist(wetter$NIEDERSCHLAGSHOEHE, breaks=30, col="salmon")
-@
 
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Session 3: Recap}
 \begin{itemize}[<+->]
-\item Create project folder with raw data set(s) and empty (or given) script
-\item set up script: comments on analysis, \rcode{setwd}, \rcode{dir}
-\item Read data: \rcode{read.table}, \rcode{str}
-\item Percentile: \rcode{Q90 <- quantile(weather\$rain, probs=0.9)}
-\item Select data: \rcode{weather[ weather\$rain >= Q90, "temp" ]}
+% \item Create project folder with raw data set(s) and empty (or given) script
+% \item set up script: comments on analysis, \rcode{setwd}, \rcode{dir}
+% \item Read data: \rcode{read.table}, \rcode{str}
+% \item Percentile: \rcode{Q90 <- quantile(weather\$rain, probs=0.9)}
+% \item Select data: \rcode{weather[ weather\$rain >= Q90, "temp" ]}
 \item Multiple figures in one graph with \rcode{par(mfrow)} / \rcode{par(mfcol)} or \rcode{layout}
 \item Export graphics with \rcode{png} or \rcode{pdf} with good size and resolution settings.
+\item \rcode{if(TRUE) message("Yo!") else message("Dude...")}
+% \item be careful with line breaks
+\item \rcode{ifelse(c(T,T,F,T), 7, else 7.3)} for vectors
 \end{itemize}
 \end{frame}
 
 %------------------------------------------------------------%
 
 \begin{frame}{Session 3: Homework}
-\begin{enumerate}[<+->]
+\begin{enumerate}%[<+->]
   \item Complete all unfinished exercises we started
   \item What is the difference between \rcode{par(mfrow)}, \texttt{mfcol} and \rcode{layout}?
   \item Find some data (e.g. attenu, freeny or rock from \rcode{datasets}) and plot several images in one multipanel graphic (e.g. scatterplots, line graphs, histograms, boxplots, pie charts, ...)
@@ -6013,10 +6066,10 @@ hist(wetter$NIEDERSCHLAGSHOEHE, breaks=30, col="salmon")
   \item BONUS 1: What is the source code difference between \rcode{points} and \rcode{lines}? You will need \rcode{methods(points)} to figure out what the default \rcode{UseMethod} is.
   \item BONUS 2: On your RefCard, find something new that you want to present to your peers next week
 \end{enumerate}
-\pause
-Enter the competition to win a 32GB 3.0 USB-Drive with R goodies:\\
-Send in your graphic per email (PNG preferred) along with the R script and approximate time needed.
-The class will pick a winner from the submissions based on graph appearance, artistic creativity, programming level and scientific relevance.
+% \pause
+% Enter the competition to win a 32GB 3.0 USB-Drive with R goodies:\\
+% Send in your graphic per email (PNG preferred) along with the R script and approximate time needed.
+% The class will pick a winner from the submissions based on graph appearance, artistic creativity, programming level and scientific relevance.
 \end{frame}
 
 %------------------------------------------------------------%
@@ -6043,15 +6096,11 @@ Collaborative editing can quickly become a textual rap battle fought with increa
 
 %------------------------------------------------------------%
 
-\begin{frame}{Session 4: Aim (Chapter 7.1 + 7.2)}
-\pause - conditional coding (if-else)\\
+\begin{frame}{Session 4: Aim (Chapter 7.2)}
 \pause - repetitional coding (for-loops)\\
 \pause afterwards, you should be able to:
 \pause
 \begin{itemize}[<+->]
-\item make reasonable guesses about logical values by looking at code
-\item write conditionally executed code using if/else
-\item decide whether to use \rcode{if(cond) A else B} or \rcode{ifelse(cond, A, B)}
 \item explain the concept of a loop
 \item write simple for-loops
 \end{itemize}
@@ -6061,9 +6110,6 @@ Collaborative editing can quickly become a textual rap battle fought with increa
 
 \begin{frame}[fragile]{Session 4: Recap}
 \begin{itemize}[<+->]
-\item \rcode{if(TRUE) message("Yo!") else message("Dude...")}
-\item be careful with line breaks
-\item \rcode{ifelse(c(T,T,F,T), 7, else 7.3)} for vectors
 \item loops repeat a block of code with a different \rcode{i} each time
 \item \rcode{for(i in 1:20) plot(df[,i], main=colnames(df)[i])}
 \item for loops should not be called too often, as they are slow
@@ -6089,6 +6135,23 @@ Please email me how much time you spent on each task and how solvable it was (di
 \subsection{Session 5/7: functions}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
+
+\begin{frame}{Small research project}
+Please write down the answers to the following questions / instructions as pseudocode
+\begin{itemize}
+\item What do you do to start a (small) research project?
+\item Read a file into R where columns are tab-separated and the decimal marker is German.
+\item In a data set with monthly weather records (\datalinkText{Potsdam.txt}): Get the average temperature of months with more than 90 mm rainfall.
+\item Visually compare wind speed and rainfall.
+\item Describe and visualize the distribution of relative humidity.
+\end{itemize}
+\end{frame}
+
+<<weatherproject, eval=FALSE, echo=FALSE>>=
+wetter <- read.table("data/Potsdam.txt", header=T)
+hist(wetter$NIEDERSCHLAGSHOEHE, breaks=30, col="salmon")
+@
+
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 \subsection{Session 6/7: statistics}
