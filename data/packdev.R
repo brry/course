@@ -24,6 +24,7 @@ devtools::check()
 # Change to   License: GPL (>=2)
 # Change to   Version: 0.0.1
 # Add         Date: 2017-08-04
+# remove      Depends: R (>= 3.4.2)  to enable pack usage with older R versions
 devtools::check() # should now be empty
 # Package structure is now set up, let's add a function
 
