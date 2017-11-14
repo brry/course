@@ -415,14 +415,14 @@ treesize$measurement=="A"
 treesize[ treesize$age >= 23.5 , "height"]
 @
 <<sol_treessubset3, eval=F, size="scriptsize">>=
-treesize[ -c(3,7:20) , ]
+treesize[ -c(3,7:90) , ]
 
 #
 @
 \vspace{-3em}
 <<sol_treessubset4, echo=F, size="scriptsize">>=
 options(width=50)
-head(treesize[ -c(3,7:20) , ],12); cat("...")
+head(treesize[ -c(3,7:90) , ],12); cat("...")
 @
 \end{frame}
 
@@ -3255,7 +3255,7 @@ v
 @
 \pause \vspace{-1em}
 <<for6b>>=
-for(i in 3:17)  {  v[i] <- (i-2)^2  }
+for(i in 3:17)  {  v[i] <- (i+2)^2  }
 @
 \pause \vspace{-1em}
 <<for6b2, echo=2>>=
@@ -3264,7 +3264,7 @@ v # this code was executed once for each i
 options(width=50)
 @
 \pause \vspace{-0.5em}
-See \href{https://rclickhandbuch.wordpress.com/hauptseite/}{Rclick 10.4} for a realistic for loop example.\\
+See \href{https://github.com/brry/rclick/blob/master/10-if\%2Cfor.r\#L152}{Rclick 10.4} for a realistic for loop example.\\
 \pause
 In R, \rcode{for} loops are slow. Always try to vectorize (the best option, not always possible) or use \rcode{lapply} (saves you the initiation of the empty vector, easier to parallize).
 \end{frame}
@@ -3354,9 +3354,9 @@ lines(x, 12.5*n/factorial(n-1)*(x/8*n)^(n-1)*exp(-x/8*n), col=2)
 \begin{frame}[fragile]{stocks data from \href{http://finance.yahoo.com}{finance.yahoo.com}}
 <<stocks_datapreparation, size="scriptsize", eval=F>>=
 # Download current datasets:
-if(!requireNamespace(quantmod)) install.packages("quantmod")
-if(!requireNamespace(pbapply))  install.packages("pbapply")
-dummy <- pbapply::pblapply(c("F","VLKAY", "AMZN","AAPL","GOOG","YHOO"),
+if(!requireNamespace("quantmod")) install.packages("quantmod")
+if(!requireNamespace("pbapply"))  install.packages("pbapply")
+dummy <- pbapply::pblapply(c("F","VLKAY", "AMZN","AAPL","GOOG","MSFT"),
    function(x) zoo::write.zoo(x=quantmod::getSymbols(x, auto.assign=FALSE)[,6],
                            file=paste0("data/finance/",x,".txt"), col.names=T))
 
@@ -3368,7 +3368,7 @@ stocks <- Reduce(function(...) merge(..., all=T), stocks)
 # Get nicer column names:
 names <- sapply(strsplit(colnames(stocks), ".", fix=TRUE),"[", 1)
 colnames(stocks) <- c(Index="Date", F="FORD", VLKAY="VOLKSWAGEN",
-              AMZN="AMAZON", AAPL="APPLE", GOOG="GOOGLE", YHOO="YAHOO")[names]
+         AMZN="AMAZON", AAPL="APPLE", GOOG="GOOGLE", MSFT="MICROSOFT")[names]
 
 # Save to disc:
 write.table(stocks, file="data/stocks.txt", row.names=F, quote=F)
@@ -3413,10 +3413,10 @@ mtext("stocks this decade", line=0, outer=TRUE)
 par(mfrow=c(1,2), mar=c(4,4,2,0.1), mgp=c(2.5,0.7,0), cex=0.7, las=1)
 for(i in 2:3)
  {
- plot(stocks[ stocks$Date>as.Date("2015-04-01") , c(1,i) ],
+ plot(stocks[ stocks$Date>as.Date("2016-04-01") , c(1,i) ],
       main=colnames(stocks)[i], xaxt="n", type="l", xlab=" ",
       ylab=if(i==2) "Adjusted daily share price  [USD]" else "")
- berryFunctions::monthAxis(ym=TRUE)
+ berryFunctions::monthAxis(1)
  }
 @
 \end{frame}
@@ -3502,6 +3502,49 @@ sapply(dfs, "[", 5,    )
 
 %------------------------------------------------------------%
 
+\begin{frame}[fragile]{lapply exercise}
+\begin{exercise}{lapply}
+\begin{enumerate}
+\item Get the average of each element in the built-in dataset 
+      \rcode{Harman23.cor} with \rcode{lapply}.
+\item Now use \rcode{sapply} instead. What changes?
+\item BONUS: Do this again with a \rcode{for} loop.
+\item Please create \rcode{max\_n <- function(...) max(rnorm(1e7))}. 
+      Now run this 10 times with an \rcode{sapply} loop.
+\item Display a progress bar along with it.
+\item BONUS: From each element of \rcode{Harman74.cor}, get the first 5 values.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{lapply exercise solution I}
+<<exlapply_sol1>>=
+lapply(Harman23.cor, mean)
+sapply(Harman23.cor, mean) # simplified into a vector
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{lapply exercise solution II}
+<<exlapply_sol2>>=
+harmeans <- rep(NA,length(Harman23.cor))
+for(i in 1:length(Harman23.cor) ) 
+    harmeans[i] <- mean(Harman23.cor[[i]])
+names(harmeans) <- names(Harman23.cor)
+harmeans
+
+max_n <- function(...) max(rnorm(1e5))
+pbapply::pbsapply(1:10, max_n)
+@
+<<exlapply_sol3, eval=FALSE>>=
+lapply(Harman74.cor, "[", 1:5)
+@
+\end{frame}
+
+%------------------------------------------------------------%
 \begin{frame}[fragile]{for -> lapply IIIa: parallel on multiple CPU cores}
 \vspace{-1em}
 <<for_lapply10, eval=FALSE>>=
@@ -3567,7 +3610,7 @@ parLapply(cl, X, fun)
 Sys.time() - begintime ; rm(cl, begintime)
 @
 \pause \vspace{-1.2em}
-<<for_lapply15, eval=TRUE, echo=-1, size="scriptsize">>=
+<<for_lapply15, eval=TRUE, echo=-1, size="scriptsize", warning=FALSE>>=
 options(width=100)
 #install.packages("microbenchmark")
 library(microbenchmark)
@@ -5737,7 +5780,7 @@ par(mar=c(0,3,0,3))
 p <- sf::st_read("data/PrecBrandenburg/niederschlag.shp", quiet=TRUE)
 geoR:::image.kriging(krobj2, col=pcol)
 colPoints(cent$x, cent$y, p$P1, col=pcol, zlab="Prec", cex=0.7,
-          legargs=list(y1=0.1,y2=0.8, x1=0.78, x2=0.87, horiz=F))
+     legargs=list(y1=0.1,y2=0.8, x1=0.78, x2=0.87, horizontal=F))
 plot(p, add=T, col=NA, border=8)#; points(cent$x,cent$y, cex=0.7)
 @
 \end{frame}
@@ -6103,7 +6146,10 @@ Collaborative editing can quickly become a textual rap battle fought with increa
 \begin{itemize}[<+->]
 \item explain the concept of a loop
 \item write simple for-loops
+\item structurally know how to use the lapply function
 \end{itemize}
+\vspace{1em}
+\onslide \href{http://bit.ly/recapRif}{bit.ly/recapRif}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -6112,6 +6158,7 @@ Collaborative editing can quickly become a textual rap battle fought with increa
 \begin{itemize}[<+->]
 \item loops repeat a block of code with a different \rcode{i} each time
 \item \rcode{for(i in 1:20) plot(df[,i], main=colnames(df)[i])}
+\item \rcode{for(cn in colnames(df)) plot(df[,cn], main=cn)}
 \item for loops should not be called too often, as they are slow
 \item instead: vectorize, use lapply, write C++ code
 \end{itemize}
@@ -6121,19 +6168,49 @@ Collaborative editing can quickly become a textual rap battle fought with increa
 
 \begin{frame}{Session 4: Homework }
 \begin{enumerate}[<+->]
-  \item Exam task in Chapter 12
+  \item Finish all the started exercises
   \item Update your RefCard: mark all the items you learned about today
-  \item Write down topics you want to learn (more) about in the optional session
-  \item Do actual research, have fun!
 \end{enumerate}
-\onslide<+->
-Please email me how much time you spent on each task and how solvable it was (did you need to look into my solutions?)
 \end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 \subsection{Session 5/7: functions}
 %------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{recap \alert{if else} I}
+\begin{enumerate}
+\item Create a new R file and write \rcode{x <- 3.14} into it.
+\item Now  assign the absolute value of x to \rcode{y} by using conditional code execution (control structures).
+\item \rcode{source} the complete document.
+\item Test the result of y by setting \rcode{x <- -007} and running the document again.
+\item BONUS: Make it also work for vectors like \rcode{x <- (-5):8} .
+\end{enumerate}
+\pause
+<<ifelserecap>>=
+x <- -5:8
+y <- ifelse(x<0, -x, x)
+y
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{recap \alert{if else} II}
+<<ifelserecap2>>=
+(  requireNamespace("some_package", quietly=TRUE)  )
+@
+invisibly returns TRUE if it succeeds loading a package. The outer brackets are for printing in the slides.
+\begin{enumerate}
+\item Use it to conditionally install the package \href{https://cran.r-project.org/package=quantmod}{quantmod} (i.e. if it is not already available).
+\end{enumerate}
+\pause
+<<ifelserecap3, size="small">>=
+if(!requireNamespace("quantmod")) install.packages("quantmod")
+@
+\end{frame}
+
 %------------------------------------------------------------%
 
 \begin{frame}{Small research project}
@@ -6178,41 +6255,6 @@ Please fill out the feedback form at\\[1em]
 Thanks!\\[1em]
 }
 \end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{recap \alert{if else} I}
-\begin{enumerate}
-\item Create a new R file and write \rcode{x <- 3.14} into it.
-\item Now  assign the absolute value of x to \rcode{y} by using conditional code execution (control structures).
-\item \rcode{source} the complete document.
-\item Test the result of y by setting \rcode{x <- -007} and running the document again.
-\item BONUS: Make it also work for vectors like \rcode{x <- (-5):8} .
-\end{enumerate}
-\pause
-<<ifelserecap>>=
-x <- -5:8
-y <- ifelse(x<0, -x, x)
-y
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{recap \alert{if else} II}
-<<ifelserecap2>>=
-(  requireNamespace("some_package", quietly=TRUE)  )
-@
-invisibly returns TRUE if it succeeds loading a package. The outer brackets are for printing in the slides.
-\begin{enumerate}
-\item Use it to conditionally install the package \href{https://cran.r-project.org/package=quantmod}{quantmod} (i.e. if it is not already available).
-\end{enumerate}
-\pause
-<<ifelserecap3, size="small">>=
-if(!requireNamespace("quantmod")) install.packages("quantmod")
-@
-\end{frame}
-
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
