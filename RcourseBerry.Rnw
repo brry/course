@@ -2017,7 +2017,7 @@ setwd("C:/Dokumente und Einstellungen/hydro/Desktop")
 # which files are there:
 dir()
 # step by step, specify the arguments of read.table...
-animals <- read.table("animals.txt", sep="\t",
+animals <- read.table("data/animals.txt", sep="\t",
                       header=TRUE, dec=",")
 animals
 str(animals) # ... until all numbers are num.
@@ -2030,16 +2030,16 @@ str(animals) # ... until all numbers are num.
 <<ex3solb, eval=FALSE>>=
 # first column, and which is Sparrow:
 animals$Name
-animals[ ,"Name"] # too much typing
-animals[ ,1] # hard to read later on
+animals[ ,"Name"] # more typing
+animals[ ,1] # hard to interpret later on
 animals$Name == "Sparrow"
 which( animals$Name == "Sparrow" )
 
 # Can the elephant fly? Automatic query:
 animals[4,3]
 animals[ animals$Name == "Elephant" , 3 ]
-animals[ animals$Name == "Elephant" , "can_fly" ]
-animals[ animals$Name == "Sparrow"  , "can_fly" ]
+animals[ animals$Name == "Elephant" , "can.fly" ]
+animals[ animals$Name == "Sparrow"  , "can.fly" ]
 @
 \end{frame}
 
@@ -2048,8 +2048,8 @@ animals[ animals$Name == "Sparrow"  , "can_fly" ]
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.6-7: data.frames}
 <<ex3solc, eval=FALSE>>=
 # How many legs do the mammals have on average?
-animals[ animals$Class == "Mammal" , "n_legs" ]
-mean( animals[ animals$Class == "Mammal" , "n_legs" ] )
+animals[ animals$Class == "Mammal" , "n.legs" ]
+mean( animals[ animals$Class == "Mammal" , "n.legs" ] )
 # How cute are they, on average?
 mean( animals[ animals$Class == "Mammal" , "cuteness" ] )
 
@@ -2227,6 +2227,7 @@ options(width=50)
 %------------------------------------------------------------%
 
 \begin{frame}{Merge (join) tables}
+If you haven't already, now is a good time to download (and unzip!) \href{https://minhaskamal.github.io/DownGit/\#/home?url=https://github.com/brry/course/tree/master/data}{all datasets}.
 \begin{exercise}{Merge} %ex4
 \begin{enumerate}
   \item Read the files \datalinkText{mergeApples1.txt} and \datalinkBlob{mergeApples2.txt} into separate data.frames.
@@ -6149,7 +6150,7 @@ Collaborative editing can quickly become a textual rap battle fought with increa
 \item structurally know how to use the lapply function
 \end{itemize}
 \vspace{1em}
-\onslide \href{http://bit.ly/recapRif}{bit.ly/recapRif}
+\onslide<+-> \href{http://bit.ly/recapRif}{bit.ly/recapRif}
 \end{frame}
 
 %------------------------------------------------------------%
