@@ -4223,7 +4223,7 @@ Example: \href{https://www.r-bloggers.com/tracking-down-errors-in-r/}{Pete Werne
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Practice debugging}
+\begin{frame}[fragile]{Practice debugging, \datalinkText{lsc\_functions.R}}
 \begin{exercise}{Debugging}
 \begin{enumerate}
 \item Load your package and the datasets. Correct the functions until\\
@@ -6180,6 +6180,16 @@ Collaborative editing can quickly become a textual rap battle fought with increa
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
+\begin{frame}{Today's plan}
+\begin{enumerate}[<+->]
+  \item if else + for loop Recap
+  \item writing functions
+  \item debugging functions
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}[fragile]{recap \alert{if else} I}
 \begin{enumerate}
 \item Create a new R file and write \rcode{x <- 3.14} into it.
@@ -6223,12 +6233,29 @@ Please write down the answers to the following questions / instructions as pseud
 \item Visually compare wind speed and rainfall.
 \item Describe and visualize the distribution of relative humidity.
 \end{itemize}
-\end{frame}
-
 <<weatherproject, eval=FALSE, echo=FALSE>>=
 wetter <- read.table("data/Potsdam.txt", header=T)
 hist(wetter$NIEDERSCHLAGSHOEHE, breaks=30, col="salmon")
 @
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}{for loop}
+\begin{itemize}
+\item Plot the Apple stocks over date (\datalinkText{stocks.txt}) as a line graph.
+\item With a for loop, add all other companies in the same plot
+\item BONUS: First create a vector with 6 different colors, then use that in the for loop to color the lines
+\item BONUS: Add a legend with the same colors
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}{Recap, Homework}
+Please select the topic(s) for next week online:\\[1em]
+\href{http://bit.ly/selectR}{bit.ly/selectR}
+\end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
