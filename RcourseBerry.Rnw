@@ -3863,7 +3863,8 @@ options(width=50)
 \pause
 \rcode{?"function"}\\
 \pause  Syntax:\\
-\rcode{Functionobjectname <- \alert{function}(argument1, argument2, ...) \{"DoSomething"\}}\\
+\rcode{Functionobjectname <- \alert{function}(argument1, argument2, ...) \\
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\{"DoSomething"\}}\\
 \pause
 <<funct2, echo=T, eval=T, tidy=FALSE>>=
 myfunct <- function(grappig)
@@ -3970,9 +3971,9 @@ circle <- function(
    x <- x[1]; y <- y[1]; r <- r[1]; locnum <- locnum[1]
    }
  # input checking - is every value numeric?
- if(!is.numeric(x)) stop("x must be numeric")
- if(!is.numeric(y)) stop("y must be numeric")
- if(!is.numeric(r)) stop("r must be numeric")
+ if(!is.numeric(x)) stop("x must be numeric, not ", class(x))
+ if(!is.numeric(y)) stop("y must be numeric, not ", class(y))
+ if(!is.numeric(r)) stop("r must be numeric, not ", class(r))
  # prepare circle line coordinates:
  cx <- x+r*cos( seq(0,2*pi,len=locnum) )
  cy <- y+r*sin( seq(0,2*pi,len=locnum) )
@@ -6184,7 +6185,7 @@ Collaborative editing can quickly become a textual rap battle fought with increa
 \begin{enumerate}[<+->]
   \item if else + for loop Recap
   \item writing functions
-  \item debugging functions
+  %\item debugging functions
 \end{enumerate}
 \end{frame}
 
@@ -6197,6 +6198,9 @@ Collaborative editing can quickly become a textual rap battle fought with increa
 \item \rcode{source} the complete document.
 \item Test the result of y by setting \rcode{x <- -007} and running the document again.
 \item BONUS: Make it also work for vectors like \rcode{x <- (-5):8} .
+\item BONUS 2: Which R function gives the absolute value? How is it implemented? \\
+    What's in \href{https://github.com/wch/r-source/blob/trunk/src/main/names.c#L278}{github.com/wch/r-source ~-> src/main/names.c L278} and
+    \href{https://github.com/wch/r-source/blob/trunk/src/main/arithmetic.c#L1315}{-> src/main/arithmetic.c L1315}?
 \end{enumerate}
 \pause
 <<ifelserecap>>=
