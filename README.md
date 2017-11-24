@@ -137,9 +137,31 @@ If you already know the basics from the first sessions, you can join later
 - 2017-11-07: export publication-ready graphics, use if-else conditionals
 - 2017-11-14: program loops (for loops, apply functions)
 - 2017-11-21: write and debug functions
-- 2017-11-28: aggregate time series / apply statistical methods like distribution normality tests, linear regression, EDA
-- 2017-12-05: read shapefile, plot + edit interactively, export as html (sf, mapview, mapedit)
-- Additionally if desired:  Rmarkdown, reproducible workflow, version control with git+github, package development
+
+Tue 11-28, House 25, Pool D0.02
+
+- visualize data - Exploratory Data Analysis (EDA)
+- test a sample distribution for normality
+- use the beta distribution  OR  understand Simpsons Paradox (with regression)
+
+Wed 11-29, House 1, PC pool
+
+- aggregate time series (including changing charstrings to date/time objects)
+- read and plot netcdf files (the standard of large spatio-temporal data)
+
+Wed 12-06, House 1, PC pool
+
+- realize that R is WAAAY cooler than ArcGIS: read shapefile, plot + edit interactively, export as html (sf, mapview, mapedit)
+- work reproducibly - project management with Rstudio
+- use Rstudio effectively (keyboard shortcuts, rskey, document outline, ...)
+
+Wed 12-13, House 1, PC pool
+
+- use lapply like a pro
+- apply functions to arrays (freaking elegant coding)
+- debug functions
+- develop an R package
+- ... your topic here ...
 
 Details in section [slides](#slides)
 
