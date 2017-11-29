@@ -16,6 +16,7 @@
 cache/
 books/
 data/books.zip
+data/tavg.nc
 data/lsc_functions/
 data/PrecBrandenburg/
 DWDdata/
