@@ -5498,8 +5498,121 @@ and \href{https://rclickhandbuch.wordpress.com/rpackages/}{Rclick page}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
-%timetravel
+\begin{frame}{Char to date / time and back}
+\begin{exercise}{char time} %ex
+\begin{enumerate}
+\item Convert the character string "2017-11-29 13:41:16" to a time object with 
+      \rcode{?strptime} (string parsed to time). Check the \rcode{str}ucture.
+\item BONUS: reflect the local or GMT time zone.
+\item \rcode{?paste} the following charstrings together "14.2.2016" and "17:18", 
+      separated with a minus symbol.
+\item Convert the result with \rcode{strptime}. 
+      Convert it to a number (what does it mean?) and with \rcode{as.POSIXct}.
+\item BONUS: format the current \rcode{Sys.Date()} as 
+      "Mi, 29.Nov.2017 (= ein Mittwoch im November)". On what weekday were you born?
+\item BONUS: Print the names in English, even if the locale is German.
+      See \href{https://github.com/brry/rclick/blob/master/13-Zeit\%2CDatum.r\#L102}{Rclick chapter 13}
+      on \rcode{?Sys.setlocale}.
+\end{enumerate}
+\end{exercise}
+\end{frame}
 
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Char - Time Solutions}
+<<chartime1, size="footnotesize">>=
+now <- strptime("2017-11-29 13:41:16", format="%Y-%m-%d %H:%M:%S")
+now ; class(now); str(now)
+strptime("2017-11-29 13:41:16", format="%F %T", tz="UTC")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Char - Time Solutions}
+<<chartime2, size="footnotesize">>=
+now <- paste("14.2.2016", "17:19", sep="-")
+now <- strptime(now, "%d.%m.%Y-%H:%M")
+as.numeric(now) # number of seconds since 1970-01-01
+str(as.POSIXct(now))
+format( Sys.Date(), "%a, %d.%b.%Y (= some %A in %B)")
+format(as.Date("1997-04-13"), "%A") # Born on Sunday
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Time sequences}
+\begin{exercise}{equally spaced time sequences} %ex
+\begin{enumerate}
+\item Create a weekly sequence with \rcode{seq()} starting \vspace{-0.7em}
+<<tseq_task1>>=
+t1 <- as.Date("2007/10/18") # and ending at
+t2 <- as.Date("2007/11/25")
+@
+\item BONUS: How about monthly sequences? (by = number of days not helpful)
+\item From the time range "tr", create a sequence in steps of 15 minutes:\vspace{-0.7em}
+<<tseq_task2>>=
+tr <- strptime(c("05.08.2010, 12:15",
+                 "09.02.2013, 14:45"),
+               format="%d.%m.%Y, %H:%M")
+@
+\item Create a data.frame with that time sequence and values from a random walk 
+      (see \rcode{rnorm} and \rcode{cumsum}). Both columns should be named aptly.
+\item BONUS: Correct the by argument in \rcode{seq(as.Date("2017-08-30"), as.Date("2017-06-30"), by=7)}.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Time sequence solutions}
+<<time_seq_sol>>=
+seq(t1, t2, by=7)
+seq(t1,t2+150, by="month") # uses seq.Date
+tseq <- seq(tr[1], tr[2], by="15 min")
+fakeTS <- data.frame(time=tseq,
+                    values=cumsum(rnorm(length(tseq)))
+                    )
+# str(fakeTS)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Time Series aggregation}
+\begin{exercise}{TS aggregation} %ex
+\begin{enumerate}
+\item Plot the random walk time series from the previous task. 
+      BONUS: label the axis nicely with \rcode{berryFunctions::monthAxis()}
+\item Add a column uniquely identifying the month of each data point.
+\item Compute monthly averages with \rcode{?tapply}
+\item BONUS: Browse through \href{https://github.com/brry/rclick/blob/master/13-Zeit\%2CDatum.r}{Rclick chapter 13}
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{TS aggregation solutions}
+<<time_agg_sol, fig.show="hide">>=
+plot(fakeTS, type="l", xaxt="n", las=1)
+berryFunctions::monthAxis(mcex=0.5)
+#
+fakeTS$month <- format(fakeTS$time, "%Y-%m-15")
+agg_month <- tapply(X=fakeTS$values, INDEX=fakeTS$month, 
+                    FUN=mean)
+# compute mean of values, split into month groups
+
+head(agg_month) # View(data.frame(agg_month))
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{TS aggregation solutions}
+\includegraphics[width=\textwidth]{fig/time_agg_sol-1.pdf}
+\end{frame}
 
 %------------------------------------------------------------%
 
