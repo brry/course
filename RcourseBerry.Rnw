@@ -5498,7 +5498,7 @@ and \href{https://rclickhandbuch.wordpress.com/rpackages/}{Rclick page}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
-
+%timetravel
 
 
 %------------------------------------------------------------%
@@ -5721,8 +5721,8 @@ p <- sf::st_read("data/PrecBrandenburg/niederschlag.shp",
 pcol <- colorRampPalette(c("red","yellow","blue"))(50)
 clss <- berryFunctions::classify(p$P1, breaks=50)$index
 # Plot
-par(mar = c(0,0,1.2,0))
-plot(p, col=pcol[clss], max.plot=1) # P1: Precipitation
+par(mar = c(1, 1, 1.2, 1)) # for sf plots / colPointsLegend
+sf:::plot.sf(p, col=pcol[clss], max.plot=1) # P1: Precipitation
 # kriging coordinates
 cent <- sf::st_centroid(p)
 berryFunctions::colPoints(cent$x, cent$y, p$P1, add=T, cex=0.7,
@@ -5763,7 +5763,7 @@ plot(vario) ; lines(fit)
 d <- sapply(1:nrow(cent), function(i) min(berryFunctions::distance(
                           cent$x[i], cent$y[i], cent$x[-i], cent$y[-i])))
 hist(d/1000, breaks=20, main="distance to closest gauge [km]")
-mean(d) # 8 km
+mean(d) # 8 km  - grid resolution in next slide
 @
 \end{frame}
 
@@ -5789,13 +5789,14 @@ krobj2$predict[!isinp] <- NA
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.5: Kriging Visualization}
-<<ex_krig_vis, echo=-(1:2), size="small", fig.height=2.5>>=
+<<ex_krig_vis, echo=-(1:3), size="small", fig.height=2.5, warning=FALSE>>=
 par(mar=c(0,3,0,3))
 p <- sf::st_read("data/PrecBrandenburg/niederschlag.shp", quiet=TRUE)
+pcol <- colorRampPalette(c("red","yellow","blue"))(50)
 geoR:::image.kriging(krobj2, col=pcol)
 colPoints(cent$x, cent$y, p$P1, col=pcol, zlab="Prec", cex=0.7,
      legargs=list(y1=0.1,y2=0.8, x1=0.78, x2=0.87, horizontal=F))
-plot(p, add=T, col=NA, border=8)#; points(cent$x,cent$y, cex=0.7)
+plot(p, add=T, col=NA, border=8)#; points(cent$x,cent$y, cex=0.8)
 @
 \end{frame}
 
@@ -6338,6 +6339,75 @@ Please select the topic(s) for next week online:\\[1em]
 \subsection{Session 6/7: statistics}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
+
+\begin{frame}[fragile]{Floyd Recap}
+Download the recap tasks at \datalinkRaw{FloydRecap.pdf}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Floyd Recap Solutions}
+1. \vspace{-1em}
+<<floyd_read, eval=FALSE>>=
+setwd("S:/Dropbox/R/Project")
+reed <- read.table("file.name", header=T, sep="\t", skip=2)
+@
+
+2. Spaces in column names, 
+comments in the middle of data fields (use NA instead), 
+tab-stop separated columns are not the safest option (semicolon ";" is better).
+\rcode{str(reed)} output: \vspace{-1em}
+<<floyd_str, eval=F, size="small">>=
+data.frame, n observations in 4 variables (rows, columns)
+$Site         : factor with n levels ...
+$moisture     : factor with 3 levels "wet","moist",...: 1 2 2...
+$plant.height : int 154 120 173 ...
+$stem_diameter: num 1.80.95 2.6 ...
+@
+
+3. 
+see \hyperlink{datatypes}{slide \ref{datatypes}}. 
+\rcode{c(pi,"pi")} gives a vector with charstrings, number gets converted in order of coercion.
+You cannot compute with a characterstring, but you could run \rcode{as.numeric(c(pi,"pi")[1])*1.8}.
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Floyd Recap Solutions}
+4. join "reed" with second dataset "chem":\vspace{-1em}
+<<floyd_merge, eval=FALSE>>=
+merge(reed, chem, by.x="Site", by.y="columname", all=TRUE)
+@
+\vspace{-1em}5.\vspace{-1em}
+<<floyd_scat, eval=FALSE>>=
+plot(reed$chem, reed$growth)
+@
+\vspace{-1em}6.\vspace{-1em}
+<<floyd_mp, eval=FALSE, size="small">>=
+par(mfrow=c(2,3), mar=c(2.9,3,1,0.5), mgp=c(2.1,0.7,0), las=1)
+plot(a,b)
+plot(C,D, col="pink")
+...
+@
+\vspace{-1em}7-9.\vspace{-1em}
+<<floyd_multipanel, fig.show="hide">>=
+par(mfrow=c(4,4), mar=rep(0,4), oma=c(3,5,2,1), las=1)
+for(i in 1:16)
+  {plot(rnorm(20), type="l", yaxt="n", xaxt="n")
+  if( i %in% c(1,5,9,13) ) axis(side=2)
+  }
+title(ylab="hi there", outer=TRUE, cex.lab=2)
+title(main="I'm cool", outer=TRUE)
+box("outer", col="blue", lwd=5)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Floyd Recap Solutions}
+\includegraphics[width=\textwidth]{fig/floyd_multipanel-1.pdf}
+\end{frame}
+
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 \subsection{Session 7/7: shapefiles (R as GIS)}
