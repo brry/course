@@ -54,8 +54,10 @@
 
 \resetcounteronoverlays{exercisecount}
 
-% format inline R command names in blue courier:
-\newcommand{\rcode}[1]{\texttt{\textcolor{Blue}{#1}}} % or use Blue
+% format inline R command names in blue courier and lightgrey background:
+\newcommand{\rcode}[1]{\texttt{\textcolor{Blue}{#1}}}
+\newcommand{\key}[1]{\colorbox{gray!30}{\texttt{\textcolor{Blue}{#1}}}}
+
 
 % links to files
 \newcommand{\datalinkRaw}[1]{\href{https://raw.githubusercontent.com/brry/course/master/data/#1}{#1}}
@@ -262,6 +264,7 @@ One slide about Rstudio, and then we'll finally start...
   \begin{figure}
   \includegraphics[width=0.95\textwidth]{./externalfig/Rstudio2.png}
   \end{figure}
+\label{rstudio}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -5649,7 +5652,7 @@ potsdam$date <- as.Date(as.character(potsdam$MESS_DATUM_BEGINN), "%Y%m%d")
 \begin{frame}{Authorship note}
 % make note to first slide clickable.
 This section (time series) was originally written by Matthias Seibert (GFZ).\\
-It is currently excluded from this main document but can be obtained as \href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/RcourseBerry_Mathias.pdf}{pdf}.
+It is currently excluded from this main document but can be obtained as \href{https://github.com/brry/course/raw/master/RcourseBerry_Mathias.pdf}{pdf}.
 
 <<librariests>>=
 library(xts)
@@ -5919,12 +5922,89 @@ plot(p, add=T, col=NA, border=8)#; points(cent$x,cent$y, cex=0.8)
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
+\begin{frame}[fragile]{interactive shapefile editing - \href{http://r-spatial.org}{http://r-spatial.org}}
+\pause
+This is R. There is no if. Only how.
+\pause
+<<shp_int, eval=FALSE, size="scriptsize">>=
+# Data and Packages:
+download.file(
+  "https://github.com/brry/course/raw/master/data/PrecBrandenburg.zip", 
+  destfile="prec.zip")
+unzip("prec.zip")
+
+library(sf)
+library(mapview)
+library(mapedit)
+
+p <- sf::st_read("data/PrecBrandenburg/niederschlag.shp")
+map <- mapview::mapview(p) 
+map
+
+p2 <- mapedit::editMap(map) # add polygons, lines, points, rectangles
+mapview::mapview(p2$finished)
+names(p)[2] = "x1" # x column problem, see Issue 2017-12-05
+p3 <- mapedit::editFeatures(p)
+?franconia # from mapview package
+ed <- mapedit::editFeatures(franconia[1:5,])
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{shapefile operations}
+sf replaces the old sp package since 2017 (sp will be deprecated). \\
+Vignettes:\\
+\href{https://cran.r-project.org/web/packages/sf/vignettes/sf1.html}{1. intro: simple features, geometry, reading/writing, projections, units}\\
+\href{https://cran.r-project.org/web/packages/sf/vignettes/sf2.html}{2. reading/writing, conversion}\\
+\href{https://cran.r-project.org/web/packages/sf/vignettes/sf3.html}{3. transformation, coordinate reference systems, geometrical operations}\\
+\href{https://cran.r-project.org/web/packages/sf/vignettes/sf4.html}{4. subsetting, aggregation, joining by attribute / geometry}\\
+\href{https://cran.r-project.org/web/packages/sf/vignettes/sf5.html}{5. plotting, projections}\\
+\href{https://cran.r-project.org/web/packages/sf/vignettes/sf6.html}{6. miscellaneous}\\
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{point data (coordinates) - leaflet}
+<<coord_data>>=
+ddd <- read.table(header=TRUE, sep=",", as.is=TRUE, text="
+lat, lon, city, LOA # LOA: Level of Awesomeness
+48.858271,   2.294245, Paris , 5
+51.503162,  -0.131082, London, 3
+52.514687,  13.350012, Berlin, 6
+52.407160,  12.972761, Golm  , 9
+")
+ddd$display <- berryFunctions::popleaf(ddd)
+@
+\pause
+Interactive plots: \vspace{-0.8em}
+<<coord_leaflet, eval=FALSE>>=
+library(leaflet)
+leaflet(ddd) %>% addTiles() %>%
+  addCircleMarkers(~lon, ~lat, popup=~display)
+@
+\vspace{-0.8em}
+\href{https://rstudio.github.io/leaflet/basemaps.html}{Different background maps}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{point data (coordinates) - OSMscale}
+Static maps:\vspace{-0.8em}
+<<coord_OSMscale, eval=TRUE>>=
+library(OSMscale)
+pointsMap(lat, lon, data=ddd, quiet=TRUE)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}[fragile]{R geo, further material}
 Use the sf, mapview, osmar and osmplotr packages!\\[1em]
 Combine city names with geolocations:\\ \href{http://blog.revolutionanalytics.com/2015/11/marriott.html}{blog.revolutionanalytics.com/2015/11/marriott.html}\\[1em]
 For this section (spatial data / GIS), a lot was originally written by Matthias Seibert (GFZ). 
 With the advance of the \rcode{sf} package (late 2016), that material is mostly outdated.
-Until new material is created here, his slides can be obtained as \href{https://dl.dropboxusercontent.com/u/4836866/R_course_Berry/RcourseBerry_Mathias.pdf}{pdf}.
+Until new material is created here, his slides can be obtained as \href{https://github.com/brry/course/raw/master/RcourseBerry_Mathias.pdf}{pdf}.
 \end{frame}
 
 %------------------------------------------------------------%
@@ -5950,6 +6030,12 @@ nc <- read_nc("data/tavg.nc")
 <<vis_nc, fig.width=5, fig.height=5, out.width='0.55\\textwidth'>>=
 vis_nc(nc, cex=11.5)
 @
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{visualize nc files}
+\rcode{mhmVis::vis\_nc\_all} and \rcode{mhmVis::vis\_nc\_film}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -6527,6 +6613,22 @@ box("outer", col="blue", lwd=5)
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
+\begin{frame}[fragile]{Rstudio Tipps and Tricks}
+\begin{enumerate}[<+->]
+\item \hyperlink{rstudio}{Rstudio settings slide}
+\item \href{https://rviews.rstudio.com/2016/11/11/easy-tricks-you-mightve-missed/}{RStudio IDE Easy Tricks You Might've Missed}
+and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio.com/categories/tips-and-tricks}
+\item Work with Rstudio projects!
+\item \key{ALT} + mouse for multiline cursor
+\item \key{CTRL} + \key{SHIFT} + \key{1} panel full view
+\item \key{ALT} + \key{UP}/\key{DOWN} move line of code
+\item \key{CTRL} + \key{SHIFT} + \key{P} rerun previous code region
+\item \key{CTRL} + \key{SHIFT} + \key{S}/\key{ENTER} source document
+\item \key{CTRL} + \key{UP} (in console) command history
+\item tearable panes
+\item \key{CTRL} + \key{SHIFT} + \key{O} Document outline
+\end{enumerate}
+\end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
