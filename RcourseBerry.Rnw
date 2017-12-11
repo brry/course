@@ -3851,6 +3851,101 @@ options(width=50)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
+\subsection{Arrays}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+<<econcalc, eval=F, echo=F>>=
+load("../rclick/Daten/11_econ.Rdata")
+for(i in 1:5) write.table(econ[,,i], file=paste0("data/econ/e", 2011+i, ".txt"), quote=FALSE)
+@
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Read files in a loop, create an array}
+\begin{exercise}{Create an array from files} %ex
+\begin{enumerate}
+\item Download the \datalinkRaw{econ.zip} file (e.g. with \rcode{download.file}), 
+      then \rcode{unzip} it.
+\item Get a vector of filenames in the econ folder with \rcode{dir}. 
+      Remember to set the \texttt{full.names} argument.
+\item Using \rcode{lapply}, read all the datasets into a list.
+\item BONUS: With \rcode{basename} and \rcode{substr}, 
+      use the years in the filename as names of the list elements.
+\item Convert each element of the list to a \rcode{?matrix}.
+\item With \rcode{?berryFunctions::l2array}, convert the list to an array.
+\item Examine it with \rcode{str}
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Array creation - solution}
+\vspace{-1em}
+<<econ_unzip, eval=FALSE, size="small">>=
+download.file(
+ "https://github.com/brry/course/raw/master/data/econ.zip",
+ destfile="econ.zip")
+unzip("econ.zip")
+@
+\vspace{-1em}
+<<econ_read, size="small">>=
+files <- dir("data/econ", full.names=TRUE)
+econ <- lapply(files, read.table)
+names(econ) <- substr(basename(files), 2,5)
+econ <- lapply(econ, as.matrix)
+econ <- berryFunctions::l2array(econ)
+str(econ)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Array subsetting and aggregation}
+%Array subsetting and aggregation works like this:
+\vspace{-1em}
+<<arrayops, eval=FALSE>>=
+some_array[x,y,z, ...]
+apply(some_array, MARGIN=c(1,3), FUN=mean)
+@
+\vspace{-0.5em}
+MARGIN denotes the dimensions to keep (i.e. aggregate over the other dimensions)
+\begin{exercise}{subsets and aggregates from arrays} %ex
+\begin{enumerate}
+\item Display all the values for Germany (by name).
+      Extract the values in the second economic category (by number).
+      Display a time series of the agricultural branch in Switzerland.
+\item Compute the median per category and country (aggregate over time). 
+      Compute the maximum of each year.
+\item BONUS: Compute the max per year, excluding the industrial sector.
+      If there are many items in the second dimension, 
+      how could you automatize the request for a particular entry (like "Industrie") 
+      without hard-coding the position? 
+      Hint: \rcode{str(some\_array)} shows a useful attribute you'll need.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Array subsetting - solution}
+\vspace{-1em}
+<<econ_subset, eval=FALSE>>=
+econ["DE",,]
+econ[,2,]
+econ["CH","Landwirtschaft",]
+
+apply(econ, 1:2, median)
+apply(econ, 3, max)
+
+apply(econ[,-2,], 3, max)
+which(dimnames(econ)[[2]]=="Industrie")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
 \section{8. Functions \& packages}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
