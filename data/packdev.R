@@ -103,6 +103,7 @@ check() # very often
 # It is extremely good for readability to keep the argument description close to argument list!
 # to create a complete roxygen structure, I prefer to use
 berryFunctions::createFun("roar")
+devtools::document()
 devtools::load_all(".")
 ?roar
 devtools::check()
@@ -121,6 +122,7 @@ devtools::check()
 
 # locally:
 cat("\nlibrary(devtools)\n", file=".Rprofile", append=TRUE)
+# on Linux, only the local .Rprofile is executed if available (no longer the global)
 # CTRL + SHIFT + F10 to restart R
 document() # quicker to type without devtools::
 
