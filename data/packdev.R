@@ -12,9 +12,9 @@ install.packages(c("devtools","roxygen2","berryFunctions"))
 # Step 1: create package structure ----
 
 getwd() # setwd("../otherFolder") if you want to create your package elsewhere
-devtools::create("catPack")
-# now open the catPack.Proj file with Rstudio
-berryFunctions::openFile("catPack/catPack.Proj")
+devtools::create("catPack") # use devtools::setup if you cloned from github
+# now open the catPack.Rproj file with Rstudio, either manually or with:
+berryFunctions::openFile("catPack/catPack.Rproj")
 
 
 # Step 2: check whether package is working ----
@@ -71,46 +71,9 @@ library("catPack")
 ?meow
 meow("Elephant")
 
+
 # That's basically it!
 # The following things will make your life better.
-
-
-### Use version control (git + github) ----
-
-# more on this in the course slides (see top of this script)
-# If you've done it once before, you'll start with it from the beginning
-
-
-### Develop an efficient workflow ----
-
-# For developing and testing code use
-load_all(".") # CTRL + SHIFT + L
-# which is faster than install, but temporary.
-# Also, doc links are not clickable and generating docs may fail altogether.
-
-# CTRL + SHIFT + F10 to restart R
-# Recommended Rstudio settings: Tools - Global Options - General
-#   OFF: Restore .Rdata into workspace at startup
-#   Save workspace to .RData on exit: NEVER
-
-check() # very often
-
-# write unit tests (see Hadley's book referenced below)
-
-
-### Improve documentation routines ----
-
-# It is extremely good for readability to keep the argument description close to argument list!
-# to create a complete roxygen structure, I prefer to use
-berryFunctions::createFun("roar")
-devtools::document()
-devtools::load_all(".")
-?roar
-devtools::check()
-# In the future, the R package documentation system may be changed!
-# https://www.r-consortium.org/blog/2016/08/22/the-r-consortium-funds-three-projects-in-july
-# There are several projects, I find this a promising one:
-# http://r-posts.com/adding-sinew-to-roxygen2-skeletons/
 
 
 ### Always load devtools ----
@@ -125,6 +88,44 @@ cat("\nlibrary(devtools)\n", file=".Rprofile", append=TRUE)
 # on Linux, only the local .Rprofile is executed if available (no longer the global)
 # CTRL + SHIFT + F10 to restart R
 document() # quicker to type without devtools::
+
+
+### Use version control (git + github) ----
+
+# more on this in the course slides (see top of this script)
+# If you've done it once before, you'll start with it from the beginning
+
+
+### Develop an efficient workflow ----
+
+# For developing and testing code use
+load_all(".") # CTRL + SHIFT + L
+# which is faster than install + library, but temporary.
+# Also, doc links are not clickable and generating docs may fail altogether.
+
+# CTRL + SHIFT + F10 to restart R
+# Recommended Rstudio settings: Tools - Global Options - General
+#   OFF: Restore .Rdata into workspace at startup
+#   Save workspace to .RData on exit: NEVER
+
+check() # very often
+
+# write unit tests (see Hadley's book referenced below)
+
+
+### Improve documentation routines ----
+
+# It is good for readability to keep the argument description close to argument list!
+# To create a complete roxygen structure, I prefer to use
+berryFunctions::createFun("roar")
+devtools::document()
+devtools::load_all(".")
+?roar
+devtools::check()
+# In the future, the R package documentation system may be changed!
+# https://www.r-consortium.org/blog/2016/08/22/the-r-consortium-funds-three-projects-in-july
+# There are several projects, I find this a promising one:
+# http://r-posts.com/adding-sinew-to-roxygen2-skeletons/
 
 
 ### Read books and tutorials ----
