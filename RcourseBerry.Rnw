@@ -154,7 +154,7 @@ for(i in 1:50)
 \begin{center}
     \begin{columns}
     \column{22.0em}
-    \begin{block}{}{\Large ~Introductionary + advanced \includegraphics[width=0.7cm]{externalfig/Rlogo.png} ~course}
+    \begin{block}{}{\Large ~Introductory + advanced \includegraphics[width=0.7cm]{externalfig/Rlogo.png} ~course}
     \end{block}
     \end{columns}
 \vspace{1em}
@@ -6734,8 +6734,8 @@ and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio
 \begin{frame}{Feedback}
 \center{
 Please fill out the feedback form at\\[1em]
-\href{https://goo.gl/jVgqge}{goo.gl/jVgqge}\\[1em]
-(it only takes 2 minutes)\\[1em]
+\href{https://bit.ly/feedbackR}{bit.ly/feedbackR}\\[1em]
+(it only takes a few minutes and helps to improve the course)\\[1em]
 Thanks!\\[1em]
 }
 \end{frame}
