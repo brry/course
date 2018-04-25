@@ -7,3 +7,10 @@ unlink(c(
 "Test.synctex.gz", 
 "Test.toc", 
 "Test.vrb"))
+
+if(.Platform$OS.type=="unix") 
+{
+.libPaths("/home/berry/R/libBerry/")
+if(requireNamespace("installB", quietly=TRUE)) installB::loadPackages(ask=FALSE)
+}
+

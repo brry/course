@@ -19,21 +19,39 @@ First install R itself and then Rstudio:
 
 * **R on Windows**: *windows -> base -> download* at https://cloud.r-project.org (update through [installr](https://github.com/talgalili/installr/blob/master/README.md))
 * **R on Mac**: follow e.g. these instructions: https://www.r-bloggers.com/installing-r-on-os-x
-* **R on Linux Ubuntu**: open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines.  
-(from [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) and [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)). 
-Replace `xenial` with e.g. `trusty` if you have another Ubuntu version:  
-17.04 zesty, 16.10 yakkety, 16.04 xenial, 14.04 trusty, 12.04 precise
+* **R on Linux Ubuntu**: See instructions below
+
+* **Rstudio on all platforms**: https://www.rstudio.com/products/rstudio/download/#Desk
+
+
+**Installing R on Linux Ubuntu** so that `sudo apt upgrade` updates to the latest R version if outdated 
+(from [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) and [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)):  
+Open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines.  
+Replace `xenial` with e.g. `trusty` if you have another Ubuntu version (check in shell with `lsb_release -a`):  
+17.10 artful, 17.04 zesty, 16.04 xenial, 14.04 trusty
 
 ```
-sudo echo "deb http://cran.rstudio.com/bin/linux/ubuntu xenial/" | sudo tee -a /etc/apt/sources.list
+sudo echo "deb https://cran.rstudio.com/bin/linux/ubuntu xenial/" | sudo tee -a /etc/apt/sources.list
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install r-base r-base-dev
 ```
+In case you run into GPG problems like the example below, try replacing both gpg lines with the single line 
+([idea source](https://superuser.com/questions/620765/sudo-apt-key-adv-keyserver-keyserver-ubuntu-com-recv-7f0ceb10-command-return)):
+```
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E084DAB9
+```
 
+*gpg: requesting key E084DAB9 from hkp server keyserver.ubuntu.com
+?: keyserver.ubuntu.com: No route to host
+gpgkeys: HTTP fetch error 7: couldn't connect: No route to host
+gpg: no valid OpenPGP data found.
+gpg: Total number processed: 0
+gpg: keyserver communications error: keyserver unreachable
+gpg: keyserver communications error: public key not found
+gpg: keyserver receive failed: public key not found*
 
-* **Rstudio on all platforms**: https://www.rstudio.com/products/rstudio/download/#Desk
 
 ### settings
 
