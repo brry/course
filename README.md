@@ -25,7 +25,7 @@ First install R itself and then Rstudio:
 
 
 **Installing R on Linux Ubuntu** so that `sudo apt upgrade` updates to the latest R version if outdated 
-(from [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) and [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)):  
+(idea from [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) and [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)):  
 Open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines.  
 Replace `xenial` with e.g. `trusty` if you have another Ubuntu version (check in shell with `lsb_release -a`):  
 17.10 artful, 17.04 zesty, 16.04 xenial, 14.04 trusty
