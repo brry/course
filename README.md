@@ -21,6 +21,7 @@ First install R itself and then Rstudio:
 * **R on Mac**: follow e.g. these instructions: https://www.r-bloggers.com/installing-r-on-os-x
 * **R on Linux Ubuntu**: See instructions below
 
+
 * **Rstudio on all platforms**: https://www.rstudio.com/products/rstudio/download/#Desk
 
 
