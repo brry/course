@@ -22,6 +22,7 @@ First install R itself and then Rstudio:
 * **R on Linux Ubuntu**: See instructions below
 
 
+
 * **Rstudio on all platforms**: https://www.rstudio.com/products/rstudio/download/#Desk
 
 
