@@ -1,4 +1,4 @@
-Jump to [slides](#slides), [install](#install), [settings](#settings), [packages](#packages), [resources](#resources), [uni](#uni)
+Jump to [slides](#slides), [install](#install), [settings](#settings), [packages](#packages), [sumatra](#sumatra), [resources](#resources), [uni](#uni)
 
 ### slides
 
@@ -98,6 +98,20 @@ sudo apt install libgdal-dev libproj-dev
 ```
 
 
+### sumatra
+
+I like to use sumatra PDF viewer as the default viewer. 
+It doesn't lock files from editing, hence currently opened files can be changed (by R, e.g.).
+It comes in `Rstudio/bin/sumatra` and I like to change some [settings](https://www.sumatrapdfreader.org/settings.html):  
+open `Rstudio/bin/sumatra/sumatrapdfrestrict.ini` and set `SavePreferences = 1`  
+open and close a pdf, so that `Rstudio/bin/sumatra/SumatraPDF-settings.txt` will be created  
+now change the following entries:
+
+* `DefaultZoom = fit page` (probably already the default)
+* `ShowToc = 0`
+* `DefaultDisplayMode = single page`
+
+
 ### resources
 
 * [R-weekly](https://rweekly.org/) - weekly newsletter about all things R
@@ -105,6 +119,7 @@ sudo apt install libgdal-dev libproj-dev
 * [Shiny](https://shiny.rstudio.com/) - web application framework for R/Rstudio
 * [Rmarkdown](http://rmarkdown.rstudio.com/) - document/notebook generation framework for R/Rstudio
 * [Github guides](https://guides.github.com/) - Introduction to github
+
 
 ### online tutorials
 * http://stat545.com/topics.html (excellent tutorial)
