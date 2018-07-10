@@ -17,20 +17,21 @@ The presentation template is available through
 ### install
 First install R itself and then Rstudio:
 
-* R on **Windows**: *windows -> base -> download* at https://cloud.r-project.org (update through [installr](https://github.com/talgalili/installr/blob/master/README.md))
-* R on **Mac**: follow e.g. these instructions: https://www.r-bloggers.com/installing-r-on-os-x
-* R on **Linux Ubuntu**: See instructions below  
+* R itself
+  * R on **Windows**: *windows -> base -> download* at https://cloud.r-project.org (update through [installr](https://github.com/talgalili/installr/blob/master/README.md))
+  * R on **Mac**: follow e.g. these instructions: https://www.r-bloggers.com/installing-r-on-os-x
+  * R on **Linux Ubuntu**: See instructions below  
 * **Rstudio on all platforms**: https://www.rstudio.com/products/rstudio/download/#Desk
 
 
 **Installing R on Linux Ubuntu** so that `sudo apt upgrade` updates to the latest R version if outdated 
 (idea from [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) and [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)):  
 Open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines.  
-Replace `xenial` with e.g. `trusty` if you have another Ubuntu version (check in shell with `lsb_release -a`):  
-17.10 artful, 17.04 zesty, 16.04 xenial, 14.04 trusty
+Replace `xenial` with e.g. `trusty` if you have another Ubuntu version (check in shell with `lsb_release -a`  ):  
+18.04 bionic-cran35, 17.10 artful, 16.04 xenial, 14.04 trusty
 
 ```
-sudo echo "deb https://cran.rstudio.com/bin/linux/ubuntu xenial/" | sudo tee -a /etc/apt/sources.list
+sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu xenial/" | sudo tee -a /etc/apt/sources.list
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | sudo apt-key add -
 sudo apt-get update
