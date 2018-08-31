@@ -18,7 +18,7 @@ The presentation template is available through
 First install R itself and then Rstudio:
 
 * R itself
-  * R on **Windows**: *windows -> base -> download* at https://cloud.r-project.org (update through [installr](https://github.com/talgalili/installr/blob/master/README.md))
+  * R on **Windows**: <https://cloud.r-project.org/bin/windows/base/release.htm> (update through [installr](https://github.com/talgalili/installr/blob/master/README.md))
   * R on **Mac**: follow e.g. these instructions: https://www.r-bloggers.com/installing-r-on-os-x
   * R on **Linux Ubuntu**: See instructions below  
 * **Rstudio on all platforms**: https://www.rstudio.com/products/rstudio/download/#Desk
