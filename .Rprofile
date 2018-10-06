@@ -1,5 +1,7 @@
 knit_course <- function() knitPres::knit_hand_pres("RcourseBerry.Rnw", presname=" pres")
 
+clean_course <- function() unlink(c("uni.html","README.html"))
+
 unlink(c(
 "Test-concordance.tex", 
 "Test.nav", 
