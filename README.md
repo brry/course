@@ -1,4 +1,6 @@
-Jump to [slides](#slides), [install](#install), [settings](#settings), [packages](#packages), [sumatra](#sumatra), [resources](#resources), [uni](#uni)
+Jump to [slides](#slides), [install](#install), [settings](#settings), [packages](#packages), [sumatra](#sumatra), [resources](#resources)
+
+Find info about the fall 2018 course at Potsdam university [here](https://github.com/brry/course/blob/master/uni.md).
 
 ### slides
 
@@ -127,75 +129,3 @@ now change the following entries:
 * https://www.edx.org/course/introduction-r-programming-microsoft-dat204x-0 (Datacamp, with login, but free)
 * http://tryr.codeschool.com/levels/1/challenges/1 (codeschool, interactive, login to save progress)
 
-
-### uni
-
-This section provides information on the course "introduction to programming with R" at Potsdam University, fall 2017. 
-
-#### content
-
-This course provides an introduction to the free and flexible R software. 
-Participants will mainly work with hands-on exercises using geoecological data sets for sample analyses. 
-R is a well-established programming environment used in areas as statistics, 
-data analysis and visualization as well as machine learning. 
-Companies like Microsoft, Amazon and Google use R for market analysis, 
-researchers worldwide enjoy the benefits of structured and reproducible scientific work.
-
-#### organization
-
-The course takes place in 7 three-hour sessions during the first half of the semester.
-There are two options, both on campus Golm:
-
-* tuesdays, 12:15-15:15, house 25, room D0.02, main language English
-* wednesdays, 12:15-15:15, house 1, PC Pool (guest account provided), mainly German
-
-Each participant of the tuesday course must already have a 
-[PC-pool account](https://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html) 
-or bring a laptop with [WiFi](http://www.zeik.uni-potsdam.de/wlan.html), 
-recent R and Rstudio (see section [install](#install) above). 
-It will be necessary to complete homework exercises taking about 1-4 hours per week. 
-
-#### registration 
-Please register per [email](mailto:berry-b@gmx.de) or via the 
-[moodle course](https://moodle2.uni-potsdam.de/course/view.php?id=14800).
-Students in the Geoecology module "numeric and simulation" will be enrolled first, 
-remaining seats assigned by registration date. 
-If you already know the basics from the first sessions, you can join later 
-(please let us know via email from which session on).
-
-#### planned session curriculum
-- 2017-10-17: one-session-intro: how and why use R, read files, select data and display it graphically
-- 2017-10-24: consolidate the contents of the first session, manage NAs, merge data
-- *2017-10-31: Reformation day - official holiday, time to relax*
-- 2017-11-07: export publication-ready graphics, use if-else conditionals
-- 2017-11-14: program loops (for loops, apply functions)
-- 2017-11-21: write and debug functions
-
-Tue 11-28, House 25, Pool D0.02
-
-- visualize data - Exploratory Data Analysis (EDA)
-- test a sample distribution for normality
-- use the beta distribution  OR  understand Simpsons Paradox (with regression)
-
-Wed 11-29, House 1, PC pool
-
-- aggregate time series (including changing charstrings to date/time objects)
-- read and plot netcdf files (the standard of large spatio-temporal data)
-
-Wed 12-06, House 1, PC pool
-
-- realize that R is WAAAY cooler than ArcGIS: read shapefile, plot + edit interactively, export as html (sf, mapview, mapedit)
-- work reproducibly - project management with Rstudio
-- use Rstudio effectively (keyboard shortcuts, rskey, document outline, ...)
-
-Wed 12-13, House 1, PC pool
-
-- use lapply like a pro
-- apply functions to arrays (freaking elegant coding)
-- debug functions
-- develop an R package
-- ... your topic here ...
-
-Details in section [slides](#slides)
-
-See also: [overview of moodle courses in geoecology](https://moodle2.uni-potsdam.de/course/index.php?categoryid=1079) 
