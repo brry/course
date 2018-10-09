@@ -38,7 +38,7 @@ The course language will be German or English, depending on the participants.
 
 ### registration 
 Please register per [email](mailto:berry-b@gmx.de), [PULS](https://puls.uni-potsdam.de/qisserver/rds?state=verpublish&publishContainer=lectureContainer&publishid=69945) 
-or via the moodle course (LINK TO BE ADDED SOON).
+or [moodle](https://moodle2.uni-potsdam.de/course/view.php?id=17994).
 If you already know the basics from the first sessions, you can join later 
 (please let me know via email from which session on).
 
@@ -47,18 +47,19 @@ If you already know the basics from the first sessions, you can join later
 **Part 1**
 
 - 2018-10-23: one-session-intro: how and why use R, read files, select data and display it graphically
-- 2018-10-30: consolidate the contents of the first session, manage NAs, merge data
-- 2018-11-06: use if-else conditionals
-- 2018-11-13: program loops (for loops, apply functions)
+- 2018-10-30: explore Rstudio, get to know data and object types
+- 2018-11-06: use if-else conditionals, program for-loops
+- 2018-11-13: write functions, program apply-loops
 
 Details of the contents can be found in the course [slides](https://github.com/brry/course#slides)
 
 **Part 2** will be specified with the participants. Potential topics include
 
-- write and debug functions
+- write and debug complicated functions
+- manage NAs, merge data
 - export publication-ready graphics
 - visualize data - Exploratory Data Analysis (EDA)
-- statistics
+- statistics, distributions & co
 - aggregate time series (including changing charstrings to date/time objects)
 - read and plot netcdf files (the standard of large spatio-temporal data)
 - R as GIS: read shapefile, plot + edit interactively, export as html (sf, mapview, mapedit)
