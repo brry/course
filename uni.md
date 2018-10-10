@@ -15,7 +15,7 @@ Participants will mainly work with hands-on exercises using geoecological data s
 
 The course ist split into two consecutive parts.
 Part 1 is mandatory for students in "Numerik und Simulation".
-Part 2 is mandatory for PhD-students in NatRisckChange.
+Part 2 is specifically for PhD-students in NatRisckChange.
 Both parts are open to all participants, though seats are prioritized by these groups.
 
 **Part 1** (1 ECTS) takes place in 4 sessions during the first half of the semester:
@@ -31,7 +31,7 @@ recent [R and Rstudio](https://github.com/brry/course#install). Power sockets ar
 * it will be necessary to complete homework exercises taking about 1-4 hours per week. 
 
 **Part 2** (2 ECTS) will either continue in the same time slot or be held as a block course in Nov/Dec/Jan, depending on participants' desires.
-A solid basic R knowledge (as taught in part 1) is needed for this part.
+A solid basic R knowledge (as taught in part 1) is needed for this part!
 
 The course language will be German or English, depending on the participants.
 
@@ -63,8 +63,8 @@ Details of the contents can be found in the course [slides](https://github.com/b
 - aggregate time series (including changing charstrings to date/time objects)
 - read and plot netcdf files (the standard of large spatio-temporal data)
 - R as GIS: read shapefile, plot + edit interactively, export as html (sf, mapview, mapedit)
-- work reproducibly - project management with Rstudio
-- use Rstudio effectively (keyboard shortcuts, rskey, document outline, ...)
+- use Rstudio effectively (keyboard shortcuts, rskey, project management, document outline, ...)
+- reproducible report generation with rmarkdown and knitr
 - use lapply like a pro
 - apply functions to arrays (elegant coding)
 - debug functions
