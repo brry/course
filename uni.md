@@ -18,17 +18,18 @@ Part 1 is mandatory for students in "Numerik und Simulation".
 Part 2 is specifically for PhD-students in NatRisckChange.
 Both parts are open to all participants, though seats are prioritized by these groups.
 
-**Part 1** (1 ECTS) takes place in 4 sessions during the first half of the semester:
+**Part 1** (1 ECTS) takes place in 4 sessions during the first half of the semester, 
+starting October 23 (2nd week of semester). See the schedule below for session-specific content. 
+It will be necessary to complete homework exercises taking about 1-4 hours per week. 
 
-* tuesdays, **08:15-11:45**, campus Golm, house 25, room **D0.02** (moved to ground floor)
-* starting October 23 (2nd week of semester)
-* have a 
+There will be two time slots (each with the same content):
+
+* tuesdays, **08:15-11:45**, campus Golm, house 25, room **D0.02** (moved to ground floor) for which you need a 
 [PC-pool account](https://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html) 
 or bring a laptop with working [WiFi](http://www.zeik.uni-potsdam.de/wlan.html) and 
 recent [R and Rstudio](https://github.com/brry/course#install). Power sockets are available.
-* see the schedule below for session-specific content
-* if >20 participants register, there will be a second option on a different day of the week. Please send me an email if you have specific wishes for that time slot.
-* it will be necessary to complete homework exercises taking about 1-4 hours per week. 
+* For the second option, **please vote [here](https://goo.gl/forms/VlbAKApoqqeszosl1) by Oct 19**.
+
 
 **Part 2** (2 ECTS) will either continue in the same time slot or be held as a block course in Nov/Dec/Jan, depending on participants' desires.
 A solid basic R knowledge (as taught in part 1) is needed for this part!
@@ -69,4 +70,5 @@ Details of the contents can be found in the course [slides](https://github.com/b
 - apply functions to arrays (elegant coding)
 - debug functions
 - develop an R package
+- version control with git+github
 - ... 
