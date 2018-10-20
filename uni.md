@@ -28,7 +28,7 @@ There will be two time slots (each with the same content):
 [PC-pool account](https://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html) 
 or bring a laptop with working [WiFi](http://www.zeik.uni-potsdam.de/wlan.html) and 
 recent [R and Rstudio](https://github.com/brry/course#install). Power sockets are available.
-* For the second option, **please vote [here](https://goo.gl/forms/VlbAKApoqqeszosl1) by Oct 19**.
+* For the second option, **please vote [https://doodle.com/poll/aynavpbwc7f6se2v](https://goo.gl/forms/VlbAKApoqqeszosl1)**.
 
 
 **Part 2** (2 ECTS) will either continue in the same time slot or be held as a block course in Nov/Dec/Jan, depending on participants' desires.
