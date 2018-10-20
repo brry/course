@@ -200,7 +200,7 @@ PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ 
 \item Geoecology @ Potsdam University
 \item R Fan\onslide<+->atic \onslide<+-> since 2010
 \begin{itemize}
-\item Teaching: \href{https://rclickhandbuch.wordpress.com}{RclickHandbuch.wordpress.com} (German) + this course
+\item Teaching: \href{https://rclickhandbuch.wordpress.com}{RclickHandbuch.wordpress.com} (German) + this course \vspace{0.3em}
 \item Programming: \href{https://github.com/brry/extremeStat}{\texttt{extremeStat}}, 
       \onslide<+->\href{https://cran.r-project.org/package=berryFunctions}{\texttt{berryFunctions}}, 
       \onslide<+->\href{https://github.com/brry/rdwd\#rdwd}{\texttt{rdwd}}, 
@@ -382,7 +382,7 @@ treesize <- read.table(file="treesize.txt", header=TRUE)
   \item For tables with different data types (numbers, characters, categories, integers), R has the object type data.frame: \\\rcode{data.frame(count=c(2,6,5), type=c("a","k","k"))}
   \item \rcode{read.table} also returns a data.frame
   \item If we have the object \rcode{df}, we can subset with \rcode{df[rows,columns]}
-  \item \rcode{df[1,2:4]; df[2, ]; df[ ,"name"]; df\$name}
+  \item \rcode{df[1,2:4]; \onslide<+-> df[2, ]; \onslide<+-> ~ df[ ,"name"]; \onslide<+-> df\$name}
   \item Logical values: \rcode{vect[c(TRUE,TRUE,FALSE,FALSE,TRUE,FALSE)]}
 \end{itemize}
 \onslide<+->
@@ -2425,18 +2425,20 @@ Here are some tips by Hadley:
 <<klima_ftp, eval=FALSE, size="footnotesize">>=
 library(rdwd) # github.com/brry/rdwd
 clim <- dataDWD(selectDWD(id=02080, res="daily", var="kl",
-                          time="hist"), dir=tempdir())
+                          per="hist"), dir="DWDdata")
 @
-\item \href{http://data.unicef.org/}{data.unicef.org} (potentially add .xls etc as file extension)
-\item \href{https://github.com/okulbilisim/awesome-datascience\#data-sets}{https://github.com/okulbilisim/awesome-datascience\#data-sets}
-\item \href{https://github.com/caesar0301/awesome-public-datasets}{https://github.com/caesar0301/awesome-public-datasets}
-\item \href{http://ropensci.org/packages/index.html}{http://ropensci.org/packages/index.html}
-\item \href{http://dataviz.tools/category/data-sources/}{http://dataviz.tools/category/data-sources/}
+\item \href{https://data.fivethirtyeight.com/}{data.fivethirtyeight.com} 
+\item \href{https://data.unicef.org/}{data.unicef.org} (potentially add .xls etc as file extension)
+\item \href{https://github.com/okulbilisim/awesome-datascience\#data-sets}{github.com/okulbilisim/awesome-datascience\#data-sets}
+\item \href{https://github.com/caesar0301/awesome-public-datasets}{github.com/caesar0301/awesome-public-datasets}
+\item \href{https://ropensci.org/packages/index.html}{ropensci.org/packages/index.html}
+\item \href{https://dataviz.tools/category/data-sources/}{dataviz.tools/category/data-sources/}
+\item \href{https://docs.google.com/document/d/1Ads4XsCjXmDrdGRgfmm_OgRdpFcl6Qhs6SOllNGyq7Y/edit}{StorytellingWithData dataviz challenge 2018}
 \end{itemize}
 \vspace{-0.5em}
 %\pause
 \begin{exercise}{Real Data}
-Download a dataset that interests you, read it into R and do some analyzing / plotting.
+Download, read and (visually) analyze a dataset that interests you.
 \end{exercise}
 \label{realdata}
 \end{frame}
@@ -3642,7 +3644,7 @@ Loops are fast in C++, so outsource that part of your code into C.
 The package \rcode{Rcpp} will compile it for you and make it available as a normally accessible R function.\\
 \pause
 Start learning at
-\url{https://adv-r.had.co.nz/Rcpp.html}\\
+\url{http://adv-r.had.co.nz/Rcpp.html}\\
 \pause
 Speed gain is highly variable, of course, but you might be able to reduce your computing time from 2 hours to 20 seconds!\\[1em]
 \pause
@@ -4315,7 +4317,7 @@ if(length(input)>1) stop("length must be 1, not ", length(input))
 \rcode{message}: to inform instead of worry the user\\[1em]
 \pause
 \href{http://www.biostat.jhsph.edu/~rpeng/docs/R-debug-tools.pdf}{R. Peng (2002): Interactive Debugging Tools in R}\\
-\href{http://www.stats.uwo.ca/faculty/murdoch/software/debuggingR/}{D. Murdoch (2010): Debugging in R}\\
+\href{https://www.stats.umanitoba.ca/files/statsweb/2011/03/debugging.pdf}{D. Murdoch (2010): Debugging in R}\\
 \href{http://adv-r.had.co.nz/Exceptions-Debugging.html}{H. Wickham (2015): Advanced R: debugging}\\
 Example: \href{https://www.r-bloggers.com/tracking-down-errors-in-r/}{Pete Werner Blog Post (2013)}
 \end{frame}
@@ -4344,10 +4346,10 @@ lsc_cal <- berryFunctions::lsc(calib$P, calib$Q, area=1.6)
 
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Debugging}
 \begin{itemize}
-\item \rcode{stupid error you can easily remove} - traceback - find location of error - lsc\#75 - just comment it out
-\item \rcode{harder to find but still stupid} - traceback - nse\#22 - ditto
-\item \rcode{Error in plot: need finite 'ylim' value} - debug/browser/options(error=recover) - lsc\#107 - NAs in Q - range(Q, na.rm=TRUE) - also in other applicable locations
-\item \rcode{There were 50 or more warnings} - come from rmse being called in optimization - add argument quietNA (or similar) to lsc that is passed to rmse in lsc\#81
+\item \rcode{stupid error you can easily remove} - traceback - find location of error - lsc\#73 - just comment it out
+\item \rcode{harder to find but still stupid} - traceback - nse\#11 - ditto
+\item \rcode{Error in plot: need finite 'ylim' value} - debug/browser/options(error=recover) - lsc\#105 - NAs in Q - range(Q, na.rm=TRUE) - also in other applicable locations
+\item \rcode{There were 50 or more warnings} - come from rmse being called in optimization - add argument quietNA (or similar) to lsc that is passed to rmse in lsc\#79
 \end{itemize}
 \end{frame}
 
@@ -5182,7 +5184,8 @@ betaPlotComp(oma=c(2,2,2,2), ylim=lim0(4.8),
 \begin{frame}[fragile]{Beta distribution properties}
 \pause ~~~~~ $\alert{mean} = \mu = \scalebox{1.3}{$\frac{a}{a+b}$}$ ~~~~~~~~~
 \pause $\alert{variance}= \sigma^2 = \scalebox{1.3}{$\frac{ab}{(a+b)^2 * (a+b+1)}$}$\\[\baselineskip]
-\pause With these formulas, if a and b $\gg$ 1, you can estimate an approximation to the normal distribution.\\[2em]
+\pause With these formulas, if a and b $\gg$ 1, you can estimate an approximation to the normal distribution.\\
+To get a \& b from mean \& var, see \href{https://stats.stackexchange.com/a/12239}{https://stats.stackexchange.com/a/12239}\\[2em]
 \pause ~~~~~ $\alert{mode} = density ~peak = m = \scalebox{1.3}{$\frac{a - 1}{a+b -2}$} ~~~  \textit{ for } a,b > 1$\\[\baselineskip]
 \pause If you want to set the mode at a certain value, you can compute beta with\\[1em]
 ~~~~~ $b = \scalebox{1.3}{$\frac{a-1}{m}$} - a + 2$ ~~~ and alpha with ~~~ $a = \scalebox{1.3}{$\frac{(2-b-1/m)*m}{m-1}$}$
@@ -6185,7 +6188,7 @@ vis_nc(nc, cex=11.5)
 \begin{exercise}{Final exam} %
 {\footnotesize
 \begin{enumerate}
-  \item Download a long time series of weather data (e.g. DWD, NOAA), see \hyperlink{realdata}{slide \ref{realdata}}.
+  \item Download a long time series (e.g. weather data from DWD, NOAA), see \hyperlink{realdata}{slide \ref{realdata}}.
   \item Read the data into R and control the data types. Change the date (or time) to appropriate types with \rcode{as.Date}, \rcode{as.POSIXct} or \rcode{strptime}.
   \item Write a subsection of the data (eg your birth year) to a tab-separated file so it's easy to copypaste this to Excel/Calc.
   \item Plot the development of some aggregate (e.g. monthly 90\% Quantile of windspeed, annual precipitation sum or temperature mean depending on \href{ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate/hourly/}{hour of the day}).
@@ -6210,7 +6213,7 @@ vis_nc(nc, cex=11.5)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 1/7: Why R, read file, select and plot data}
+\subsection{Session 1/4: Why R, read file, select and plot data}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6248,102 +6251,39 @@ vis_nc(nc, cex=11.5)
   \item df columns with \rcode{tab[ ,3]}, \rcode{tab[ ,"precip"]}, \rcode{tab\$wind}
   \item \rcode{hist(vals)}; \rcode{plot(x,y, las=1, pch=16, type="b")}
 \end{itemize}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}{Session 1: Homework}
 \pause
-\begin{itemize}[<+->]
-  \item If not already done, install R and Rstudio (see \href{https://github.com/brry/course\#install}{github.com/brry/course\#install})
-  \item If you still need it, get a \href{http://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html}{PC-Pool Account} \\(Laptop with \href{http://www.zeik.uni-potsdam.de/wlan.html}{WLAN access} is fine, too)
-  \item Complete all unfinished exercises from today
-  \item Print a RefCard (see \hyperlink{refcards}{slide \ref{refcards}}) and mark all the items that you have understood
-  % \item BONUS: Read about Simpson's paradox and solve the first corresponding exercise, see \hyperlink{simpson}{slide \ref{simpson}} et sequentes.
-\end{itemize}
+The homework is at \url{https://github.com/brry/course/blob/master/uni.md\#homework}
 \end{frame}
+
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 2/7: Objects, file reading, NAs, data merging}
+\subsection{Session 2/4: Objects, file reading, Rstudio}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
 \begin{frame}{Session 2: Aim (Chapters 2  - 4.3)}
 \pause - itensify and fortify the knowledge obtained in session 1\\
-\pause - learn about NAs and data merging\\[0.5em]
+\pause - learn about Rstudio and objects\\[0.5em]
 \pause afterwards, you should be able to:
 \pause
 \begin{itemize}[<+->]
 \item install and load add-on packages written by the R community
 \item perform and visualize linear regression
 \item find the appropriate place and way to get help if you're stuck
-\item find an overview of common data and object types
+\item distinguish common data and object types
+\item ...
 % \item explain the difference between object types and data types
 % \item read 'medium difficult' files into R
-\item merge two datasets together
-\item ignore NAs
-\item apply a function to each column / row of a dataset
+% \item merge two datasets together
+% \item ignore NAs
+% \item apply a function to each column / row of a dataset
 % \item know where to look if you need to
 %    \begin{itemize}[<+->]
 %    \item create matrices and lists and index each to get subsets
 %    \item apply a function to each element in a list (or vector)
 %    \end{itemize}
 \end{itemize}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Repetition / application of content from last week}
-\begin{footnotesize}
-In groups of two or three, please take turns solving the following tasks. 
-Pseudo-Code is fine, als long as the syntax is correct.
-This is for real life, not school, so feel free to use any source of help and inspiration ;-)
-\begin{enumerate}
-\item What program do we use to access R and what is typically in the four panels?
-\item Assign a vector with the names of your group members (character strings!) to an object with a useful name.
-\item Return all values of that vector except for the second.
-\item What is the easiest way to open the help documentation of a command?
-\item In a project handling several files, where, why and how do you use \rcode{setwd()}?
-\item Read the data in the imaginary file \texttt{Wolf\_Observations.txt} into R.
-\item What are the two important functions to check whether it was read correctly?
-\item Code two ways to select a column from a \rcode{data.frame}.
-\item Get all the data in the 6th and 8th row of a df.
-\item How would you plot the wolf pack size over the distance from the coast?
-\item With which arguments to \rcode{plot()} would you make the graph more informative and appealing?
-\end{enumerate}
-\end{footnotesize}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}{Recap solutions}
-\begin{enumerate}
-\item Rstudio: Scripts, Code execution, Workspace/history, help/packages/plots
-\item groupnames <- c("AA","BB","CC","DD")
-\item groupnames[-2]
-\item put the cursor on it, press key F1
-\item At top of script, setwd("C:/Some/path"), so we can use relative filenames
-      because they are short and make scripts easier to share
-\item wolf <- read.table("Wolf\_Observations.txt", header=TRUE)
-\item head(wolf); str(wolf)
-\item df\$column; df[ ,"column"]
-\item df[c(6,8), ]
-\item plot(wolf\$packsize, wolf\$distance\_coast)
-\item main="Title", las=1, xlab="label", ylab="label"
-\end{enumerate}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Please judge the difficulty of the previous tasks}
-<<taskdifficulty, fig.height=2, echo=-1>>=
-par(mar=c(2,0,0,0), mgp=c(3,0.5,0), cex=2)
-plot(1:10, type="n", xlim=c(-1,11), ann=FALSE, axes=FALSE)
-axis(side=1, at=c(0,5,10))
-text(x=c(0,5,10), y=rep(6,3), c("too\neasy", 
-     "just\nright", "too\nhard"))
-@
 \end{frame}
 
 %------------------------------------------------------------%
@@ -6355,31 +6295,18 @@ text(x=c(0,5,10), y=rep(6,3), c("too\neasy",
 % \item \rcode{read.table} arguments: header=TRUE, sep="\textbackslash t", dec=",", skip, fill, comment.char, na.strings, \textit{many more}
 \item Function documentation with \rcode{help} (or F1), \href{www.StackOverflow.com}{StackOverflow} for questions, Reference Cards (\hyperlink{refcards}{slide \ref{refcards}}) for an overview and books / tutorials (\hyperlink{books}{slide \ref{books}}) for self-learning
 % \item factors (categories, groups) are integers internally, useful for color specification in plotting, dangerous when converting to \rcode{as.numeric}!
+\item Rstudio is awesome!
 \item Objects (vector, data.frame, matrix, list, function) can have several data types (numeric, logical, character), see \hyperlink{datatypes}{slide \ref{datatypes}}
-\item \rcode{rbind} and \rcode{cbind} to join data.frames, \rcode{merge} to (surprise) merge them.
-\item \rcode{na.rm} argument in many functions, \rcode{na.omit} command otherwise
+% \item \rcode{rbind} and \rcode{cbind} to join data.frames, \rcode{merge} to (surprise) merge them.
+% \item \rcode{na.rm} argument in many functions, \rcode{na.omit} command otherwise
 \end{itemize}
 \end{frame}
 
-%------------------------------------------------------------%
 
-\begin{frame}{Session 2: Homework}
-\pause
-\begin{enumerate}[<+->]
-\item Complete all unfinished exercises up to Nr 12.
-\item Update your RefCard: mark all the items you learned about today
-\item BONUS 1: How can you get \rcode{tab[x==7, "ColName"]} in \$ notation?
-\item BONUS 2: From the \href{https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts}{Rstudio keyboard shortcuts}, choose a few that seem useful to you and try them out. Prepare to tell your classmates about them next week.
-\item BONUS 3: Solve exercise 13 (factors, tapply) using chapter 4.2
-\end{enumerate}
-\pause
-You can send me your homework if you want comments.
-\label{hw2}
-\end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 3/7: publication-ready graphics, if-else conditionals}
+\subsection{Session 3/4: if-else conditionals, for loops}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6394,17 +6321,20 @@ You can send me your homework if you want comments.
 
 %------------------------------------------------------------%
 
-\begin{frame}{Session 3: Aim (Chapter 5 + 7.1)}
-\pause - export publication-ready graphics\\
+\begin{frame}{Session 3: Aim (Chapter 7.1 + 7.2)}
 \pause - conditional code execution (if-else)\\
+\pause - repetitional coding (for-loops)\\
 \pause afterwards, you should be able to:
 \pause
 \begin{itemize}[<+->]
-\item create a plot with multiple panels
-\item reproducibly save figures with useful settings
+% \item create a plot with multiple panels
+% \item reproducibly save figures with useful settings
 \item make reasonable guesses about logical values by looking at code
 \item write conditionally executed code using if/else
 \item decide whether to use \rcode{if(cond) A else B} or \rcode{ifelse(cond, A, B)}
+\item explain the concept of a loop
+\item write simple for-loops
+% \item structurally know how to use the lapply function
 \end{itemize}
 \end{frame}
 
@@ -6424,45 +6354,24 @@ Please fill out the recap online:\\[1em]
 % \item Read data: \rcode{read.table}, \rcode{str}
 % \item Percentile: \rcode{Q90 <- quantile(weather\$rain, probs=0.9)}
 % \item Select data: \rcode{weather[ weather\$rain >= Q90, "temp" ]}
-\item Multiple figures in one graph with \rcode{par(mfrow)} / \rcode{par(mfcol)} or \rcode{layout}
-\item Export graphics with \rcode{png} or \rcode{pdf} with good size and resolution settings.
+% \item Multiple figures in one graph with \rcode{par(mfrow)} / \rcode{par(mfcol)} or \rcode{layout}
+% \item Export graphics with \rcode{png} or \rcode{pdf} with good size and resolution settings.
 \item \rcode{if(TRUE) message("Yo!") else message("Dude...")}
 % \item be careful with line breaks
 \item \rcode{ifelse(c(T,T,F,T), 7, else 7.3)} for vectors
+\item for loops repeat a block of code with a different \rcode{i} each time
+\item \rcode{for(i in 1:20) plot(df[,i], main=colnames(df)[i])}
+\item \rcode{for(cn in colnames(df)) plot(df[,cn], main=cn)}
+\item for loops should not be called too often, as they are slow
+\item instead: vectorize, use lapply, write C++ code
 \end{itemize}
+\onslide<+->  \href{http://bit.ly/recapRif}{bit.ly/recapRif}
 \end{frame}
 
-%------------------------------------------------------------%
-
-\begin{frame}{Session 3: Homework}
-\begin{enumerate}%[<+->]
-  \item Complete all unfinished exercises we started
-  \item What is the difference between \rcode{par(mfrow)}, \texttt{mfcol} and \rcode{layout}?
-  \item Find some data (e.g. attenu, freeny or rock from \rcode{datasets}) and plot several images in one multipanel graphic (e.g. scatterplots, line graphs, histograms, boxplots, pie charts, ...)
-  \item Update your RefCard: mark all the items you learned about today
-  \item BONUS 1: What is the source code difference between \rcode{points} and \rcode{lines}? You will need \rcode{methods(points)} to figure out what the default \rcode{UseMethod} is.
-  \item BONUS 2: On your RefCard, find something new that you want to present to your peers next week
-\end{enumerate}
-% \pause
-% Enter the competition to win a 32GB 3.0 USB-Drive with R goodies:\\
-% Send in your graphic per email (PNG preferred) along with the R script and approximate time needed.
-% The class will pick a winner from the submissions based on graph appearance, artistic creativity, programming level and scientific relevance.
-\end{frame}
-
-%------------------------------------------------------------%
-
-% \begin{frame}{Competition Entry 1}
-% \center
-% \includegraphics[height=0.85\textheight]{2016_Uni/hw_CarolineCoch.png}
-% \end{frame}
-% \begin{frame}{Competition Entry 2}
-% \center
-% \includegraphics[height=0.85\textheight]{2016_Uni/hw_SaschaGey.png}
-% \end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 4/7: for loops, apply functions}
+\subsection{Session 4/4: functions and apply loops}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6471,46 +6380,6 @@ Please fill out the recap online:\\[1em]
 Collaborative editing can quickly become a textual rap battle fought with increasingly convoluted invocations of U+202a to U+202e (\href{https://xkcd.com/1137/}{xkcd.com/1137})
 \end{frame}
 
-%------------------------------------------------------------%
-
-\begin{frame}{Session 4: Aim (Chapter 7.2)}
-\pause - repetitional coding (for-loops)\\
-\pause afterwards, you should be able to:
-\pause
-\begin{itemize}[<+->]
-\item explain the concept of a loop
-\item write simple for-loops
-\item structurally know how to use the lapply function
-\end{itemize}
-\vspace{1em}
-\onslide<+-> \href{http://bit.ly/recapRif}{bit.ly/recapRif}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Session 4: Recap}
-\begin{itemize}[<+->]
-\item loops repeat a block of code with a different \rcode{i} each time
-\item \rcode{for(i in 1:20) plot(df[,i], main=colnames(df)[i])}
-\item \rcode{for(cn in colnames(df)) plot(df[,cn], main=cn)}
-\item for loops should not be called too often, as they are slow
-\item instead: vectorize, use lapply, write C++ code
-\end{itemize}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}{Session 4: Homework }
-\begin{enumerate}[<+->]
-  \item Finish all the started exercises
-  \item Update your RefCard: mark all the items you learned about today
-\end{enumerate}
-\end{frame}
-
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-\subsection{Session 5/7: functions}
-%------------------------------------------------------------%
 %------------------------------------------------------------%
 
 \begin{frame}{Today's plan}
@@ -6630,7 +6499,7 @@ Please select the topic(s) for next week online:\\[1em]
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 6/7: statistics}
+\subsection{Session x: statistics}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6704,7 +6573,7 @@ box("outer", col="blue", lwd=5)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 7/7: shapefiles (R as GIS)}
+\subsection{Session x: shapefiles (R as GIS)}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 

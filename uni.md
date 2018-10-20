@@ -2,7 +2,7 @@ This page describes the course "introduction to programming with R" at Potsdam U
 It is held by Berry Boessenkool, Geoecology graduate and freelance R trainer.
 This information takes precendence over the information in PULS due to some last minute changes in schedule.
 
-Jump to [content](#content), [organization](#organization), [registration](#registration), [curriculum](#curriculum)
+Jump to [content](#content), [organization](#organization), [registration](#registration), [curriculum](#curriculum), [homework](#homework)
 
 
 ### content
@@ -48,7 +48,7 @@ If you already know the basics from the first sessions, you can join later
 **Part 1**
 
 - 2018-10-23: one-session-intro: how and why use R, read files, select data and display it graphically
-- 2018-10-30: explore Rstudio, get to know data and object types
+- 2018-10-30: explore Rstudio, read data, get to know data and object types
 - 2018-11-06: use if-else conditionals, program for-loops
 - 2018-11-13: write functions, program apply-loops
 
@@ -72,3 +72,54 @@ Details of the contents can be found in the course [slides](https://github.com/b
 - develop an R package
 - version control with git+github
 - ... 
+
+
+### homework
+
+You can send me your homework solutions if you want comments.
+Aditionally, we'll take time at the beginning of each session for homework questions.
+
+**Session 1**
+
+- if not done: install [R and Rstudio](https://github.com/brry/course#install) at home
+- if not done: get a [PC-pool account](https://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html) 
+- print a ref card: [base](https://www.rstudio.com/wp-content/uploads/2016/09/r-cheat-sheet-1.pdf) and
+ [advanced](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf) cheatsheets from
+ [Rstudio](https://www.rstudio.com/resources/cheatsheets); 
+ RefCards originally by Tom Short from
+ [Stein](https://github.com/jonasstein/R-Reference-Card/raw/master/R-refcard.pdf) (recommended),
+ [Baggot](https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf),
+ [Tanbakuchi](http://www.u.arizona.edu/~kuchi/Courses/MAT167/Files/R-refcard.pdf) or
+ [cuni](http://atrey.karlin.mff.cuni.cz/~morf/vyuka/pas/materialy/R-refcard.pdf) 
+- Complete all unfinished exercises from the slides in chapter 1 (One-Session-Intro), especially ex 7
+
+Check your knowledge with the following tasks. Pseudo-Code is fine, als long as the syntax is correct. 
+This is for real life, not school, so feel free to use any source of help and inspiration ;-)
+
+- What program do we use to access R and what is typically in the four panels?
+- Assign a vector with the names of some friends (character strings!) to an object with a useful name.
+- Return all values of that vector except for the second.
+- What is the easiest way to open the help documentation of a command?
+- In a project handling several files, where, why and how do you use `setwd()`?
+- Read the data in the imaginary file `Wolf_Observations.txt` into R.
+- What are the two important functions to check whether it was read correctly?
+- Code two ways to select a column from a `data.frame`.
+- Get all the data in the 6th and 8th row of a df.
+- How would you plot the wolf pack size over the distance from the coast?
+- With which arguments to `plot()` would you make the graph more informative and appealing?
+
+**Session 2**
+
+- how do you send sevela lines of code to R (with one keyboard shortcut)?
+- how do you execute a complete script?
+- Explain the object types vector, data.frame, matrix
+- What data types do you know?
+- Complete all unfinished exercises up to Nr 12.
+- Update your RefCard: mark all the items you learned about today
+- How can you get `tab[x==7, "ColName"]` in `$` notation?
+- From the [Rstudio keyboard shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts), choose a few that seem useful to you and try them out. Prepare to tell your classmates about them next week.
+- ...
+
+**Session 3**
+
+- to be added soon
