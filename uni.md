@@ -91,7 +91,7 @@ Aditionally, we'll take time at the beginning of each session for homework quest
  [Baggot](https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf),
  [Tanbakuchi](http://www.u.arizona.edu/~kuchi/Courses/MAT167/Files/R-refcard.pdf) or
  [cuni](http://atrey.karlin.mff.cuni.cz/~morf/vyuka/pas/materialy/R-refcard.pdf) 
-- Complete all unfinished exercises from the slides in chapter 1 (One-Session-Intro), especially ex 7
+- Complete all unfinished exercises from the [slides](https://github.com/brry/course#slides) in chapter 1 (One-Session-Intro), especially ex 7
 
 Check your knowledge with the following tasks. Pseudo-Code is fine, als long as the syntax is correct. 
 This is for real life, not school, so feel free to use any source of help and inspiration ;-)
@@ -110,16 +110,57 @@ This is for real life, not school, so feel free to use any source of help and in
 
 **Session 2**
 
-- how do you send sevela lines of code to R (with one keyboard shortcut)?
-- how do you execute a complete script?
+- How do you read a file into R where columns are tab-separated and the decimal marker is German?
+- How do you send several lines of code to R (with one keyboard shortcut)?
+- How do you execute a complete script?
 - Explain the object types vector, data.frame, matrix
 - What data types do you know?
-- Complete all unfinished exercises up to Nr 12.
+- Complete all unfinished exercises (nr 9,10,12)
 - Update your RefCard: mark all the items you learned about today
 - How can you get `tab[x==7, "ColName"]` in `$` notation?
 - From the [Rstudio keyboard shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts), choose a few that seem useful to you and try them out. Prepare to tell your classmates about them next week.
-- ...
+
+Check your knowledge with the following task. Pseudo-Code is fine.
+
+- Set your working directory to `D:\Thesis`.
+- Inside the folder `data` is the textfile `ponds`. Read it into R. The first row contains the column names.
+- Overwriting the object, only keep the first 100 rows and the columns B, A and G (in this order).
+- Convert column G to character strings.
+- Inspect the distribution of the values in column A visually.
+- Graph B dependent on A in a scatterplot.
+
+Bonus task with real data
+
+- Download this [data set](https://github.com/brry/course/blob/master/data/Potsdam.txt) (rightclick on `Raw`, then `Save target as`) with monthly weather records for Potsdam.
+- Get the average temperature of months with more than 90 mm rainfall.
+- Visually compare wind speed and rainfall.
+- Describe and visualize the distribution of relative humidity.
+
 
 **Session 3**
 
-- to be added soon
+- What is the expected output of `1+7 > 3` ?
+- What is the expected output of `1+ (7 > 3)` ?
+- If the object `checksum` is larger than or equal to 6, a message should be displayed informing the user about this.
+- The message should only be displayed if the value of 'inform' is also TRUE.
+- For a vector `v`, pass the values above 1 to `log()`, smaller values should be replaced with 1. Use conditional code execution.
+- use the `replace` function instead.
+- What is syntaxically wrong with the code `if(out)  {   output <- rnorm(50) ; return(output)  }    else    plot(x,y) ; title(main="Caption")`
+- What real-life usage of conditional code execution can you imagine?
+
+A loop with real data
+
+- Download this [data set](https://github.com/brry/course/blob/master/data/stocks.txt) (rightclick on `Raw`, then `Save target as`).
+- Plot the Apple stocks over date (stocks.txt  ) as a line graph.
+- With a `for` loop, add all other companies in the same plot
+- BONUS1: First create a vector with 6 different colors, then use that in the for loop to color the lines
+- BONUS2: Add a legend with the same colors
+- BONUS3: label the lines directly
+- BONUS4: Use a logarithmic axis, enhanced with `berryFunctions::logAxis`
+- (The solution is in the slides in chapter `course plan` right before session 3/4)
+
+
+**Session 4**
+
+- Fill out the feedback form at <https://bit.ly/feedbackR>
+- Work through <http://r4ds.had.co.nz/functions.html>

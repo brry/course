@@ -3362,7 +3362,7 @@ lines(x, 12.5*n/factorial(n-1)*(x/8*n)^(n-1)*exp(-x/8*n), col=2)
 # Download current datasets:
 if(!requireNamespace("quantmod")) install.packages("quantmod")
 if(!requireNamespace("pbapply"))  install.packages("pbapply")
-dummy <- pbapply::pblapply(c("F","VLKAY", "AMZN","AAPL","GOOG","MSFT"),
+dummy <- pbapply::pblapply(c("F","VLKAF", "AMZN","AAPL","GOOG","MSFT"),
    function(x) zoo::write.zoo(x=quantmod::getSymbols(x, auto.assign=FALSE)[,6],
                            file=paste0("data/finance/",x,".txt"), col.names=T))
 
@@ -3373,7 +3373,7 @@ stocks <- Reduce(function(...) merge(..., all=T), stocks)
 
 # Get nicer column names:
 names <- sapply(strsplit(colnames(stocks), ".", fix=TRUE),"[", 1)
-colnames(stocks) <- c(Index="Date", F="FORD", VLKAY="VOLKSWAGEN",
+colnames(stocks) <- c(Index="Date", F="FORD", VLKAF="VOLKSWAGEN",
          AMZN="AMAZON", AAPL="APPLE", GOOG="GOOGLE", MSFT="MICROSOFT")[names]
 
 # Save to disc:
@@ -3959,6 +3959,7 @@ which(dimnames(econ)[[2]]=="Industrie")
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Functions I}
+\label{functions1}
 \href{http://r4ds.had.co.nz/functions.html}{http://r4ds.had.co.nz/functions.html}\\
 \pause
 \rcode{?"function"}\\
@@ -6251,8 +6252,7 @@ vis_nc(nc, cex=11.5)
   \item df columns with \rcode{tab[ ,3]}, \rcode{tab[ ,"precip"]}, \rcode{tab\$wind}
   \item \rcode{hist(vals)}; \rcode{plot(x,y, las=1, pch=16, type="b")}
 \end{itemize}
-\pause
-The homework is at \url{https://github.com/brry/course/blob/master/uni.md\#homework}
+\onslide<+-> The homework is at \url{https://github.com/brry/course/blob/master/uni.md\#homework}
 \end{frame}
 
 
@@ -6269,10 +6269,9 @@ The homework is at \url{https://github.com/brry/course/blob/master/uni.md\#homew
 \pause
 \begin{itemize}[<+->]
 \item install and load add-on packages written by the R community
-\item perform and visualize linear regression
 \item find the appropriate place and way to get help if you're stuck
 \item distinguish common data and object types
-\item ...
+\item use Rstudio more effectively
 % \item explain the difference between object types and data types
 % \item read 'medium difficult' files into R
 % \item merge two datasets together
@@ -6284,6 +6283,25 @@ The homework is at \url{https://github.com/brry/course/blob/master/uni.md\#homew
 %    \item apply a function to each element in a list (or vector)
 %    \end{itemize}
 \end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Rstudio Tips and Tricks}
+\begin{enumerate}[<+->]
+\item \hyperlink{rstudio}{Rstudio settings slide}
+\item \href{https://rviews.rstudio.com/2016/11/11/easy-tricks-you-mightve-missed/}{RStudio IDE Easy Tricks You Might've Missed}
+and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio.com/categories/tips-and-tricks}
+\item Work with Rstudio projects!
+\item \key{ALT} + mouse for multiline cursor
+\item \key{CTRL} + \key{SHIFT} + \key{1} panel full view
+\item \key{ALT} + \key{UP}/\key{DOWN} move line of code
+\item \key{CTRL} + \key{SHIFT} + \key{P} rerun previous code region
+\item \key{CTRL} + \key{SHIFT} + \key{S}/\key{ENTER} source document
+\item \key{CTRL} + \key{UP} (in console) command history
+\item tearable panes
+\item \key{CTRL} + \key{SHIFT} + \key{O} Document outline
+\end{enumerate}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -6340,10 +6358,10 @@ The homework is at \url{https://github.com/brry/course/blob/master/uni.md\#homew
 
 %------------------------------------------------------------%
 
-\begin{frame}{Recap from last two sessions}
-Please fill out the recap online:\\[1em]
-\href{http://bit.ly/recapR}{bit.ly/recapR}
-\end{frame}
+% \begin{frame}{Recap from last two sessions}
+% Please fill out the recap online:\\[1em]
+% \href{http://bit.ly/recapR}{bit.ly/recapR}
+% \end{frame}
 
 %------------------------------------------------------------%
 
@@ -6365,101 +6383,25 @@ Please fill out the recap online:\\[1em]
 \item for loops should not be called too often, as they are slow
 \item instead: vectorize, use lapply, write C++ code
 \end{itemize}
-\onslide<+->  \href{http://bit.ly/recapRif}{bit.ly/recapRif}
-\end{frame}
-
-
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-\subsection{Session 4/4: functions and apply loops}
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-
-\begin{frame}{Unicode}
-\center \includegraphics[height=0.65\textheight]{externalfig/rtl.png}\\
-Collaborative editing can quickly become a textual rap battle fought with increasingly convoluted invocations of U+202a to U+202e (\href{https://xkcd.com/1137/}{xkcd.com/1137})
+% \onslide<+->  \href{http://bit.ly/recapRif}{bit.ly/recapRif}
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}{Today's plan}
-\begin{enumerate}[<+->]
-  \item if else + for loop Recap
-  \item writing functions
-  %\item debugging functions
-\end{enumerate}
-\end{frame}
+% \begin{frame}{for loop}
+% \begin{itemize}
+% \item Plot the Apple stocks over date (\datalinkText{stocks.txt}) as a line graph.
+% \item With a for loop, add all other companies in the same plot
+% \item BONUS1: First create a vector with 6 different colors, then use that in the for loop to color the lines
+% \item BONUS2: Add a legend with the same colors
+% \item BONUS3: label the lines directly
+% \item BONUS4: Use a logarithmic axis, enhanced with \rcode{berryFunctions::logAxis}
+% \end{itemize}
+% \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{recap \alert{if else} I}
-\begin{enumerate}
-\item Create a new R file and write \rcode{x <- 3.14} into it.
-\item Now  assign the absolute value of x to \rcode{y} by using conditional code execution (control structures).
-\item \rcode{source} the complete document.
-\item Test the result of y by setting \rcode{x} to a negative number in the script and running the document again.
-\item BONUS: Make it also work for vectors like \rcode{x <- (-5):8} .
-\item BONUS 2: Which R function gives the absolute value? How is it implemented? \\
-    What's in \href{https://github.com/wch/r-source/blob/trunk/src/main/names.c#L278}{github.com/wch/r-source ~-> src/main/names.c L278} and
-    \href{https://github.com/wch/r-source/blob/trunk/src/main/arithmetic.c#L1315}{-> src/main/arithmetic.c L1315}?
-\end{enumerate}
-\pause
-<<ifelserecap>>=
-x <- -5:8
-y <- ifelse(x<0, -x, x)
-y
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{recap \alert{if else} II}
-<<ifelserecap2>>=
-(  requireNamespace("some_package", quietly=TRUE)  )
-@
-invisibly returns TRUE if it succeeds loading a package. The outer brackets are for printing in the slides.
-\begin{enumerate}
-\item Use it to conditionally install the package \href{https://cran.r-project.org/package=quantmod}{quantmod} (i.e. if it is not already available).
-\end{enumerate}
-\pause
-<<ifelserecap3, size="small">>=
-if(!requireNamespace("quantmod")) install.packages("quantmod")
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}{Small research project}
-Please write down the answers to the following questions / instructions as pseudocode
-\begin{itemize}
-\item What do you do to start a (small) research project?
-\item Read a file into R where columns are tab-separated and the decimal marker is German.
-\item In a data set with monthly weather records (\datalinkText{Potsdam.txt}): Get the average temperature of months with more than 90 mm rainfall.
-\item Visually compare wind speed and rainfall.
-\item Describe and visualize the distribution of relative humidity.
-\end{itemize}
-<<weatherproject, eval=FALSE, echo=FALSE>>=
-wetter <- read.table("data/Potsdam.txt", header=T)
-hist(wetter$NIEDERSCHLAGSHOEHE, breaks=30, col="salmon")
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}{for loop}
-\begin{itemize}
-\item Plot the Apple stocks over date (\datalinkText{stocks.txt}) as a line graph.
-\item With a for loop, add all other companies in the same plot
-\item BONUS1: First create a vector with 6 different colors, then use that in the for loop to color the lines
-\item BONUS2: Add a legend with the same colors
-\item BONUS3: label the lines directly
-\item BONUS4: Use a logarithmic axis, enhanced with \rcode{berryFunctions::logAxis}
-\end{itemize}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{for loop solution}
+\begin{frame}[fragile]{Homework for loop solution}
 \vspace{-0.5em}
 <<forlines, fig.show="hide", echo=-1, size="small", fig.width=5>>=
 par(mar=c(2,5,1.5,0.5), mgp=c(3,0.7,0), cex=0.8)
@@ -6486,20 +6428,118 @@ berryFunctions::textField(as.Date("2017-12-01"), cex=0.8,
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{for loop solution}
+\begin{frame}[fragile]{Homework for loop solution}
 \includegraphics[width=\textwidth]{fig/forlines-1.pdf}
 \end{frame}
 
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Session 4/4: functions and apply loops}
+%------------------------------------------------------------%
 %------------------------------------------------------------%
 
-\begin{frame}{Recap, Homework}
-Please select the topic(s) for next week online:\\[1em]
-\href{http://bit.ly/selectR}{bit.ly/selectR}
+\begin{frame}{Unicode}
+\center \includegraphics[height=0.65\textheight]{externalfig/rtl.png}\\
+Collaborative editing can quickly become a textual rap battle fought with increasingly convoluted invocations of U+202a to U+202e (\href{https://xkcd.com/1137/}{xkcd.com/1137})
 \end{frame}
 
 %------------------------------------------------------------%
+
+\begin{frame}{Today's plan}
+\begin{enumerate}[<+->]
+  \item Recap if else + for loop
+  \item Writing functions
+  %\item debugging functions
+\end{enumerate}
+\end{frame}
+
 %------------------------------------------------------------%
-\subsection{Session x: statistics}
+
+\begin{frame}[fragile]{Recap \alert{if else} I}
+\begin{enumerate}
+\item Create a new R file and write \rcode{x <- 3.14} into it.
+\item Now  assign the absolute value of x to \rcode{y} by using conditional code execution (control structures).
+\item \rcode{source} the complete document.
+\item Test the result of y by setting \rcode{x} to a negative number in the script and running the document again.
+\item BONUS: Make it also work for vectors like \rcode{x <- (-5):8} .
+\item BONUS 2: Which R function gives the absolute value? How is it implemented? \\
+    What's in \href{https://github.com/wch/r-source/blob/trunk/src/main/names.c#L278}{github.com/wch/r-source ~-> src/main/names.c L278} and
+    \href{https://github.com/wch/r-source/blob/trunk/src/main/arithmetic.c#L1315}{-> src/main/arithmetic.c L1315}?
+\end{enumerate}
+\pause
+<<ifelserecap>>=
+x <- -5:8
+y <- ifelse(x<0, -x, x)
+y
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Recap \alert{if else} II}
+<<ifelserecap2>>=
+(  requireNamespace("some_package", quietly=TRUE)  )
+@
+invisibly returns TRUE if it succeeds loading a package. The outer brackets are for printing in the slides.
+\begin{enumerate}
+\item Use it to conditionally install the package \href{https://cran.r-project.org/package=quantmod}{quantmod} (i.e. if it is not already available).
+\end{enumerate}
+\pause
+<<ifelserecap3, size="small">>=
+if(!requireNamespace("quantmod")) install.packages("quantmod")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Recap \alert{for} loop}
+\pause
+With \rcode{rexp(n, rate)}, random numbers can be generated from the exponential distribution.\\
+With \rcode{paste0("someText\_", 1)}, character strings and numbers can be concatenated.\\ 
+With \rcode{write.table(x, file)}, data can be written to a file.\\
+Using a \alert{for} loop, write three datasets to separate .txt files with 5, 20 and 100 exponentially distributed random numbers.\\
+BONUS: format the file nicely with the \rcode{write.table()} options. 
+\pause
+<<recapfor, size="small">>=
+for(n in c(5,20,100)) 
+  write.table(rexp(n), file=paste0("random_", n, ".txt"))
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}{Now let's start learning about functions}
+\hyperlink{functions1}{Jump to Functions}
+\end{frame}
+
+%------------------------------------------------------------%
+
+% \begin{frame}{Small research project}
+% Please write down the answers to the following questions / instructions as pseudocode
+% \begin{itemize}
+% \item What do you do to start a (small) research project?
+% \item Read a file into R where columns are tab-separated and the decimal marker is German.
+% \item In a data set with monthly weather records (\datalinkText{Potsdam.txt}): Get the average temperature of months with more than 90 mm rainfall.
+% \item Visually compare wind speed and rainfall.
+% \item Describe and visualize the distribution of relative humidity.
+% \end{itemize}
+% <<weatherproject, eval=FALSE, echo=FALSE>>=
+% wetter <- read.table("data/Potsdam.txt", header=T)
+% hist(wetter$NIEDERSCHLAGSHOEHE, breaks=30, col="salmon")
+% @
+% \end{frame}
+
+%------------------------------------------------------------%
+
+% \begin{frame}{Recap, Homework}
+% Please select the topic(s) for next week online:\\[1em]
+% \href{http://bit.ly/selectR}{bit.ly/selectR}
+% \end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Session x: Recap all}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6571,28 +6611,6 @@ box("outer", col="blue", lwd=5)
 \includegraphics[width=\textwidth]{fig/floyd_multipanel-1.pdf}
 \end{frame}
 
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-\subsection{Session x: shapefiles (R as GIS)}
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Rstudio Tipps and Tricks}
-\begin{enumerate}[<+->]
-\item \hyperlink{rstudio}{Rstudio settings slide}
-\item \href{https://rviews.rstudio.com/2016/11/11/easy-tricks-you-mightve-missed/}{RStudio IDE Easy Tricks You Might've Missed}
-and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio.com/categories/tips-and-tricks}
-\item Work with Rstudio projects!
-\item \key{ALT} + mouse for multiline cursor
-\item \key{CTRL} + \key{SHIFT} + \key{1} panel full view
-\item \key{ALT} + \key{UP}/\key{DOWN} move line of code
-\item \key{CTRL} + \key{SHIFT} + \key{P} rerun previous code region
-\item \key{CTRL} + \key{SHIFT} + \key{S}/\key{ENTER} source document
-\item \key{CTRL} + \key{UP} (in console) command history
-\item tearable panes
-\item \key{CTRL} + \key{SHIFT} + \key{O} Document outline
-\end{enumerate}
-\end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
