@@ -20,7 +20,7 @@ Both parts are open to all participants, though seats are prioritized by these g
 
 **Part 1** (1 ECTS) takes place in 4 sessions during the first half of the semester, 
 starting October 23 (2nd week of semester). See the schedule below for session-specific content. 
-It will be necessary to complete homework exercises taking about 1-4 hours per week. 
+It will be necessary to complete [homework](#homework) exercises taking about 1-4 hours per week. 
 
 There will be two time slots (each with the same content):
 
@@ -28,7 +28,7 @@ There will be two time slots (each with the same content):
 [PC-pool account](https://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html) 
 or bring a laptop with working [WiFi](http://www.zeik.uni-potsdam.de/wlan.html) and 
 recent [R and Rstudio](https://github.com/brry/course#install). Power sockets are available.
-* For the second option, **please vote [here](https://doodle.com/poll/aynavpbwc7f6se2v)**.
+* wednesdays, 08:15-11:45, house 1 PC pool room 0.02. No account is needed here.
 
 
 **Part 2** (2 ECTS) will either continue in the same time slot or be held as a block course in Nov/Dec/Jan, depending on participants' desires.
