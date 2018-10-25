@@ -20,21 +20,19 @@ Both parts are open to all participants, though seats are prioritized by these g
 
 **Part 1** (1 ECTS) takes place in 4 sessions during the first half of the semester, 
 starting October 23 (2nd week of semester). See the schedule below for session-specific content. 
-It will be necessary to complete [homework](#homework) exercises taking about 1-4 hours per week. 
-
+It will be necessary to complete [homework](#homework) exercises taking about 1-4 hours per week.  
 There will be two time slots (each with the same content):
 
-* tuesdays, **08:15-11:45**, campus Golm, house 25, room **D0.02** (moved to ground floor) for which you need a 
-[PC-pool account](https://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html) 
-or bring a laptop with working [WiFi](http://www.zeik.uni-potsdam.de/wlan.html) and 
-recent [R and Rstudio](https://github.com/brry/course#install). Power sockets are available.
-* wednesdays, 08:15-11:45, house 1 PC pool room 0.02. No account is needed here.
+* tuesdays, 08:15-11:45, campus Golm, house 25, room D0.02 (moved to ground floor)
+* wednesdays, 08:15-11:45, campus Golm, house 1, PC pool room 0.02.
 
 
 **Part 2** (2 ECTS) will either continue in the same time slot or be held as a block course in Nov/Dec/Jan, depending on participants' desires.
 A solid basic R knowledge (as taught in part 1) is needed for this part!
 
-The course language will be German or English, depending on the participants.
+The course language will be German or English, depending on the participants.  
+You're welcome to bring your own laptop, but it needs to be with working [WiFi](http://www.zeik.uni-potsdam.de/wlan.html) and 
+recent [R and Rstudio](https://github.com/brry/course#install). Power sockets are available.
 
 
 ### registration 
@@ -47,10 +45,10 @@ If you already know the basics from the first sessions, you can join later
 ### curriculum
 **Part 1**
 
-- 2018-10-23: one-session-intro: how and why use R, read files, select data and display it graphically
-- 2018-10-30: explore Rstudio, read data, get to know data and object types
-- 2018-11-06: use if-else conditionals, program for-loops
-- 2018-11-13: write functions, program apply-loops
+- 2018-10-23/24: one-session-intro: how and why use R, read files, select data and display it graphically
+- 2018-10-30: explore Rstudio, read data, get to know data and object types (**tuesday session only**)
+- 2018-11-06/07: use if-else conditionals, program for-loops
+- 2018-11-13/14: write functions, program apply-loops
 
 Details of the contents can be found in the course [slides](https://github.com/brry/course#slides)
 
@@ -82,7 +80,6 @@ Aditionally, we'll take time at the beginning of each session for homework quest
 **Session 1**
 
 - if not done: install [R and Rstudio](https://github.com/brry/course#install) at home
-- if not done: get a [PC-pool account](https://www.chem.uni-potsdam.de/groups/pools/Studierende/studierende.html) 
 - print a ref card: [base](https://www.rstudio.com/wp-content/uploads/2016/09/r-cheat-sheet-1.pdf) and
  [advanced](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf) cheatsheets from
  [Rstudio](https://www.rstudio.com/resources/cheatsheets); 
