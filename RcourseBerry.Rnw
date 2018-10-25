@@ -154,7 +154,7 @@ for(i in 1:50)
 \begin{center}
     \begin{columns}
     \column{22.0em}
-    \begin{block}{}{\Large ~Introductory + advanced \includegraphics[width=0.7cm]{externalfig/Rlogo.png} ~course}
+    \begin{block}{}{\Large ~Introductionary + advanced~ \includegraphics[width=0.7cm]{externalfig/Rlogo.png}~course}
     \end{block}
     \end{columns}
 \vspace{1em}
@@ -581,15 +581,19 @@ xaxt="n" # axis type (none to suppress axis)
 \begin{exercise}{Packages, linear regression}
 \begin{enumerate}
   \item Install and load the package \rcode{berryFunctions}
-  \item How can we pass the \datalinkRaw{treesize} data to \rcode{?linReg} with a formula?\\
-        \textit{Hint: Read the "Examples" section of the function manual.}
+  \item Pass the \datalinkRaw{treesize} data to \rcode{linReg}.
+        Don't use (x,y) coordinates, but a (y\textasciitilde x) formula, read as "y dependent on x".
+        Use the \texttt{data} argument as described in the "Examples" section of the \rcode{linReg} manual.
   \item Describe the resulting graph (height vs age).
-  \item Look into the source code of \rcode{linReg}. 
-        \textit{If you don't know how to view the source code of a function in R, you can google it!}
-        What is actually the backbone for the calculation of the function?
   \item Feed the data into \rcode{lm}, assign the output to an object (useful name!).
   \item Briefly explain the \rcode{summary} of the linear model.
-  \item BONUS: install \href{https://github.com/brry/rskey\#rskey}{rskey (via github)}, set a keyboard shortcut for \rcode{funSource} and use it to get the source code of some function.
+  \item BONUS1: Look into the source code of \rcode{linReg}. 
+        % \textit{If you don't know how to view the source code of a function in R, you can google it!}
+        You can print the function by calling it without brackets.
+        You can also open it on github with \rcode{berryFunctions::funSource}.
+  \item BONUS2: What is the backbone for the calculation in \rcode{linReg}?
+  \item BONUS3: install \href{https://github.com/brry/rskey\#rskey}{rskey (via github)}, 
+        set a keyboard shortcut for \rcode{funSource} and use it to get the source code of some function.
 \end{enumerate}
 \end{exercise}
 \end{frame}
@@ -6245,9 +6249,9 @@ vis_nc(nc, cex=11.5)
   \item Script for code writing (you) + exchange
   \item Objects are created with the assignment operator \rcode{$<$-}%, see \rcode{ls()} % in the workspace
   \item Get help with \rcode{help(median)}, \rcode{?matrix}, or pressing F1
-  \item Create vectors with \rcode{c(42,3,-4)}, \rcode{1:n}, \rcode{seq(2,5,len=30)}
+  \item Create vectors with \rcode{c(42,3,-4)}, \rcode{1:n}
   \item \rcode{data.frame}s hold tables with one data type per column
-  \item \rcode{read.table}, with header=T to read files into R
+  \item \rcode{read.table}, with \texttt{header=TRUE} to read files into R
   \item Index objects with \rcode{values[8:5]}, \rcode{tab[4,2:6]}
   \item df columns with \rcode{tab[ ,3]}, \rcode{tab[ ,"precip"]}, \rcode{tab\$wind}
   \item \rcode{hist(vals)}; \rcode{plot(x,y, las=1, pch=16, type="b")}
@@ -6268,7 +6272,7 @@ vis_nc(nc, cex=11.5)
 \pause afterwards, you should be able to:
 \pause
 \begin{itemize}[<+->]
-\item install and load add-on packages written by the R community
+% \item install and load add-on packages written by the R community
 \item find the appropriate place and way to get help if you're stuck
 \item distinguish common data and object types
 \item use Rstudio more effectively
@@ -6308,7 +6312,7 @@ and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio
 
 \begin{frame}[fragile]{Session 2: Take home message}
 \begin{itemize}[<+->]
-  \item Packages are basically (documented) scripts from other people $\rightarrow$ \rcode{install.packages} and \rcode{library}
+% \item Packages are basically (documented) scripts from other people $\rightarrow$ \rcode{install.packages} and \rcode{library}
 \item Reading data: \rcode{setwd}, \rcode{dir}, \rcode{read.table}, \rcode{str}
 % \item \rcode{read.table} arguments: header=TRUE, sep="\textbackslash t", dec=",", skip, fill, comment.char, na.strings, \textit{many more}
 \item Function documentation with \rcode{help} (or F1), \href{www.StackOverflow.com}{StackOverflow} for questions, Reference Cards (\hyperlink{refcards}{slide \ref{refcards}}) for an overview and books / tutorials (\hyperlink{books}{slide \ref{books}}) for self-learning
