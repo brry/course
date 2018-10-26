@@ -128,7 +128,8 @@ Check your knowledge with the following task. Pseudo-Code is fine.
 
 Bonus task with real data
 
-- Download this [data set](https://github.com/brry/course/blob/master/data/Potsdam.txt) (rightclick on `Raw`, then `Save target as`) with monthly weather records for Potsdam.
+- Download this [data set](https://github.com/brry/course/blob/master/data/Potsdam.txt) (rightclick on `Raw`, then `Save target as`) with monthly weather records for Potsdam, obtained through [rdwd](https://github.com/brry/rdwd#rdwd).
+- The metadata is available in the DESCRIPTION and BESCHREIBUNG files at the [DWD Data server](ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate/monthly/kl/historical/)
 - Get the average temperature of months with more than 90 mm rainfall.
 - Visually compare wind speed and rainfall.
 - Describe and visualize the distribution of relative humidity.
