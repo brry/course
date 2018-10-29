@@ -112,7 +112,7 @@ This is for real life, not school, so feel free to use any source of help and in
 - How do you execute a complete script?
 - Explain the object types vector, data.frame, matrix
 - What data types do you know?
-- Complete all unfinished exercises (nr 9,10,12)
+- Complete all unfinished exercises (nr 9-12)
 - Update your RefCard: mark all the items you learned about today
 - How can you get `tab[x==7, "ColName"]` in `$` notation?
 - From the [Rstudio keyboard shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts), choose a few that seem useful to you and try them out. Prepare to tell your classmates about them next week.

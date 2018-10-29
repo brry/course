@@ -854,6 +854,7 @@ Instructions online: \href{https://github.com/brry/course\#install}{github.com/b
 %------------------------------------------------------------%
 
 \begin{frame}{RStudio configuration}
+\label{rstudiosettings}
 \href{https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts}{keyboard shortcuts} (ALT+SHIFT+K)\\[1em]
 \pause
 Recommended settings for reproducible research under\\
@@ -864,7 +865,9 @@ Save workspace to .RData on exit: \textbf{NEVER}\\[0.5em]
 \textit{Instead use \rcode{save(object, file="object.Rdata")} after long computations.
 You can load them later with \rcode{load("object.Rdata")}.}\\[1em]
 \pause
-More at \href{https://github.com/brry/course\#settings}{github.com/brry/course\#settings}
+More at \href{https://github.com/brry/course\#settings}{github.com/brry/course\#settings}\\[1em]
+\pause
+\hyperlink{rstudiotips}{Rstudio tips and tricks slide}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -1247,12 +1250,12 @@ rm(b) # remove an object
 R can handle data of a variety of types: Numbers like \rcode{42.6}, characters like \rcode{"R rocks"}, complex numbers like \rcode{8+4i}, categories with \rcode{as.factor(c("blue", "green"))}, logical or boolean values \rcode{c(TRUE, FALSE)} and a few others. They should usually not be mixed. For example, you can't perform algebraic computation on characters:
 \onslide<2->
 <<datatypes, eval=FALSE>>=
-(p9 <- "1.3")    # show assignment result
-2*p9             # error, as p9 is a character
-2*as.numeric(p9) # make it a number first
-p9               # p9 itself has not changed
-is.numeric(p9)   # FALSE
-mode(p9)         # character
+p9 <- "1.3"  ; p9 # show assignment result
+2*p9              # error, as p9 is a character
+2*as.numeric(p9)  # make it a number first
+p9                # p9 itself has not changed
+is.numeric(p9)    # FALSE
+mode(p9)          # character
 @
 \end{frame}
 
@@ -6292,8 +6295,9 @@ vis_nc(nc, cex=11.5)
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Rstudio Tips and Tricks}
+\label{rstudiotips}
 \begin{enumerate}[<+->]
-\item \hyperlink{rstudio}{Rstudio settings slide}
+\item \hyperlink{rstudiosettings}{Rstudio settings slide}
 \item \href{https://rviews.rstudio.com/2016/11/11/easy-tricks-you-mightve-missed/}{RStudio IDE Easy Tricks You Might've Missed}
 and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio.com/categories/tips-and-tricks}
 \item Work with Rstudio projects!
