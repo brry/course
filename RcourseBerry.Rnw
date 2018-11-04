@@ -3364,6 +3364,79 @@ lines(x, 12.5*n/factorial(n-1)*(x/8*n)^(n-1)*exp(-x/8*n), col=2)
 
 %------------------------------------------------------------%
 
+\begin{frame}[fragile]{for loops shouldn't grow a vector}
+Bad practice - R needs to recreate the vector each time:
+<<for_loop_init1, eval=FALSE, size="small">>=
+output <- NA
+for(column in 1:5) output[column] <- median(iris[ ,column])
+@
+\pause
+This internally does the same thing as:
+<<for_loop_init2, eval=FALSE, size="small">>=
+output <- vector(mode="numeric", length=0)
+for(column in 1:5) output <- c(output, median(iris[ ,column])  )
+@
+\pause
+Good practice - first tell R how big the output will be, so it can be adequately allocated in memory:
+<<for_loop_init3, eval=FALSE, size="small">>=
+output <- vector(mode="numeric", length=5)
+for(column in 1:5) output[column] <- median(iris[ ,column])
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{for loops exercise}
+\begin{exercise}{for loops in file creation}
+\scriptsize
+We'll write many datasets to disc (and read them back).
+\begin{enumerate}
+\item With \rcode{paste0}, print a filename of the structure "mydata\_123.txt" 
+      using the name, the number and the file ending as inputs. 
+      We'll be changing the number later in a loop.
+\item Print a data.frame with two columns, each with 10 random numbers: 
+      one column from the normal, one from the exponential distribution
+\item With \rcode{write.table}, write such a table to a file in a subfolder (remember \rcode{dir.create}), 
+      using the number of rows (e.g. 10) in the filename.\\
+\item BONUS: change the arguments so that row numbers and quotation marks are not printed and tabstops are used for column separation.
+\item With a \rcode{for}-loop, now write files for different sample sizes, e.g. 10, 20, 50, 100, 500.
+\item Using the output of \rcode{dir()}, read all the files into a list of data.frames.
+      Remember to first create an empty list of the right length.
+\item BONUS: name the list elements according to the filenames. 
+\item BONUS: now replace the whole construct with an \rcode{lapply} loop. 
+      Celebrate how much nicer your code looks. 
+      Check how you can get element names with \rcode{sapply(..., simplify=FALSE)}
+\item BONUS: With \rcode{unlink}, delete the files from this exercise. 
+      This function is vectorizable, so there's no need to do this in a for loop!
+\end{enumerate}
+\end{exercise}
+\normalsize
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{for loops exercise solution}
+<<forloops_file_writing, eval=FALSE, size="footnotesize">>=
+dir.create("loopexercise")
+for(n in c(10,20,50,100,500)) 
+    write.table(x=data.frame(norm=rnorm(n), exp=rexp(n)), 
+                file=paste0("loopexercise/randomdata_", n, ".txt"),
+                quote=F, row.names=F, sep="\t")
+
+fnames <- dir("loopexercise", full=TRUE)
+fcontents <- vector("list", length=length(fnames))
+for(fnum in seq_along(fnames)) 
+   fcontents[[fnum]] <- read.table(fnames[fnum], header=TRUE)
+
+flist <- sapply(dir("loopexercise", full=TRUE), read.table, header=TRUE, 
+                simplify=FALSE)
+
+unlink(paste0("loopexercise/randomdata_", c(10,20,50,100,500), ".txt"))
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}[fragile]{stocks data from \href{http://finance.yahoo.com}{finance.yahoo.com}}
 <<stocks_datapreparation, size="scriptsize", eval=F>>=
 # Download current datasets:

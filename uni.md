@@ -148,14 +148,15 @@ Bonus task with real data
 
 A loop with real data
 
-- Download this [data set](https://github.com/brry/course/blob/master/data/stocks.txt) (rightclick on `Raw`, then `Save target as`).
-- Plot the Apple stocks over date (stocks.txt  ) as a line graph.
+- Download and read this [data set](https://github.com/brry/course/blob/master/data/stocks.txt) (rightclick on `Raw`, then `Save target as`).
+- Plot the Apple stocks over date as a line graph.
+- Bonus0: With `as.Date`, first convert the character string (or factor, if the default `read.table(..., stringsAsFactors=TRUE)` was used).
 - With a `for` loop, add all other companies in the same plot
 - BONUS1: First create a vector with 6 different colors, then use that in the for loop to color the lines
 - BONUS2: Add a legend with the same colors
 - BONUS3: label the lines directly
 - BONUS4: Use a logarithmic axis, enhanced with `berryFunctions::logAxis`
-- (The solution is in the slides in chapter `course plan` right before session 3/4)
+- (The solution is in the slides in chapter `course plan` right before session 4/4)
 
 
 **Session 4**
