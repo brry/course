@@ -3415,6 +3415,22 @@ We'll write many datasets to disc (and read them back).
 
 %------------------------------------------------------------%
 
+% \begin{frame}[fragile]{Recap \alert{for} loop}
+% \pause
+% With \rcode{rexp(n, rate)}, random numbers can be generated from the exponential distribution.\\
+% With \rcode{paste0("someText\_", 1)}, character strings and numbers can be concatenated.\\ 
+% With \rcode{write.table(x, file)}, data can be written to a file.\\
+% Using a \alert{for} loop, write three datasets to separate .txt files with 5, 20 and 100 exponentially distributed random numbers.\\
+% BONUS: format the file nicely with the \rcode{write.table()} options. 
+% \pause
+% <<recapfor, size="small">>=
+% for(n in c(5,20,100)) 
+%   write.table(rexp(n), file=paste0("random_", n, ".txt"))
+% @
+% \end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}[fragile]{for loops exercise solution}
 <<forloops_file_writing, eval=FALSE, size="footnotesize">>=
 dir.create("loopexercise")
@@ -6531,7 +6547,7 @@ Collaborative editing can quickly become a textual rap battle fought with increa
 \begin{enumerate}[<+->]
   \item Recap if else + for loop
   \item Writing functions
-  %\item debugging functions
+  \item optional: debugging functions
 \end{enumerate}
 \end{frame}
 
@@ -6574,17 +6590,34 @@ if(!requireNamespace("quantmod")) install.packages("quantmod")
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Recap \alert{for} loop}
+\begin{frame}[fragile]{Recap loops and conditions}
 \pause
-With \rcode{rexp(n, rate)}, random numbers can be generated from the exponential distribution.\\
-With \rcode{paste0("someText\_", 1)}, character strings and numbers can be concatenated.\\ 
-With \rcode{write.table(x, file)}, data can be written to a file.\\
-Using a \alert{for} loop, write three datasets to separate .txt files with 5, 20 and 100 exponentially distributed random numbers.\\
-BONUS: format the file nicely with the \rcode{write.table()} options. 
-\pause
-<<recapfor, size="small">>=
-for(n in c(5,20,100)) 
-  write.table(rexp(n), file=paste0("random_", n, ".txt"))
+\begin{exercise}{conditional loop}
+Repetition from last week with the built-in dataset \rcode{quakes} (locations of earthquakes off Fiji)
+\begin{enumerate}
+\item Create a multiple figure graph with \rcode{par(mfrow=c(2,3))}
+\item With a for loop, create a histogram of each column in \rcode{quakes}. (One hist per panel).
+\item Suppress the x and y axis label (using an empty label) in all plots (\texttt{xlab, ylab}).
+\item Using conditional code execution, write a y axis label in the upper left panel (\rcode{title}).
+\item BONUS1: Using \rcode{\%in\%}, how can you write a label in both left panels?
+\item BONUS2: use the column name as titles for each graph.
+\item BONUS3: use the same y axis limit (\texttt{ylim}) in each panel.
+\item BONUS4: generally improve the graphic labeling, spaces etc.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{conditional loop exercise solution}
+\vspace{-0.5em}
+<<conditional_loop, eval=TRUE, size="scriptsize", fig.height=2.7>>=
+par(mfrow=c(2,3), mar=c(3,3,2,0.5), mgp=c(2,0.7,0), las=1)
+for(c in colnames(quakes))
+ {
+ hist(quakes[,c], main=c, xlab="",ylab="", ylim=c(0,300), col="coral")
+ if(c=="mag") title(ylab="Number of Obs")
+ }   #  if(c %in% c("lat","mag")) title(ylab="Number of Obs")
 @
 \end{frame}
 
