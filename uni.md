@@ -66,9 +66,8 @@ Details of the contents can be found in the course [slides](https://github.com/b
 - reproducible report generation with rmarkdown and knitr
 - use lapply like a pro
 - apply functions to arrays (elegant coding)
-- debug functions
 - develop an R package
-- version control with git+github
+- version control with Rstudio, git & github
 - ... 
 
 
@@ -143,7 +142,8 @@ Bonus task with real data
 - The message should only be displayed if the value of 'inform' is also TRUE.
 - For a vector `v`, pass the values above 1 to `log()`, smaller values should be replaced with 1. Use conditional code execution.
 - use the `replace` function instead.
-- What is syntaxically wrong with the code `if(out)  {   output <- rnorm(50) ; return(output)  }    else    plot(x,y) ; title(main="Caption")`
+- What is syntaxically wrong with the following code?  
+`if(out)  {   output <- rnorm(50) ; return(output)  }    else    plot(x,y) ; title(main="Caption")`
 - What real-life usage of conditional code execution can you imagine?
 
 A loop with real data
