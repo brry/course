@@ -1,6 +1,5 @@
 This page describes the course "introduction to programming with R" at Potsdam University, fall 2018. 
 It is held by Berry Boessenkool, Geoecology graduate and freelance R trainer.
-This information takes precendence over the information in PULS due to some last minute changes in schedule.
 
 Jump to [content](#content), [organization](#organization), [registration](#registration), [curriculum](#curriculum), [homework](#homework)
 
@@ -27,8 +26,11 @@ There will be two time slots (each with the same content):
 * wednesdays, 08:15-11:45, campus Golm, house 1, PC pool room 0.02.
 
 
-**Part 2** (2 ECTS) will either continue in the same time slot or be held as a block course in Nov/Dec/Jan, depending on participants' desires.
-A solid basic R knowledge (as taught in part 1) is needed for this part!
+**Part 2** (2 ECTS) will be held as a two-stage block course, each on two consecutive days, for a total of four days.  
+A **solid basic R knowledge** (as taught in part 1) is needed for this part!
+Please vote for [dates](https://doodle.com/poll/unstpew3mn7nnte3)
+and [topics](https://goo.gl/forms/pnRmow5epSpMs2wI2).
+
 
 The course language will be German or English, depending on the participants.  
 You're welcome to bring your own laptop, but it needs to be with working [WiFi](http://www.zeik.uni-potsdam.de/wlan.html) and 
