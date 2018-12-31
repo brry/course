@@ -1,7 +1,7 @@
 This page describes the course "introduction to programming with R" at Potsdam University, fall 2018. 
 It is held by Berry Boessenkool, Geoecology graduate and freelance R trainer.
 
-Jump to [content](#content), [organization](#organization), [registration](#registration), [curriculum](#curriculum), [homework](#homework)
+Jump to [content](#content), [organization](#organization), [registration](#registration), [curriculum](#curriculum), [homework](#homework), [admission](#admission)
 
 
 ### content
@@ -26,10 +26,11 @@ There will be two time slots (each with the same content):
 * wednesdays, 08:15-11:45, campus Golm, house 1, PC pool room 0.02.
 
 
-**Part 2** (2 ECTS) will be held as a two-stage block course, each on two consecutive days, for a total of four days.  
+**Part 2** (2 ECTS) will be held as a two-stage block course, each on two consecutive days, for a total of four days.
+They are Jan 15+16 (Tue+Wed) and Jan 21+22 (Mon+Tue), 2019.  
 A **solid basic R knowledge** (as taught in part 1) is needed for this part!
-Please vote for [dates](https://doodle.com/poll/unstpew3mn7nnte3)
-and [topics](https://goo.gl/forms/pnRmow5epSpMs2wI2).
+Please take the admission test [below](#admission) and [send me](mailto:berry-b@gmx.de) the results.
+You can also still vote for [topics](https://goo.gl/forms/pnRmow5epSpMs2wI2).
 
 
 The course language will be German or English, depending on the participants.  
@@ -70,12 +71,13 @@ Details of the contents can be found in the course [slides](https://github.com/b
 - apply functions to arrays (elegant coding)
 - develop an R package
 - version control with Rstudio, git & github
+- extreme value statistics
 - ... 
 
 
 ### homework
 
-You can send me your homework solutions if you want comments.
+You can send me your part 1 homework solutions if you want comments.
 Aditionally, we'll take time at the beginning of each session for homework questions.
 
 **Session 1**
@@ -165,3 +167,56 @@ A loop with real data
 
 - Fill out the feedback form at <https://bit.ly/feedbackR>
 - Work through <http://r4ds.had.co.nz/functions.html>
+
+
+
+### admission
+
+Part 2 of the course is aimed at intermediate R programmers. 
+You will only be able to gain much from the course if you can solve this (hopefully real-worldly) exercise.
+**If you have significant trouble with this kind of coding, the workshop pace will be too fast for you!** (In which case you should wait out for the next "Intro to R" course).
+
+**Aim**: Obtain certain columns from many files, merge those into a single data.frame.  
+**Data**: Daily weather observations from 300 gauges across Germany of the last year and a half.  
+**Needed R skills**: file management, reading and subsetting data, writing simple functions, looping code, basic line plotting
+
+**Step 1**: Note the starting time for later reporting of the time needed (without BONUS tasks).  
+**Step 2**: Download and unzip [`admission.zip`](https://github.com/brry/course/raw/master/data/admission.zip)
+into some directory (BONUS: use R code to do both). Read `meta.txt` and `columns.txt`. 
+Get a vector of filenames using `dir` (with `full.names=T`).  
+**Step 3**: Write a function that takes a single file name as input and performs the following.  
+Hint: step by step, check the `str` output of your function call with the first file.
+Ensure the output is a data.frame with a character and a numeric column.  
+
+- Read the file (correctly)
+- Select the columns `MESS_DATUM` and `TMK` (see German explanation in meta file `columns.txt`). 
+Assume the column order may not always be the same, hence avoid indexing with integer positions.
+- Change the temperature column name ("TMK") to the gauge ID number in the filename (e.g. use `nchar()` and `substr()`).
+BONUS: use the gauge name by matching with `meta.txt`.
+- As output, `return` the reduced dataset (with the renamed column).
+
+**Step 4**: Create a single list object with the output for all the files (except `meta.txt` and `columns.txt`).
+There should be an error for one single file, see below. 
+I strongly recommend to use `lapply`. BONUS: display a progress bar (e.g. with `pbapply::pblapply`).  
+I manually introduced a wrong date column name in one of the files. 
+Make sure your reading function throws an informative error for such a case. 
+Manually fix the column name in the altered file and run your code again.  
+**Step 5**: Merge the list elements into a single data.frame using `Reduce` and `merge` like below:
+```
+SOME_LIST_WITH_DFS <- list(
+ data.frame(date=1:4, AA=11:14),
+ data.frame(date=2:6, BB=22:26),
+ data.frame(date=3:7, CC=33:37)
+)
+SOME_LIST_WITH_DFS
+Reduce(function(...) merge(..., all=TRUE), SOME_LIST_WITH_DFS)
+```
+**Step 6**:  Change the MESS_DATUM column data type to `Date`. Plot the time series for some station. BONUS: With a `for` loop, add lines for all stations.  
+**Step 7**: [Report](mailto:berry-b@gmx.de) the time you needed to solve this task 
+(estimate without BONUS time). Ask questions if you like. 
+Optionally, give me feedback: is this task suited for an admission test? Any improvement ideas?  
+**Step 8**: BONUS: After all the coding, let's get to to contentually interesting part.
+Which is the hottest of the gauges by average (or max) temperature? What gauge has the smallest temparature range?
+Using the `meta.txt` information, perform a geographical analysis of recent temperatures in Germany, e.g. create a map, animate a time series map, interpolate temperatures onto a grid with kriging, ...  
+
+If you want to work with much more weather data, check out [rdwd](https://github.com/brry/rdwd#rdwd), which I also used to create this dataset, see [admission_data.R](https://github.com/brry/course/blob/master/data/admission_data.R).

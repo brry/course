@@ -13,7 +13,7 @@ library(rdwd) # for selectDWD, dataDWD, readDWD, readVars, geoIndex
 # select gauges and download data ----
 urls <- selectDWD(res="daily", var="kl", per="recent")
 set.seed(42) #  random number generator startpoint for reproducibility of 'sample'
-url_sel <- sort(sample(urls, size=300))
+url_sel <- sort(sample(urls, size=100))
 localfiles <- dataDWD(url_sel, dir="data/DWDdata", read=FALSE)
 
 
@@ -27,7 +27,7 @@ write.table(columns, paste0(tdir,"/columns.txt"), row.names=FALSE, quote=FALSE, 
 data("geoIndex")
 ids <- substr(sapply(strsplit(localfiles, "KL_"), "[", 2), 1,5)
 meta <- geoIndex[geoIndex$id %in% as.numeric(ids), 1:6]
-write.table(meta, paste0(tdir,"/meta.txt"), row.names=FALSE, quote=FALSE)
+write.table(meta, paste0(tdir,"/meta.txt"), row.names=FALSE, quote=FALSE, sep="|")
 
 
 # read data, select columns ----
