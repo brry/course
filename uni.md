@@ -177,32 +177,32 @@ You will only be able to gain much from the course if you can solve this (hopefu
 **If you have significant trouble with this kind of coding, the workshop pace will be too fast for you!** (In which case you should wait out for the next "Intro to R" course).
 
 **Aim**: Obtain certain columns from many files, merge those into a single data.frame.  
-**Data**: Daily weather observations from 300 gauges across Germany of the last year and a half.  
+**Data**: Daily weather observations from 100 gauges across Germany of the last year and a half.  
 **Needed R skills**: file management, reading and subsetting data, writing simple functions, looping code, basic line plotting
 
-**Step 1**: Note the starting time for later reporting of the time needed (without BONUS tasks).  
+**Step 1**: Note the current time to later report how much time you needed (without BONUS tasks).  
 **Step 2**: Download and unzip [`admission.zip`](https://github.com/brry/course/raw/master/data/admission.zip)
 into some directory (BONUS: use R code to do both). Read `meta.txt` and `columns.txt`. 
-Get a vector of filenames using `dir` (with `full.names=T`).  
-**Step 3**: Write a function that takes a single file name as input and performs the following.  
-Hint: step by step, check the `str` output of your function call with the first file.
-Ensure the output is a data.frame with a character and a numeric column.  
+Get a vector of filenames using `dir()` (with `full.names=TRUE`).  Exclude `meta.txt` and `columns.txt`.  
+**Step 3**: Write a function that takes a single file name as input and performs the following:  
+*(Hint: step by step during development, check the `str()` output of your function reading the first file.
+Ensure the final output is a data.frame with a character and a numeric column.)*
 
-- Read the file (correctly)
+- Read the file (correctly).
 - Select the columns `MESS_DATUM` and `TMK` (see German explanation in meta file `columns.txt`). 
 Assume the column order may not always be the same, hence avoid indexing with integer positions.
 - Change the temperature column name ("TMK") to the gauge ID number in the filename (e.g. use `nchar()` and `substr()`).
 BONUS: use the gauge name by matching with `meta.txt`.
-- As output, `return` the reduced dataset (with the renamed column).
+- As output, `return()` the reduced dataset with the renamed column.
 
-**Step 4**: Create a single list object with the output for all the files (except `meta.txt` and `columns.txt`).
+**Step 4**: Create a single list object with the output for all the files.
 There should be an error for one single file, see below. 
-I strongly recommend to use `lapply`. BONUS: display a progress bar (e.g. with `pbapply::pblapply`).  
-I manually introduced a wrong date column name in one of the files. 
+I strongly recommend to use `lapply()`. BONUS: display a progress bar (e.g. with `pbapply::pblapply()`).  
+I intentionally introduced a wrong date column name in one of the files. 
 Make sure your reading function throws an informative error for such a case. 
 Manually fix the column name in the altered file and run your code again.  
-**Step 5**: Merge the list elements into a single data.frame using `Reduce` and `merge` like below:
-```
+**Step 5**: Merge the list elements into a single data.frame using `Reduce()` and `merge()` like below:
+```R
 SOME_LIST_WITH_DFS <- list(
  data.frame(date=1:4, AA=11:14),
  data.frame(date=2:6, BB=22:26),
@@ -211,7 +211,7 @@ SOME_LIST_WITH_DFS <- list(
 SOME_LIST_WITH_DFS
 Reduce(function(...) merge(..., all=TRUE), SOME_LIST_WITH_DFS)
 ```
-**Step 6**:  Change the MESS_DATUM column data type to `Date`. Plot the time series for some station. BONUS: With a `for` loop, add lines for all stations.  
+**Step 6**:  Change the `MESS_DATUM` data type to `Date`. Plot the time series for some station. BONUS: With a `for` loop, add lines for all stations.  
 **Step 7**: [Report](mailto:berry-b@gmx.de) the time you needed to solve this task 
 (estimate without BONUS time). Ask questions if you like. 
 Optionally, give me feedback: is this task suited for an admission test? Any improvement ideas?  
