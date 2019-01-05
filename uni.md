@@ -183,7 +183,7 @@ You will only be able to gain much from the course if you can solve this (hopefu
 **Step 1**: Note the current time to later report how much time you needed (without BONUS tasks).  
 **Step 2**: Download and unzip [`admission.zip`](https://github.com/brry/course/raw/master/data/admission.zip)
 into some directory (BONUS: use R code to do both). Read `meta.txt` and `columns.txt`. 
-Get a vector of filenames using `dir()` (with `full.names=TRUE`).  Exclude `meta.txt` and `columns.txt`.  
+Get a vector of filenames using `dir()` (with `full.names=TRUE` if you use a sub-folder).  Exclude `meta.txt` and `columns.txt`.  
 **Step 3**: Write a function that takes a single file name as input and performs the following:  
 *(Hint: step by step during development, check the `str()` output of your function reading the first file.
 Ensure the final output is a data.frame with a character and a numeric column.)*
