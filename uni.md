@@ -191,7 +191,7 @@ Ensure the final output is a data.frame with a character and a numeric column.)*
 - Read the file (correctly).
 - Select the columns `MESS_DATUM` and `TMK` (see German explanation in meta file `columns.txt`). 
 Assume the column order may not always be the same, hence avoid indexing with integer positions.
-- Change the temperature column name ("TMK") to the gauge ID number in the filename (e.g. use `nchar()` and `substr()`).
+- Change the temperature column name ("TMK") to the gauge ID number in the filename (e.g. use `nchar()` and `substr()`). Make sure it will also work if you use filenames in a subfolder like "meteodata/01142.txt".
 BONUS: use the gauge name by matching with `meta.txt`.
 - As output, `return()` the reduced dataset with the renamed column.
 
