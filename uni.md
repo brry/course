@@ -196,11 +196,11 @@ BONUS: use the gauge name by matching with `meta.txt`.
 - As output, `return()` the reduced dataset with the renamed column.
 
 **Step 4**: Create a single list object with the output for all the files.
-There should be an error for one single file, see below. 
-I strongly recommend to use `lapply()`. BONUS: display a progress bar (e.g. with `pbapply::pblapply()`).  
-I intentionally introduced a wrong date column name in one of the files. 
-Make sure your reading function throws an informative error for such a case. 
-Manually fix the column name in the altered file and run your code again.  
+I strongly recommend to use `lapply()`.
+There should be an error: I intentionally introduced a wrong date column name in one of the files. 
+Make sure your reading function throws an informative error (e.g. with the filename) for such a case. 
+Manually fix the column name in the altered file and run your code again.
+BONUS: display a progress bar (e.g. with `pbapply::pblapply()`).  
 **Step 5**: Merge the list elements into a single data.frame using `Reduce()` and `merge()` like below:
 ```R
 SOME_LIST_WITH_DFS <- list(
