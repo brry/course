@@ -214,6 +214,7 @@ Reduce(function(...) merge(..., all=TRUE), SOME_LIST_WITH_DFS)
 **Step 6**:  Change the `MESS_DATUM` data type to `Date`. Plot the time series for some station. BONUS: With a `for` loop, add lines for all stations.  
 **Step 7**: [Report](mailto:berry-b@gmx.de) the time you needed to solve this task 
 (estimate without BONUS time). Ask questions if you like. 
+Send along your script if you want feedback on it. 
 Optionally, give me feedback: is this task suited for an admission test? Any improvement ideas?  
 **Step 8**: BONUS: After all the coding, let's get to to contentually interesting part.
 Which is the hottest of the gauges by average (or max) temperature? What gauge has the smallest temparature range?
