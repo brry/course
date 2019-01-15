@@ -3463,13 +3463,13 @@ something <- 1:6
 \pause
 You'll often see the dangerous code \rcode{\alert{for}(i in 1:n)}: \vspace{-0.7em}
 <<seq_along1, size="footnotesize">>=
-for(i in 1:length(something)) do_something(i)
+for(i in 1:length(something)) do_something(i) # works with current sth
 @
 \pause
 Imagine this:\vspace{-0.5em}
 <<seq_along2, size="footnotesize">>=
 something <- which(letters=="4")
-for(i in 1:length(something)) do_something(i)
+for(i in 1:length(something)) do_something(i) # fails! (same code!)
 @
 \pause
 Safer to use is:\vspace{-0.7em}
@@ -4981,27 +4981,27 @@ if(step==7) return(invisible(NULL))
 lines(200:900, dnorm(200:900, mean(clim$JA_RR), sd(clim$JA_RR)), col="red", lwd=3)
 }
 @
-\only<1>{
+\only<1| handout:0>{
 <<normdist3, echo=FALSE>>=
 plotnorm(3)
 @
 }
-\only<2>{
+\only<2| handout:0>{
 <<normdist4, echo=FALSE>>=
 plotnorm(4)
 @
 }
-\only<3>{
+\only<3| handout:0>{
 <<normdist5, echo=FALSE>>=
 plotnorm(5)
 @
 }
-\only<4>{
+\only<4| handout:0>{
 <<normdist6, echo=FALSE>>=
 plotnorm(6)
 @
 }
-\only<5>{
+\only<5| handout:0>{
 <<normdist7, echo=FALSE>>=
 plotnorm(7)
 @
@@ -5073,12 +5073,12 @@ generalnormplot()
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Distributions: normal distribution II}
-\only<1>{
+\only<1| handout:0>{
 <<normaldistr1, echo=FALSE>>=
 generalnormplot(val=590)
 @
 }
-\only<2>{
+\only<2| handout:0>{
 <<normaldistr2, echo=FALSE>>=
 generalnormplot(val=598)
 @
@@ -5178,13 +5178,20 @@ More on \hyperlink{nortest}{slide \ref{nortest}} et sequentes.
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Binomial distribution}
-<<exbinomsol, size="footnotesize", out.width='.6\\textwidth'>>=
-plot(30:70, dbinom(x=30:70, size=100, prob=149291/279371))
-abline(v=c(49.5, 53.438), h=0.025)
-1-pbinom(q=49.5, size=100, prob=149291/279371)
+\vspace{-1.5em}
+<<exbinomsol, size="tiny", echo=-1, out.width='.6\\textwidth'>>=
+par(mar=c(1.8,4,0.5,0.5), mgp=c(1.8,0.7,0), las=1)
+prop_f <- 149291/279371 # Proportion of females among students in Austria
+plot(30:70, dbinom(x=30:70, size=100, prob=prop_f)*100, 
+     ylab="Probability for n females\nin a sample of 100 stundents  [%]")
+HDI <- qbinom(p=c(0.025, 0.975), size=100, prob=prop_f)
+abline(v=c(49.5, prop_f*100, HDI), col=c("purple","grey","red","red"))
+1-pbinom(q=49.5, size=100, prob=prop_f)   ;  HDI
 @
-If the probability of the result happening by chance is under 5\%, in this case $\leq 45$ or $\geq 61$  females (two-sided confidence interval).
+In 78.5\% of samples, a majority should be female. 
+Improper sampling is assumed if the probability of the result happening by chance is under e.g. 5\%, in this case $\leq 44$ or $\geq 63$  females (two-sided confidence interval).
 \end{frame}
+
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Other distributions: density}
