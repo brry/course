@@ -188,7 +188,8 @@ Get a vector of filenames using `dir()` (with `full.names=TRUE` if you use a sub
 *(Hint: step by step during development, check the `str()` output of your function reading the first file.
 Ensure the final output is a data.frame with a character and a numeric column.)*
 
-- Read the file (correctly).
+- Read the file correctly, so that the datum column is a character string and the temperature is numeric.
+Remeber `str()`!
 - Select the columns `MESS_DATUM` and `TMK` (see German explanation in meta file `columns.txt`). 
 Assume the column order may not always be the same, hence avoid indexing with integer positions.
 - Change the temperature column name ("TMK") to the gauge ID number in the filename (e.g. use `nchar()` and `substr()`). Make sure it will also work if you use filenames in a subfolder like "meteodata/01142.txt".
@@ -201,7 +202,7 @@ There should be an error: I intentionally introduced a wrong date column name in
 Make sure your reading function throws an informative error (e.g. with the filename) for such a case. 
 Manually fix the column name in the altered file and run your code again.
 BONUS: display a progress bar (e.g. with `pbapply::pblapply()`).  
-**Step 5**: Merge the list elements into a single data.frame using `Reduce()` and `merge()` like below:
+**Step 5**: Transform the list of dataframes into a single data.frame by merging along the dates. Use `Reduce()` and `merge()` like below:
 ```R
 SOME_LIST_WITH_DFS <- list(
  data.frame(date=1:4, AA=11:14),

@@ -3453,6 +3453,38 @@ unlink(paste0("loopexercise/randomdata_", c(10,20,50,100,500), ".txt"))
 
 %------------------------------------------------------------%
 
+\begin{frame}[fragile]{\rcode{seq\_along(n)} is safer than \rcode{1:n} in \alert{for} loops}
+\pause
+\vspace{-0.5em}
+<<seq_along0, size="scriptsize">>=
+do_something <- function(x) if(x<1) stop("x must be >=1, not:", x) else x
+something <- 1:6
+@
+\pause
+You'll often see the dangerous code \rcode{\alert{for}(i in 1:n)}: \vspace{-0.7em}
+<<seq_along1, size="footnotesize">>=
+for(i in 1:length(something)) do_something(i)
+@
+\pause
+Imagine this:\vspace{-0.5em}
+<<seq_along2, size="footnotesize">>=
+something <- which(letters=="4")
+for(i in 1:length(something)) do_something(i)
+@
+\pause
+Safer to use is:\vspace{-0.7em}
+<<seq_along3>>=
+for(i in seq_along(something)) do_something(i)
+@
+\pause
+Because:\vspace{-0.5em}
+<<seq_along4, size="scriptsize">>=
+1:length(something)     ;   seq_along(something)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}[fragile]{stocks data from \href{http://finance.yahoo.com}{finance.yahoo.com}}
 <<stocks_datapreparation, size="scriptsize", eval=F>>=
 # Download current datasets:
@@ -4860,10 +4892,6 @@ lines(0:65, dnorm(0:65, mean(z), sd(z)))
 \end{frame}
 
 %------------------------------------------------------------%
-%------------------------------------------------------------%
-\subsection{Normal distribution}
-%------------------------------------------------------------%
-%------------------------------------------------------------%
 
 \begin{frame}{Random numbers}
 R has a very good random number generator. If you want to set a starting point for it, you can use \rcode{set.seed(n)}, with n being some number you like. After R has set the seed, it will always generate the same "random" numbers. This creates reproducible numbers.
@@ -4898,18 +4926,139 @@ lines(0:50/10, dexp(0:50/10) +par("usr")[3], col=2)
 \end{frame}
 
 %------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Normal distribution}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{normal distribution: data}
+\vspace{-1em}
+<<normdist_data, size="scriptsize", message=FALSE, echo=-1, fig.height=2.9>>=
+par(mar=c(2,3.5,2,0.5), mgp=c(2.3,0.7,0), las=1)
+url <- rdwd::selectDWD("Potsdam", res="annual", var="kl", per="h")
+clim <- rdwd::dataDWD(url)
+clim$Year <- as.numeric(substr(clim$MESS_DATUM_BEGINN, 1, 4))
+plot(clim$Year, clim$JA_RR, type="l", col="blue", lwd=3,
+     xlab="Year", ylab="Precipitation sum  [mm]", 
+     main="Annual rainfal in Potsdam appears trendless")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{normal distribution: empirical histogram}
+\vspace{-0.8em}
+<<normdist_hist, echo=-1, size="scriptsize">>=
+par(mar=c(2,3.3,2,0.5), mgp=c(2.3,0.7,0), las=1)
+hist(clim$JA_RR, breaks=20, col="azure3", main="Histogram Rainfall",
+     ylab="Number of values in rainfall bin", 
+     xlab="Annual rainfall sum Potsdam 1894:2017")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{normal distribution: density histogram}
+<<normdist_function, echo=FALSE>>=
+plotnorm <- function(step=50){
+par(mar=c(2,3.9,2,0.5), mgp=c(3,0.7,0), las=1)
+hist(clim$JA_RR, breaks=20, col="azure3", 
+     main="Probability density, total histogram area=1",
+     xlab="Annual rainfall sum Potsdam 1894:2017", freq=FALSE)
+if(step==3) return(invisible(NULL))
+abline(v=mean(clim$JA_RR), col="red", lwd=5)
+textField(650, 0.005, paste0("mean = ", round(mean(clim$JA_RR),0)), col="red")
+if(step==4) return(invisible(NULL))
+musd <- function(x,f=1) mean(x,na.rm=TRUE)+c(-f,f)*sd(x, na.rm=TRUE)
+segments(musd(clim$JA_RR,1), rep(-1,2), y1=rep(0.0025,2), col="red", lwd=5)
+textField(690, 0.004, paste0("sd = ", round(sd(clim$JA_RR),0)), col="red")
+if(step==5) return(invisible(NULL))
+textField(589, 0.002, "70% of values between\nmu +- 1 sd")
+if(step==6) return(invisible(NULL))
+segments(musd(clim$JA_RR,2), rep(-1,2), y1=rep(0.0006,2), col="red", lwd=5)
+textField(589, 0.0007, "95% of values between\nmu +- 2 sd")
+if(step==7) return(invisible(NULL))
+lines(200:900, dnorm(200:900, mean(clim$JA_RR), sd(clim$JA_RR)), col="red", lwd=3)
+}
+@
+\only<1>{
+<<normdist3, echo=FALSE>>=
+plotnorm(3)
+@
+}
+\only<2>{
+<<normdist4, echo=FALSE>>=
+plotnorm(4)
+@
+}
+\only<3>{
+<<normdist5, echo=FALSE>>=
+plotnorm(5)
+@
+}
+\only<4>{
+<<normdist6, echo=FALSE>>=
+plotnorm(6)
+@
+}
+\only<5>{
+<<normdist7, echo=FALSE>>=
+plotnorm(7)
+@
+}
+\only<6>{
+<<normdist8, echo=FALSE>>=
+plotnorm(8)
+@
+}
+\end{frame}
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{normal distribution: code}
+\vspace{-0.6em}
+<<normdist_code, eval=FALSE, size="scriptsize">>=
+par(mgp=c(3,0.7,0), las=1)
+hist(clim$JA_RR, breaks=20, col="azure3", 
+     main="Probability density, total histogram area=1",
+     xlab="Annual rainfall sum Potsdam 1894:2017", freq=FALSE)
+abline(v=mean(clim$JA_RR), col="red", lwd=5)
+textField(650, 0.005, paste0("mean = ", round(mean(clim$JA_RR),0)), col="red")
+musd <- function(x,f=1) mean(x,na.rm=TRUE)+c(-f,f)*sd(x, na.rm=TRUE)
+segments(musd(clim$JA_RR,1), rep(-1,2), y1=rep(0.0025,2), col="red", lwd=5)
+textField(690, 0.004, paste0("sd = ", round(sd(clim$JA_RR),0)), col="red")
+textField(589, 0.002, "70% of values between\nmu +- 1 sd")
+segments(musd(clim$JA_RR,2), rep(-1,2), y1=rep(0.0006,2), col="red", lwd=5)
+textField(589, 0.0007, "95% of values between\nmu +- 2 sd")
+lines(200:900, dnorm(200:900, mean(clim$JA_RR), sd(clim$JA_RR)), col="red",lwd=3)
+@
+\end{frame}
+
+%------------------------------------------------------------%
 
 \begin{frame}[fragile]{Distributions: normal distribution I}
 <<normaldistr, echo=F, eval=TRUE>>=
+generalnormplot <- function(m=600,s=10, val=NULL)
+{
+value <- seq(m-3.5*s, m+3.5*s, len=200)
 par(mar=c(3,3,2.5,0.5), mgp=c(1.9,0.6,0), mfrow=c(1,2), cex.main=1)
-value <- seq (from=-10, to=10, by=0.01)
-plot(value, dnorm(value), type="l", las=1, lwd=2, xlim=c(-5,5),
-     main="probability density function\ndnorm (value, mean=0, sd=1)")
+plot(value, dnorm(value,m,s), type="l", las=1, lwd=2, xaxs="i",
+     main=paste0("probability density function\ndnorm (value, mean=",m,", sd=",s,")   "))
+if(!is.null(val)){
+w <- seq(value[1], val, len=100)
+polygon(c(w, val, value[1]), dnorm(c(w,0,0),m,s), col=4)
+points(val, dnorm(val,m,s), pch=3, col=2, cex=2, lwd=3)
+}
 box("figure", col=1)
 #
-plot(value, pnorm(value), type="l", las=1, lwd=2, xlim=c(-5,5),
-     main="cumulated probability\npnorm (value, mean=0, sd=1)")
+plot(value, pnorm(value,m,s), type="l", las=1, lwd=2, xaxs="i",
+     main=paste0("cumulated probability\npnorm(value, mean=",m,", sd=",s,")   "))
+if(!is.null(val)){
+abline(h=pnorm(val,m,s), v=val, col=4)
+points(val, pnorm(val,m,s), pch=3, col=2, cex=2, lwd=3)
+}
 box("figure", col=1)
+}
+generalnormplot()
 @
 \vspace{2.72em}
 \end{frame}
@@ -4924,23 +5073,22 @@ box("figure", col=1)
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Distributions: normal distribution II}
-<<normaldistr2, echo=F, eval=TRUE>>=
-par(mar=c(3,3,2.5,0.5), mgp=c(1.9,0.6,0), mfrow=c(1,2), cex.main=1)
-value <- seq (from=-10, to=10, by=0.01)
-plot(value, dnorm(value), type="l", las=1, lwd=2, xlim=c(-5,5),
-     main="probability density function\ndnorm (value, mean=0, sd=1)")
-w <- seq(-6, 1, 0.01)
-polygon(c(w, 1, -6), c(dnorm(w), 0,0), col=4)
-box("figure", col=1)
-points(1, dnorm(1), pch=3, col=2, cex=2, lwd=3)
-#
-plot(value, pnorm(value), type="l", las=1, lwd=2, xlim=c(-5,5),
-     main="cumulated probability\npnorm (value, mean=0, sd=1)")
-abline(h=pnorm(1), v=1, col=4)
-box("figure", col=1)
-points(1, pnorm(1), pch=3, col=2, cex=2, lwd=3)
+\only<1>{
+<<normaldistr1, echo=FALSE>>=
+generalnormplot(val=590)
 @
-\onslide<2> \rcode{pnorm(q=1,  mean=0, sd=1)} = 84\% of the values of a standard normal distribution (SND) with $\mu=0$ and $\sigma=1$ are smaller than 1.
+}
+\only<2>{
+<<normaldistr2, echo=FALSE>>=
+generalnormplot(val=598)
+@
+}
+\only<3-4>{
+<<normaldistr3, echo=FALSE>>=
+generalnormplot(val=615)
+@
+}
+\onslide<4> \rcode{pnorm(q=615, mean=600, sd=10)} = 93\% of the values of a normal distribution (ND) with $\mu=600$ and $\sigma=10$ are smaller than 615.
 \end{frame}
 
 %------------------------------------------------------------%
