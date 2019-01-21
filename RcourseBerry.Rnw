@@ -613,7 +613,7 @@ summary(linear_model)
 @
 \vspace{-1em}
 \small
-\href{http://blog.yhathq.com/posts/r-lm-summary.html}{blog.yhathq.com/posts/r-lm-summary.html}\\
+\href{http://blog.yhat.com/posts/r-lm-summary.html}{blog.yhat.com/posts/r-lm-summary.html}\\
 \href{http://stats.stackexchange.com/questions/5135/interpretation-of-rs-lm-output}{stats.stackexchange.com/questions/5135/interpretation-of-rs-lm-output}
 \normalsize
 <<sollinreg2, echo=F, fig.height=2.3>>=
@@ -3719,6 +3719,8 @@ clusterEvalQ(cl, library("somePackage"))
 \begin{frame}[fragile]{for -> lapply IIIb: parallel AND progress bar}
 \vspace{-1em}
 <<for_lapply11b, eval=FALSE>>=
+berryFunctions::parallelCode() # template for windows
+
 library(parallel)
 library(pbapply) # (>2016-10-30)
 cl <- makeCluster( detectCores()-1 )
@@ -3910,6 +3912,10 @@ while(substring(folder, nchar(folder))=="/")
 
 while( substring(folder, nchar(folder)) %in% c("/", "\\") )
      folder <- substring(folder, 1, nchar(folder)-1)
+
+
+# Or, more elegantly, with regular expressions:
+while(grepl("/$", folder))  folder <- sub("/$","",folder)
 @
 \end{frame}
 
@@ -5528,6 +5534,119 @@ plotLfit(distLfit(x, quiet=T), breaks=30, nbest=11, legargs=c(x="left"))
 \end{frame}
 
 
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+\subsection{Extreme Value Statistics}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Extreme value statistics (EVS)}
+More extensive script version of these slides (in German):\\
+\footnotesize
+\url{https://github.com/brry/rclick/blob/master/15-Extremwertstatistik.r}\\[2em]
+\normalsize
+\begin{enumerate}
+\item Data
+\item Return period, plotting positions
+\item Fitting extreme value distribution functions
+\item Plotting and computing quantiles from evd
+\item L-moments
+\item R package \texttt{extremeStat}
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: Dataset}
+Annual streamflow maxima 1976-2010 at a stream in Austria
+<<EVS_data>>=
+JM <- c(61.5, 77.0, 37.0, 69.3, 75.6, 74.9, 43.7, 50.8,
+55.6, 84.1, 43.6, 81.9, 60.1, 72.4, 61.6, 94.8, 82.6, 57.2,
+63.1, 73.8, 51.3, 93.6, 56.9, 52.1, 40.4, 48.9, 113.6, 
+35.4, 40.1, 89.6, 47.8, 57.6, 38.9, 69.7, 110.8)
+@
+\pause
+Annual maxima must be independent from each other \\ 
+-> no extreme event at year-separation used for both years\\[1em]
+\pause
+The alternative to this Block Maxima (BM) approach is using Peak-Over-Threshold (POT) extremes.
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: Dataset Graph}
+\vspace{-1em}
+<<EVS_data_graph, echo=-1, fig.height=2.4>>=
+par(mar=c(2,2,2,0.5), mgp=c(3,0.8,0))
+plot(1976:2010, JM, type="l", las=1, ylab="", xlab="",
+     main="Annual streamflow maxima [m\U00B3/s]")
+# Moving Average (in berryFunctions):
+lines(1976:2010, movAv(JM), col=2, lwd=3) 
+# can indicate trends or cycles, but:
+# window width = "researcher degree of freedom"
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: empirical quantile + Plotting Positions}
+<<EVS_empquant>>=
+quantile(JM) 
+@
+\pause
+75\% of the annual maxima are smaller than 76.3 m3/s (upper quartile).
+This discharche is exceeded in 25 of 100 years.
+Statistically, we'd expect an event of this magnitude every \pause
+4 years.
+Each year, there's a statistical probability of 25\% for 76 m3/s to be reached/exceeded.\\[1em]
+\pause
+This all assumes a stationary runoff regime in the catchment, i.e. no relevant changes over time in rainfall patterns or landscape composition.
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: Return Period}
+<<EVS_RP>>=
+6
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: Fitting Gamma distribution}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: Discharge over Return Periods I}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: Discharge over Return Periods II}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: L moments I}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: L moments II}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: L moments III}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{EVS: extremeStat}
+\href{https://cran.r-project.org/web/packages/extremeStat/vignettes/extremeStat.html}{extremeStat vignette} especially the 
+\href{https://cran.r-project.org/web/packages/extremeStat/vignettes/extremeStat.html#extreme-value-statistics-return-periods}{last section}
+\end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
