@@ -189,7 +189,7 @@ Get a vector of filenames using `dir()` (with `full.names=TRUE` if you use a sub
 Ensure the final output is a data.frame with a character and a numeric column.)*
 
 - Read the file correctly, so that the datum column is a character string and the temperature is numeric.
-Remeber `str()`!
+Remember `str()`!
 - Select the columns `MESS_DATUM` and `TMK` (see German explanation in meta file `columns.txt`). 
 Assume the column order may not always be the same, hence avoid indexing with integer positions.
 - Change the temperature column name ("TMK") to the gauge ID number in the filename (e.g. use `nchar()` and `substr()`). Make sure it will also work if you use filenames in a subfolder like "meteodata/01142.txt".
