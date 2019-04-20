@@ -20,21 +20,21 @@ install_if_needed("praise")
 
 # Step 1: create package structure ----
 
-getwd() # setwd("../otherFolder") if you want to create your package elsewhere
-devtools::create("myCatPack") # use devtools::setup if you cloned from github
-# now open the myCatPack.Rproj file with Rstudio, either manually or with:
-berryFunctions::openFile("myCatPack/myCatPack.Rproj")
+# setwd("..") # if you cloned from github and rstudio set the wd to package dir
+usethis::create_package("myCatPack")
+# open the myCatPack.Rproj file with Rstudio (normally happens automatically)
+# re-open this file there for easiest usage
 
 
 
-# Step 2: check whether package is working ----
+# Step 2: check whether package is correct ----
 
 devtools::check()
-# Open DESCRIPTION file (easy via Files pane in Rstudio, default bottom right)
+# Open DESCRIPTION file (easy via "Files" pane in Rstudio, default bottom right)
 # Change to   Version: 0.0.1
 # Change to   License: GPL (>=2)
 # Add         Date: 2017-08-04       if you like
-# remove      Depends: R (>= 3.4.2)  to enable pack usage with older R versions
+# in real life, change the other information too, but we're good for now ;-)
 devtools::check() # should now be empty
 # Package structure is now set up, let's add a function
 
@@ -49,11 +49,12 @@ meow <- function(
   good=TRUE
   )
   {
-  message("Fact of the day: ", animal, "s are ", if(good) "awesome" else "ugly", "!")
+  message("Fact of the day: ", animal, "s are ", 
+          if(good) "awesome" else "ugly", "!")
   }
 ', file="R/meow.R")
 
-# now open the file in the R folder
+# now open the file in the R folder (again, using the Rstudio "Files" pane)
 
 
 
