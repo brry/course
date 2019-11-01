@@ -200,15 +200,15 @@ PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ 
 \item Geoecology @ Potsdam University
 \item R Fan\onslide<+->atic \onslide<+-> since 2010
 \begin{itemize}
-\item Teaching: \href{https://rclickhandbuch.wordpress.com}{RclickHandbuch.wordpress.com} (German) + this course \vspace{0.3em}
-\item Programming: \href{https://github.com/brry/extremeStat}{\texttt{extremeStat}}, 
-      \onslide<+->\href{https://cran.r-project.org/package=berryFunctions}{\texttt{berryFunctions}}, 
-      \onslide<+->\href{https://github.com/brry/rdwd\#rdwd}{\texttt{rdwd}}, 
+\item Programming: \href{https://github.com/brry/rdwd\#rdwd}{\texttt{rdwd}},
+      \onslide<+->\href{https://github.com/brry/extremeStat}{\texttt{extremeStat}}, 
       \onslide<+->\href{https://github.com/brry/OSMscale}{\texttt{OSMscale}}
 \item Community: \href{https://www.meetup.com/de-DE/Berlin-R-Users-Group/}{\includegraphics[width=3em]{externalfig/BRUG_full.png}}
+\item Training \& Consulting: \href{https://brry.github.io}{\includegraphics[width=0.5cm]{externalfig/Blogo.png}}
+
 \end{itemize}
 %\item \alert{Jump to beta distribution \hyperlink{beta}{example lecture}}
-\item These slides were originally based on a one week course held in 2013 for \href{http://www.cawa-project.net/story/300}{CaWa} with Mathias Seibert (GFZ) in Bishkek, Kyrgyzstan
+\item These slides were originally based on a one week course held in 2013 for \href{http://www.cawa-project.net/ru/news-detail/news/cawa-training-course-statistical-analysis-in-hydrology-introduction-into-r/}{CaWa} with Mathias Seibert (GFZ) in Bishkek, Kyrgyzstan
 \item R installation instructions: \href{https://github.com/brry/course\#install}{github.com/brry/course\#install}
 \item \alert{If we're proceeding too fast, please interrupt!}
 \end{itemize}
@@ -283,7 +283,7 @@ In the console, calculate ~ 21+21 ~,~ 7*6 ~ and ~ $\frac{0,3}{4}*\sqrt{313600}$\
 \vspace{-1em}
 \pause
 \begin{itemize}[<+->]
-  \item objects: assignment with ~ \rcode{$<-$} ~ Rstudio Keyboard shortcut:  \rcode{ALT} + \rcode{-}  \\
+  \item objects: assignment with ~ \rcode{$<-$} ~ Rstudio Keyboard shortcut:  \key{ALT} + \key{-}  \\
         \rcode{nstudents <- 15\\nstudents\\nstudents > 12}
   \item What's a good object name? \onslide<+-> $\rightarrow$ short, but explanatory,
         \onslide<+-> lowerCamelStandard\_or\_underscore are good naming conventions
@@ -1496,7 +1496,7 @@ state[state$Income>=5000, ]
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Matrices}
+\subsection{Matrices, apply function}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -1532,6 +1532,84 @@ m
 <<mat3>>=
 m[1,1] <- "a"
 m
+@
+All are converted to character (see \hyperlink{datatypes}{order of coercion})
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Apply function to matrix rows / columns}
+<<mat_apply1>>=
+m <- matrix(1:12, ncol=4)
+rowMeans(m)
+apply(m, MARGIN=1, FUN=median) # MARGIN=1: Keep x dimension
+apply(m, MARGIN=2, median, na.rm=TRUE) # apply to columns
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Write a function and apply it to a matrix}
+\vspace{-1.5em}
+\begin{exercise}{functions + matrices} %ex3
+\begin{enumerate}
+\footnotesize
+\item What do you get with   \rcode{vect <- c(5, 3, 9, 1, 7, 4, 8, 6)     ;   which.min(vect)}?
+\item How do you exclude the sixt element of \rcode{vect} (return all of \rcode{vect} except the value at position 6)?
+\item Write a function to get the second-largest value of a vector and test it on \rcode{vect}.
+\item Create a matrix with the integers from 1 to 12 organized in three columns (filled column-wise).
+\item Apply the function row-wise and column-wise.
+\item What type of object does that return? (Hint: it's not a matrix as you might have expected.)
+\item BONUS: Write a function that can optionally return the third/fourth/etc-largest value of a vector. 
+ Remember to use curly braces (\rcode{\{...\}}) around the body of the function if several statements are involved.
+ You can create and access objects within a function in the same way you would in the global workspace.
+\item tough BONUS: Have the function \rcode{stop} with an informative error if the number to exclude is larger than the length of the vector. Handle the input 0.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.1-3: functions + matrices}
+\rcode{which.min} returns the position (index) of smallest value.\\
+<<ex_fm_sol1>>=
+vect <- c(5, 3, 9, 1, 7, 4, 8, 6)
+secondMax <- function(x) max(x[-which.max(x)])
+secondMax(vect)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.4-6: functions + matrices}
+\vspace{-2em}
+\small
+<<ex_fm_sol2>>=
+z <- matrix(1:12, ncol=3)   ;   z
+apply(z, MARGIN=1, secondMax)
+apply(z, MARGIN=2, secondMax)
+@
+\vspace{-0.7em}
+MARGIN: dimension to keep when function reduces vectors to a single number.\\
+\rcode{apply} then takes these single numbers (one per row/column) and combines them into a vector.
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.7-8: functions + matrices}
+<<ex_fm_sol3, eval=FALSE>>=
+nMax <- function(x, n_exclude=0)
+  {
+  x <- sort(x, decreasing=TRUE)
+  if(n_exclude >= length(x)) 
+     stop("Can't exclude ", n_exclude,
+          " elements from a vector with length ", length(x))
+  if(n_exclude > 0) x <- x[-(1:n_exclude)]
+  max(x)
+}
+nMax(vect) ; max(vect)            # 9
+nMax(vect, 1) ; secondMax(vect)   # 8
+nMax(vect, 2)                     # 7
 @
 \end{frame}
 
@@ -1860,6 +1938,7 @@ With \rcode{View}, you can look at a table in an external viewer. This is useful
 
 \begin{frame}{Overview: data types}
 \scriptsize In order of coercion (if mixed, TRUE is converted to 1,~  3.14 to "3.14" etc)
+\vspace{-0.7em}
 \small
 <<coercion, eval=FALSE, echo=FALSE>>=
 l <- list(null=NULL, na=NA, logi=TRUE, factor=as.factor("hi"), int=7L, double=3.14,
@@ -1875,7 +1954,7 @@ empty set        & NULL                 & NULL      & NULL               \\ \hli
 not available    & NA                   & logical   & logical            \\ \hline
 logical          & c(T, F, FALSE, TRUE) & logical   & logical            \\ \hline
 category         & factor("left")       & integer   & \textbf{factor}    \\ \hline
-integer number   & 4:6                  & integer   & integer            \\ \hline
+integer number   & 4:6  ; 7L            & integer   & integer            \\ \hline
 decimal          & 8.7                  & double    & \textbf{numeric}   \\ \hline
 complex          & 5+3i                 & complex   & complex            \\ \hline
 character string & "homer rocks"        & character & character          \\ \hline
@@ -1884,6 +1963,7 @@ date             & as.Date("2017-05-02")& double    & \textbf{Date}      \\ \hli
 function         & ncol                 & closure   & \textbf{function}  \\ \hline
 \end{tabu}
 \end{center}
+\vspace{-0.7em}
 \scriptsize
 \pause
 \href{http://adv-r.had.co.nz/Data-structures.html}{adv-r.had.co.nz/Data-structures}.
@@ -3571,23 +3651,23 @@ files <- dir("../rawdata", pattern="*.csv", full=TRUE)
 \pause \vspace{-2.7em}
 <<for_lapply2, eval=FALSE>>=
 # bad and slow way:
-dfs <- list() # initiate empty list
+ldfs <- list() # initiate empty list
 for(i in 1:length(files))
-   dfs[[i]] <- read.csv(files[i], as.is=TRUE)
+   ldfs[[i]] <- read.csv(files[i], as.is=TRUE)
 
 #
 @
 \pause \vspace{-2.7em}
 <<for_lapply3, eval=FALSE>>=
 # much better way: apply function to each file
-dfs <- lapply(X=files, FUN=read.csv, as.is=TRUE)
+ldfs <- lapply(X=files, FUN=read.csv, as.is=TRUE)
 
 #
 @
 \pause \vspace{-2.7em}
 <<for_lapply4, eval=FALSE>>=
 # single data.frame if all files have n columns:
-df <- do.call(rbind, dfs)
+df <- do.call(rbind, ldfs)
 
 #
 @
@@ -3595,8 +3675,8 @@ df <- do.call(rbind, dfs)
 <<for_lapply5, eval=FALSE>>=
 # PS: much faster in this example could be
 library("data.table")
-dfs <- lapply(X=files, FUN=fread, sep=",")
-df <- rbindlist(dfs)
+ldfs <- lapply(X=files, FUN=fread, sep=",")
+df <- rbindlist(ldfs)
 @
 \end{frame}
 
@@ -3605,7 +3685,7 @@ df <- rbindlist(dfs)
 \begin{frame}[fragile]{for -> lapply II: progress bar, names, indexing etc}
 \vspace{-0.6em}
 <<for_lapply6, eval=FALSE>>=
-dfs <-   lapply(X=files, FUN=read.csv, as.is=TRUE)
+ldfs <-   lapply(X=files, FUN=read.csv, as.is=TRUE)
 
 #
 @
@@ -3613,24 +3693,24 @@ dfs <-   lapply(X=files, FUN=read.csv, as.is=TRUE)
 <<for_lapply7, eval=FALSE>>=
 # progress bar with remaining time
 library("pbapply")
-dfs <- pblapply(X=files, FUN=read.csv, as.is=TRUE)
+ldfs <- pblapply(X=files, FUN=read.csv, as.is=TRUE)
 
 #
 @
 \pause \vspace{-3.48em}
 <<for_lapply8, eval=FALSE>>=
 # nice additional stuff:
-names(dfs) <- files
-str(dfs, max.level=1)
-dfs[[2]] # second list element
+names(ldfs) <- files
+str(ldfs, max.level=1)
+ldfs[[2]] # second list element
 
 #
 @
 \pause \vspace{-3.58em}
 <<for_lapply9, eval=FALSE>>=
 # get third column / fifth row from each df:
-sapply(dfs, "[",  , j=3)
-sapply(dfs, "[", 5,    )
+sapply(ldfs, "[",  , j=3)
+sapply(ldfs, "[", 5,    )
 @
 \end{frame}
 
@@ -3691,9 +3771,9 @@ nc <- detectCores()-1
 \pause \vspace{-2.6em}
 <<for_lapply11, eval=FALSE>>=
 # multicore parallel execution
-dfs <-        lapply(X=files, FUN=read.csv, as.is=TRUE)
-dfs <-      mclapply(X=files, FUN=read.csv, as.is=TRUE,
-                     mc.cores=nc) # easy on linux
+ldfs <-        lapply(X=files, FUN=read.csv, as.is=TRUE)
+ldfs <-      mclapply(X=files, FUN=read.csv, as.is=TRUE,
+                      mc.cores=nc) # easy on linux
 
 #
 @
@@ -3701,7 +3781,7 @@ dfs <-      mclapply(X=files, FUN=read.csv, as.is=TRUE,
 <<for_lapply12, eval=FALSE>>=
 # more code needed on windows:
 cl <- makePSOCKcluster(nc)
-dfs <- parLapply(cl, X=files, fun=read.csv, as.is=TRUE)
+ldfs <- parLapply(cl, X=files, fun=read.csv, as.is=TRUE)
 stopCluster(cl)
 
 #
@@ -3946,7 +4026,7 @@ What are the chances of survival for each of the two?\\
 <<duel_analytical, echo=-c(1,4), size="small", fig.height=2.8>>=
 par(mar=c(2,3,2,0), las=1)
 plot(cumsum(sapply(0:20, function(i) 0.42^i*0.3)), type="l",
-     ylim=c(0.26,0.58), main="cumulative death chance per round")
+     ylim=c(0.26,0.58), main="cumulative death chance ~ round")
 lines(cumsum(sapply(0:20, function(i) 0.42^i*0.7*0.4)), col=2)
 text(15, c(0.55,0.44), c("Sir Bert, 0.5172","Sir Adam, 0.4828"), col=1:2)
 @
@@ -5689,7 +5769,7 @@ lines(Q, dgamma(x=Q, shape=shape, rate=rate), lwd=4)
 \vspace{-1em}
 <<EVS_value_RP_plot, size="scriptsize", fig.height=2.4, echo=-1>>=
 par(mar=c(3.2,3,2,0.5), mgp=c(2.1,0.7,0))
-# remember: RP = 1/(1-Pne) = 1/(1- Rank/(n+1) )
+# remember: RP   =   1/(1-Pne)   =   1/(1- Rank/(n+1) )
 plot(RP, m, ylab="Discharge HQ  [m\U00B3/s]", xlab="Return Period RP  [a]",
      las=1, main="yearly streamflow extrema / return period", pch=20)
 RPgamma <- 1/( 1-  pgamma( Q, shape=shape, rate=rate)    )
@@ -5727,11 +5807,11 @@ $ shape = \mu^2/var$ ~~ ; ~~ $ rate = \mu/var$
 $ scale = \sqrt{6}*\sigma/\pi $ ~~ ; ~~ $ loc = \mu-0.5772*scale $
 \item Add both distributions to the graph. You can use \rcode{evd::dgumbel}.
 \item BONUS: add a legend or label the lines directly
-\item Plot streamflow over discharge using Weibull plotting positions:\\
-\rcode{N\_s <- sort(Nile) ; n <- length(Nile)  ;  PP <- 1/(1-1:n/(n+1))}
+\item Plot streamflow over return period using Weibull plotting positions:\\
+\rcode{N\_s <- sort(Nile) ; n <- length(Nile)  ;  RP <- 1/(1-1:n/(n+1))}
 \item Using the help of \rcode{?plot.default}, use a logarithmic axis for the RP.
 \item BONUS: suppress axis drawing and add \rcode{berryFunctions::logAxis(1)}
-\item Add both fitted lines (in the same colors usd in the previous plot)
+\item Add both fitted lines (in the same colors used in the previous plot)
 \item From both distributions, estimate the discharge expected with RPs:\\
 \rcode{ReturnYears <- c(5,10,20,50,100,200)}
 \end{enumerate}
@@ -5760,8 +5840,8 @@ legend("topright", c("Gamma", "Gumbel"), col=c("blue","red"), lwd=3)
 \vspace{-0.8em}
 <<EVS_ex_plot, echo=-1, fig.height=2.4, size="footnotesize">>=
 par(mar=c(2.7,3.7,1,1), mgp=c(2.6,0.7,0), las=1)
-m <- sort(Nile) ; n <- length(Nile)  ;  PP <- 1/(1-1:n/(n+1))
-plot(PP, m, ylab="Nile flow", xlab="", log="x", ylim=c(500,1500), 
+N_s <- sort(Nile) ; n <- length(Nile)  ;  RP <- 1/(1-1:n/(n+1))
+plot(RP, N_s, ylab="Nile flow", xlab="", log="x", ylim=c(500,1500), 
      xlim=c(1,200), xaxt="n") ; berryFunctions::logAxis(1)
 title(xlab="Return period", line=1.5)
 lines(1/(1-    pgamma(q=Q, shape=shape, rate=rate)), Q, lwd=4,col="blue")
@@ -5830,16 +5910,16 @@ quantile(Q50$returnlev[1:16,"RP.50"])
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{EVS: extremeStat plots}
+\begin{frame}[fragile]{EVS: extremeStat plots: streamflow - return period}
 <<EVS_plot, echo=-1, fig.height=3.5>>=
 par(mar=c(3,4,1,1))
-plotLfit(Q50, legargs=list(x="topright"))
+plotLextreme(Q50)
 @
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{EVS: extremeStat plots}
+\begin{frame}[fragile]{EVS: extremeStat plots: streamflow distribution}
 <<EVS_plot_nbest, echo=-1, fig.height=3.5>>=
 par(mar=c(3,4,1,1))
 plotLfit(Q50, nbest=17, legargs=list(x="topright"))
@@ -5848,7 +5928,7 @@ plotLfit(Q50, nbest=17, legargs=list(x="topright"))
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{EVS: extremeStat plots}
+\begin{frame}[fragile]{EVS: extremeStat plots: streamflow CDF}
 <<EVS_plot_cdf, echo=-1, fig.height=3.5>>=
 par(mar=c(3,4,1,1))
 plotLfit(Q50, cdf=TRUE, legargs=list(x="bottomright"))
@@ -5860,9 +5940,11 @@ plotLfit(Q50, cdf=TRUE, legargs=list(x="bottomright"))
 \begin{frame}[fragile]{EVS: use extremeStat}
 \begin{exercise}{extremeStat}
 \begin{enumerate}
-\item Using distLextreme, printL and plotLfit in extremeStat, 
-explore the extremes of the Nile streamflow.
+\item Using distLextreme, printL and plotLextreme in extremeStat, 
+explore the extremes of the \rcode{Nile} streamflow.
 \item What streamflow is expected once per 200 years?
+\item BONUS 1: get uncertainty ranges for the GEV estimate with \rcode{distLexBoot}
+\item BONUS 2: use the POT method with a useful truncation
 \end{enumerate}
 \end{exercise}
 \end{frame}
@@ -5875,10 +5957,12 @@ nile <- distLextreme(Nile, RPs=c(50,100,200), quiet=TRUE)
 head(nile$returnlev)
 options(digits=7)
 @
+\vspace{-1em}
 <<EVS_ES_Nile_explore, eval=FALSE>>=
 printL(nile)
-plotLfit(nile)
+plotLextreme(nile)
 plotLweights(nile)
+nile_b <- distLexBoot(nile, selection="gev")
 @
 \end{frame}
 
@@ -6392,10 +6476,11 @@ This material has also been featured by Packt publishing:\\
 
 \begin{frame}[fragile]{Kriging: packages}
 <<krig_pack_inst, eval=FALSE>>=
-install.packages("rgeos")
-install.packages("sf")
-install.packages("geoR")
+# install packages if needed:
+if(!requireNamespace("pacman")) install.packages("pacman")
+pacman::p_load(rgeos, sf, geoR, berryFunctions) 
 @
+Alternatively:
 <<krig_pack_lib, eval=FALSE>>=
 library(sf)   # for st_read (read shapefiles), 
               # st_centroid, st_area, st_union
@@ -6504,6 +6589,41 @@ colPoints(x,y,z, add=F, cex=2, legargs=list(y1=0.8,y2=1))
 <<krig_plotf, width="\\textwidth">>=
 colPoints(grid[ ,1], grid[ ,2], krobj$predict, add=F,
           cex=2, col2=NA, legargs=list(y1=0.8,y2=1))
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Kriging: All in one script, for reference}
+<<krig_allinonescript, eval=FALSE, size="tiny">>=
+if(!requireNamespace("pacman", quietly=TRUE)) install.packages("pacman")
+pacman::p_load(geoR, berryFunctions) # installs packages if needed
+# berryFunctions: seqPal, distance, seqR, colPoints
+# geoR: as.geodata, variofit, variog, krige.conv, krige.control
+
+K_X <- c(4,4,5,5,6,6,6,7,7,8,9,9,9)
+K_Y <- c(6,9,5,8,4,6,8,4,8,7,3,7,9)
+K_Z <- c(5,9,2,6,3,5,9,4,8,8,3,6,7)
+K_COLS <- seqPal()
+K_MDIST <- max(distance(K_X,K_Y))
+K_RESOLUTION <- median(distance(K_X,K_Y))/10
+
+K_GEODATA <- as.geodata(cbind(K_X,K_Y,K_Z))
+K_VARIOGRAM <- variofit(variog(K_GEODATA, max.dist=K_MDIST))
+K_GRID <- expand.grid(seqR(K_X, by=K_RESOLUTION, extend=0.1),
+                      seqR(K_Y, by=K_RESOLUTION, extend=0.1))
+K_OK <- krige.conv(K_GEODATA, locations=K_GRID, 
+        krige=krige.control(type.krige="OK", obj.model=K_VARIOGRAM))
+
+geoR:::image.kriging(K_OK, col=K_COLS)
+colPoints(K_X, K_Y, K_Z, col=K_COLS, zlab="Kriging", cex=1)
+points(K_X, K_Y)
+
+# optional: interactive map:
+pacman::p_load(raster, mapview) # installs packages if needed
+K_RASTER <- raster::rasterFromXYZ(cbind(K_GRID, temp=K_OK$predict), 
+                          crs="+proj=longlat +datum=WGS84 +no_defs") 
+mapview::mapview(K_RASTER, col.regions=seqPal(256))
 @
 \end{frame}
 
@@ -6693,7 +6813,7 @@ leaflet(ddd) %>% addTiles() %>%
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{point data (coordinates) - OSMscale}
-Static maps:\vspace{-0.8em}
+Static maps: (\href{https://github.com/brry/OSMscale/#installation}{OSMscale installation instructions})\vspace{-0.8em}
 <<coord_OSMscale, eval=TRUE>>=
 library(OSMscale)
 pointsMap(lat, lon, data=ddd, quiet=TRUE)
