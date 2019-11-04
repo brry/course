@@ -1549,6 +1549,45 @@ apply(m, MARGIN=2, median, na.rm=TRUE) # apply to columns
 
 %------------------------------------------------------------%
 
+\begin{frame}[fragile]{combining matrices}
+\footnotesize
+<<mat_combine_objects>>=
+m <- matrix(11:16, ncol=3) ; m # 2 x 3
+p <- matrix(21:32, ncol=4) ; p # 3 x 4
+r <- matrix(31:39, ncol=3) ; r # 3 x 3
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{combining matrices ~ ~ m: 2 x 3 ~ ~ p: 3 x 4 ~ ~ r: 3 x 3}
+\footnotesize
+\vspace{-1.5em}
+<<mat_combine_bind1>>=
+rbind(m,r) # row-bind: number of columns must match
+# rbind(m,p) # Error: 3 and 4 columns
+@
+\pause
+\vspace{-1.5em}
+<<mat_combine_bind2>>=
+cbind(p,r) # column-bind: nrows must match
+# cbind(m,r) # Error: 2 and 3 rows3
+@
+\end{frame}
+
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{combining matrices}
+\footnotesize
+<<mat_combine_t>>=
+m
+t(m) # transpose
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}[fragile]{Write a function and apply it to a matrix}
 \vspace{-1.5em}
 \begin{exercise}{functions + matrices} %ex3
