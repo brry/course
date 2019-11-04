@@ -283,7 +283,7 @@ In the console, calculate ~ 21+21 ~,~ 7*6 ~ and ~ $\frac{0,3}{4}*\sqrt{313600}$\
 \vspace{-1em}
 \pause
 \begin{itemize}[<+->]
-  \item objects: assignment with ~ \rcode{$<-$} ~ Rstudio Keyboard shortcut:  \key{ALT} + \key{-}  \\
+  \item objects: assignment ~ \rcode{$<-$} ~ Rstudio Keyboard shortcut:  \key{ALT} + \key{-}  \\
         \rcode{nstudents <- 15\\nstudents\\nstudents > 12}
   \item What's a good object name? \onslide<+-> $\rightarrow$ short, but explanatory,
         \onslide<+-> lowerCamelStandard\_or\_underscore are good naming conventions
@@ -1598,7 +1598,7 @@ MARGIN: dimension to keep when function reduces vectors to a single number.\\
 
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.7-8: functions + matrices}
 <<ex_fm_sol3, eval=FALSE>>=
-nMax <- function(x, n_exclude=0)
+nthMax <- function(x, n_exclude=0)
   {
   x <- sort(x, decreasing=TRUE)
   if(n_exclude >= length(x)) 
@@ -1607,9 +1607,9 @@ nMax <- function(x, n_exclude=0)
   if(n_exclude > 0) x <- x[-(1:n_exclude)]
   max(x)
 }
-nMax(vect) ; max(vect)            # 9
-nMax(vect, 1) ; secondMax(vect)   # 8
-nMax(vect, 2)                     # 7
+nthMax(vect) ; max(vect)            # 9
+nthMax(vect, 1) ; secondMax(vect)   # 8
+nthMax(vect, 2)                     # 7
 @
 \end{frame}
 
