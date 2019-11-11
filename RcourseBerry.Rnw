@@ -1659,9 +1659,9 @@ nthMax(vect, 2)                     # 7
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Lists}
-Lists store every R data type (vectors, data.frames, \ldots) in one variable
+Lists store any R object type (vectors, data.frames, \ldots) in one object.
 <<list1, size="small", tidy=F>>=
-list("df"=df[c(1:2), ], matrix=m, character="TEXT")
+list("df"=df[1:2, ], matrix=m, character="TEXT")
 @
 \end{frame}
 
@@ -1726,6 +1726,25 @@ L1[3]
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{List indexing II}
+\vspace{-1.5em}
+<<listindex_list, eval=FALSE>>=
+class(L1[3]) # list
+class(L1[[3]]) # numeric
+@
+\vspace{-1em}
+\rcode{L1[3]} returns a list (with a single element).\\
+\rcode{L1[[3]]} returns that single element as is (in this case: a vector with 10 numbers). 
+\footnotesize
+\pause
+<<listindex5>>=
+# Several elements of the list (the result is still a list):
+L1[4:5]
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{List indexing III}
 <<listindex3>>=
 # Assesing elements by name
 L1$eight # NULL if not existent, so watch out with spelling!
@@ -1735,15 +1754,6 @@ L1$eigth
 <<listindex4>>=
 names(L1) # as with names(VECTOR) or rownames(DATAFRAME)
 names(L1)[2] <- "second elem."
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{List indexing III}
-<<listindex5>>=
-# Several elements of the list (the result is still a list):
-L1[4:5]
 @
 \end{frame}
 
@@ -1884,29 +1894,43 @@ lapply(c(6,2,13), sample, x=1:100)
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Practice matrices and lists}
-\begin{exercise}{matrix, list} %ex
+\begin{frame}[fragile]{Practice lists}
+\footnotesize
+\vspace{-1em}
+\begin{exercise}{lists} %ex
 \begin{enumerate}
-  \item Create a matrix with some numbers you like, with a useful amount of rows and columns.
+  \item Create a matrix with some numbers you like, with >= 2 rows and columns.
   \item Create a list (with meaningful element names!) that contains the previous matrix, your name, the current \rcode{Sys.time()}, the number of this exercise, and the haircolors of at least two of your neighbours.
-  \item BONUS 1: Using \rcode{sapply}, get the \rcode{length} for each element. What is surprising about he result?
-  \item BONUS 2: Make the haircolors element a \rcode{factor}. Inspect the result with \rcode{str}.
+  \item What do you get with \rcode{mean(mylist[1])}? Why?
+  \item Using the appropriate function from the apply family, get the \rcode{length} for each element. What is surprising about he result?
+  \item BONUS 1: Can a list containing another list be created?
+  \item BONUS 2: Change the \texttt{haircolors} element class into a category with \rcode{as.factor}. Inspect the new list with \rcode{str}.
+  \item tough BONUS 3: instead of using \rcode{DF[3,4]}, you can also explicitely call the subset function with \rcode{"["(DF, i=3, j=4)}. Create \rcode{datalist <- list(iris=head(iris), indo=head(Indometh), beaver=head(beaver1))}.\\
+  How can you get the second column of each \texttt{datalist} element? \\
+  How the third row? (Reminder: for a single DF, you need \rcode{DF[3, ]} with an empty entry for j.)
 \end{enumerate}
 \end{exercise}
 \end{frame}
-
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{matrix + list: solutions}
+\begin{frame}[fragile]{list exercise solutions}
+\small
 <<matlistsol, eval=FALSE>>=
 mat <- matrix(c(42,007,123,7777,-17,88), ncol=2)
 mylist <- list(matrix=mat, creator="Berry",
      created=Sys.time(), exerciseNumber=11,
      haircolor=c("brunette", "red", "blonde", "blonde")  )
+# 3 see below
 sapply(mylist, length) # matrix length is 6 (=ncol*nrow)
+# B1: Yes, you'll create a so-called recursive list.
 mylist$haircolor <- as.factor(mylist$haircolor)
 str(mylist)
+sapply(datalist, "[", , 2) # or sapply(datalist, "[", 2)
+sapply(datalist, "[", 3, )
+
 @
+3: \rcode{mean(mylist[1])} returns NA (along with a warning) because \rcode{mean} needs a numerical input.
+\rcode{mylist[1]} returns a list with a single element. \rcode{mean(mylist[[1]])} is needed instead.\\
 \end{frame}
 
 %------------------------------------------------------------%
@@ -1961,17 +1985,17 @@ which(v > 4)
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Please note ...}
-\begin{block}{Parentheses and square brackets of functions and objects}
-\pause
-\begin{description}[<+->]
-\item[objects] are variables and contain your data. The indexing (accessing of items) is done by brackets \texttt{[ ]}
-\item[functions] are methods (built-in or self-made) and they perform an analysis or start a process. When functions are called, you have to use parentheses \texttt{( )}, in which the arguments are put.
-\end{description}
-\end{block}
-\onslide<4-> With \rcode{newtable <- edit(oldtable)}, you can change cells in a table by hand. \alert{As this is not reproducible, this is bad practice!}. \rcode{fix} is even worse, as it changes the object itself.\\
-With \rcode{View}, you can look at a table in an external viewer. This is useful for large tables, as the console is not cluttered with data.
-\end{frame}
+% \begin{frame}[fragile]{Please note ...}
+% \begin{block}{Parentheses and square brackets of functions and objects}
+% \pause
+% \begin{description}[<+->]
+% \item[objects] are variables and contain your data. The indexing (accessing of items) is done by brackets \texttt{[ ]}
+% \item[functions] are methods (built-in or self-made) and they perform an analysis or start a process. When functions are called, you have to use parentheses \texttt{( )}, in which the arguments are put.
+% \end{description}
+% \end{block}
+% \onslide<4-> With \rcode{newtable <- edit(oldtable)}, you can change cells in a table by hand. \alert{As this is not reproducible, this is bad practice!}. \rcode{fix} is even worse, as it changes the object itself.\\
+% With \rcode{View}, you can look at a table in an external viewer. This is useful for large tables, as the console is not cluttered with data.
+% \end{frame}
 
 %------------------------------------------------------------%
 
@@ -3713,7 +3737,7 @@ df <- do.call(rbind, ldfs)
 \pause \vspace{-2.7em}
 <<for_lapply5, eval=FALSE>>=
 # PS: much faster in this example could be
-library("data.table")
+library("data.table") # fread + rbindlist
 ldfs <- lapply(X=files, FUN=fread, sep=",")
 df <- rbindlist(ldfs)
 @
