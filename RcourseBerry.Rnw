@@ -371,6 +371,7 @@ Copy the file \datalinkText{treesize.txt} and tell R where to look for it with:\
 \begin{frame}[fragile]{Solution to exercise \arabic{exercisecount}: Reading files}
 <<solreadfile, eval=F>>=
 treesize <- read.table(file="treesize.txt", header=TRUE)
+str(treesize)
 @
 \end{frame}
 
@@ -381,8 +382,8 @@ treesize <- read.table(file="treesize.txt", header=TRUE)
 \begin{itemize}[<+->]
   \item For tables with different data types (numbers, characters, categories, integers), R has the object type data.frame: \\\rcode{data.frame(count=c(2,6,5), type=c("a","k","k"))}
   \item \rcode{read.table} also returns a data.frame
-  \item If we have the object \rcode{df}, we can subset with \rcode{df[rows,columns]}
-  \item \rcode{df[1,2:4]; \onslide<+-> df[2, ]; \onslide<+-> ~ df[ ,"name"]; \onslide<+-> df\$name}
+  \item If we have the object \rcode{DF}, we can subset with \rcode{DF[rows,columns]}
+  \item \rcode{DF[1,2:4]; \onslide<+-> DF[2, ]; \onslide<+-> ~ DF[ ,"name"]; \onslide<+-> DF\$name}
   \item Logical values: \rcode{vect[c(TRUE,TRUE,FALSE,FALSE,TRUE,FALSE)]}
 \end{itemize}
 \onslide<+->
@@ -1433,7 +1434,7 @@ df[   , 2] # all rows, 2nd column (as vector)
 <<df3, size="small" >>=
 df[ "LogicalCol" ] # no comma -> data.frame
 @
-\onslide<+-> \vspace{-0.5em} Bad practice, unclear whether rows or columns are indexed!\vspace{-0.5em}
+\onslide<+-> \vspace{-0.5em} Bad practice, unclear to user whether rows or columns are indexed!\vspace{-0.5em}
 <<df3a, eval=FALSE>>=
 df[ , "LogicalCol", drop=FALSE ]  # better
 @
@@ -1454,6 +1455,7 @@ df[2, ] # full row
 \item If \rcode{nrow(df)} returns \rcode{NULL}, \texttt{df} might in fact be a vector.
 \item \rcode{NROW(df)} will show \rcode{length(df)} if \texttt{df} is a vector.
 \item Also, remember you can check the object with \rcode{class} and \rcode{mode}, as well as \rcode{is.vector}.
+\item Objects like matrices can be converted with \rcode{as.data.frame(theMatrix)}
 \item \rcode{colnames(df)} will show the column names. (see also \rcode{rownames})
 \end{itemize}
 \end{frame}
@@ -1464,13 +1466,13 @@ df[2, ] # full row
 \begin{exercise}{data.frames}
 Working with the dataset \rcode{state.x77}
 \begin{enumerate}
-\item Change the object type to a data.frame
+\item Change the object type to a data.frame. Remember you can change \textit{data} types with the \rcode{as.factor} syntax.
 \item What are the 3 ways to select the population column? Which one doesn't work for Life expectancy? Why not?
 \item How can you subset a single column, without the result being simplified to a vector? (you want to keep it as a data.frame, but with one single column only. Hint: \rcode{?"["})
 \item How could the \rcode{\$} subsetting method be dangerous when misspelling columns?
 \item By which two ways can you select the Income and Illiteracy columns?
 \item How can you select all the states (=rows) with an income above 5000?
-\item BONUS: Why does \rcode{state.x77\$Income} not work on the original dataset? (use \rcode{rm(state.x77\$Income)} to remove your changed object from the workspace, if you didn't assign it to a different name.)
+\item BONUS: Why does \rcode{state.x77\$Income} not work on the original dataset? (use \rcode{rm(state.x77)} to remove your changed object from the workspace, if you didn't assign it to a different name.)
 \end{enumerate}
 \end{exercise}
 \end{frame}
