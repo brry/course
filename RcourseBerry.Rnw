@@ -1464,10 +1464,10 @@ df[2, ] # full row
 
 \begin{frame}[fragile]
 \begin{exercise}{data.frames}
-Working with the dataset \rcode{state.x77}
+Working with the dataset \rcode{state.x77} (comes built-in with R)
 \begin{enumerate}
-\item Change the object type to a data.frame. Remember you can change \textit{data} types with the \rcode{as.factor} syntax.
-\item What are the 3 ways to select the population column? Which one doesn't work for Life expectancy? Why not?
+\item Change the object type to a data.frame.
+\item What are the 3 ways to select the population column? Which one doesn't work for Life expectancy? Why not? (This only applies if you used \rcode{as.data.frame}, not \rcode{data.frame})
 \item How can you subset a single column, without the result being simplified to a vector? (you want to keep it as a data.frame, but with one single column only. Hint: \rcode{?"["})
 \item How could the \rcode{\$} subsetting method be dangerous when misspelling columns?
 \item By which two ways can you select the Income and Illiteracy columns?
@@ -1936,6 +1936,75 @@ sapply(datalist, "[", 3, )
 \end{frame}
 
 %------------------------------------------------------------%
+
+\begin{frame}[fragile]{apply custom functions to lists}
+Function to get the sum of elements 3,4,5 in a vector:
+\vspace{-0.8em}
+<<listsum35a>>=
+sum35 <- function(x) sum(x[3:5])
+sum35(1:9)
+@
+\pause \vspace{-0.8em}
+<<listsum35b>>=
+L <- list(1:7, c(42,007,pi,2,4), rnorm(15), 99:96)
+sapply(L, sum35)
+@
+\pause \vspace{-0.8em}
+<<listsum35c, eval=FALSE>>=
+sapply(L, function(x) sum(x[3:5])  )
+@
+\vspace{-0.8em}
+called "anonymous" function (not defined with a name)
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{list and df exercise}
+\small
+\vspace{-0.8em}
+\begin{exercise}{lists and dataframes}
+\begin{enumerate}
+\item Create a list with the following built-in datasets (i.e. available directly in R):
+\rcode{infert, Indometh, euro, esoph, VADeaths, sleep}. 
+Use custom element names and a useful object name. Check it with \rcode{str}.
+\item Now change the esoph element to keep only the numerical columns.
+\item For each of the following tasks, compare \rcode{lapply} and \rcode{sapply}.
+If simplification doesn't work, analyze why and see if you can exclude elements of the list to make it work.
+For each element, get the \rcode{class, dim, ncol, NCOL, median, range}.
+\item Instead of using \rcode{ToothGrowth[5,2]}, you can also explicitely call the subset function with \rcode{"["(ToothGrowth, i=5, j=2)}.\\
+Reminder: for a row, you need \rcode{ToothGrowth[5, ]} with an empty entry for j.
+Get the third column of \rcode{ToothGrowth} in this explicit way.
+\item Get the second column of each data.frame element of the previous list, again comparing \rcode{lapply} and \rcode{sapply}. Then get the third row of each element.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{list and df exercise solution}
+\footnotesize
+<<ldfex, eval=FALSE>>=
+manyDatasets <- list(infertility=infert, indo=Indometh,
+    euro=euro, cancer=esoph, deathrates=VADeaths, sleep=sleep)
+manyDatasets$cancer <- manyDatasets$cancer[,4:5]
+str(manyDatasets)
+lapply(manyDatasets, class)
+sapply(manyDatasets, class)
+sapply(manyDatasets[-2], class)
+sapply(manyDatasets[-3], dim)
+sapply(manyDatasets, ncol) # NULL for vector, cannot be simplified
+sapply(manyDatasets, NCOL)
+sapply(manyDatasets[c(3,5)], median) # other are DFs = non-numerics
+sapply(manyDatasets[3:5], range) # range can handle all-numeric DFs
+
+"["(ToothGrowth,,3)
+
+lapply(manyDatasets[-3], "[", , j=2)
+lapply(manyDatasets[-3], "[", 3, )
+@
+\end{frame}
+
+%------------------------------------------------------------%
 %------------------------------------------------------------%
 \subsection{Classes, methods, functions}
 %------------------------------------------------------------%
@@ -2389,7 +2458,7 @@ If you haven't already, now is a good time to download (and unzip!) \href{https:
   \item Use \rcode{rbind} to combine both tables line-wise and assign the output to e.g. \rcode{apples}.
   \item Read \datalinkBlob{mergeAge.txt} into e.g. \rcode{age}.
   \item Describe what \rcode{merge(age, apples, by.x="Name", by.y="Person")} does.
-  \item What happens if you set \texttt{all} or \texttt{all.x} = TRUE?
+  \item What happens if you set \texttt{all=TRUE} or \texttt{all.x=TRUE}?
   \item BONUS 1: What is the difference between \rcode{cbind} and \rcode{rbind}?
   \item BONUS 2: Why does \rcode{cbind} not work with age and apples?
 \end{enumerate}
