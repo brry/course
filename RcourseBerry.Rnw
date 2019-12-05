@@ -469,7 +469,7 @@ plot(x=Indometh$time, y=Indometh$conc,
      col="orange", pch=16, main="Awesome Graph!")
 points(4, 1.5, pch=22, bg="yellow", cex=4, col="red")
 lines(x=c(2,5,6,7), y=c(1,2.3,-3,1),
-      col=4, type="b", lwd=5)
+      col="blue", type="b", lwd=5)
 @
 \end{frame}
 
@@ -524,7 +524,7 @@ quantile(treesize$height, probs=c(0.1, 0.8))
 
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Histogram}
 <<solscathist>>=
-hist(treesize$height, col=6, breaks=20, las=1)
+hist(treesize$height, col="purple", breaks=20, las=1)
 @
 \end{frame}
 
@@ -532,7 +532,8 @@ hist(treesize$height, col=6, breaks=20, las=1)
 
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Boxplot}
 <<solscatbox>>=
-boxplot(treesize$height, col=5, horizontal=TRUE, notch=TRUE)
+boxplot(treesize$height, col="cyan", horizontal=TRUE, 
+        notch=TRUE)
 @
 \end{frame}
 
@@ -582,10 +583,10 @@ xaxt="n" # axis type (none to suppress axis)
 \begin{exercise}{Packages, linear regression}
 \begin{enumerate}
   \item Install and load the package \rcode{berryFunctions}
-  \item Pass the \datalinkRaw{treesize} data to \rcode{linReg}.
+  \item Pass the \datalinkText{treesize.txt} data to \rcode{linReg}.
         Don't use (x,y) coordinates, but a (y\textasciitilde x) formula, read as "y dependent on x".
         Use the \texttt{data} argument as described in the "Examples" section of the \rcode{linReg} manual.
-  \item Describe the resulting graph (height vs age).
+        Describe the resulting graph (height vs age).
   \item Feed the data into \rcode{lm}, assign the output to an object (useful name!).
   \item Briefly explain the \rcode{summary} of the linear model.
   \item BONUS1: Look into the source code of \rcode{linReg}. 
@@ -593,7 +594,7 @@ xaxt="n" # axis type (none to suppress axis)
         You can print the function by calling it without brackets.
         You can also open it on github with \rcode{berryFunctions::funSource}.
   \item BONUS2: What is the backbone for the calculation in \rcode{linReg}?
-  \item BONUS3: install \href{https://github.com/brry/rskey\#rskey}{rskey (via github)}, 
+  \item BONUS3: install \href{https://github.com/brry/rskey\#rskey}{rskey}, 
         set a keyboard shortcut for \rcode{funSource} and use it to get the source code of some function.
 \end{enumerate}
 \end{exercise}
@@ -607,8 +608,7 @@ xaxt="n" # axis type (none to suppress axis)
 library("berryFunctions")
 linReg(height~age, data=treesize)
 linReg
-browseURL("https://github.com/brry/berryFunctions")
-# go to R/linReg.R  -  working horse: lm
+funSource(linReg) # berryFunctions/R/linReg.R  -  working horse: lm
 linear_model <- lm(height~age, data=treesize)
 summary(linear_model)
 @
@@ -617,7 +617,7 @@ summary(linear_model)
 \href{http://blog.yhat.com/posts/r-lm-summary.html}{blog.yhat.com/posts/r-lm-summary.html}\\
 \href{http://stats.stackexchange.com/questions/5135/interpretation-of-rs-lm-output}{stats.stackexchange.com/questions/5135/interpretation-of-rs-lm-output}
 \normalsize
-<<sollinreg2, echo=F, fig.height=2.3>>=
+<<sollinreg2, echo=F, fig.height=2.1>>=
 treesize <- read.table(file="data/treesize.txt", header=TRUE)
 par(mar=c(2.5,3,2,1), mgp=c(2,0.7,0))
 library("berryFunctions")
@@ -697,7 +697,7 @@ title(xlab="age", mgp=c(1.5,0,0))
 %------------------------------------------------------------%
 
 \begin{frame}{Time to put all of this into practice}
-\begin{exercise}{Reading files, subsetting, comparison}%1
+\begin{exercise}{Reading files, subsetting, comparing}%1
 \begin{enumerate}
   \item Start a new session of R. Read in the tree size data.
   \item Check that everything is read correctly with \rcode{str}.
@@ -725,9 +725,9 @@ treeA <- treesize[treesize$measurement=="A", ]
 treeB <- treesize[treesize$measurement=="B", ]
 library("berryFunctions")
 linReg(height~age, data=treeA, pos1="topleft")
-linReg(height~age, data=treeB, add=T, col=4,
+linReg(height~age, data=treeB, add=T, colline="blue",
        pos1="bottomright", inset=0.05)
-points(height~age, data=treeB, pch=3, col=4)
+points(height~age, data=treeB, pch=3, col="blue")
 @
 \end{frame}
 
@@ -1970,8 +1970,8 @@ Use custom element names and a useful object name. Check it with \rcode{str}.
 \item Now change the esoph element to keep only the numerical columns.
 \item For each of the following tasks, compare \rcode{lapply} and \rcode{sapply}.
 If simplification doesn't work, analyze why and see if you can exclude elements of the list to make it work.
-For each element, get the \rcode{class, dim, ncol, NCOL, median, range}.
-\item Instead of using \rcode{ToothGrowth[5,2]}, you can also explicitely call the subset function with \rcode{"["(ToothGrowth, i=5, j=2)}.\\
+For each element, get the \rcode{class, dim, ncol, NCOL, median, range, summary}.
+\item Instead of using \rcode{ToothGrowth[5,2]}, you can also explicitely call the subset function with \rcode{"["(ToothGrowth, 5, 2)}.\\
 Reminder: for a row, you need \rcode{ToothGrowth[5, ]} with an empty entry for j.
 Get the third column of \rcode{ToothGrowth} in this explicit way.
 \item Get the second column of each data.frame element of the previous list, again comparing \rcode{lapply} and \rcode{sapply}. Then get the third row of each element.
@@ -2006,7 +2006,7 @@ lapply(manyDatasets[-3], "[", 3, )
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Classes, methods, functions}
+\subsection{Classes and methods, data types and object types}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2790,7 +2790,7 @@ for(y in 3:1)
    for(x in 1:3) {
       points(a+4*x-4, b+5*y-5, type=tp[i])
       text(3.5+4*x-4, 3+5*y-5, paste0("\"",tp[i],"\"")) ; i <- i+1 }
-abline(v=c(5,9)-.5, h=c(4,9)+.75, col=8 )
+abline(v=c(5,9)-.5, h=c(4,9)+.75, col="gray" )
 box("plot")
 @
 \end{frame}
@@ -2855,8 +2855,8 @@ plot(beaver2[ ,2:3], xlim=c(3000,-1000), ylim=c(36,40))
 <<plot_add, size="scriptsize", echo=-1>>=
 par(mar=c(3.5,4,2,1), mgp=c(2.4,0.7,0), las=1)
 plot(beaver2[ ,2:3])
-points(100, 37.5, pch=21, bg=5, cex=4, col=2, lwd=3)
-lines(x=c(5,120,514,918), y=c(37,39,38,37.5), col=3, type="b")
+points(100, 37.5, pch=21, bg=5, cex=4, col="red", lwd=3)
+lines(x=c(5,120,514,918), y=c(37,39,38,37.5), col="green4", type="b")
 @
 \end{frame}
 
@@ -2890,7 +2890,7 @@ plot(numbers, type="l", xlab="Time",
 # Add points and lines
 points(x=x, y=y, pch=22, type="p", cex=3, col="orange",
       bg="green")
-lines(x=c(10, 15, 31, 33), y=c(-6, -3, -8, -2)+25, col=2,
+lines(x=c(10, 15, 31, 33), y=c(-6, -3, -8, -2)+25, col="red",
       lty="dashed")
 # Custom axis, legend and box around plot:
 axis(side=1, at=c(0, 15, 30, 45)  )
@@ -2939,9 +2939,9 @@ plot(stackloss[ ,1:2]) # 6 plot commands
 plot(stackloss[ ,2:3])
 hist(rnorm(300), col="orange")
 par(cex.lab=0.65, cex.axis=0.8)
-plot(cumsum(rnorm(30)), type="l", col=4)
-plot(cumsum(rnorm(300)), type="l", col=5)
-plot(cumsum(rnorm(3000)), type="l", col=6)
+plot(cumsum(rnorm(30)), type="l", col="blue")
+plot(cumsum(rnorm(300)), type="l", col="cyan")
+plot(cumsum(rnorm(3000)), type="l", col="purple")
 @
 \end{frame}
 
@@ -2991,10 +2991,10 @@ par(oma=c(1,2,2,4), lend=1) # outer margins, line end style
 laymat <- matrix(c(4,rep(1,4), 3, rep(2,6)), ncol=6, byrow=TRUE)
 lay <- layout( laymat, heights=c(0.6, 0.4) )  ; par(mar=c(3,4,1,1), cex=1)  ; set.seed(12)
 plot(runif(6), las=1, type="l", ylab="Y-Axis")
-box("plot",   lwd=2, col=7)
-box("figure", lwd=2, col=2)
-box("inner",  lwd=2, col=3)
-box("outer",  lwd=4, col=4)
+box("plot",   lwd=2, col="gold")
+box("figure", lwd=2, col="red")
+box("inner",  lwd=2, col="green4")
+box("outer",  lwd=4, col="blue")
 par(mar=rep(0,4)) ; plot(1, type="n", axes=T, ann=F)
 legend("center", c("'plot'","'figure', after par(mfrow) or layout()","'inner'","'outer', if outer margins were set by par(oma)"), bty="n", title="box( _ )", col=c(7,2,3,4), lwd=2)
 @
@@ -3025,9 +3025,9 @@ wzug <- read.table("data/Zugspitze.txt", header=TRUE)
 
 pdf("fig/zugspitze.pdf", height=4)
 par(mfrow=c(1,2), mar=c(3,3,1,1), oma=c(0,0,2,0), las=1)
-hist(wzug$LUFTTEMPERATUR, col="coral", breaks=25,
+hist(wzug$MO_TT, col="coral", breaks=25,
      main="Histogram monthly values")
-plot(wzug$LUFTTEMPERATUR[1:50], type="l", lwd=2, 
+plot(wzug$MO_TT[1:50], type="l", lwd=2, 
      col="darkorchid", main="First 50 months")
 title(main="Temperature Zugspitze 1900:2015", outer=TRUE)
 dev.off()
@@ -3137,7 +3137,7 @@ strsplit("Die Aerzte - Monster Party", split=" - ")[[1]]
 <<backsl, echo=T, eval=F, tidy=FALSE>>=
 plot(1)
 # average symbol without using "expression":
-mtext(paste("\U00D8", 5.4, "\U00B0 C"), col=2)
+mtext(paste("\U00D8", 5.4, "\U00B0 C"), col="red")
 @
 \end{frame}
 
@@ -3253,7 +3253,7 @@ if condition == FALSE, then expression2 is evaluated.\\[1em]
 if(TRUE)
   {
   plot(1:10, main="TRUE in code")
-  box("figure", col=4, lwd=3)
+  box("figure", col="blue", lwd=3)
   } else
 # do something else: plot random numbers
     {
@@ -3274,7 +3274,7 @@ par(mfrow=c(1,2), cex=1, las=1)
 if(TRUE)
   {
   plot(1:10, main="TRUE in code")
-  box("figure", col=4, lwd=3)
+  box("figure", col="blue", lwd=3)
   } else
     {
     plot(rnorm(500), main="FALSE in code")
@@ -3282,7 +3282,7 @@ if(TRUE)
 if(FALSE)
   {
   plot(1:10, main="TRUE in code")
-  box("figure", col=4, lwd=3)
+  box("figure", col="blue", lwd=3)
   } else
     {
     plot(rnorm(500), main="FALSE in code")
@@ -3491,8 +3491,6 @@ v # this code was executed once for each i
 options(width=50)
 @
 \pause \vspace{-0.5em}
-See \href{https://github.com/brry/rclick/blob/master/10-if\%2Cfor.r\#L152}{Rclick 10.4} for a realistic for loop example.\\
-\pause
 In R, \rcode{for} loops are slow. Always try to vectorize (the best option, not always possible) or use \rcode{lapply} (saves you the initiation of the empty vector, easier to parallize).
 \end{frame}
 
@@ -3517,8 +3515,8 @@ plot(x, 12.5*10/factorial(10-1)*(x/8*10)^(10-1)*exp(-x/8*10),
 par(mar=c(3,3,1,1), mgp=c(2,0.8,0), las=1)
 x <- seq(0,25,0.1)
 plot(x,x, type="n", ylab="y = f(x,n)")
-lines(x, 12.5*5/factorial(5-1)*(x/8*5)^(5-1)*exp(-x/8*5), col=2)
-lines(x, 12.5*6/factorial(6-1)*(x/8*6)^(6-1)*exp(-x/8*6), col=2)
+lines(x, 12.5*5/factorial(5-1)*(x/8*5)^(5-1)*exp(-x/8*5), col="red")
+lines(x, 12.5*6/factorial(6-1)*(x/8*6)^(6-1)*exp(-x/8*6), col="red")
 @
 \only<2>{
 \begin{textblock*}{0.2cm}(2.6cm,2.2cm)
@@ -3552,7 +3550,7 @@ par(mar=c(3,3,1,1), mgp=c(2,0.8,0), las=1)
 x <- seq(0,25,0.1)
 plot(x,x, type="n", ylab="y = f(x,n)")
 for (n in 5:25)
-lines(x, 12.5*n/factorial(n-1)*(x/8*n)^(n-1)*exp(-x/8*n), col=2)
+lines(x, 12.5*n/factorial(n-1)*(x/8*n)^(n-1)*exp(-x/8*n), col="red")
 @
 \begin{textblock*}{0.2cm}(2.6cm,2.65cm)
 \vspace{0.45cm} ~
@@ -3576,31 +3574,120 @@ lines(x, 12.5*n/factorial(n-1)*(x/8*n)^(n-1)*exp(-x/8*n), col=2)
 %
 \end{frame}
 
+
+
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{for loops shouldn't grow a vector}
-Bad practice - R needs to recreate the vector each time:
-<<for_loop_init1, eval=FALSE, size="small">>=
-output <- NA
-for(column in 1:5) output[column] <- median(iris[ ,column])
-@
-\pause
-This internally does the same thing as:
-<<for_loop_init2, eval=FALSE, size="small">>=
-output <- vector(mode="numeric", length=0)
-for(column in 1:5) output <- c(output, median(iris[ ,column])  )
-@
-\pause
-Good practice - first tell R how big the output will be, so it can be adequately allocated in memory:
-<<for_loop_init3, eval=FALSE, size="small">>=
-output <- vector(mode="numeric", length=5)
-for(column in 1:5) output[column] <- median(iris[ ,column])
+\begin{frame}[fragile]{For loops: multipanel graphics: the task}
+\small
+\begin{exercise}{for loop}
+\begin{enumerate}
+\item Read \datalinkText{stocks.txt}, so that there are no factors in the data.frame
+\item Change the first column type from \texttt{char} to \texttt{date} with \rcode{?as.Date}
+\item What do you get with \rcode{plot(yourDF[ ,c(1,2)])}? Make it a line graph.
+\item With a \rcode{for} loop, plot each stock time series, i.e. plot the \textit{i}th column
+over the first column.
+\item BONUS 1: Use good annotations (\texttt{main, ylab, xlab}) and turn y axis labels upright (\texttt{las})
+\item BONUS 2: Plot all lines in a single graph (set \texttt{ylim} in the \rcode{plot} command.). 
+      Label the lines directly. Use a logarithmic axis, enhanced with \rcode{berryFunctions::logAxis}
+\item Tough BONUS 3: With \rcode{par(mfrow...)}, set up a two by three panel plot. Make the plot margins smaller (\rcode{par} \texttt{mar}) and move the axis labels closer to the plots (\texttt{mgp}).
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{For loops: multiple graphics}
+\vspace{-1em}
+<<forpanel, size="footnotesize", fig.height=2.8>>=
+stocks <- read.table("data/stocks.txt", header=T, as.is=T)
+stocks$Date <- as.Date(stocks$Date)
+par(mfrow=c(2,3), mar=c(2,4,1,1), mgp=c(2.5,0.7,0),oma=c(0,0,2,0),las=1)
+for(i in 2:7) plot(stocks[ ,c(1,i)], type="l")
+mtext("stocks this decade", line=0, outer=TRUE)
 @
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{for loops exercise}
+\begin{frame}[fragile]{logarithmic axis}
+\vspace{-0.9em}
+<<forlines, fig.show="hide", echo=-1, size="small", fig.width=5>>=
+par(mar=c(2,5,1.5,2.5), mgp=c(3,0.7,0), cex=0.8)
+stocks <- read.table("data/stocks.txt", header=T, as.is=T)
+stocks$Date <- as.Date(stocks$Date)
+companies <- colnames(stocks)[-1]
+cols <- c("purple", "orange", "red", "green", "pink", "blue")
+names(cols) <- companies     # cols["AMAZON"]
+
+plot(stocks$Date, stocks$APPLE, type="n", log="y", yaxt="n", 
+     xlim=as.Date(c("2007-01-03","2020-01-01")), 
+     ylim=range(stocks[,-1], na.rm=TRUE), 
+     ylab="Stock values, log axis  [USD]", xlab="Date", las=1,
+     main="Tech companies rise faster than the car industry")
+berryFunctions::logAxis(2)
+for(comp in companies) 
+    lines(stocks$Date, stocks[,comp], col=cols[comp])
+#legend("topleft", companies, fill=cols)
+berryFunctions::textField(tail(stocks[,1],1), cex=0.8,
+                          y=as.numeric(tail(stocks[,-1],1)), 
+                          rrarg=list(bothsame=FALSE),
+                          companies, adj=0, col=cols, xpd=T)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{logarithmic axis}
+\includegraphics[width=\textwidth]{fig/forlines-1.pdf}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{For loops: multipanel graphics: beautifuller}
+\vspace{-1em}
+<<forpanel2, size="scriptsize", fig.height=2.5>>=
+par(mfrow=c(1,2), mar=c(4,4,2,0.1), mgp=c(2.5,0.7,0), cex=0.7, las=1)
+for(i in 2:3)
+ {
+ plot(stocks[ stocks$Date>as.Date("2016-04-01") , c(1,i) ],
+      main=colnames(stocks)[i], xaxt="n", type="l", xlab=" ",
+      ylab=if(i==2) "Adjusted daily share price  [USD]" else "")
+ berryFunctions::monthAxis(1)
+ }
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{stocks data from \href{http://finance.yahoo.com}{finance.yahoo.com}}
+In case you want to know how I create (and update) the stock dataset:
+<<stocks_datapreparation, size="scriptsize", eval=F>>=
+# Download current datasets:
+if(!requireNamespace("quantmod")) install.packages("quantmod")
+if(!requireNamespace("pbapply"))  install.packages("pbapply")
+dummy <- pbapply::pblapply(c("F","VLKAF", "AMZN","AAPL","GOOG","MSFT"),
+   function(x) zoo::write.zoo(x=quantmod::getSymbols(x, auto.assign=FALSE)[,6],
+                           file=paste0("data/finance/",x,".txt"), col.names=T))
+
+# read single files to R and merge into one file:
+stocks <- lapply(dir("data/finance", full=TRUE),
+                  read.table, as.is=TRUE, header=TRUE)
+stocks <- Reduce(function(...) merge(..., all=T), stocks)
+
+# Get nicer column names:
+names <- sapply(strsplit(colnames(stocks), ".", fix=TRUE),"[", 1)
+colnames(stocks) <- c(Index="Date", F="FORD", VLKAF="VOLKSWAGEN",
+         AMZN="AMAZON", AAPL="APPLE", GOOG="GOOGLE", MSFT="MICROSOFT")[names]
+
+# Save to disc:
+write.table(stocks, file="data/stocks.txt", row.names=F, quote=F)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{for loops: file exercise}
 \begin{exercise}{for loops in file creation}
 \scriptsize
 We'll write many datasets to disc (and read them back).
@@ -3629,23 +3716,7 @@ We'll write many datasets to disc (and read them back).
 
 %------------------------------------------------------------%
 
-% \begin{frame}[fragile]{Recap \alert{for} loop}
-% \pause
-% With \rcode{rexp(n, rate)}, random numbers can be generated from the exponential distribution.\\
-% With \rcode{paste0("someText\_", 1)}, character strings and numbers can be concatenated.\\ 
-% With \rcode{write.table(x, file)}, data can be written to a file.\\
-% Using a \alert{for} loop, write three datasets to separate .txt files with 5, 20 and 100 exponentially distributed random numbers.\\
-% BONUS: format the file nicely with the \rcode{write.table()} options. 
-% \pause
-% <<recapfor, size="small">>=
-% for(n in c(5,20,100)) 
-%   write.table(rexp(n), file=paste0("random_", n, ".txt"))
-% @
-% \end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{for loops exercise solution}
+\begin{frame}[fragile]{for loops: file exercise solution}
 <<forloops_file_writing, eval=FALSE, size="footnotesize">>=
 dir.create("loopexercise")
 for(n in c(10,20,50,100,500)) 
@@ -3694,78 +3765,6 @@ for(i in seq_along(something)) do_something(i)
 Because:\vspace{-0.5em}
 <<seq_along4, size="scriptsize">>=
 1:length(something)     ;   seq_along(something)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{stocks data from \href{http://finance.yahoo.com}{finance.yahoo.com}}
-<<stocks_datapreparation, size="scriptsize", eval=F>>=
-# Download current datasets:
-if(!requireNamespace("quantmod")) install.packages("quantmod")
-if(!requireNamespace("pbapply"))  install.packages("pbapply")
-dummy <- pbapply::pblapply(c("F","VLKAF", "AMZN","AAPL","GOOG","MSFT"),
-   function(x) zoo::write.zoo(x=quantmod::getSymbols(x, auto.assign=FALSE)[,6],
-                           file=paste0("data/finance/",x,".txt"), col.names=T))
-
-# read single files to R and merge into one file:
-stocks <- lapply(dir("data/finance", full=TRUE),
-                  read.table, as.is=TRUE, header=TRUE)
-stocks <- Reduce(function(...) merge(..., all=T), stocks)
-
-# Get nicer column names:
-names <- sapply(strsplit(colnames(stocks), ".", fix=TRUE),"[", 1)
-colnames(stocks) <- c(Index="Date", F="FORD", VLKAF="VOLKSWAGEN",
-         AMZN="AMAZON", AAPL="APPLE", GOOG="GOOGLE", MSFT="MICROSOFT")[names]
-
-# Save to disc:
-write.table(stocks, file="data/stocks.txt", row.names=F, quote=F)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{For loops: multipanel graphics: the task}
-\begin{exercise}{for loop}
-\begin{enumerate}
-\item Read \datalinkText{stocks.txt}, so that there are no factors in the data.frame
-\item Change the first column type from \texttt{char} to \texttt{date} with \rcode{?as.Date}
-\item What do you get with \rcode{plot(stocks[ ,1:2])}? Make it a line graph.
-\item With \rcode{par(mfrow...}, set up a two by three panel plot
-\item With a for loop, fill those with each stock time series
-\item BONUS 1: Make good annotations, including a main title (par oma, \rcode{mtext} with the outer argument)
-\item BONUS 2: Make the plot margins smaller (par mar), turn y axis labels upright (las) and move the axis labels closer to the plots (mgp).
-\item BONUS 3: Understand and comment each line of the data preparation. %Get your own files or use mine: \footnotesize{\datalinkBlob{finance/AAPL.txt}, \datalinkBlob{finance/AMZN.txt}, \datalinkBlob{finance/F.txt}, \datalinkBlob{finance/GOOG.txt}, \datalinkBlob{finance/VLKAY.txt}, \datalinkBlob{finance/YHOO.txt}}
-\end{enumerate}
-\end{exercise}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{For loops: multipanel graphics: the solution}
-\vspace{-1em}
-<<forpanel, size="footnotesize", fig.height=2.8>>=
-stocks <- read.table("data/stocks.txt", header=T, as.is=T)
-stocks$Date <- as.Date(stocks$Date)
-par(mfrow=c(2,3), mar=c(2,4,1,1), mgp=c(2.5,0.7,0),oma=c(0,0,2,0),las=1)
-for(i in 2:7) plot(stocks[ ,c(1,i)], type="l")
-mtext("stocks this decade", line=0, outer=TRUE)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{For loops: multipanel graphics: beautifuller}
-\vspace{-1em}
-<<forpanel2, size="scriptsize", fig.height=2.5>>=
-par(mfrow=c(1,2), mar=c(4,4,2,0.1), mgp=c(2.5,0.7,0), cex=0.7, las=1)
-for(i in 2:3)
- {
- plot(stocks[ stocks$Date>as.Date("2016-04-01") , c(1,i) ],
-      main=colnames(stocks)[i], xaxt="n", type="l", xlab=" ",
-      ylab=if(i==2) "Adjusted daily share price  [USD]" else "")
- berryFunctions::monthAxis(1)
- }
 @
 \end{frame}
 
@@ -3885,7 +3884,7 @@ names(harmeans) <- names(Harman23.cor)
 harmeans
 
 max_n <- function(...) max(rnorm(1e5))
-pbapply::pbsapply(1:10, max_n)
+pbapply::pbsapply(1:5, max_n)
 @
 <<exlapply_sol3, eval=FALSE>>=
 lapply(Harman74.cor, "[", 1:5)
@@ -4040,7 +4039,7 @@ options(width=90)
 #install.packages("microbenchmark")
 library(microbenchmark)
 #install.packages("numbers")
-suppressWarnings(library(numbers))
+suppressMessages(library(numbers))
 forbad <- function(n)
   {fibvals <- c(1,1)
   for (i in 3:len) fibvals[i] <- fibvals[i-1]+fibvals[i-2]
@@ -4161,7 +4160,7 @@ What are the chances of survival for each of the two?\\
 par(mar=c(2,3,2,0), las=1)
 plot(cumsum(sapply(0:20, function(i) 0.42^i*0.3)), type="l",
      ylim=c(0.26,0.58), main="cumulative death chance ~ round")
-lines(cumsum(sapply(0:20, function(i) 0.42^i*0.7*0.4)), col=2)
+lines(cumsum(sapply(0:20, function(i) 0.42^i*0.7*0.4)), col="red")
 text(15, c(0.55,0.44), c("Sir Bert, 0.5172","Sir Adam, 0.4828"), col=1:2)
 @
 \end{frame}
@@ -4364,7 +4363,7 @@ pq(3, -12)
 \begin{frame}[fragile]{Functions: example II}
 <<pqfunplot>>=
 x <- seq(-10, 10, len=100)
-plot(x,  x^2 +3*x -12, type="l", col=2)
+plot(x,  x^2 +3*x -12, type="l", col="red")
 abline(h=0, v=0)
 @
 \end{frame}
@@ -4375,7 +4374,7 @@ abline(h=0, v=0)
 <<circlebasics, echo=-1, fig.height=2.1, fig.width=2.5, out.width="0.4\\textwidth">>=
 par(mar=c(2,2,1,1), las=1)
 plot(1:10, asp=1) # aspect ratio y/x of graph range
-grid(col=1) # the next part sould go into a function:
+grid(col="gray") # the next part sould go into a function:
 x <- 8 ;  y <- 6 ;  r <-2
 p <- seq(0, 2*pi, len=50)
 cx <- x+r*cos(p) ;  cy <- y+r*sin(p)
@@ -4439,7 +4438,7 @@ circle <- function(
 par(mar=c(3,3,0,0), las=1)
 plot(1:20, type="n", asp=1, cex=2)
 circle(5,5, r=3)
-circle(15,10, r=4, locnum=12, col=2, border=4, lwd=3)
+circle(15,10, r=4, locnum=12, col="red", border=4, lwd=3)
 @
 \end{frame}
 
@@ -4930,7 +4929,7 @@ boxplot(mb, yaxt="n"); berryFunctions::logAxis(2)
 par(mar=c(4,4,.5,.5), mgp=c(2.5,0.7,0), las=1)
 transp <- rgb(0,0,0, alpha=0.1)
 plot(n, res_lapply["mean", ], pch=16, col=transp, cex=0.6)
-abline(h=70, col=4, lwd=2)
+abline(h=70, col="blue", lwd=2)
 @
 \end{frame}
 
@@ -4942,11 +4941,11 @@ abline(h=70, col=4, lwd=2)
 par(mar=c(4,4,.5,.5), mgp=c(2.5,0.7,0), las=1)
 transp <- rgb(0,0,0, alpha=0.1)
 plot(n, res_lapply["mean", ], pch=16, col=transp, cex=0.6)
-abline(h=70, col=4, lwd=2)
+abline(h=70, col="blue", lwd=2)
 conf <- tapply(res_lapply["mean", ], n, quantile, probs=c(0.05, 0.95))
 conf <- sapply(conf, I)
 conf_x <- as.numeric(colnames(conf))
-for(i in 1:2) lines(conf_x, conf[i, ], col=2, lwd=2)
+for(i in 1:2) lines(conf_x, conf[i, ], col="red", lwd=2)
 @
 \end{frame}
 
@@ -4963,8 +4962,8 @@ truevals <- c(mean=70, sd=5, CV=5/70, logmean=70)
 for(nm in rownames(res_lapply))
   {
   plot(n, res_lapply[nm, ], ylab=nm, pch=16, col=transp)
-  abline(h=truevals[nm], col=4, lwd=2)
-  if(nm=="sd") points(60,2, col=2)
+  abline(h=truevals[nm], col="blue", lwd=2)
+  if(nm=="sd") points(60,2, col="red")
   }
 @
 \end{frame}
@@ -5130,18 +5129,18 @@ R has a very good random number generator. If you want to set a starting point f
 <<ex_random_sola, eval=F, size="scriptsize">>=
 sample(5:15)  ;  sample(1:3, 25, replace=TRUE)  ;  r <- rexp(200)
 par(mfrow=c(2,1), mar=c(2,2,0,0))
-hist(r, breaks=20, col=3)
-boxplot(r, horizontal=T, notch=T, col=3)
+hist(r, breaks=20, col="green4")
+boxplot(r, horizontal=T, notch=T, col="green4")
 lines(density(r)$x, density(r)$y +par("usr")[3], lwd=3)
-lines(0:50/10, dexp(0:50/10) +par("usr")[3], col=2)
+lines(0:50/10, dexp(0:50/10) +par("usr")[3], col="red")
 @
 <<ex_random_solb, echo=F, out.width="0.8\\textwidth">>=
 set.seed(5) ; r <- rexp(200)
 par(mfrow=c(2,1), mar=c(2,2,0,0))
-hist(r, breaks=20, col=3)
-boxplot(r, horizontal=T, notch=T, col=3)
+hist(r, breaks=20, col="green4")
+boxplot(r, horizontal=T, notch=T, col="green4")
 lines(density(r)$x, density(r)$y +par("usr")[3], lwd=3)
-lines(0:50/10, dexp(0:50/10) +par("usr")[3], col=2)
+lines(0:50/10, dexp(0:50/10) +par("usr")[3], col="red")
 @
 \end{frame}
 
@@ -5265,30 +5264,30 @@ plot(value, dnorm(value,m,s), type="l", las=1, lwd=2, xaxs="i",
      main=paste0("probability density function\ndnorm (value, mean=",m,", sd=",s,")   "))
 if(!is.null(val)){
 w <- seq(value[1], val, len=100)
-polygon(c(w, val, value[1]), dnorm(c(w,0,0),m,s), col=4)
-points(val, dnorm(val,m,s), pch=3, col=2, cex=2, lwd=3)
+polygon(c(w, val, value[1]), dnorm(c(w,0,0),m,s), col="blue")
+points(val, dnorm(val,m,s), pch=3, col="red", cex=2, lwd=3)
 }
-box("figure", col=1)
+box("figure", col="black")
 #
 plot(value, pnorm(value,m,s), type="l", las=1, lwd=2, xaxs="i",
      main=paste0("cumulated probability\npnorm(value, mean=",m,", sd=",s,")   "))
 if(!is.null(val)){
-abline(h=pnorm(val,m,s), v=val, col=4)
-points(val, pnorm(val,m,s), pch=3, col=2, cex=2, lwd=3)
+abline(h=pnorm(val,m,s), v=val, col="blue")
+points(val, pnorm(val,m,s), pch=3, col="red", cex=2, lwd=3)
 }
-box("figure", col=1)
+box("figure", col="black")
 }
 generalnormplot()
 @
 \vspace{2.72em}
 \end{frame}
 % normal:
-% hist(chickwts$weight, breaks=20, col=2)
-% hist(eurodist, breaks=20, col=2)
-% hist(iris$Sepal.Length, breaks=20, col=2)
+% hist(chickwts$weight, breaks=20, col="red")
+% hist(eurodist, breaks=20, col="red")
+% hist(iris$Sepal.Length, breaks=20, col="red")
 %
 % two groups
-% hist(faithful$eruptions, breaks=20, col=2)
+% hist(faithful$eruptions, breaks=20, col="red")
 
 %------------------------------------------------------------%
 
@@ -5420,13 +5419,13 @@ par(mar=c(2,3,1,1))
 x <- seq(-5, 5, .01)
 x2 <- (-5):5
 plot(-5:5, -5:5, type="n", las=1, ylab="cumulated probability", ylim=c(0,0.57), xaxs="i", yaxs="i")
-# abline(h=0:10/5, v=-5:5, col=8, lty=2) ; box()
-lines(x, dnorm(x, mean=0, sd=1), col=1, lwd=2)
-lines(x, dexp(x, rate=1), col=2, lwd=2)
-lines(x, dgamma(x, shape=0.1, scale=1), col=3, lwd=2)
-lines(x2, dpois(x2, lambda=1), col=4, lwd=2, pch=16, type="b", lty=2)
-lines(x2, dbinom(x2, size=10, prob=1/5), col=5, lwd=2, pch=16, type="b", lty=2)
-lines(x, dcauchy(x, location=0, scale=1), col=6, lwd=2)
+# abline(h=0:10/5, v=-5:5, col="gray", lty=2) ; box()
+lines(x, dnorm(x, mean=0, sd=1), col="black", lwd=2)
+lines(x, dexp(x, rate=1), col="red", lwd=2)
+lines(x, dgamma(x, shape=0.1, scale=1), col="green4", lwd=2)
+lines(x2, dpois(x2, lambda=1), col="blue", lwd=2, pch=16, type="b", lty=2)
+lines(x2, dbinom(x2, size=10, prob=1/5), col="cyan", lwd=2, pch=16, type="b", lty=2)
+lines(x, dcauchy(x, location=0, scale=1), col="purple", lwd=2)
 lines(x, dunif(x, min=-4, max=4), col="orange", lwd=2)
 legend("topleft", c("dnorm, mean=0, sd=1", "dgamma, shape=0.1, scale=1", "dcauchy, location=0, scale=1", "dunif, min=-4, max=4", "dexp, rate=1", "dpois, lambda=1", "dbinom, size=10, prob=1/5"),
        col=c(1,3,6,"orange",2,4,5), lty=1, cex=0.8)
@@ -5440,13 +5439,13 @@ legend("topleft", c("dnorm, mean=0, sd=1", "dgamma, shape=0.1, scale=1", "dcauch
 par(mar=c(2,3,1,1))
 x <- seq(-5, 5, .01)
 plot(-5:5, -5:5, type="n", las=1, ylab="cumulated probability", ylim=c(0,1), xaxs="i", yaxs="i")
-# abline(h=0:10/5, v=-5:5, col=8, lty=2) ; box()
-lines(x, pnorm(x, mean=0, sd=1), col=1, lwd=2)
-lines(x, pexp(x, rate=1), col=2, lwd=2)
-lines(x, pgamma(x, shape=0.1, scale=1), col=3, lwd=2)
-lines(x, ppois(x, lambda=1), col=4, lwd=2)
-lines(x, pbinom(x, size=10, prob=1/5), col=5, lwd=2)
-lines(x, pcauchy(x, location=0, scale=1), col=6, lwd=2)
+# abline(h=0:10/5, v=-5:5, col="gray", lty=2) ; box()
+lines(x, pnorm(x, mean=0, sd=1), col="black", lwd=2)
+lines(x, pexp(x, rate=1), col="red", lwd=2)
+lines(x, pgamma(x, shape=0.1, scale=1), col="green4", lwd=2)
+lines(x, ppois(x, lambda=1), col="blue", lwd=2)
+lines(x, pbinom(x, size=10, prob=1/5), col="cyan", lwd=2)
+lines(x, pcauchy(x, location=0, scale=1), col="purple", lwd=2)
 lines(x, punif(x, min=-4, max=4), col="orange", lwd=2)
 legend("topleft", c("pnorm, mean=0, sd=1", "pgamma, shape=0.1, scale=1", "pcauchy, location=0, scale=1", "punif, min=-4, max=4", "pexp, rate=1", "ppois, lambda=1", "pbinom, size=10, prob=1/5"),
        col=c(1,3,6,"orange",2,4,5), lty=1, cex=0.8)
@@ -5552,7 +5551,7 @@ You remember (from this class) that for a binomial trial, the two parameters can
 par(mar=c(3,3,0,0), mgp=c(2,0.7,0), las=1)
 proportion <- seq(0,1, len=200)
 plot(proportion, dbeta(proportion, 3,9), type="l")
-segments(x0=0.25, y0=-1, y1=3.097, col=2)
+segments(x0=0.25, y0=-1, y1=3.097, col="red")
 @
 \vspace{-1em}
 \pause
@@ -5680,13 +5679,13 @@ You want to specify a distribution with the peak at 90\%, reached in a sample of
 
 \begin{frame}[fragile]{Beta distribution parametrization solution}
 \vspace{-1em}
-<<betapar, echo=-1, fig.height=2.5>>=
+<<betapar, echo=-1, fig.height=2.5, size="small">>=
 par(mar=c(2,3,0,0))
 v <- seq(0,1, len=200)
 plot(v, dbeta(v, 91,11), type="l", las=1)
-lines(v, dbeta(v, 10,2), col=2)
+lines(v, dbeta(v, 10,2), col="red")
 points(qbeta(c(0.1, 0.9), 91,11), rep(-0.5,2), pch=3)
-points(qbeta(c(0.1, 0.9), 10,2), rep(-0.5,2), pch=3, col=2)
+points(qbeta(c(0.1, 0.9), 10,2), rep(-0.5,2), pch=3, col="red")
 @
 \end{frame}
 
@@ -5701,12 +5700,12 @@ Posterior beta parameters: a\_prior + successes, b\_prior + failures \pause
 par(mgp=c(3,0.7,0))
 x <- seq(0,1, len=200)
 betaPlot(3, 9, ylim=lim0(10), cum=F, mar=c(2,2,0,0), keeppar=T)
-lines(x, dbeta(x, 3+35, 9+65), lwd=2, col=3)
+lines(x, dbeta(x, 3+35, 9+65), lwd=2, col="green4")
 abline(v=0.35)
 text(0.45,6, "Posterior probability (density)\nfor true population proportion.
-Mode = (38-1)/(38+74-2) = 0.336\nHDI (TeachingDemos::hpd)\n90% HDI = 0.27 - 0.41)", adj=0, col=3)
+Mode = (38-1)/(38+74-2) = 0.336\nHDI (TeachingDemos::hpd)\n90% HDI = 0.27 - 0.41)", adj=0, col="green4")
 hdi <- TeachingDemos::hpd(qbeta, shape1=38, shape2=74, conf=0.90)
-arrows(x0=hdi[1], y0=dbeta(hdi[1],38,74), x1=hdi[2], col=2, code=3, length=0.1)
+arrows(x0=hdi[1], y0=dbeta(hdi[1],38,74), x1=hdi[2], col="red", code=3, length=0.1)
 @
 \end{frame}
 
@@ -5727,8 +5726,9 @@ Outlook: used for beta regression, see \href{https://journal.r-project.org/archi
 par(mar=c(2.5,4,1,0.5))
 x <- 400:580; m <- 120 ; n <- 570
 plot(x, dbeta((x-m)/(n-m),30,4), type="l")
-lines(x, dnorm((x-m)/(n-m),30/34, sd=sqrt(120/(34^2*35))), col=2)
-text(525,4, "normal\napproximation", col=2)
+lines(x, dnorm((x-m)/(n-m),30/34, sd=sqrt(120/(34^2*35))), 
+      col="red")
+text(525,4, "normal\napproximation", col="red")
 text(560,5, "shifted\nbeta")
 @
 \end{frame}
@@ -5795,7 +5795,7 @@ par(mar=c(2,2,2,0.5), mgp=c(3,0.8,0))
 plot(1976:2010, JM, type="l", las=1, ylab="", xlab="",
      main="Annual streamflow maxima [m\U00B3/s]")
 # Moving Average (in berryFunctions):
-lines(1976:2010, movAv(JM), col=2, lwd=3) 
+lines(1976:2010, movAv(JM), col="red", lwd=3) 
 # can indicate trends or cycles, but:
 # window width = "researcher degree of freedom"
 @
@@ -6278,15 +6278,15 @@ n <- 0:105
 k_alpha <- sqrt(-0.5*log(0.05/2))/sqrt(n)
 plot(n, k_alpha, type="l", las=1, main="KS-test critical value",
      xaxs="i", ylim=lim0(1), xlab="sample size n", col="orange")
-lines(n, sqrt(-0.5*log(0.10/2))/sqrt(n), col=2)
-lines(n, sqrt(-0.5*log(0.01/2))/sqrt(n), col=4)
+lines(n, sqrt(-0.5*log(0.10/2))/sqrt(n), col="red")
+lines(n, sqrt(-0.5*log(0.01/2))/sqrt(n), col="blue")
 textField(c(8,12,15,20), c(0.3, 0.4, 0.5, 0.6), c("0.10", "0.05", "0.01", "alpha"), col=c(2,"orange",4,1))
 #
 plot(n, k_alpha/sqrt(n), type="l", las=1, main="comparison with D",
      xaxs="i", ylim=lim0(0.2), xlab="sample size n", yaxt="n", col="orange")
 axis(2, c(0,0.1,0.2))
-lines(n, sqrt(-0.5*log(0.10/2))/n, col=2)
-lines(n, sqrt(-0.5*log(0.01/2))/n, col=4)
+lines(n, sqrt(-0.5*log(0.10/2))/n, col="red")
+lines(n, sqrt(-0.5*log(0.01/2))/n, col="blue")
 @
 \end{frame}
 
@@ -7243,52 +7243,6 @@ and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio
 \item instead: vectorize, use lapply, write C++ code
 \end{itemize}
 % \onslide<+->  \href{http://bit.ly/recapRif}{bit.ly/recapRif}
-\end{frame}
-
-%------------------------------------------------------------%
-
-% \begin{frame}{for loop}
-% \begin{itemize}
-% \item Plot the Apple stocks over date (\datalinkText{stocks.txt}) as a line graph.
-% \item With a for loop, add all other companies in the same plot
-% \item BONUS1: First create a vector with 6 different colors, then use that in the for loop to color the lines
-% \item BONUS2: Add a legend with the same colors
-% \item BONUS3: label the lines directly
-% \item BONUS4: Use a logarithmic axis, enhanced with \rcode{berryFunctions::logAxis}
-% \end{itemize}
-% \end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Homework for loop solution}
-\vspace{-0.5em}
-<<forlines, fig.show="hide", echo=-1, size="small", fig.width=5>>=
-par(mar=c(2,5,1.5,0.5), mgp=c(3,0.7,0), cex=0.8)
-stocks <- read.table("data/stocks.txt", header=T, as.is=T)
-stocks$Date <- as.Date(stocks$Date)
-companies <- colnames(stocks)[-1]
-cols <- c("purple", "orange", "red", "green", "pink", "blue")
-names(cols) <- companies     # cols["AMAZON"]
-
-plot(stocks$Date, stocks$APPLE, type="n", log="y", yaxt="n", 
-     xlim=as.Date(c("2007-01-03","2020-01-01")), 
-     ylim=range(stocks[,-1]), 
-     ylab="Stock values, log axis  [USD]", xlab="Date", las=1,
-     main="Tech companies rise faster than the car industry")
-berryFunctions::logAxis(2)
-for(comp in companies) 
-    lines(stocks$Date, stocks[,comp], col=cols[comp])
-#legend("topleft", companies, fill=cols)
-berryFunctions::textField(as.Date("2017-12-01"), cex=0.8,
-                          y=as.numeric(tail(stocks[,-1],1)), 
-                          companies, adj=0, col=cols, xpd=T)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Homework for loop solution}
-\includegraphics[width=\textwidth]{fig/forlines-1.pdf}
 \end{frame}
 
 
