@@ -3472,28 +3472,6 @@ for(i in c(2,5,9) ) { print(1:i) }
 @
 \end{frame}
 
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{For loops: fill a vector}
-<<for6>>=
-v <- vector(mode="numeric", length=20)
-v
-@
-\pause \vspace{-1em}
-<<for6b>>=
-for(i in 3:17)  {  v[i] <- (i+2)^2  }
-@
-\pause \vspace{-1em}
-<<for6b2, echo=2>>=
-options(width=40)
-v # this code was executed once for each i
-options(width=50)
-@
-\pause \vspace{-0.5em}
-In R, \rcode{for} loops are slow. Always try to vectorize (the best option, not always possible) or use \rcode{lapply} (saves you the initiation of the empty vector, easier to parallize).
-\end{frame}
-
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{For loops: execute code multiple times I}
@@ -3574,11 +3552,30 @@ lines(x, 12.5*n/factorial(n-1)*(x/8*n)^(n-1)*exp(-x/8*n), col="red")
 %
 \end{frame}
 
+%------------------------------------------------------------%
 
+\begin{frame}[fragile]{For loops: fill a vector}
+<<for6>>=
+v <- vector(mode="numeric", length=20)
+v
+@
+\pause \vspace{-1em}
+<<for6b>>=
+for(i in 3:17)  {  v[i] <- (i+2)^2  }
+@
+\pause \vspace{-1em}
+<<for6b2, echo=2>>=
+options(width=40)
+v # this code was executed once for each i
+options(width=50)
+@
+\pause \vspace{-0.5em}
+In R, \rcode{for} loops are slow. Always try to vectorize (the best option, not always possible) or use \rcode{lapply} (saves you the initiation of the empty vector, easier to parallize).
+\end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{For loops: multipanel graphics: the task}
+\begin{frame}[fragile]{For loops: multiple graphs}
 \small
 \begin{exercise}{for loop}
 \begin{enumerate}
@@ -3597,7 +3594,7 @@ over the first column.
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{For loops: multiple graphics}
+\begin{frame}[fragile]{For loops: multiple graphs}
 \vspace{-1em}
 <<forpanel, size="footnotesize", fig.height=2.8>>=
 stocks <- read.table("data/stocks.txt", header=T, as.is=T)
@@ -3612,27 +3609,28 @@ mtext("stocks this decade", line=0, outer=TRUE)
 
 \begin{frame}[fragile]{logarithmic axis}
 \vspace{-0.9em}
-<<forlines, fig.show="hide", echo=-1, size="small", fig.width=5>>=
-par(mar=c(2,5,1.5,2.5), mgp=c(3,0.7,0), cex=0.8)
-stocks <- read.table("data/stocks.txt", header=T, as.is=T)
-stocks$Date <- as.Date(stocks$Date)
-companies <- colnames(stocks)[-1]
-cols <- c("purple", "orange", "red", "green", "pink", "blue")
-names(cols) <- companies     # cols["AMAZON"]
-
-plot(stocks$Date, stocks$APPLE, type="n", log="y", yaxt="n", 
-     xlim=as.Date(c("2007-01-03","2020-01-01")), 
-     ylim=range(stocks[,-1], na.rm=TRUE), 
-     ylab="Stock values, log axis  [USD]", xlab="Date", las=1,
-     main="Tech companies rise faster than the car industry")
-berryFunctions::logAxis(2)
-for(comp in companies) 
-    lines(stocks$Date, stocks[,comp], col=cols[comp])
-#legend("topleft", companies, fill=cols)
-berryFunctions::textField(tail(stocks[,1],1), cex=0.8,
-                          y=as.numeric(tail(stocks[,-1],1)), 
-                          rrarg=list(bothsame=FALSE),
-                          companies, adj=0, col=cols, xpd=T)
+<<forlines, fig.show="hide", echo=-1, size="footnotesize", fig.width=5>>=
+ par(mar=c(2,5,1.5,3), mgp=c(3,0.7,0), cex=0.8)
+ stocks <- read.table("data/stocks.txt", header=TRUE, as.is=TRUE)
+ stocks$Date <- as.Date(stocks$Date)
+ companies <- colnames(stocks)[-1]
+ cols <- c("purple", "orange", "red", "green", "pink", "blue")
+ names(cols) <- companies     # cols["AMAZON"]
+ 
+ plot(stocks$Date, stocks$APPLE, type="n", log="y", yaxt="n", 
+      xlim=as.Date(c("2007-01-03","2020-01-01")), 
+      ylim=range(stocks[,-1], na.rm=TRUE), 
+      ylab="Stock values, log axis  [USD]", xlab="Date", las=1,
+      main="Tech companies rise faster than the car industry")
+ berryFunctions::logAxis(2)
+ 
+ for(comp in companies) 
+     lines(stocks$Date, stocks[,comp], col=cols[comp])
+ 
+ #legend("topleft", companies, fill=cols)
+ berryFunctions::textField(x=tail(stocks[,1],1), labels=companies, adj=0,
+                           y=as.numeric(tail(stocks[,-1],1)), col=cols, 
+                           rrarg=list(bothsame=FALSE), cex=0.8, xpd=TRUE)
 @
 \end{frame}
 
@@ -3644,7 +3642,7 @@ berryFunctions::textField(tail(stocks[,1],1), cex=0.8,
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{For loops: multipanel graphics: beautifuller}
+\begin{frame}[fragile]{multipanel graph}
 \vspace{-1em}
 <<forpanel2, size="scriptsize", fig.height=2.5>>=
 par(mfrow=c(1,2), mar=c(4,4,2,0.1), mgp=c(2.5,0.7,0), cex=0.7, las=1)
