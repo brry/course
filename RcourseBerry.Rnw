@@ -834,7 +834,7 @@ Instructions online: \href{https://github.com/brry/course\#install}{github.com/b
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Graphical user interfaces}
+\subsection{Rstudio}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -846,7 +846,7 @@ Instructions online: \href{https://github.com/brry/course\#install}{github.com/b
 
 %------------------------------------------------------------%
 
-\begin{frame}{RStudio}
+\begin{frame}{RStudio overview}
   \begin{figure}
   \includegraphics[width=0.95\textwidth]{./externalfig/Rstudio.png}
   \end{figure}
@@ -867,28 +867,48 @@ Save workspace to .RData on exit: \textbf{NEVER}\\[0.5em]
 You can load them later with \rcode{load("object.Rdata")}.}\\[1em]
 \pause
 More at \href{https://github.com/brry/course\#settings}{github.com/brry/course\#settings}\\[1em]
-\pause
-\hyperlink{rstudiotips}{Rstudio tips and tricks slide}
+% \pause
+% \hyperlink{rstudiotips}{Rstudio tips and tricks slide}
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Tinn R}
-  \begin{figure}[h]
-    \begin{center}
-    \includegraphics[width=.8\linewidth]{./externalfig/TinnR_gui.PNG}
-		\caption{screenshot Tinn-R}
-		\label{fig:how to start R from Tinn-R}
-    \end{center}
-	\end{figure}
-<<trpaths, eval=FALSE, size="scriptsize">>=
-# enable sending of blocks up to the next blank line:
-.trPaths <- paste(Sys.getenv('LOCALAPPDATA'),
-'\\Temp\\Tinn-R', c('', 'search.txt', 'objects.txt',
-'file.r', 'selection.r', 'block.r','lines.r'),sep='\\')
-# write this in  C:/Program Files/R/R-3.2.2/etc/Rprofile.site
-@
+\begin{frame}[fragile]{Rstudio Tips and Tricks}
+\label{rstudiotips}
+\begin{enumerate}[<+->]
+% \item \hyperlink{rstudiosettings}{Rstudio settings slide}
+\item \href{https://rviews.rstudio.com/2016/11/11/easy-tricks-you-mightve-missed/}{RStudio IDE Easy Tricks You Might've Missed}
+and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio.com/categories/tips-and-tricks}
+\item Work with Rstudio projects!
+\item \key{ALT} + mouse for multiline cursor
+\item \key{CTRL} + \key{SHIFT} + \key{1} panel full view
+\item \key{ALT} + \key{UP}/\key{DOWN} move line of code
+\item \key{CTRL} + \key{SHIFT} + \key{P} rerun previous code region
+\item \key{CTRL} + \key{SHIFT} + \key{S}/\key{ENTER} source document
+\item \key{CTRL} + \key{UP} (in console) command history
+\item tearable panes
+\item \key{CTRL} + \key{SHIFT} + \key{O} Document outline
+\end{enumerate}
 \end{frame}
+
+%------------------------------------------------------------%
+
+% \begin{frame}[fragile]{Tinn R}
+%   \begin{figure}[h]
+%     \begin{center}
+%     \includegraphics[width=.8\linewidth]{./externalfig/TinnR_gui.PNG}
+% 		\caption{screenshot Tinn-R}
+% 		\label{fig:how to start R from Tinn-R}
+%     \end{center}
+% 	\end{figure}
+% <<trpaths, eval=FALSE, size="scriptsize">>=
+% # enable sending of blocks up to the next blank line:
+% .trPaths <- paste(Sys.getenv('LOCALAPPDATA'),
+% '\\Temp\\Tinn-R', c('', 'search.txt', 'objects.txt',
+% 'file.r', 'selection.r', 'block.r','lines.r'),sep='\\')
+% # write this in  C:/Program Files/R/R-3.2.2/etc/Rprofile.site
+% @
+% \end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
@@ -3403,7 +3423,9 @@ table(result)
 \item \rcode{which(logicalVec)} gives the indices (positions) of TRUE values.
 \item \rcode{Vec[logicalVec]} returns only the values of vec corresponding to TRUE in logicalVec (No need to wrap it into \rcode{which}).
 \item Logical operators: \rcode{!, \&, |, xor()} (not, and, or, exclusive or)
-% \item \rcode{cat(T, letters[c(12,15,22,5)])}
+\item \rcode{||} and \rcode{\&\&} for a single logical value.\\
+      In \rcode{a || b}, expression \rcode{b} will NOT be evaluated if \rcode{a} is not TRUE.\\
+      In contrast, when you use \rcode{a | b}, expression \rcode{b} will be evaluated regardless of outcome of \rcode{a}.
 \end{itemize}
 \end{frame}
 
@@ -3450,10 +3472,14 @@ can be avoided with \rcode{switch}.
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{For loops}
+\vspace{-0.3em}
 Execute a block of code several times, with different input values.\\
 Syntax: ~ \texttt{\alert{for}(aRunningVariable \alert{in} aSequence)\{ doSomething \}}
 \pause
-Often, i (for index) is used, thus ~~ \texttt{\alert{for}(i \alert{in} 1:n) \rcode{doThis}(i)}
+Often, i (for index) is used, thus ~~ \texttt{\alert{for}(i \alert{in} 1:n) \rcode{doThis}(i)}\\
+\pause
+\textit{Curly brackets are optional if there is one single expression.}
+\vspace{-0.5em}
 \pause
 <<for1, echo=T, eval=F>>=
 help("for") # needs quotation marks!
@@ -3466,6 +3492,7 @@ print(1:9)
 @
 \pause
 This is easier and less prone to human errors with:
+\vspace{-0.5em}
 \pause
 <<for2, echo=T, eval=TRUE, tidy=FALSE>>=
 for(i in c(2,5,9) ) { print(1:i) }
@@ -3480,9 +3507,10 @@ for(i in c(2,5,9) ) { print(1:i) }
 par(mar=c(3,3,1,1), mgp=c(2,0.8,0), las=1)
 x <- seq(0,20,0.1)
 plot(x, 12.5*10/factorial(10-1)*(x/8*10)^(10-1)*exp(-x/8*10),
-     ylab="y  =  f(x, n=10)", type="l", lwd=2)
+     ylab="y  =  f(x, n=10)", type="l", lwd=2, col="orange")
 @
-
+\pause
+We'll plot the curve for different n values (5,6,7,...,25)
 \end{frame}
 
 %------------------------------------------------------------%
@@ -3555,22 +3583,30 @@ lines(x, 12.5*n/factorial(n-1)*(x/8*n)^(n-1)*exp(-x/8*n), col="red")
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{For loops: fill a vector}
+\vspace{-0.8em}
+\textit{If you follow along with the handout version (one page per slide), please don't view this slide yet.
+We'll reveal piecewise.}
+\vspace{-0.8em}
+\pause
 <<for6>>=
-v <- vector(mode="numeric", length=20)
-v
+v <- vector(mode="numeric", length=20)   ;  v
 @
-\pause \vspace{-1em}
+\pause \vspace{-1.8em}
 <<for6b>>=
-for(i in 3:17)  {  v[i] <- (i+2)^2  }
+for(i in 3:17)  {  v[i] <- (i+2)^2  }  # what is now in v?
 @
-\pause \vspace{-1em}
+\pause \vspace{-1.8em}
 <<for6b2, echo=2>>=
 options(width=40)
-v # this code was executed once for each i
+v # the code above was executed once for each i
 options(width=50)
 @
-\pause \vspace{-0.5em}
-In R, \rcode{for} loops are slow. Always try to vectorize (the best option, not always possible) or use \rcode{lapply} (saves you the initiation of the empty vector, easier to parallize).
+\pause \vspace{-0.8em}
+What objects are now in the global environment workspace?\\
+\pause
+-> \rcode{v} (as above) and \rcode{i} (with the last assigned value, 17)\\
+\pause \vspace{0.3em}
+In R, \rcode{for} loops are slow. Always try to vectorize (the best option, not always possible) or use \rcode{lapply} (less code, easy to parallize).
 \end{frame}
 
 %------------------------------------------------------------%
@@ -3685,6 +3721,38 @@ write.table(stocks, file="data/stocks.txt", row.names=F, quote=F)
 
 %------------------------------------------------------------%
 
+\begin{frame}[fragile]{\rcode{seq\_along(n)} is safer than \rcode{1:n} in \alert{for} loops}
+\pause
+\vspace{-0.5em}
+<<seq_along0, size="scriptsize">>=
+do_something <- function(x) if(x<1) stop("x must be >=1, not: ", x) else x
+something <- 1:6
+@
+\pause
+You'll often see the dangerous code \rcode{\alert{for}(i in 1:n)}: \vspace{-0.7em}
+<<seq_along1, size="footnotesize">>=
+for(i in 1:length(something)) do_something(i) # works with current sth
+@
+\pause
+Imagine this:\vspace{-0.5em}
+<<seq_along2, size="footnotesize">>=
+something <- which(letters=="4")
+for(i in 1:length(something)) do_something(i) # fails! (same code!)
+@
+\pause
+Safer to use is:\vspace{-0.7em}
+<<seq_along3>>=
+for(i in seq_along(something)) do_something(i)
+@
+\pause
+Because:\vspace{-0.5em}
+<<seq_along4, size="scriptsize">>=
+1:length(something)     ;   seq_along(something)
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
 \begin{frame}[fragile]{for loops: file exercise}
 \begin{exercise}{for loops in file creation}
 \scriptsize
@@ -3700,9 +3768,9 @@ We'll write many datasets to disc (and read them back).
 \item BONUS: change the arguments so that row numbers and quotation marks are not printed and tabstops are used for column separation.
 \item With a \rcode{for}-loop, now write files for different sample sizes, e.g. 10, 20, 50, 100, 500.
 \item Using the output of \rcode{dir()}, read all the files into a list of data.frames.
-      Remember to first create an empty list of the right length.
+      Remember to first create an empty list.
 \item BONUS: name the list elements according to the filenames. 
-\item BONUS: now replace the whole construct with an \rcode{lapply} loop. 
+\item BONUS: now replace the whole file reading construct with an \rcode{lapply} loop. 
       Celebrate how much nicer your code looks. 
       Check how you can get element names with \rcode{sapply(..., simplify=FALSE)}
 \item BONUS: With \rcode{unlink}, delete the files from this exercise. 
@@ -3731,38 +3799,6 @@ flist <- sapply(dir("loopexercise", full=TRUE), read.table, header=TRUE,
                 simplify=FALSE)
 
 unlink(paste0("loopexercise/randomdata_", c(10,20,50,100,500), ".txt"))
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{\rcode{seq\_along(n)} is safer than \rcode{1:n} in \alert{for} loops}
-\pause
-\vspace{-0.5em}
-<<seq_along0, size="scriptsize">>=
-do_something <- function(x) if(x<1) stop("x must be >=1, not:", x) else x
-something <- 1:6
-@
-\pause
-You'll often see the dangerous code \rcode{\alert{for}(i in 1:n)}: \vspace{-0.7em}
-<<seq_along1, size="footnotesize">>=
-for(i in 1:length(something)) do_something(i) # works with current sth
-@
-\pause
-Imagine this:\vspace{-0.5em}
-<<seq_along2, size="footnotesize">>=
-something <- which(letters=="4")
-for(i in 1:length(something)) do_something(i) # fails! (same code!)
-@
-\pause
-Safer to use is:\vspace{-0.7em}
-<<seq_along3>>=
-for(i in seq_along(something)) do_something(i)
-@
-\pause
-Because:\vspace{-0.5em}
-<<seq_along4, size="scriptsize">>=
-1:length(something)     ;   seq_along(something)
 @
 \end{frame}
 
@@ -4107,7 +4143,9 @@ repeat loops are hardly ever used in R, and while loops fairly seldom as well.
 \begin{enumerate}
 \item Why is the character string \rcode{folder <- "path/to/file///"} unsuitable for reading in a file?
 \item With a while loop, make it suitable. Hints: \rcode{substring}, \rcode{nchar}
-\item BONUS: enable your solution to deal with \textbackslash \textbackslash ~at the end as well. Hint: \rcode{\%in\%}.
+\item BONUS 1: enable your solution to deal with \textbackslash \textbackslash ~at the end as well. Hint: \rcode{\%in\%}.
+\item BONUS 2: Use a regular expression (regexp) instead of \rcode{substring}/\rcode{nchar}. 
+You'll need \rcode{grepl} with \texttt{"endswith\$"} and \rcode{sub}
 \end{enumerate}
 \end{exercise}
 \end{frame}
@@ -4127,6 +4165,8 @@ while( substring(folder, nchar(folder)) %in% c("/", "\\") )
 
 # Or, more elegantly, with regular expressions:
 while(grepl("/$", folder))  folder <- sub("/$","",folder)
+while(grepl("[\\/]$", folder))
+     folder <- sub("[\\/]$","",folder)
 @
 \end{frame}
 
@@ -7143,26 +7183,6 @@ vis_nc(nc, cex=11.5)
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Rstudio Tips and Tricks}
-\label{rstudiotips}
-\begin{enumerate}[<+->]
-\item \hyperlink{rstudiosettings}{Rstudio settings slide}
-\item \href{https://rviews.rstudio.com/2016/11/11/easy-tricks-you-mightve-missed/}{RStudio IDE Easy Tricks You Might've Missed}
-and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio.com/categories/tips-and-tricks}
-\item Work with Rstudio projects!
-\item \key{ALT} + mouse for multiline cursor
-\item \key{CTRL} + \key{SHIFT} + \key{1} panel full view
-\item \key{ALT} + \key{UP}/\key{DOWN} move line of code
-\item \key{CTRL} + \key{SHIFT} + \key{P} rerun previous code region
-\item \key{CTRL} + \key{SHIFT} + \key{S}/\key{ENTER} source document
-\item \key{CTRL} + \key{UP} (in console) command history
-\item tearable panes
-\item \key{CTRL} + \key{SHIFT} + \key{O} Document outline
-\end{enumerate}
-\end{frame}
-
-%------------------------------------------------------------%
-
 \begin{frame}[fragile]{Session 2: Take home message}
 \begin{itemize}[<+->]
 % \item Packages are basically (documented) scripts from other people $\rightarrow$ \rcode{install.packages} and \rcode{library}
@@ -7250,10 +7270,10 @@ and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
-\begin{frame}{Unicode}
-\center \includegraphics[height=0.65\textheight]{externalfig/rtl.png}\\
-Collaborative editing can quickly become a textual rap battle fought with increasingly convoluted invocations of U+202a to U+202e (\href{https://xkcd.com/1137/}{xkcd.com/1137})
-\end{frame}
+% \begin{frame}{Unicode}
+% \center \includegraphics[height=0.65\textheight]{externalfig/rtl.png}\\
+% Collaborative editing can quickly become a textual rap battle fought with increasingly convoluted invocations of U+202a to U+202e (\href{https://xkcd.com/1137/}{xkcd.com/1137})
+% \end{frame}
 
 %------------------------------------------------------------%
 
