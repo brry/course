@@ -3230,6 +3230,11 @@ tolower(schoko)
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Conditional execution I}
+\vspace{-0.8em}
+\footnotesize{\textit{If you follow along with the handout version (one page per slide), please don't view this slide yet.
+We'll reveal piecewise.}}\\
+\vspace{0.3em}
+\pause
 Syntax for a single logical value:\\
 \rcode{\alert{if}(this\_is\_true) \{do\_something\} \alert{else} \{do\_other\_thing\}}\\[\baselineskip]
 \pause
@@ -3251,7 +3256,7 @@ if condition == FALSE, then expression2 is evaluated.\\[1em]
 \pause TRUE\\
 \pause logical = truth value, boolean\\
 \pause Condition is TRUE, so 18 is returned\\
-\pause Condition is FALSE, so nothing happens\\
+\pause Condition is FALSE, so nothing happens*\\
 \pause Condition FALSE, so 17 is returned.
 \end{column}
 \end{columns}
@@ -3263,6 +3268,8 @@ if condition == FALSE, then expression2 is evaluated.\\[1em]
 %' if(7-3 > 5) 18 else 17 # Cond. F, so 17 is returned.
 %' @
 %' % onslide doesn't work in a verbatim (fragile) environment
+\pause
+\footnotesize{\textit{*: technically, \rcode{NULL} is returned invisibly}}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -3325,6 +3332,58 @@ ifelse(v>14, v+10, NA) # can handle vector of input
 <<ifelse_vectorized3>>=
 if(v>14) v+10 else NA
 @
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Notes on logical values}
+\begin{itemize}[<+->]
+\item as you might have seen in \rcode{read.table(header=T)}, logical values (TRUE, FALSE) can be abbreviated.
+\item If you want to play a mean prank on someone, write\\ \rcode{T <- FALSE; F <- TRUE} in their \href{https://rclickhandbuch.wordpress.com/install-r/rprofile/}{Rprofile} (see \rcode{?Startup}).
+\item Logical (boolean) values F and T internally are often converted to integers 0 and 1, thus \rcode{sum(c(T,F,F,T,T,T,F,F,T))} is the number of TRUEs in a vector, \rcode{mean} yields the proportion of TRUEs.
+\item \rcode{which(logicalVec)} gives the indices (positions) of TRUE values.
+\item \rcode{Vec[logicalVec]} returns only the values of vec corresponding to TRUE in logicalVec (No need to wrap it into \rcode{which}).
+\item Logical operators: \rcode{!, \&, |, xor()} (not, and, or, exclusive or)
+\item \rcode{||} and \rcode{\&\&} for a single logical value.\\
+      In \rcode{a || b}, expression \rcode{b} will NOT be evaluated if \rcode{a} is not TRUE.\\
+      In contrast, when you use \rcode{a | b}, expression \rcode{b} will be evaluated regardless of outcome of \rcode{a}.
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Notes on conditional code execution}
+\begin{itemize}[<+->]
+\item \rcode{\alert{if}(c)\{ex1\}} is valid code, thus R doesn't expect \alert{else} anymore.
+\item If you execute code line by line (in a script, for example), \alert{\}} and \alert{else} must be on the same line.
+\item Many people consider it good practice to do this in functions as well, but for machine-readability, it is technically fine to write\\
+\texttt{\alert{if}(cond)\\
+~~\{\\
+~~ex1a\\
+~~ex1b\\
+~~\} \\
+\alert{else}\\
+~~ex2}
+\item \rcode{\alert{if}(logicalValue==TRUE) ...} is usually unnecessary, you can write\\
+\onslide<+-> \rcode{\alert{if}(logicalValue) ...}, but sometimes,\\
+\onslide<+->  \rcode{\alert{if}(isTRUE(logicalValue)) ...} helps to deal with NAs.
+% \item \rcode{cat(T, letters[c(12,15,22,5)])}
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}{Actual usage of if else statements}
+See the \rcode{hist} source code: \\
+\href{https://github.com/wch/r-source/blob/trunk/src/library/graphics/R/hist.R}{github.com/wch/r-source ~ -> ~ src / library / graphics / R / hist.R}\\[1em]
+\pause
+<<mad, eval=F>>=
+mad
+@
+\pause
+Multiple nested conditionals\\
+\texttt{\alert{if}(a) b \alert{else} \alert{if}(c) d \alert{else} e}\\
+can be avoided with \rcode{switch}.
 \end{frame}
 
 %------------------------------------------------------------%
@@ -3411,58 +3470,6 @@ table(result)
 result <- ifelse(rnorm(1000)>2, "unlikely", "probable")
 table(result)
 @
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Notes on logical values}
-\begin{itemize}[<+->]
-\item as you might have seen in \rcode{read.table(header=T)}, logical values (TRUE, FALSE) can be abbreviated.
-\item If you want to play a mean prank on someone, write\\ \rcode{T <- FALSE; F <- TRUE} in their \href{https://rclickhandbuch.wordpress.com/install-r/rprofile/}{Rprofile} (see \rcode{?Startup}).
-\item Logical (boolean) values F and T internally are often converted to integers 0 and 1, thus \rcode{sum(c(T,F,F,T,T,T,F,F,T))} is the number of TRUEs in a vector, \rcode{mean} yields the proportion of TRUEs.
-\item \rcode{which(logicalVec)} gives the indices (positions) of TRUE values.
-\item \rcode{Vec[logicalVec]} returns only the values of vec corresponding to TRUE in logicalVec (No need to wrap it into \rcode{which}).
-\item Logical operators: \rcode{!, \&, |, xor()} (not, and, or, exclusive or)
-\item \rcode{||} and \rcode{\&\&} for a single logical value.\\
-      In \rcode{a || b}, expression \rcode{b} will NOT be evaluated if \rcode{a} is not TRUE.\\
-      In contrast, when you use \rcode{a | b}, expression \rcode{b} will be evaluated regardless of outcome of \rcode{a}.
-\end{itemize}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Notes on conditional code execution}
-\begin{itemize}[<+->]
-\item \rcode{\alert{if}(c)\{ex1\}} is valid code, thus R doesn't expect \alert{else} anymore.
-\item If you execute code line by line (in a script, for example), \alert{\}} and \alert{else} must be on the same line.
-\item Many people consider it good practice to do this in functions as well, but for machine-readability, it is technically fine to write\\
-\texttt{\alert{if}(cond)\\
-~~\{\\
-~~ex1a\\
-~~ex1b\\
-~~\} \\
-\alert{else}\\
-~~ex2}
-\item \rcode{\alert{if}(logicalValue==TRUE) ...} is usually unnecessary, you can write\\
-\onslide<+-> \rcode{\alert{if}(logicalValue) ...}, but sometimes,\\
-\onslide<+->  \rcode{\alert{if}(isTRUE(logicalValue)) ...} helps to deal with NAs.
-% \item \rcode{cat(T, letters[c(12,15,22,5)])}
-\end{itemize}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}{Actual usage of if else statements}
-See the \rcode{hist} source code: \\
-\href{https://github.com/wch/r-source/blob/trunk/src/library/graphics/R/hist.R}{github.com/wch/r-source ~ -> ~ src / library / graphics / R / hist.R}\\[1em]
-\pause
-<<mad, eval=F>>=
-mad
-@
-\pause
-Multiple nested conditionals\\
-\texttt{\alert{if}(a) b \alert{else} \alert{if}(c) d \alert{else} e}\\
-can be avoided with \rcode{switch}.
 \end{frame}
 
 %------------------------------------------------------------%
@@ -3791,14 +3798,17 @@ for(n in c(10,20,50,100,500))
                 quote=F, row.names=F, sep="\t")
 
 fnames <- dir("loopexercise", full=TRUE)
-fcontents <- vector("list", length=length(fnames))
-for(fnum in seq_along(fnames)) 
-   fcontents[[fnum]] <- read.table(fnames[fnum], header=TRUE)
+fcontents <- list()
+for(fn in fnames) 
+   fcontents[[fn]] <- read.table(fn, header=TRUE)
 
-flist <- sapply(dir("loopexercise", full=TRUE), read.table, header=TRUE, 
-                simplify=FALSE)
+flist <- sapply(dir("loopexercise", full=TRUE), 
+                read.table, header=TRUE, simplify=FALSE)
+
+all.equal(fcontents, flist) # TRUE
 
 unlink(paste0("loopexercise/randomdata_", c(10,20,50,100,500), ".txt"))
+# unlink("loopexercise", recursive=TRUE) # less safe...
 @
 \end{frame}
 
@@ -4104,10 +4114,12 @@ options(width=50)
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Repeat loops}
+\vspace{-0.5em}
 Syntax:
 \texttt{\alert{repeat} \{expressions\}\\
 \alert{next} ~\# jump to next iteration\\
 \alert{break} \# leave the loop}
+\vspace{-0.5em}
 \pause
 <<repeatloop, echo=T, eval=T, size="small">>=
 i <- 0 # Create object i with the value 0
@@ -4118,9 +4130,19 @@ repeat # keep repeating the following block of code
    if (i == 3)   break  # conditional leaving of loop
    }                    # Codeblock ends
 @
-What is now the value of i?
+\vspace{-0.5em}
+\footnotesize What is now the value of i?
 \pause
-\small i is now 3, because in the last iteration, 1 was added to 2 and the result saved as i.
+i is now 3, because in the last iteration, 1 was added to 2 and the result saved as i.
+\pause
+\vspace{-0.9em}
+<<repeatloopsemicolons, eval=F, size="small">>=
+i <- 0 ; repeat{i <- i+1 ; if(i<3) print(i) ; if(i==3) break} 
+@
+\vspace{-1.4em}
+R doesn't care about line breaks in the code.\\
+\vspace{-0.5em}
+They are there for us humans. Because we matter more than R. \pause <Blasphemy!>
 \end{frame}
 
 %------------------------------------------------------------%
@@ -4133,7 +4155,11 @@ i <- 0
 while(i < 3) i <- i + 1
 i
 @
-repeat loops are hardly ever used in R, and while loops fairly seldom as well.
+\pause
+\rcode{repeat} loops are hardly ever used in R, and \rcode{while} loops fairly seldom as well.\\
+\rcode{while} loops are helpful when the number of iterations is unknown prior to the task.\\
+To get out of an endlessly repeating \rcode{while} loop, hit \key{ESC} (with the mouse cursor in the console) or the STOP button provided by Rstudio.
+
 \end{frame}
 
 %------------------------------------------------------------%
@@ -4448,7 +4474,7 @@ circle <- function(
   y, # ditto for y
   r, # radius of the circle, in the graphic's units
   locnum=100, # number of points on circle (more means smoother but slower)
-  ...) # Further Arguments passed to polygon, like col, border, lwd
+  ...) # Further arguments passed to polygon, like col, border, lwd
  {
  # input checking - only one circle can be drawn:
  if(length(x) >1 | length(y) >1 | length(r) >1 | length(locnum) >1)
@@ -4460,12 +4486,12 @@ circle <- function(
  if(!is.numeric(x)) stop("x must be numeric, not ", class(x))
  if(!is.numeric(y)) stop("y must be numeric, not ", class(y))
  if(!is.numeric(r)) stop("r must be numeric, not ", class(r))
+ 
  # prepare circle line coordinates:
  cx <- x+r*cos( seq(0,2*pi,len=locnum) )
  cy <- y+r*sin( seq(0,2*pi,len=locnum) )
  polygon(cx, cy, ...) # actually draw it
  }
-# Note: if circles look like ellipsis, use plot(... asp=1)
 @
 \end{frame}
 
