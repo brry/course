@@ -834,7 +834,7 @@ Instructions online: \href{https://github.com/brry/course\#install}{github.com/b
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Rstudio}
+\subsection{Rstudio + Git}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -855,40 +855,85 @@ Instructions online: \href{https://github.com/brry/course\#install}{github.com/b
 %------------------------------------------------------------%
 
 \begin{frame}{RStudio configuration}
-\label{rstudiosettings}
-\href{https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts}{keyboard shortcuts} (ALT+SHIFT+K)\\[1em]
-\pause
 Recommended settings for reproducible research under\\
-\alert{Tools - Global Options - General}\\
+\alert{Rstudio - Tools - Global Options - General}\\
 \textbf{OFF}: Restore .Rdata into workspace at startup\\
 Save workspace to .RData on exit: \textbf{NEVER}\\[0.5em]
 \pause
 \textit{Instead use \rcode{save(object, file="object.Rdata")} after long computations.
-You can load them later with \rcode{load("object.Rdata")}.}\\[1em]
+You can load them later with \rcode{load("object.Rdata")}.}\\[0.5em]
 \pause
-More at \href{https://github.com/brry/course\#settings}{github.com/brry/course\#settings}\\[1em]
-% \pause
-% \hyperlink{rstudiotips}{Rstudio tips and tricks slide}
+More at \href{https://github.com/brry/course\#settings}{github.com/brry/course\#settings}\\[0.5em]
+\pause
+\href{https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts}{keyboard shortcuts} (\key{ALT}+\key{SHIFT}+\key{K})
+\pause
+\begin{enumerate}[<+->]
+\item \key{CTRL} + \key{ENTER} (in source script) send line/selection to console 
+\item \key{CTRL} + \key{UP} (in console) command history
+\item \key{CTRL} + \key{SHIFT} + \key{N} new R script
+\item \key{CTRL} + \key{O} open file
+\item \key{CTRL} + \key{S} save script
+\item \key{CTRL} + \key{TAB} next Tab
+\item \key{CTRL} + \key{SHIFT} + \key{TAB} previous Tab
+\end{enumerate}
 \end{frame}
 
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Rstudio Tips and Tricks}
-\label{rstudiotips}
 \begin{enumerate}[<+->]
-% \item \hyperlink{rstudiosettings}{Rstudio settings slide}
 \item \href{https://rviews.rstudio.com/2016/11/11/easy-tricks-you-mightve-missed/}{RStudio IDE Easy Tricks You Might've Missed}
 and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio.com/categories/tips-and-tricks}
 \item Work with Rstudio projects!
-\item \key{ALT} + mouse for multiline cursor
-\item \key{CTRL} + \key{SHIFT} + \key{1} panel full view
+\item \key{ALT} + mouse for multiline cursor. \textit{or}: \key{CTRL} + \key{ALT} + \key{UP}/\key{DOWN}
+\item \key{CTRL} + \key{1} cursor to panel \scriptsize{(1:source, 2:console, 3:help, 4:history, 5:files, 6:plot...)}
+\item \key{CTRL} + \key{SHIFT} + \key{1}/\key{2}/\key{3}/\key{...} panel full view
 \item \key{ALT} + \key{UP}/\key{DOWN} move line of code
 \item \key{CTRL} + \key{SHIFT} + \key{P} rerun previous code region
 \item \key{CTRL} + \key{SHIFT} + \key{S}/\key{ENTER} source document
-\item \key{CTRL} + \key{UP} (in console) command history
+\item \key{CTRL} + \key{SHIFT} + \key{C} (un)comment lines
+\item \key{CTRL} + \key{SHIFT} + \key{M} insert pipe operator
 \item tearable panes
 \item \key{CTRL} + \key{SHIFT} + \key{O} Document outline
 \end{enumerate}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}{Install git (program for version control)}
+\label{installGit}
+\begin{enumerate}
+\item Create a github account at \url{https://github.com/join}\\[1em]
+\item Download and install git, see \url{https://git-scm.com/downloads}\\[1em]
+\item Connect git to Rstudio: up to \rcode{git config user.name} at \url{https://www.r-bloggers.com/rstudio-and-github}\\[1em]
+\item Excellent tutorial on git in general (mostly without Rstudio): \url{http://kbroman.org/github\_tutorial}
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}{Clone github repo from within Rstudio I}
+\footnotesize
+Go to \url{https://github.com/brry/course} -> \colorbox{Green}{\textcolor{White}{Clone or download}} -> Copy URL
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{./externalfig/git_clone_1.PNG}
+\end{figure}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}{Clone github repo from within Rstudio II}
+\footnotesize
+Rstudio - File - New Project - Version Control - Git\\
+paste the URL, set the subdirectory and create project.\\
+I recommend to keep the Project directory name for your own projects.
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{./externalfig/git_clone_Rstudio.png}
+\end{figure}
+From now on, get the latest version of my slides with a single click on \key{Pull}:
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{./externalfig/git_clone_6.PNG}
+\end{figure}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -3395,7 +3440,7 @@ can be avoided with \rcode{switch}.
   \item Construct a statement that checks whether the variable \rcode{input <- 4} is a number smaller than 3. Let it write a useful \rcode{message} to the console (for both cases). Now test it with \rcode{input <- 1.8} and \rcode{input <- -17}.
   \item Now restrict the correct value of input to \emph{positive} numbers <3, i.e. the number must be <3 AND $\geq$ 0.
   \item BONUS 1: What happens if \rcode{input <- "2"} or if \rcode{input <- "b"}?
-  \item BONUS 2: Create a character variable that, depending on the result of \rcode{rnorm(1)}, is initiated with probable or unlikely.
+  \item BONUS 2: Create a character variable that, depending on the result of \rcode{rnorm(1)}, is initiated with "probable" or "unlikely".
   \item BONUS 3: \rcode{replicate} this experiment 1000 times and examine the result with \rcode{table}.
   \item BONUS 4: How could you do this with \rcode{ifelse}?
 \end{enumerate}
@@ -4597,10 +4642,7 @@ We'll create a cat package together following the instructions in
 
 Version control with git:
 \begin{itemize}%[<+->]
-\item \textcolor{Gray}{Once only: Create a github account (free), set up git on your computer, connect it to Rstudio.
-This is all very unfun and tedious, but at least there is a good guide that also includes a first test of the system:
-\href{https://www.r-bloggers.com/rstudio-and-github/}{r-bloggers.com/rstudio-and-github}.
-See also \href{http://kbroman.org/github_tutorial/}{kbroman.org/github\_tutorial} for a good intro.}
+\item \hyperlink{installGit}{slides with Git installation instructions}
 \item github.com, log in, on "+" in top-right select "New repository", initialize with readme!
 \item On the green field "clone or download": copy link
 \item Rstudio - file - new project - version control - git: paste url and create
