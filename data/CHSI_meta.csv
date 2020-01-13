@@ -1,0 +1,32 @@
+COLUMN_NAME,DATA_TYPE,IS_PERCENT_DATA,DESCRIPTION
+State_FIPS_Code,Text,N,"Two-digit state identifier, developed by the National Bureau of Standards"
+County_FIPS_Code,Text,N,"Three-digit county identifier, developed by the National Bureau of Standards"
+CHSI_County_Name,Text,N,Name of county
+CHSI_State_Name,Text,N,Name of State or District of Columbia
+CHSI_State_Abbr,Text,N,Two-character postal abbreviation for state name
+Strata_ID_Number,Integer,N,CHSI Peer County Stratum Number
+No_Exercise,Decimal,Y,"County data, no exercise"
+CI_Min_No_Exercise,Decimal,Y,"Confidence interval lower limit, no exercise"
+CI_Max_No_Exercise,Decimal,Y,"Confidence interval upper limit, no exercise"
+Few_Fruit_Veg,Decimal,Y,"County data, few fruits/vegetables"
+CI_Min_Fruit_Veg,Decimal,Y,"Confidence interval lower limit, few fruits/vegetables"
+CI_Max_Fruit_Veg,Decimal,Y,"Confidence interval upper limit, few fruits/vegetables"
+Obesity,Decimal,Y,"County data, obesity"
+CI_Min_Obesity,Decimal,Y,"Confidence interval lower limit, obesity"
+CI_Max_Obesity,Decimal,Y,"Confidence interval upper limit, obesity"
+High_Blood_Pres,Decimal,Y,"County data, high blood pressure"
+CI_Min_High_Blood_Pres,Decimal,Y,"Confidence interval lower limit, high blood pressure"
+CI_Max_High_Blood_Pres,Decimal,Y,"Confidence interval upper limit, high blood pressure"
+Smoker,Decimal,Y,"County data, smoker"
+CI_Min_Smoker,Decimal,Y,"Confidence interval lower limit, smoker"
+CI_Max_Smoker,Decimal,Y,"Confidence interval upper limit, smoker"
+Diabetes,Decimal,Y,"County data, diabetes"
+CI_Min_Diabetes,Decimal,Y,"Confidence interval lower limit, diabetes"
+CI_Max_Diabetes,Decimal,Y,"Confidence interval upper limit, diabetes"
+Uninsured,Integer,N,"County data, uninsured individuals"
+Elderly_Medicare,Integer,N,"County data, medicare beneficiaries, elderly (age 65+)"
+Disabled_Medicare,Integer,N,"County data, medicare beneficiaries, disabled"
+Prim_Care_Phys_Rate,Decimal,N,"County data, primary care physicians per 100,000 pop."
+Dentist_Rate,Decimal,N,"County data, dentists per 100,000 pop."
+Community_Health_Center_Ind,Integer,N,Indicator for any Community/Migrant Health Centers located in the county
+HPSA_Ind,Integer,N,Indicator for single county designated Health Professional Shortage Area

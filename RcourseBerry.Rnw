@@ -2973,6 +2973,61 @@ box(lwd=5)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
+\subsection{boxplots, histograms}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
+
+\begin{frame}{Health data, county-aggregated for >3k regions in the US.}
+\scriptsize
+\vspace{-0.5em}
+Found through reddit: \href{https://lionbridge.ai/datasets/18-free-life-sciences-medical-datasets-for-machine-learning}{18 Free Life Sciences, Healthcare and Medical Datasets}\\
+\href{https://healthdata.gov/dataset/community-health-status-indicators-chsi-combat-obesity-heart-disease-and-cancer/resource}{Community Health Status Indicators (CHSI) to Combat Obesity, Heart Disease and Cancer}\\
+\datalinkBlob{CHSI\_meta.csv} abstracted from DATAELEMENTDESCRIPTION.csv\\
+\datalinkBlob{CHSI\_data.csv} which is RISKFACTORSANDACCESSTOCARE.csv\\
+Remember you can simply update the material through \key{git pull}
+\vspace{-0.8em}
+\pause
+\begin{exercise}{medical boxplots} %ex
+\begin{enumerate}
+\item Read both files. You'll need \rcode{na.strings=c(-1111.1,-2222, -2222.2)} for the data.
+\item Reduce the dataset to the following columns: \rcode{DF[,c(7,10,13,16,19,22,25:31)]}.
+\item Create a boxplot of any column that sounds interesting.
+\item Create a histogram of one of the first 5 columns. Why does it look like a normal distribution? (I told you these don't usually occur in real life.)
+\item Create a boxplot of the first 5 columns to compare percentages.
+\item BONUS: Create a violin plot with the \rcode{vioplot} package (or \rcode{ggplot2::geom\_violin}).
+\item Using the formula interface (\rcode{Y~X, data=someDF}), create a boxplot showing the \textbf{number of doctors per 100k people} (Prim\_Care\_Phys\_Rate) depending on whether it's a designated \textbf{health professional shortage area} (HPSA\_Ind).
+\item BONUS: Create a histogram of the number of uninsured people per county. Why does the distribution look like this? See if \rcode{berryFunctions} has a way to create a histogram on a logarithmic axis. Contemplate the concept of a lognormal distribution in comparison to an exponential distribution.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{solutions medical boxplots}
+<<medboxplot, eval=FALSE, size="small">>=
+  meta <- read.csv("data/CHSI_meta.csv")
+  health <- read.csv("data/CHSI_data.csv", 
+                     na.strings=c(-1111.1,-2222, -2222.2))
+  health <- health[,c(7,10,13,16,19,22,25:31)]
+  meta   <-   meta[ c(7,10,13,16,19,22,25:31), ]
+  
+  hist(health$Obesity, breaks=30) 
+  # Central limit theorem: aggregation -> normality
+  # We're looking at percentage of obesity per county, 
+  # not at individuals
+  boxplot(health[,1:5])
+  vioplot::vioplot(health[,1:5])
+  boxplot(Prim_Care_Phys_Rate~HPSA_Ind, data=health)
+  
+  hist(health$Uninsured)
+  berryFunctions::logHist(health$Uninsured, breaks=20)
+  plot(1:100, dexp(1:100, rate=0.06), col="red", type="l")
+  lines(1:100, dlnorm(1:100, 3, 0.6), col="blue")
+@
+\end{frame}
+
+%------------------------------------------------------------%
+%------------------------------------------------------------%
 \subsection{saving plots, multiple figures}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
@@ -3072,7 +3127,7 @@ legend("center", c("'plot'","'figure', after par(mfrow) or layout()","'inner'","
 \begin{enumerate}
   \item Read \datalinkText{Zugspitze.txt} with monthly weather records
   \item With \rcode{par(mfrow=...)}, set up a figure with two panels (left and right)
-  \item Plot a histogram of the LUFTTEMPERATUR records in the left panel
+  \item Plot a histogram of the air temp (MO\_TT) records in the left panel
   \item Plot a line graph of the first 50 months in the right panel
   \item Now export this graph as png with useful size and resolution
   \item BONUS 1: also export as a vector graph (e.g. PDF, EPS, SVG, svglite package)
@@ -3136,6 +3191,56 @@ A very good place to start learning ggplot2 is:\\
 To compare both paradigms, see:\\
 \url{http://flowingdata.com/2016/03/22/comparing-ggplot2-and-r-base-graphics/}\\
 Be sure to follow the links in the beginning of the article...
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}{Practice multipanel plots + empirical distribution analysis}
+\scriptsize
+\begin{exercise}{Boxplots and histograms} %ex
+\begin{enumerate}
+\item Read \datalinkBlob{box.txt} into R. Remember you can simply update the material through \key{git pull}.
+\item Set up a multipanel plot and compare the boxplots of the three columns. How do they differ?
+\item Compare the histograms of the three columns. How do they differ? Use the same axis limits on each panel.
+\item Arrange all 6 panels into one graph. 
+\item Use a horizontal boxplot. Use the same axis limits (note: for horizontal, you still need to set \texttt{ylim}, not \texttt{xlim}).
+\item BONUS: Write a loop to create the boxplots and histograms (note: you might need to change from \texttt{mfrow} to \texttt{mfcol} or vice versa).
+\item BONUS: Make the graphs look nice through the use of colors, histogram breaks, nice spacing between the panels (\rcode{par mar}), an informative overall graph \rcode{title} in the outer margin (\rcode{par oma}) etc.
+\item Change the histogram y axis from count to density (using the \texttt{freq} argument). Now add a line to each histogram with the density function of the normal distribution parametrized by the \rcode{mean} and \rcode{sd} of each sample. \rcode{dnorm} will need a vector of values like \rcode{0:60}.
+\end{enumerate}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Solution multipanel distribution plotting}
+<<mulipaneldist, size="footnotesize", fig.show="hide", fig.height=4.5>>=
+# Read data, set colors + multipanel plot:
+box <- read.table("data/box.txt", header=TRUE)
+colors <- c("salmon","brown","firebrick1")
+par(mfrow=c(3,2), mar=c(2,0,0.4,0.4), oma=c(0,0,2,0), cex=0.7)
+
+# for each column, create two plots:
+for(i in 1:3)
+  {
+  # 1: Boxplot:
+  boxplot(box[,i], ylim=c(2.3,60), horizontal=TRUE, col=colors[i])
+  # 2: Histogram: 
+  hist(box[,i], xlim=c(2.3,60), breaks=-3:62, freq=FALSE, main="", 
+       yaxt="n", col=colors[i])
+  # add density of normal distribution parametrized to data sample
+  lines(0:65, dnorm(0:65, mean(box[,i]), sd(box[,i])))
+}
+# Add title to outer margin (par oma):
+title(main="same boxplots, different distributions!", outer=TRUE)
+
+@
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}
+\includegraphics[width=.99\textwidth]{fig/mulipaneldist-1.pdf}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -5199,6 +5304,9 @@ par(mfcol=c(3,1), mar=c(2,0,0.4,0.4), cex=0.7)
 boxplot(x, ylim=r, horizontal=TRUE, col="salmon")
 boxplot(y, ylim=r, horizontal=TRUE, col="brown")
 boxplot(z, ylim=r, horizontal=TRUE, col="firebrick1")
+write.table(data.frame(K=round(x,2),L=round(y,2),M=round(z,2)), 
+            file="data/box.txt", quote=FALSE, row.names=FALSE,
+            sep="\t")
 @
 \end{frame}
 
