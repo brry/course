@@ -2256,7 +2256,7 @@ dir.exists()
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Some of the arguments for read.table}
+\begin{frame}[fragile]{Some of the arguments for \rcode{read.table}}
 \footnotesize
 \begin{tabu}{l l}
   \onslide<+->{ header = TRUE      & read first line as column names}\\
@@ -2278,6 +2278,63 @@ Alternatives to read.table:
   \item[read.fwf] fixed width formatted data
   \item[read\_excel] Excel files (install package, see \href{https://github.com/hadley/readxl#overview}{github.com/hadley/readxl})
 \end{description}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Frequent mistakes with \rcode{read.table}}
+\small
+\begin{tabular}{|m{0.45\textwidth}|m{0.45\textwidth}|}\hline
+\alert{Error in scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings, : line \_ did not have \_ elements} & usually \rcode{header}, \rcode{sep} or \rcode{fill} is given incorrectly.\\
+\hline
+\pause
+\alert{Warning message: \newline In read.table("\_.txt", \_) : \newline incomplete final line found by \newline readTableHeader on 'C:\textbackslash\_.txt'}& Open the file and at the end, add a line break (with ENTER) = line feed = newline = carriage return.\\
+\hline
+\pause
+\rcode{str(DataframeIreadIn)}  yields \newline "factor" in some numeric columns & Check data file! \newline \rcode{dec} may need to be corrected\\
+\hline
+\end{tabular}\\[\baselineskip]
+\pause
+<<commadec, eval=FALSE>>=
+as.numeric( as.character(df$col) )
+as.numeric( gsub(pattern=",", replacement=".", x=df$col) )
+# If you try to read data in the format "3,590.18", run
+df$col <- as.numeric(gsub(",", "", df$col))
+@
+\pause
+Note: \alert{error}s stop function execution, \alert{warning}s can influence function performance and should only be ignored if you know what they really mean.
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Reading real files (i.e. complicated things)}
+\begin{exercise}{Read complicated files} %ex
+\begin{enumerate}
+\item Read \datalinkBlob{complicated.txt}. You'll need to set several arguments.
+\item BONUS: Replace the thousand-mark in the ThouSand column with an empty string (e.g. using \rcode{sub}), then convert to numeric.
+\item BONUS: Work on exercise 15
+\end{enumerate}
+The following arguments need specification:
+\pause
+\begin{itemize}
+\item file
+\item skip
+\item header
+\item sep
+\item dec
+\end{itemize}
+\end{exercise}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Solution reading complicated file}
+<<complifile>>=
+fake <- read.table("data/complicated.txt", skip=6, 
+                   header=TRUE, sep="\t", dec=",")
+fake$ThouSand <- as.numeric(sub("`", "", fake$ThouSand))
+fake
+@
 \end{frame}
 
 %------------------------------------------------------------%
@@ -2369,31 +2426,6 @@ read.fwf("data/days.txt", widths=c(2,1,2,1,4))
 # usage example: return months for e.g. vegetation index:
 days$month
 @
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Frequent mistakes with \rcode{read.table}}
-\small
-\begin{tabular}{|m{0.45\textwidth}|m{0.45\textwidth}|}\hline
-\alert{Error in scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings, : line \_ did not have \_ elements} & usually \rcode{header}, \rcode{sep} or \rcode{fill} is given incorrectly.\\
-\hline
-\pause
-\alert{Warning message: \newline In read.table("\_.txt", \_) : \newline incomplete final line found by \newline readTableHeader on 'C:\textbackslash\_.txt'}& Open the file and at the end, add a line break (with ENTER) = line feed = newline = carriage return.\\
-\hline
-\pause
-\rcode{str(DataframeIreadIn)}  yields \newline "factor" in some numeric columns & Check data file! \newline \rcode{dec} may need to be corrected\\
-\hline
-\end{tabular}\\[\baselineskip]
-\pause
-<<commadec, eval=FALSE>>=
-as.numeric( as.character(df$col) )
-as.numeric( gsub(pattern=",", replacement=".", x=df$col) )
-# If you try to read data in the format "3,590.18", run
-df$col <- as.numeric(gsub(",", "", df$col))
-@
-\pause
-Note: \alert{error}s stop function execution, \alert{warning}s can influence function performance and should only be ignored if you know what they really mean.
 \end{frame}
 
 %------------------------------------------------------------%

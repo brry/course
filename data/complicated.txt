@@ -1,0 +1,19 @@
+This is a fake dataset created by Berry Boessenkool.
+It features common data formats that are still easy to read by R.
+Almost all it needs are settings to the read.table family of commands.
+
+Remember to never change raw data!
+Rather have R read it for you, keep a script of potential cleanups and save a clean version of the data alongside the orginal.
+
+Group	Some Fake Values	ThouSand	Notes
+Dark	82,07583	45`991	Sometimes
+Dark	87,82263	46`508	I
+Dark	71,32776	16`996	cannot
+Sunrise	37,49618	30`692	think
+Sunrise	29,21638	6`245	of
+Sunrise	68,23128	48`544	good
+Sunrise	93,358	5`148	remarks
+Bright	1,05233	16`323	for
+Bright	78,01298	2`016	fake
+Cloudy	29,77	104`877	data
+
