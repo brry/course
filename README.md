@@ -55,6 +55,25 @@ gpg: keyserver communications error: public key not found
 gpg: keyserver receive failed: public key not found*
 
 
+### git
+
+- Create a github account at <https://github.com/join>
+- Download and install git, see <https://git-scm.com/downloads>
+- Connect git to Rstudio: (up to `git config user.name` (with images at <https://www.r-bloggers.com/rstudio-and-github>)
+  - RStudio -> Tools -> Version Control: select Git.
+  - RStudio -> Tools -> Global Options -> Git/SVN: Ensure the path to the Git executable is correct.
+  - `Create RSA Key`, close window
+  - `View public key`: copy the displayed public key
+  - go to <https://github.com/settings/keys> and click `New SSH key`, paste the public key
+  - RStudio -> Tools -> Shell: type the following:
+```
+git version # just to see git works fine
+git config --global user.email "YourEmail@domain.com"
+git config --global user.name "YourUserNameHere"
+```
+
+  
+
 ### settings
 
 Suggested Rstudio settings (for reproducibility and compatibility):
