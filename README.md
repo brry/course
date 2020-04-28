@@ -155,7 +155,7 @@ now change the following entries:
 These are some instructions to start an R research project under version control.
 
 - install [R, Rstudio](https://github.com/brry/course/#install) and [git](https://github.com/brry/course/#git) 
-- create a new github repsoitory (<https://github.com/new>), initialize with Readme
+- create a new github repository (<https://github.com/new>), initialize with Readme
 - `Clone or download` -> Copy URL
 - Rstudio -> File -> New Project -> Version Control -> Git: paste the URL, set the subdirectory and create project. I recommend to keep the Project directory name for your own projects.
 - Rstudio -> File -> New File -> R markdown
