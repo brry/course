@@ -59,7 +59,7 @@ gpg: keyserver receive failed: public key not found*
 
 - Create a github account at <https://github.com/join>
 - Download and install git, see <https://git-scm.com/downloads>
-- Connect git to Rstudio: (up to `git config user.name` (with images at <https://www.r-bloggers.com/rstudio-and-github>)
+- Connect git to Rstudio: (with images at <https://www.r-bloggers.com/rstudio-and-github>)
   - RStudio -> Tools -> Version Control: select Git.
   - RStudio -> Tools -> Global Options -> Git/SVN: Ensure the path to the Git executable is correct.
   - `Create RSA Key`, close window
@@ -147,4 +147,17 @@ now change the following entries:
 * http://stat545.com/topics.html (excellent tutorial)
 * https://www.edx.org/course/introduction-r-programming-microsoft-dat204x-0 (Datacamp, with login, but free)
 * http://tryr.codeschool.com/levels/1/challenges/1 (codeschool, interactive, login to save progress)
+
+
+
+### project
+
+These are some instructions to start an R research project under version control.
+
+- install [R, Rstudio](https://github.com/brry/course/#install) and [git](https://github.com/brry/course/#git) 
+- create a new github repsoitory (<https://github.com/new>), initialize with Readme
+- `Clone or download` -> Copy URL
+- Rstudio -> File -> New Project -> Version Control -> Git: paste the URL, set the subdirectory and create project. I recommend to keep the Project directory name for your own projects.
+- Rstudio -> File -> New File -> R markdown
+- Work, then commit changes and push to github
 
