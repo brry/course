@@ -1,0 +1,9 @@
+Measurements of reed (German: Schilf) at the beautiful lake "Fantasea" in 2015.
+Conducted by Arno Nym, with the help of Mr. T and the B-team, as well as K. rider.
+Site	moisture	plant height	stem_diameter
+H1	wet	154	1.8
+H1	moist	120	0.95
+H3	moist	173	2.6
+H1	dry	134	1.25
+K7	forgot to log, sorry professor	143	1.35
+K2	wet	167	2.7

@@ -2513,9 +2513,9 @@ legend("bottomright", levels(Puromycin$state), col=1:2, pch=16)
 \begin{exercise}{Factors, tapply}
 \begin{enumerate}
 \item Plot the Puromycin dataset, but use the 3rd and 4th color of the default \rcode{palette()}
-\item BONUS 1: Use custom colors. \\Hint: create a vector with the colors, then index from it.
-\item BONUS 2: In the \rcode{iris} dataset, add a row for the \textit{Iris sintenisii}. \\Hint: add a level to the factor first.
 \item Using \rcode{tapply}, find out what you should feed chickens according to the measurements in \rcode{chickwts}.
+\item BONUS 1: For the Puromycin dataset, use custom colors. \\Hint: create a vector with the colors, then index from it.
+\item BONUS 2: In the \rcode{iris} dataset, add a row for the \textit{Iris sintenisii}. \\Hint: add a level to the factor first.
 \end{enumerate}
 \end{exercise}
 \end{frame}
@@ -4635,7 +4635,7 @@ polygon(cx, cy)
 Write a function that
 \begin{enumerate}
   \item - draws a circle with a certain radius at user-specified locations of an existing plot (see last slide).
-  \item - uses ellipsis to allow the user to customize the appearance
+  \item - uses ellipsis (threedots) to allow the user to customize the appearance
   \item - checks all the arguments and gives useful warnings if the wrong type of input is provided
   \item - has useful explanations for each argument (documentation)
   \item - has readable indentation, spacing and comments explaining the code
@@ -5414,10 +5414,10 @@ plot(clim$Year, clim$JA_RR, type="l", col="blue", lwd=3,
 \begin{frame}[fragile]{normal distribution: empirical histogram}
 \vspace{-0.8em}
 <<normdist_hist, echo=-1, size="scriptsize">>=
-par(mar=c(2,3.3,2,0.5), mgp=c(2.3,0.7,0), las=1)
+par(mar=c(3,3.3,2,0.5), mgp=c(1.9,0.7,0), las=1)
 hist(clim$JA_RR, breaks=20, col="azure3", main="Histogram Rainfall",
      ylab="Number of values in rainfall bin", 
-     xlab="Annual rainfall sum Potsdam 1894:2017")
+     xlab="Annual rainfall sum Potsdam 1893:2018")
 @
 \end{frame}
 
@@ -5429,21 +5429,21 @@ plotnorm <- function(step=50){
 par(mar=c(2,3.9,2,0.5), mgp=c(3,0.7,0), las=1)
 hist(clim$JA_RR, breaks=20, col="azure3", 
      main="Probability density, total histogram area=1",
-     xlab="Annual rainfall sum Potsdam 1894:2017", freq=FALSE)
+     xlab="Annual rainfall sum Potsdam 1893:2018", freq=FALSE)
 if(step==3) return(invisible(NULL))
-abline(v=mean(clim$JA_RR), col="red", lwd=5)
-textField(650, 0.005, paste0("mean = ", round(mean(clim$JA_RR),0)), col="red")
+abline(v=mean(clim$JA_RR, na.rm=TRUE), col="red", lwd=5)
+textField(650, 0.005, paste0("mean = ", round(mean(clim$JA_RR, na.rm=TRUE),0)), col="red")
 if(step==4) return(invisible(NULL))
 musd <- function(x,f=1) mean(x,na.rm=TRUE)+c(-f,f)*sd(x, na.rm=TRUE)
 segments(musd(clim$JA_RR,1), rep(-1,2), y1=rep(0.0025,2), col="red", lwd=5)
-textField(690, 0.004, paste0("sd = ", round(sd(clim$JA_RR),0)), col="red")
+textField(690, 0.004, paste0("sd = ", round(sd(clim$JA_RR, na.rm=TRUE),0)), col="red")
 if(step==5) return(invisible(NULL))
 textField(589, 0.002, "70% of values between\nmu +- 1 sd")
 if(step==6) return(invisible(NULL))
-segments(musd(clim$JA_RR,2), rep(-1,2), y1=rep(0.0006,2), col="red", lwd=5)
+segments(musd(clim$JA_RR,2), rep(-1,2), y1=rep(0.00055,2), col="red", lwd=5)
 textField(589, 0.0007, "95% of values between\nmu +- 2 sd")
 if(step==7) return(invisible(NULL))
-lines(200:900, dnorm(200:900, mean(clim$JA_RR), sd(clim$JA_RR)), col="red", lwd=3)
+lines(200:900, dnorm(200:900, mean(clim$JA_RR, na.rm=TRUE), sd(clim$JA_RR, na.rm=TRUE)), col="red", lwd=3)
 }
 @
 \only<1| handout:0>{
@@ -5485,7 +5485,7 @@ plotnorm(8)
 par(mgp=c(3,0.7,0), las=1)
 hist(clim$JA_RR, breaks=20, col="azure3", 
      main="Probability density, total histogram area=1",
-     xlab="Annual rainfall sum Potsdam 1894:2017", freq=FALSE)
+     xlab="Annual rainfall sum Potsdam 1893:2018", freq=FALSE)
 abline(v=mean(clim$JA_RR), col="red", lwd=5)
 textField(650, 0.005, paste0("mean = ", round(mean(clim$JA_RR),0)), col="red")
 musd <- function(x,f=1) mean(x,na.rm=TRUE)+c(-f,f)*sd(x, na.rm=TRUE)
