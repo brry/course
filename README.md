@@ -29,11 +29,11 @@ First install R itself and then Rstudio:
 **Installing R on Linux Ubuntu** so that `sudo apt upgrade` updates to the latest R version if outdated 
 (idea from [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) and [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)):  
 Open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines.  
-Replace `xenial` with e.g. `trusty` if you have another Ubuntu version (check in shell with `lsb_release -a`  ):  
-18.10 cosmic-cran35, 18.04 bionic-cran35, 16.04 xenial, 14.04 trusty
+Replace `focal` with e.g. `bionic` if you have another Ubuntu version (check in shell with `lsb_release -a`  ):  
+20.04 focal-cran40, 19.10 eoan-cran35 18.04 bionic-cran40, 16.04 xenial-cran40, 14.04 trusty-cran35 [Current list](https://cloud.r-project.org/bin/linux/ubuntu/)
 
 <pre>
-sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu <b>xenial</b>/" | sudo tee -a /etc/apt/sources.list
+sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu <b>focal-cran40</b>/" | sudo tee -a /etc/apt/sources.list
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | sudo apt-key add -
 sudo apt-get update
