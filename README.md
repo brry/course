@@ -1,4 +1,4 @@
-Jump to [slides](#slides), [install](#install), [settings](#settings), [packages](#packages), [sumatra](#sumatra), [resources](#resources)
+Jump to [slides](#slides), [install](#install), [git](#git), [settings](#settings), [packages](#packages), [sumatra](#sumatra), [resources](#resources), [project](#project)
 
 Find info about the fall 2018 course at Potsdam university [here](https://github.com/brry/course/blob/master/uni.md).
 
