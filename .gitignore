@@ -53,3 +53,6 @@ Test.knitlog
 Test.out
 Topics_Outline.r
 RcourseBerry_Mathias.tex
+website/_book/
+website/rsconnect
+website/zz_Rcourse_website.Rproj
