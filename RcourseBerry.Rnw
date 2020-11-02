@@ -979,70 +979,14 @@ help.start() # html help Manuals, Material, search engine
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Getting help: Outside R}
-\pause
 \begin{itemize}[<+->]
-  \item \href{https://cran.r-project.org/manuals.html}{R-Manuals} for introduction to the language
-  \item R Wiki: \href{http://rwiki.sciviews.org/}{rwiki.sciviews.org}
-  \item Ref Cards:
-    \href{https://www.rstudio.com/wp-content/uploads/2016/09/r-cheat-sheet-1.pdf}{base} and
-    \href{https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf}{advanced} cheatsheets from
-    \href{https://www.rstudio.com/resources/cheatsheets/}{Rstudio},\\
-    RefCards originally by Tom Short from
-    \href{https://github.com/jonasstein/R-Reference-Card/raw/master/R-refcard.pdf}{Stein} (recommended),
-    \href{https://cran.r-project.org/doc/contrib/Baggott-refcard-v2.pdf}{Baggot},
-    \href{http://www.u.arizona.edu/~kuchi/Courses/MAT167/Files/R-refcard.pdf}{Tanbakuchi},
-    \href{http://atrey.karlin.mff.cuni.cz/~morf/vyuka/pas/materialy/R-refcard.pdf}{cuni} or
-    \href{http://statmaster.sdu.dk/bent/courses/ST501-2011/Rcard.pdf}{Joergensen}
-	\item \href{www.rseek.org}{rseek.org} for R related internet search
-  \item \href{www.StackOverflow.com}{StackOverflow} for programming questions <-- \alert{main resource}
-  \item \href{www.CrossValidated.com}{CrossValidated} for statistical questions
-	\item Mailing lists: ask other experienced users for help
-	\begin{itemize}
-  \item \href{http://www.r-project.org/mail.html}{R-help mailing list}
-  \item \href{http://r.789695.n4.nabble.com/}{Nabble}: Forum-like view of the r-help mailing list
-  \item ONLY post on mailing lists when all other options are exploited and you are sure there's no answer out there. FIRST read the \href{http://www.r-project.org/posting-guide.html}{posting guide}.
+\item \href{www.StackOverflow.com}{StackOverflow} for programming questions $<$-- \alert{main resource}
+\item (online) Book: Grolemund \& Wickham (2017) - \href{http://r4ds.had.co.nz/}{R for Data Science}
+\item \href{https://github.com/jonasstein/R-Reference-Card/raw/master/R-refcard.pdf}{Reference Card} by Tom Short \& Jonas Stein
+\item More at \href{https://bookdown.org/brry/course/resources.html}{bookdown.org/brry/course/resources}
 \end{itemize}
-\end{itemize}
-\label{refcards}
+% \datalinkRaw{books.zip}
 \end{frame}
-
-%------------------------------------------------------------%
-
-% \begin{frame}[fragile]{R related internet search}
-%   \begin{figure}[h]
-%     \begin{center}
-% 		\includegraphics[width=.75\linewidth]{./externalfig/rseek.png}
-% 		\caption{\href{http://www.rseek.org}{www.rseek.org}}
-% 		\label{fig:rseek}
-%     \end{center}
-% 	\end{figure}
-% \end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Good References, books }%(\datalinkRaw{books.zip})}
-\vspace{-0.8em}
-\begin{itemize}[<+->]
-\item Grolemund \& Wickham (2017) \href{http://r4ds.had.co.nz/}{R for Data Science}
-\item J. Adler (2010): R in a Nutshell
-\item U. Ligges (2008): Programmieren mit R (German)
-\item M. Crawley (2007): The R-book
-\item H. Wickham (2014) \href{http://adv-r.had.co.nz}{Advanced R}
-\item H. Wickham (2015) \href{http://r-pkgs.had.co.nz}{R Packages}
-\item domain specific: \href{http://www.crcpress.com/browse/series/crctherser}{Chapman and Hall R Series}
-\item Many more listed at \href{https://github.com/RomanTsegelskyi/rbooks}{github.com/RomanTsegelskyi/rbooks}
-\item Review list at \href{https://web.archive.org/web/20130619094650/http://ecotope.org/blogs/page/R-Book-Review.aspx}{ecotope.org, through the wayback machine}
-\end{itemize}
-\onslide<+-> Tutorials:
-\begin{itemize}[<+->]
-%\item \href{http://RclickHandbuch.wordpress.com}{RclickHandbuch.wordpress.com} (German)
-\item \href{https://www.edx.org/course/introduction-r-programming-microsoft-dat204x-0#!}{Microsoft + Datacamp} (best course I know of, with login, but free)
-\item \href{http://tryr.codeschool.com/levels/1/challenges/1}{tryR.codeschool.com} (interactive)
-\item \href{http://stat545-ubc.github.io/topics.html}{STAT 545}
-\end{itemize}
-\label{books}
-\end{frame}
-
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
@@ -5553,7 +5497,8 @@ generalnormplot(val=598)
 generalnormplot(val=615)
 @
 }
-\onslide<4> \rcode{pnorm(q=615, mean=600, sd=10)} = 93\% of the values of a normal distribution (ND) with $\mu=600$ and $\sigma=10$ are smaller than 615.
+\onslide<4> \rcode{pnorm(q=615, mean=600, sd=10)} = 93\% of the values of a normal distribution (ND) with $\mu=600$ and $\sigma=10$ are smaller than 615.\\
+\onslide<4> \rcode{qnorm(p=0.4, mean=600, sd=10)} = 597 marks the point with 40\% of values below it.
 \end{frame}
 
 %------------------------------------------------------------%
@@ -6064,7 +6009,7 @@ quantile(JM)
 @
 \pause
 75\% of the annual maxima are smaller than 76.3 m\textsuperscript{3}/s (upper quartile).
-This discharche is exceeded in 25 of 100 years.
+This discharge is exceeded in 25 of 100 years.
 Statistically, we'd expect an event of this magnitude (or larger) once every \pause
 4 years.
 Each year, there's a statistical probability of 25\% for 76 m\textsuperscript{3}/s to be reached/exceeded.\\[1em]
@@ -6649,7 +6594,8 @@ It is excluded from this main document and can be obtained as \href{https://dl.d
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Linear Regression}
-\href{http://www.econ.queensu.ca/files/other/storks.pdf}{Storks Deliver Babies (p = 0.008)}\\
+\href{http://www.econ.queensu.ca/files/other/storks.pdf}{Storks Deliver Babies (p = 0.008)}\\[1em]
+\href{https://livefreeordichotomize.com/2019/08/24/extending-the-analogy-the-boy-you-cried-wolf-p-hacking}{p-hacking}\\[1em]
 Fit multiple functions: berryFunctions::mReg. See the mReg sections in the 
 \href{https://cran.rstudio.com/web/packages/berryFunctions/vignettes/berryFunctions.html}{Vignette} 
 and \href{https://rclickhandbuch.wordpress.com/rpackages/}{Rclick page}
@@ -7396,7 +7342,7 @@ vis_nc(nc, cex=11.5)
 % \item Packages are basically (documented) scripts from other people $\rightarrow$ \rcode{install.packages} and \rcode{library}
 \item Reading data: \rcode{setwd}, \rcode{dir}, \rcode{read.table}, \rcode{str}
 % \item \rcode{read.table} arguments: header=TRUE, sep="\textbackslash t", dec=",", skip, fill, comment.char, na.strings, \textit{many more}
-\item Function documentation with \rcode{help} (or F1), \href{www.StackOverflow.com}{StackOverflow} for questions, Reference Cards (\hyperlink{refcards}{slide \ref{refcards}}) for an overview and books / tutorials (\hyperlink{books}{slide \ref{books}}) for self-learning
+\item Function documentation with \rcode{help} (or F1), \href{www.StackOverflow.com}{StackOverflow} for questions, Reference Cards for an overview and books / tutorials for self-learning (\href{https://bookdown.org/brry/course/resources.html}{bookdown.org/brry/course/resources}).
 % \item factors (categories, groups) are integers internally, useful for color specification in plotting, dangerous when converting to \rcode{as.numeric}!
 \item Rstudio is awesome!
 \item Objects (vector, data.frame, matrix, list, function) can have several data types (numeric, logical, character), see \hyperlink{datatypes}{slide \ref{datatypes}}
