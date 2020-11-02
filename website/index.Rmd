@@ -107,24 +107,24 @@ gpg: keyserver receive failed: public key not found*
 
 Rstudio settings I suggest to change for reproducibility and compatibility:
 
-- Tools - Global Options - General
+- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General
     - **OFF**: Restore .Rdata into workspace at startup  
     - Save workspace to .RData on exit: **NEVER**  
 Instead use `save(object, file="object.Rdata")` after long computations.  
 You can load them later with `load("object.Rdata")`.
     - **ON**: Restore previously open source documents at startup  
-- Tools - Global Options - Code - Display
-    - **ON**: Show margin (Margin column:80)  *People hate horizontal scrolling!*
+- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Display
+    - **ON**: Show margin (Margin column: 80)  *People hate horizontal scrolling!*
     - **ON**: Highlight R function calls
-- Tools - Global Options - Code - Saving
+- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Saving
     - Line ending conversion: **Windows (CR/LF)**
     - Default Text Encoding: **UTF-8**
-- Tools - GLobal Options - Appearance
+- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Appearance
     - Editor font size: 10
     - Editor theme: **Cobalt**
-- Tools - Global Options - Sweave
+- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Sweave
     - Weave Rnw files using: **knitr**
-- Tools - Modify Keyboard Shortcuts
+- <span style="background-color:aquamarine">Tools</span> - Modify Keyboard Shortcuts
     - remove `CTRL+Y` from the command "paste last yank" (if you want it to mean "redo" as in other programs)
     - Set Working Directory to Current Document's Directory: `CTRL + H`
 - For more keyboard shortcuts, see [rskey](https://github.com/brry/rskey#rskey)
@@ -241,15 +241,39 @@ Now change the following entries:
 
 # resources
 
-* [R-weekly](https://rweekly.org/) - weekly newsletter about all things R
-* [Rbloggers](https://www.r-bloggers.com/) - blog aggregator about R
-* [Shiny](https://shiny.rstudio.com/) - web application framework for R/Rstudio
-* [Rmarkdown](http://rmarkdown.rstudio.com/) - document/notebook generation framework for R/Rstudio
-* [Github guides](https://guides.github.com/) - Introduction to github
+Books
 
-online tutorials
+- Grolemund & Wickham (2017): [R for Data Science](http://r4ds.had.co.nz/)
+- J. Adler (2010): R in a Nutshell
+- U. Ligges (2008): Programmieren mit R (German)
+- M. Crawley (2007): The R-book
+- H. Wickham (2014): [Advanced R](http://adv-r.had.co.nz)
+- H. Wickham (2015): [R Packages]( http://r-pkgs.had.co.nz)
+- domain specific: [Chapman and Hall R Series](https://www.routledge.com/Chapman--HallCRC-The-R-Series/book-series/crctherser)
+- Many more listed at [github.com/RomanTsegelskyi/rbooks]( https://github.com/RomanTsegelskyi/rbooks)
+- Review list at [ecotope.org](https://web.archive.org/web/20130619094650/http://ecotope.org/blogs/page/R-Book-Review.aspx) or
+  [r4stats.com](http://r4stats.com/articles/book-reviews)
 
-* https://stat545.com (excellent tutorial)
+Reference cards
+
+- [base](https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf) and
+  [advanced](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf) cheatsheets from
+        [Rstudio](https://www.rstudio.com/resources/cheatsheets)
+- [RefCard](https://github.com/jonasstein/R-Reference-Card/raw/master/R-refcard.pdf) by Tom Short & Jonas Stein
+
+The internet
+
+- [R-weekly](https://rweekly.org/) - weekly newsletter about all things R
+- [Rbloggers](https://www.r-bloggers.com/) - blog aggregator about R
+- [StackOverflow](https://stackoverflow.com/questions/tagged/r) - programming questions (main resource)
+- [CrossValidated](https://stats.stackexchange.com) - statistical questions
+- [rseek.org](https://rseek.org) - R focused internet search
+- [R-Manuals](https://cran.r-project.org/manuals.html) - official introduction to the language
+- [Mailing lists](https://www.r-project.org/mail.html), [Nabble](http://r.789695.n4.nabble.com/) with a forum-like view of the r-help mailing list
+- [stat545](https://stat545.com) - excellent online tutorial
+- [Shiny](https://shiny.rstudio.com) - web application framework for R/Rstudio
+- [Rmarkdown](http://rmarkdown.rstudio.com) - document/notebook generation framework for R/Rstudio
+- [Github guides](https://guides.github.com) - Introduction to github
 
 
 
