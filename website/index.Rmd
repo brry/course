@@ -7,6 +7,10 @@ output:
   bookdown::gitbook:
     number_sections: false
     toc_depth: 1
+    config:
+      toc:
+        toc_float:
+          collapsed: true
 editor_options: 
   chunk_output_type: console
 ---
