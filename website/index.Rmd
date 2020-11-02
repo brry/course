@@ -119,6 +119,9 @@ You can load them later with `load("object.Rdata")`.
 - Tools - Global Options - Code - Saving
     - Line ending conversion: **Windows (CR/LF)**
     - Default Text Encoding: **UTF-8**
+- Tools - GLobal Options - Appearance
+    - Editor font size: 10
+    - Editor theme: **Cobalt**
 - Tools - Global Options - Sweave
     - Weave Rnw files using: **knitr**
 - Tools - Modify Keyboard Shortcuts
@@ -275,7 +278,7 @@ Before you send someone any code whatsoever, do the following:
 - copy the script to some other folder than your working place
 - `source()` the entire script with `CTRL`+`SHIFT`+`S`
 - If something fails, fix it! (e.g. stop messing with `setwd`, copy data files to be read, rename all instances of a renamed object, ...)
-- Only now send the file (or folder with data files etc. alongside the script as zip file)
+- Only now send the file (or folder with scripts, data files, etc. as zip file)
 
 
 ### Rproj
