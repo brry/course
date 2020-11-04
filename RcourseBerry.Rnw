@@ -16,7 +16,7 @@
 
 \setbeamertemplate{footline}[text line]{%
   \parbox{\linewidth}{\vspace*{-8pt}
-  \href{https://github.com/brry/course\#slides}{github.com/brry/course} \hfill
+  \href{https://bookdown.org/brry/course}{bookdown.org/brry/course} \hfill
   \hyperlink{toc}{TOC} ~~ \insertframenumber / \inserttotalframenumber~~~~~~~~~}}
 \setbeamertemplate{navigation symbols}[only frame symbol]
 
@@ -162,14 +162,14 @@ Berry Boessenkool, \texttt{berry-b@gmx.de}\\
 Hints and corrections are very welcome!\\[1em]
 Download the current slides, source code and datasets at\\
 \Large
-\href{https://github.com/brry/course}{github.com/brry/course}\\[1em]
+\href{https://bookdown.org/brry/course}{bookdown.org/brry/course}\\[1em]
 \normalsize
 These slides are licenced under
 \href{https://creativecommons.org/licenses/by/4.0}{\includegraphics[width=3em]{externalfig/ccby.png}},\\
 so you can use the material freely as long as you cite me.\\[2em]
 % \alert{guest account. example PC: ~ Einstein, 141.89.114.20\\user: gast\_20 ~ pw: 20-einstein. (mind the dot)}\\[1em]
 \scriptsize
-PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ \\[1em]
+PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ \hyperlink{introBerry}{\textcolor{white}{.}}\\[1em]
 \end{center}
 \end{frame}
 }
@@ -195,6 +195,7 @@ PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ 
 %------------------------------------------------------------%
 
 \begin{frame}{\rcode{print("Hello world!")}}
+\label{introBerry}
 \begin{itemize}[<+->]
 \item Berry Boessenkool $\rightarrow$ berry-b@gmx.de
 \item Geoecology @ Potsdam University
@@ -209,52 +210,75 @@ PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ 
 \end{itemize}
 %\item \alert{Jump to beta distribution \hyperlink{beta}{example lecture}}
 \item These slides were originally based on a one week course held in 2013 for \href{http://www.cawa-project.net/ru/news-detail/news/cawa-training-course-statistical-analysis-in-hydrology-introduction-into-r/}{CaWa} with Mathias Seibert (GFZ) in Bishkek, Kyrgyzstan
-\item R installation instructions: \href{https://github.com/brry/course\#install}{github.com/brry/course\#install}
+% \item R installation instructions: \href{https://bookdown.org/brry/course\#install}{bookdown.org/brry/course\#install}
 \item \alert{If we're proceeding too fast, please interrupt!}
 \end{itemize}
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}{Why programming?}
+\begin{frame}{Session 1: Why R, read file, select and plot data}
+Aim: \pause get a general impression on how R works, without going too much into technical detail.\\
+\pause Afterwards, you should be able to:
 \pause
 \begin{itemize}[<+->]
-  \item Data analysis
-  \item Plotting
-  \onslide<+->  \vspace{-0.5em} ~~~~~~~~~ \textit{Excel could do that, but is lacking} \vspace{0.5em}
-  \item Awesomeness
-    \begin{itemize}
-    \item efficiency
-    \item flexibility
-    \item automatization
-    \item transparency, reproducibility
-    \item complex statistical procedures
-    \item \textcolor{ForestGreen}{job chance advantage}
-    \end{itemize}
+\item start a new script in Rstudio and execute lines of code
+\item read a data file into R
+\item select a column and rows that fullfill a certain criterion
+\item generate basic graphics with annotation and added elements
+\item open and read the documentation for R functions
 \end{itemize}
-\onslide<+-> Why R? (and not matlab, python, java, html, C++, fortran)
-\begin{itemize}[<+->]
-  \item Open Source $\rightarrow$ free!
-  \item Large community $\rightarrow$ stunning lots of methods!
-  \item Interpreter language $\rightarrow$ no compilation, human readable code
-  \item The standard for data analysis in many universities and industries
-\end{itemize}
+\onslide<+->
+\vspace{2em}
+-> Brief inputs followed by short exercises (for max learning)
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}{In the future, programming will save you time!}
-\includegraphics[width=0.99\textwidth]{externalfig/xkcd3.PNG}\\
-I find that when someone's taking time to do something right in the present, they're a perfectionist with no ability to prioritize, whereas when someone took time to do something right in the past, they're a master artisan of great foresight. (\href{https://xkcd.com/974/}{xkcd.com/974})\\
+\begin{frame}{Why R? (and not matlab, java, html, C++, fortran)}
+\includegraphics[width=0.7cm]{externalfig/Rlogo.png} \pause is free \pause \& open source \pause and has a large user community \pause (hence many methods are implemented).\\ 
+\pause  It is the standard for data analysis \pause and visualisation \pause in many universities and industries.\\
+\pause  R is an interpreter language \pause $\rightarrow$ no compilation, human readable code\\
+\pause  The flexibility of programming \pause enables automatization \pause of complex statistical procedures.\\
+\pause  Using R will make your work efficient, \pause productive, \pause transparent \pause and reproducible, \pause  thus giving you happiness \pause  and a job chance advantage.\\[2em]
+
+\pause R installation instructions: \href{https://bookdown.org/brry/course/install.html}{bookdown.org/brry/course/install.html}\\
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}{Course plan}
-\hyperlink{plansessionone}{Jump to plan Session 1}\\[2em]
+% \begin{frame}{In the future, programming will save you time!}
+% \includegraphics[width=0.99\textwidth]{externalfig/xkcd3.PNG}\\
+% I find that when someone's taking time to do something right in the present, they're a perfectionist with no ability to prioritize, whereas when someone took time to do something right in the past, they're a master artisan of great foresight. (\href{https://xkcd.com/974/}{xkcd.com/974})\\
+% \end{frame}
 
-One slide about Rstudio, and then we'll finally start...
+%------------------------------------------------------------%
 
+\begin{frame}{Clone github repo from within Rstudio I}
+\label{installGit}
+Install git (program for version control) \href{https://bookdown.org/brry/course/git.html}{bookdown.org/brry/course/git.html}\\[1em]
+Go to \href{https://github.com/brry/course}{github.com/brry/course} -> \colorbox{Green}{\textcolor{White}{Code}} -> Copy URL
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{./externalfig/git_clone_1.PNG}
+\end{figure}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}{Clone github repo from within Rstudio II}
+\footnotesize
+Rstudio - File - New Project - Version Control - Git\\
+paste the repository URL, set the subdirectory and create project.\\
+\scriptsize
+I recommend to keep the Project directory name so local and github folder names match exactly.
+\footnotesize
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{./externalfig/git_clone_Rstudio.png}
+\end{figure}
+From now on, get the latest version of my slides with a single click on \key{Pull}:
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{./externalfig/git_clone_6.PNG}
+\end{figure}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -288,7 +312,7 @@ In the console, calculate ~ 21+21 ~,~ 7*6 ~ and ~ $\frac{0,3}{4}*\sqrt{313600}$\
   \item What's a good object name? \onslide<+-> $\rightarrow$ short, but explanatory,
         \onslide<+-> lowerCamelStandard\_or\_underscore are good naming conventions
   \item comments: \texttt{\textcolor[rgb]{0,0.392,0}{\# everything after a hashtag is not executed.}}
-  \item scripts: Rstudio
+  \item Rstudio scripts: Send line/selection to R console:  \key{CTRL} + \key{ENTER}
 \end{itemize}
 \end{frame}
 
@@ -353,16 +377,26 @@ write.table(treesize, file="data/treesize.txt", quote=F, row.names=F)
 plot(height~age, data=treesize, col=measured)
 @
 \onslide<+->
+\begin{itemize}[<+->]
+  \item Read files into R with the command \rcode{read.table}
+  \item \rcode{?read.table}, or press F1 to read the documentation
+\end{itemize}
+\onslide<+->
+In case you did not clone the course repo:
+\begin{itemize}
+  \item Download \datalinkText{treesize.txt}
+  \item Tell R (in the script) where to look for files with:\\
+        \rcode{setwd("C:/path/to/input")} \texttt{\textcolor[rgb]{0,0.392,0}{ \# use forwardslashes}}
+\end{itemize}
+\onslide<+->
 \begin{exercise}{Reading files}
-Copy the file \datalinkText{treesize.txt} and tell R where to look for it with:\\
-\rcode{setwd("C:/path/to/input")} \texttt{\textcolor[rgb]{0,0.392,0}{ \# change back- to forwardslashes}}\\
-  \onslide<+-> Read the file into R with the command \rcode{read.table}, assigning it to an object with a good name.\\
-  \onslide<+-> Use the documentation to find out the correct settings of the arguments:\\
-  \onslide<+-> \rcode{help(read.table)}, \rcode{?read.table}, or press F1.\\
-  \onslide<+-> If R tells you "no such file" exists, check the output of \rcode{dir()}.\\
-  \onslide<+-> Check the object with \rcode{head(YourObject)}.\\
-  \onslide<+-> \rcode{str(YourObject)} must yield the column data types: \texttt{num, num, factor}. \\
-  \onslide<+-> You need to set the argument \texttt{header}.
+\begin{itemize}[<+->]
+  \item Read the file into R with the command \rcode{read.table}, assigning it to an object with a good name.
+  \item If R tells you "no such file" exists, check the output of \rcode{dir()}.
+  \item Check the object with \rcode{head(YourObject)}.
+  \item \rcode{str(YourObject)} must yield the column data types: \texttt{num, num, factor}. 
+  \item You need to set the argument \texttt{header}.
+  \end{itemize}
   \end{exercise}
 \end{frame}
 
@@ -565,7 +599,7 @@ xaxt="n" # axis type (none to suppress axis)
 \begin{itemize}[<+->]
 \item Many people write code for specific tasks and publish it on CRAN, the Comprehensive R Archive Network
 \item Packages for a range of topics: \href{http://cran.r-project.org/web/views/}{cran.r-project.org/web/views}
-\item All $>$10'500 available packages: \href{http://cran.r-project.org/web/packages/}{cran.r-project.org/web/packages}
+\item All $>$16'000 available packages: \href{http://cran.r-project.org/web/packages/}{cran.r-project.org/web/packages}
 \item \rcode{install.packages("ggplot2")} to download and install.\\
       \footnotesize (only needs to be executed once, works on user level, no admin rights required)\\
       You can do this in Rstudio \normalsize
@@ -626,6 +660,28 @@ title(xlab="age", mgp=c(1.5,0,0))
 @
 \end{frame}
 
+%------------------------------------------------------------%
+
+\begin{frame}{Session 1: Recap \footnotesize{(They tried to make me go to recap and I said, 'Yes, yes, yes.')}}
+\pause
+\begin{itemize}[<+->]
+  \item R is awesome. You're here, thus you will be R-some, too
+  \item Console for code execution (R), ready with \rcode{$>$}, waiting with \rcode{$+$}
+  \item Script for code writing (you) + exchange
+  \item Objects are created with the assignment operator \rcode{$<$-}%, see \rcode{ls()} % in the workspace
+  \item Get help with \rcode{help(median)}, \rcode{?matrix}, or pressing F1
+  \item Create vectors with \rcode{c(42,3,-4)}, \rcode{1:n}
+  \item \rcode{data.frame}s hold tables with one data type per column
+  \item \rcode{read.table}, with \texttt{header=TRUE} to read files into R
+  \item Index objects with \rcode{values[8:5]}, \rcode{tab[4,2:6]}
+  \item df columns with \rcode{tab[ ,3]}, \rcode{tab[ ,"precip"]}, \rcode{tab\$wind}
+  \item \rcode{hist(vals)}; \rcode{plot(x,y, las=1, pch=16, type="b")}
+\end{itemize}
+\pause
+Homework: finish all covered exercises, work on exercise 7 (Reading files, subsetting, comparing)
+% \onslide<+-> The homework is at \url{https://github.com/brry/course/blob/master/uni.md\#homework}
+\end{frame}
+
 %' %------------------------------------------------------------%
 %' %------------------------------------------------------------%
 %' \subsection{Packages, normality test}
@@ -639,7 +695,7 @@ title(xlab="age", mgp=c(1.5,0,0))
 %'   \item This is an important assumption for many classical statistical methods.
 %'   \item Whether a dataset is normally distributed can be checked with a histogram (visually effective, but the class limits are subjective), with qqplots (I don't find them very intuitive), or with statistical tests.
 %' \item
-%' <<normaltest, eval=F>>=
+%' <normaltest, eval=F>>=
 %' data <- rnorm(1000, mean=97, sd=8.9)
 %' shapiro.test(data)
 %' ks.test(data, "pnorm", mean(data), sd(data))
@@ -757,84 +813,90 @@ linReg(Volume~Girth, data=trees, col="forestgreen", pos1="topleft")
 @
 \end{frame}
 
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-\section{2. Getting started: Background, GUI and first steps}
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-\subsection{Background information}
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-
-\begin{frame}{R - What and Why?}
-\pause
-\vspace{-0.5em}
-\begin{itemize}%[<+->]
-\item R is a standard environment for statistical computing
-\item and an object-oriented programming language.
-\item It is developed and maintained by the R development core team
-\item and has thousands of add-on packages written by the community.
-\item There are mailing lists where users (\& developers) help users
-\item and blogs to communicate analysis and coding to the public.
-\item R allows complex data analysis of big data sets with current methods
-\item and the creation of advanced professional (even interactive) graphics.
-\item Coding and programming forces you to keep track of your work
-\item and allows you to efficiently customize and automatize your analysis.
-\item R is very versatile: you can write your own functions and packages,
-\item implement new methods and make them available to everyone.
-\item Being capable of programming helps finding a job
-\item and the best part: \textcolor{green}{R is open source and free!}
-\end{itemize}
+% %------------------------------------------------------------%
+% %------------------------------------------------------------%
+% \section{2. Getting started: Background, GUI and first steps}
+% %------------------------------------------------------------%
+% %------------------------------------------------------------%
+% 
+% %------------------------------------------------------------%
+% %------------------------------------------------------------%
+% \subsection{Background information}
+% %------------------------------------------------------------%
+% %------------------------------------------------------------%
+% 
+% \begin{frame}{R - What and Why?}
 % \pause
-\small \href{http://fantasyfootballanalytics.net/2014/01/why-r-is-better-than-excel.html}{fantasyfootballanalytics.net/2014/01/why-r-is-better-than-excel.html}
-\href{http://thegrantlab.org/bio3d/tutorials/79-static-content/85-why-use-r}{thegrantlab.org/bio3d/tutorials/79-static-content/85-why-use-r}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}{interpreter language - no compilation}
-\pause
-\centering
-\includegraphics[height=0.65\textheight]{externalfig/compiling.png}\\
-\href{https://xkcd.com/303/}{xkcd.com/303}
-\end{frame}
-
-%------------------------------------------------------------%
-
-% \begin{frame}{R is growing increasingly popular}
-%   \begin{figure}[h]
-%   	\begin{center}
-% 		\includegraphics[width=.8\linewidth]{./externalfig/jobgraph.png}
-% 		\caption{\href{http://www.indeed.com/jobanalytics/}{www.indeed.com/jobanalytics}}
-% 		\label{fig:r-jobs}
-%     \end{center}
-% 	\end{figure}
+% \vspace{-0.5em}
+% \begin{itemize}%[<+->]
+% \item R is a standard environment for statistical computing
+% \item and an object-oriented programming language.
+% \item It is developed and maintained by the R development core team
+% \item and has thousands of add-on packages written by the community.
+% \item There are mailing lists where users (\& developers) help users
+% \item and blogs to communicate analysis and coding to the public.
+% \item R allows complex data analysis of big data sets with current methods
+% \item and the creation of advanced professional (even interactive) graphics.
+% \item Coding and programming forces you to keep track of your work
+% \item and allows you to efficiently customize and automatize your analysis.
+% \item R is very versatile: you can write your own functions and packages,
+% \item implement new methods and make them available to everyone.
+% \item Being capable of programming helps finding a job
+% \item and the best part: \textcolor{green}{R is open source and free!}
+% \end{itemize}
+% % \pause
+% \small \href{http://fantasyfootballanalytics.net/2014/01/why-r-is-better-than-excel.html}{fantasyfootballanalytics.net/2014/01/why-r-is-better-than-excel.html}
+% \href{http://thegrantlab.org/bio3d/tutorials/79-static-content/85-why-use-r}{thegrantlab.org/bio3d/tutorials/79-static-content/85-why-use-r}
+% \end{frame}
+% 
+% %------------------------------------------------------------%
+% 
+% \begin{frame}{interpreter language - no compilation}
+% \pause
+% \centering
+% \includegraphics[height=0.65\textheight]{externalfig/compiling.png}\\
+% \href{https://xkcd.com/303/}{xkcd.com/303}
+% \end{frame}
+% 
+% %------------------------------------------------------------%
+% 
+% % \begin{frame}{R is growing increasingly popular}
+% %   \begin{figure}[h]
+% %   	\begin{center}
+% % 		\includegraphics[width=.8\linewidth]{./externalfig/jobgraph.png}
+% % 		\caption{\href{http://www.indeed.com/jobanalytics/}{www.indeed.com/jobanalytics}}
+% % 		\label{fig:r-jobs}
+% %     \end{center}
+% % 	\end{figure}
+% % \end{frame}
+% 
+% %------------------------------------------------------------%
+% 
+% \begin{frame}{Where to get R}
+% %\pause
+% Instructions online: \href{https://bookdown.org/brry/course/install.html}{bookdown.org/brry/course/install.html}\\[1em]
+% \begin{itemize}%[<+->]
+% %   \item base R itself: \href{https://cloud.r-project.org/}{r-project.org}.\\
+% %         \href{https://cran.r-project.org/bin/linux/ubuntu/README.html}{Official} and \href{https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus/}{helpful} hints for Linux Ubuntu users.
+% %   \item \href{https://www.rstudio.com/products/rstudio/\#Desktop}{R-Studio} (widely spread, easy to use)
+% %   
+% \item Editor alternative to Rstudio: \href{http://sourceforge.net/projects/tinn-r/}{Tinn-R}
+% \item Only for Windows OS, but flexible window arrangement
+% \item Needs some initial tweaking, see \href{https://rclickhandbuch.wordpress.com/install-r/tinn-r_english}{Berry's TinnR Page} % pdf cannot be completed without this percent sign
+% \item Since Rstudio has become so incredibly awesome, you should use it!
+% \end{itemize}
+% \label{installR}
 % \end{frame}
 
 %------------------------------------------------------------%
-
-\begin{frame}{Where to get R}
-%\pause
-Instructions online: \href{https://github.com/brry/course\#install}{github.com/brry/course\#install}\\[1em]
-\begin{itemize}%[<+->]
-%   \item base R itself: \href{https://cloud.r-project.org/}{r-project.org}.\\
-%         \href{https://cran.r-project.org/bin/linux/ubuntu/README.html}{Official} and \href{https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus/}{helpful} hints for Linux Ubuntu users.
-%   \item \href{https://www.rstudio.com/products/rstudio/\#Desktop}{R-Studio} (widely spread, easy to use)
-%   
-\item Editor alternative to Rstudio: \href{http://sourceforge.net/projects/tinn-r/}{Tinn-R}
-\item Only for Windows OS, but flexible window arrangement
-\item Needs some initial tweaking, see \href{https://rclickhandbuch.wordpress.com/install-r/tinn-r_english}{Berry's TinnR Page} % pdf cannot be completed without this percent sign
-\item Since Rstudio has become so incredibly awesome, you should use it!
-\end{itemize}
-\label{installR}
-\end{frame}
+%------------------------------------------------------------%
+\section{2. Objects}
+%------------------------------------------------------------%
+%------------------------------------------------------------%
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Rstudio + Git}
+\subsection{Rstudio + getting help}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -863,7 +925,7 @@ Save workspace to .RData on exit: \textbf{NEVER}\\[0.5em]
 \textit{Instead use \rcode{save(object, file="object.Rdata")} after long computations.
 You can load them later with \rcode{load("object.Rdata")}.}\\[0.5em]
 \pause
-More at \href{https://github.com/brry/course\#settings}{github.com/brry/course\#settings}\\[0.5em]
+More at \href{https://bookdown.org/brry/course\#settings}{bookdown.org/brry/course\#settings}\\[0.5em]
 \pause
 \href{https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts}{keyboard shortcuts} (\key{ALT}+\key{SHIFT}+\key{K})
 \pause
@@ -900,41 +962,15 @@ and \href{https://rviews.rstudio.com/categories/tips-and-tricks/}{rviews.rstudio
 
 %------------------------------------------------------------%
 
-\begin{frame}{Install git (program for version control)}
-\label{installGit}
-\begin{enumerate}
-\item Create a github account at \url{https://github.com/join}\\[1em]
-\item Download and install git, see \url{https://git-scm.com/downloads}\\[1em]
-\item Connect git to Rstudio: up to \rcode{git config user.name} at \url{https://www.r-bloggers.com/rstudio-and-github}\\[1em]
-\item Excellent tutorial on git in general (mostly without Rstudio): \url{http://kbroman.org/github\_tutorial}
-\end{enumerate}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}{Clone github repo from within Rstudio I}
-\footnotesize
-Go to \url{https://github.com/brry/course} -> \colorbox{Green}{\textcolor{White}{Clone or download}} -> Copy URL
-\begin{figure}
-\includegraphics[width=0.8\textwidth]{./externalfig/git_clone_1.PNG}
-\end{figure}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}{Clone github repo from within Rstudio II}
-\footnotesize
-Rstudio - File - New Project - Version Control - Git\\
-paste the URL, set the subdirectory and create project.\\
-I recommend to keep the Project directory name for your own projects.
-\begin{figure}
-\includegraphics[width=0.9\textwidth]{./externalfig/git_clone_Rstudio.png}
-\end{figure}
-From now on, get the latest version of my slides with a single click on \key{Pull}:
-\begin{figure}
-\includegraphics[width=0.4\textwidth]{./externalfig/git_clone_6.PNG}
-\end{figure}
-\end{frame}
+% \begin{frame}{Install git (program for version control)}
+% \label{installGit}
+% \begin{enumerate}
+% \item Create a github account at \url{https://github.com/join}\\[1em]
+% \item Download and install git, see \url{https://git-scm.com/downloads}\\[1em]
+% \item Connect git to Rstudio: up to \rcode{git config user.name} at \url{https://www.r-bloggers.com/rstudio-and-github}\\[1em]
+% \item Excellent tutorial on git in general (mostly without Rstudio): \url{http://kbroman.org/github\_tutorial}
+% \end{enumerate}
+% \end{frame}
 
 %------------------------------------------------------------%
 
@@ -957,12 +993,11 @@ From now on, get the latest version of my slides with a single click on \key{Pul
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Getting help}
+% \subsection{Getting help}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Getting help: Inside R}
-  R-Help
+\begin{frame}[fragile]{Getting help}
 <<help-r, eval=FALSE, echo=TRUE, tidy=FALSE>>=
 help("apply") # get help for the function
 ?apply # The same. saves typing effort.
@@ -974,11 +1009,7 @@ help.search("apply")
 
 help.start() # html help Manuals, Material, search engine
 @
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{Getting help: Outside R}
+\pause
 \begin{itemize}[<+->]
 \item \href{www.StackOverflow.com}{StackOverflow} for programming questions $<$-- \alert{main resource}
 \item (online) Book: Grolemund \& Wickham (2017) - \href{http://r4ds.had.co.nz/}{R for Data Science}
@@ -986,6 +1017,7 @@ help.start() # html help Manuals, Material, search engine
 \item More at \href{https://bookdown.org/brry/course/resources.html}{bookdown.org/brry/course/resources}
 \end{itemize}
 % \datalinkRaw{books.zip}
+\vspace{1.5em}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -994,14 +1026,14 @@ help.start() # html help Manuals, Material, search engine
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{get started, comments}
-Please start R via the editor you like.\\[\baselineskip]
-Comments start with a hash key \# %\textbf{\#}\\
-
-<<comments, eval=TRUE, echo=TRUE, tidy=FALSE>>=
-17-42 # This is a comment, thus not executed
-@
-\end{frame}
+% \begin{frame}[fragile]{get started, comments}
+% Please start R via the editor you like.\\[\baselineskip]
+% Comments start with a hash key \# %\textbf{\#}\\
+% 
+% <<comments, eval=TRUE, echo=TRUE, tidy=FALSE>>=
+% 17-42 # This is a comment, thus not executed
+% @
+% \end{frame}
 
 %------------------------------------------------------------%
 
@@ -1059,29 +1091,25 @@ help.start() # offline search, manuals, etc
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Source code of R commands}
+% \subsection{}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
-\begin{frame}
+
+\begin{frame}{Source code of R commands}
 Source code: \href{https://github.com/wch/r-source/tree/trunk/src/library}{github.com/wch/r-source/src/library}/base (or stats, utils, ...)\\
 CRAN packages source code: \href{https://github.com/cran}{github.com/cran}\\
 HTML Documentation: \href{https://www.rdocumentation.org/packages/berryFunctions/versions/1.12.3/topics/colPoints}{www.rdocumentation.org}\\[0.5em]
-
-\href{http://stackoverflow.com/questions/19226816/how-can-i-view-the-source-code-for-a-function}{excellent post}
-
-ncol - .Primitive("dim") - NROW
-head.matrix
-https://github.com/wch/r-source/blob/trunk/src/library/utils/R/head.R
-https://github.com/wch/r-source/blob/trunk/src/library/base/R/matrix.R
-
+\href{http://stackoverflow.com/questions/19226816/how-can-i-view-the-source-code-for-a-function}{excellent post}\\
+ncol - .Primitive("dim") - NROW\\
+head.matrix\\
+\footnotesize
+\url{https://github.com/wch/r-source/blob/trunk/src/library/utils/R/head.R}
+\url{https://github.com/wch/r-source/blob/trunk/src/library/base/R/matrix.R}\\[1em]
+\normalsize
+\href{https://github.com/brry/rskey\#funsource}{github.com/brry/rskey\#funSource}
 \end{frame}
 
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-\section{3. Objects}
-%------------------------------------------------------------%
-%------------------------------------------------------------%
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
@@ -2150,7 +2178,7 @@ If you accidentally change one element to a character, all are converted and cal
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{4. "Real" data}
+\section{3. "Real" data}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2707,7 +2735,7 @@ Download, read and (visually) analyze a dataset that interests you.
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{5. Plotting}
+\section{4. Plotting}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -3221,7 +3249,7 @@ title(main="same boxplots, different distributions!", outer=TRUE)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{6. Character Operations}
+\section{5. Character Operations}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -3345,7 +3373,7 @@ tolower(schoko)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{7. Conditions \& loops}
+\section{6. Conditions \& loops}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -4485,7 +4513,7 @@ which(dimnames(econ)[[2]]=="Industrie")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{8. Functions \& packages}
+\section{7. Functions \& packages}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5163,7 +5191,7 @@ for(nm in rownames(res_lapply))
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{9. Distributions}
+\section{8. Distributions}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6293,7 +6321,7 @@ nile_b <- distLexBoot(nile, selection="gev")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{10. Statistics}
+\section{9. Statistics}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6604,7 +6632,7 @@ and \href{https://rclickhandbuch.wordpress.com/rpackages/}{Rclick page}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{11. Time series handling and analysis}
+\section{10. Time series handling and analysis}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6774,7 +6802,7 @@ library(xts)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{12. Spatial data and GIS functionality}
+\section{11. Spatial data and GIS functionality}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -7189,7 +7217,7 @@ vis_nc(nc, cex=11.5)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\section{13. Final tasks}
+\section{12. Final tasks}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -7262,48 +7290,6 @@ vis_nc(nc, cex=11.5)
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-\subsection{Session 1/4: Why R, read file, select and plot data}
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-
-\begin{frame}{Session 1: Aim (Chapter 1)}
-\label{plansessionone}
-\pause get a general impression on how R works, without going too much into technical detail\\
-\pause afterwards, you should be able to:
-\pause
-\begin{itemize}[<+->]
-\item start a new script in Rstudio and execute lines of code
-\item read a data file into R
-\item select a column and rows that fullfill a certain criterion
-\item generate basic graphics with annotation and added elements
-\item open and read the documentation for R functions
-\end{itemize}
-\onslide<+->
-\vspace{2em}
-\hyperlink{iderstudio}{Jump to Rstudio}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}{Session 1: Recap \footnotesize{(They tried to make me go to recap and I said, 'Yes, yes, yes.')}}
-\pause
-\begin{itemize}[<+->]
-  \item R is awesome. You're here, thus you will be R-some, too
-  \item Console for code execution (R), ready with \rcode{$>$}, waiting with \rcode{$+$}
-  \item Script for code writing (you) + exchange
-  \item Objects are created with the assignment operator \rcode{$<$-}%, see \rcode{ls()} % in the workspace
-  \item Get help with \rcode{help(median)}, \rcode{?matrix}, or pressing F1
-  \item Create vectors with \rcode{c(42,3,-4)}, \rcode{1:n}
-  \item \rcode{data.frame}s hold tables with one data type per column
-  \item \rcode{read.table}, with \texttt{header=TRUE} to read files into R
-  \item Index objects with \rcode{values[8:5]}, \rcode{tab[4,2:6]}
-  \item df columns with \rcode{tab[ ,3]}, \rcode{tab[ ,"precip"]}, \rcode{tab\$wind}
-  \item \rcode{hist(vals)}; \rcode{plot(x,y, las=1, pch=16, type="b")}
-\end{itemize}
-\onslide<+-> The homework is at \url{https://github.com/brry/course/blob/master/uni.md\#homework}
-\end{frame}
 
 
 %------------------------------------------------------------%
