@@ -210,7 +210,7 @@ PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ 
 \end{itemize}
 %\item \alert{Jump to beta distribution \hyperlink{beta}{example lecture}}
 \item These slides were originally based on a one week course held in 2013 for \href{http://www.cawa-project.net/ru/news-detail/news/cawa-training-course-statistical-analysis-in-hydrology-introduction-into-r/}{CaWa} with Mathias Seibert (GFZ) in Bishkek, Kyrgyzstan
-% \item R installation instructions: \href{https://bookdown.org/brry/course\#install}{bookdown.org/brry/course\#install}
+% \item R installation instructions: \href{https://bookdown.org/brry/course/install.html}{bookdown.org/brry/course/install}
 \item \alert{If we're proceeding too fast, please interrupt!}
 \end{itemize}
 \end{frame}
@@ -925,7 +925,7 @@ Save workspace to .RData on exit: \textbf{NEVER}\\[0.5em]
 \textit{Instead use \rcode{save(object, file="object.Rdata")} after long computations.
 You can load them later with \rcode{load("object.Rdata")}.}\\[0.5em]
 \pause
-More at \href{https://bookdown.org/brry/course\#settings}{bookdown.org/brry/course\#settings}\\[0.5em]
+More at \href{https://bookdown.org/brry/course/settings.html}{bookdown.org/brry/course/settings.html}\\[0.5em]
 \pause
 \href{https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts}{keyboard shortcuts} (\key{ALT}+\key{SHIFT}+\key{K})
 \pause
@@ -1285,16 +1285,38 @@ rm(b) # remove an object
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Data types}
-R can handle data of a variety of types: Numbers like \rcode{42.6}, characters like \rcode{"R rocks"}, complex numbers like \rcode{8+4i}, categories with \rcode{as.factor(c("blue", "green"))}, logical or boolean values \rcode{c(TRUE, FALSE)} and a few others. They should usually not be mixed. For example, you can't perform algebraic computation on characters:
-\onslide<2->
-<<datatypes, eval=FALSE>>=
+\pause
+R can handle data of a variety of types: \pause Numbers like \rcode{42.6}, \pause characters like \rcode{"R rocks"}, \pause complex numbers like \rcode{8+4i}, \pause categories with \rcode{as.factor(c("blue", "green"))}, \pause logical or boolean values \rcode{c(TRUE, FALSE)} \pause and a few others. \pause They should usually not be mixed. \pause For example, you can't perform algebraic computation on characters:
+\pause
+<<datatypes1, eval=FALSE>>=
 p9 <- "1.3"  ; p9 # show assignment result
+@
+\vspace{-2em}
+\pause
+<<datatypes2, eval=FALSE>>=
 2*p9              # error, as p9 is a character
+@
+\vspace{-2em}
+\pause
+<<datatypes3, eval=FALSE>>=
 2*as.numeric(p9)  # make it a number first
+@
+\vspace{-2em}
+\pause
+<<datatypes4, eval=FALSE>>=
 p9                # p9 itself has not changed
+@
+\vspace{-2em}
+\pause
+<<datatypes5, eval=FALSE>>=
 is.numeric(p9)    # FALSE
+@
+\vspace{-2em}
+\pause
+<<datatypes6, eval=FALSE>>=
 mode(p9)          # character
 @
+\hyperlink{datatypes}{order of coercion}
 \end{frame}
 
 %------------------------------------------------------------%
