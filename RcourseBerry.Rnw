@@ -190,7 +190,7 @@ PDF created on \the\year-\leadingzero{\month}-\leadingzero{\day}, \currenttime\ 
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Intro, objects, vectors}
+\subsection{1. Intro, objects, vectors}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -358,7 +358,7 @@ c(mean(size), median(size), min(size), max(size)); range(size); quantile(size)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Files, data.frames}
+\subsection{2. Files, data.frames}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -466,7 +466,7 @@ head(treesize[ -c(3,7:90) , ],12); cat("...")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Plotting}
+\subsection{3. Plotting}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -591,7 +591,7 @@ xaxt="n" # axis type (none to suppress axis)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Packages, regression}
+\subsection{4. Packages, regression}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -896,7 +896,7 @@ linReg(Volume~Girth, data=trees, col="forestgreen", pos1="topleft")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Rstudio + getting help}
+\subsection{1. Rstudio + getting help}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -1022,7 +1022,7 @@ help.start() # html help Manuals, Material, search engine
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{R syntax}
+\subsection{2. R syntax}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -1113,7 +1113,7 @@ head.matrix\\
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Assignments}
+\subsection{3. Assignments}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -1168,7 +1168,7 @@ while \rcode{median(x=1:10)} does not. This is used in \rcode{NCOL}, for example
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Vectors, indexing}
+\subsection{4. Vectors, indexing}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -1447,7 +1447,7 @@ abline(v=c(172.9-15.3, 172.9+15.3), lwd=3)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Data.frames}
+\subsection{5. Data.frames}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -1557,7 +1557,7 @@ state[state$Income>=5000, ]
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Matrices, apply function}
+\subsection{6. Matrices, apply function}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -1568,7 +1568,7 @@ matrix(data=1:6 , nrow=2, ncol=3)
 \onslide<2>
 <<mat1b, eval=TRUE, tidy=F, echo=TRUE>>=
 m <- matrix(1:6 , nrow=2, ncol=3, byrow=T)
-print(m)
+m
 @
 \end{frame}
 
@@ -1578,7 +1578,7 @@ print(m)
 <<mat2, tidy=F>>=
 colnames(m) <- c("A", "B", "C")
 m[1,1] <- c(989)
-print(m)
+m
 @
 \onslide<2>
 <<mat2b, eval=TRUE, tidy=F, echo=TRUE>>=
@@ -1656,7 +1656,8 @@ t(m) # transpose
 \footnotesize
 \item What do you get with   \rcode{vect <- c(5, 3, 9, 1, 7, 4, 8, 6)     ;   which.min(vect)}?
 \item How do you exclude the sixt element of \rcode{vect} (return all of \rcode{vect} except the value at position 6)?
-\item Write a function to get the second-largest value of a vector and test it on \rcode{vect}.
+\item Write a function to get the second-largest value of a vector and test it on \rcode{vect}.\\
+      Hint: figure out a way to exclude the element which is max. Task 1+2 might help.
 \item Create a matrix with the integers from 1 to 12 organized in three columns (filled column-wise).
 \item Apply the function row-wise and column-wise.
 \item What type of object does that return? (Hint: it's not a matrix as you might have expected.)
@@ -1715,7 +1716,7 @@ nthMax(vect, 2)                     # 7
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Lists, lapply/sapply functions}
+\subsection{7. Lists, lapply/sapply functions}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2065,7 +2066,7 @@ lapply(manyDatasets[-3], "[", 3, )
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Classes and methods, data types and object types}
+\subsection{8. Classes and methods, data types and object types}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2206,7 +2207,7 @@ If you accidentally change one element to a character, all are converted and cal
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Reading and writing data}
+\subsection{1. Reading and writing data}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2424,7 +2425,7 @@ days$month
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Factors, tapply function}
+\subsection{2. Factors, tapply function}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2537,7 +2538,7 @@ options(width=50)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Merging data.frames}
+\subsection{3. Merging data.frames}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2581,7 +2582,7 @@ merge(age, apples, by.x="Name", by.y="Person", all=T)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Management of NAs, apply function}
+\subsection{4. Management of NAs, apply function}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2687,7 +2688,7 @@ options(width=50)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Reproducible coding}
+\subsection{5. Reproducible coding}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2763,7 +2764,7 @@ Download, read and (visually) analyze a dataset that interests you.
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Syntax, adjustments, labeling}
+\subsection{1. Syntax, adjustments, labeling}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2826,7 +2827,7 @@ text(6.1, 1.15,"21:25\nfill color with bg", adj=0, cex=0.9, col="red")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Lines}
+\subsection{2. Lines}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2908,7 +2909,7 @@ box("plot")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Limits, adding to graphics}
+\subsection{3. Limits, adding to graphics}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -2999,7 +3000,7 @@ box(lwd=5)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{boxplots, histograms}
+\subsection{4. Boxplots, histograms}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -3054,7 +3055,7 @@ Remember you can simply update the material through \key{git pull}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{saving plots, multiple figures}
+\subsection{5. Saving plots, multiple figures}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -3277,7 +3278,7 @@ title(main="same boxplots, different distributions!", outer=TRUE)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Character strings: Intro}
+\subsection{1. Character strings: Intro}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -3401,7 +3402,7 @@ tolower(schoko)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Conditions}
+\subsection{1. Conditions}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -3650,7 +3651,7 @@ table(result)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{For Loops}
+\subsection{2. For Loops}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -3990,7 +3991,7 @@ unlink(paste0("loopexercise/randomdata_", c(10,20,50,100,500), ".txt"))
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{lapply, Rcpp}
+\subsection{3. lapply, Rcpp}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -4285,7 +4286,7 @@ options(width=50)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Repeat + While Loops}
+\subsection{4. Repeat + While Loops}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -4440,7 +4441,7 @@ options(width=50)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Arrays}
+\subsection{5. Arrays}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -4541,7 +4542,7 @@ which(dimnames(econ)[[2]]=="Industrie")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Functions}
+\subsection{1. Functions}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -4747,7 +4748,7 @@ index_1(5); index_2(5)
 
 %------------------------------------------------------------%
 
-\subsection{Writing R packages}
+\subsection{2. Writing R packages}
 
 %------------------------------------------------------------%
 
@@ -4773,9 +4774,9 @@ We'll create a cat package together following the instructions in
 
 Version control with git:
 \begin{itemize}%[<+->]
-\item \hyperlink{installGit}{slides with Git installation instructions}
+\item \hyperlink{installGit}{slide with Git installation instructions}
 \item github.com, log in, on "+" in top-right select "New repository", initialize with readme!
-\item On the green field "clone or download": copy link
+\item On the green field "Code": copy link
 \item Rstudio - file - new project - version control - git: paste url and create
 \item \rcode{devtools::setup()} instead of \rcode{create}, choose option number to Overwrite 'yourPackage.Rproj'
 \item Work. Commit. Push. Repeat.
@@ -4851,7 +4852,7 @@ if(length(obs) != length(sim)) stop("Vectors are not of equal length.")
 
 % ---------------------------
 
-\subsection{Debugging}
+\subsection{3. Debugging}
 
 % ---------------------------
 
@@ -4940,7 +4941,7 @@ lsc_cal <- berryFunctions::lsc(calib$P, calib$Q, area=1.6)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Programming exercise}
+\subsection{4. Programming exercise}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5219,7 +5220,7 @@ for(nm in rownames(res_lapply))
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Exploratory Data Analysis (EDA)}
+\subsection{1. Exploratory Data Analysis (EDA)}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5386,7 +5387,7 @@ lines(0:50/10, dexp(0:50/10) +par("usr")[3], col="red")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Normal distribution}
+\subsection{2. Normal distribution}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5615,7 +5616,7 @@ More on \hyperlink{nortest}{slide \ref{nortest}} et sequentes.
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Other distribution functions}
+\subsection{3. Other distribution functions}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5741,7 +5742,7 @@ legend("topleft", c("pnorm, mean=0, sd=1", "pgamma, shape=0.1, scale=1", "pcauch
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Beta distribution}
+\subsection{4. Beta distribution}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -5991,7 +5992,7 @@ plotLfit(distLfit(x, quiet=T), breaks=30, nbest=11, legargs=c(x="left"))
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Extreme Value Statistics}
+\subsection{5. Extreme Value Statistics}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6349,7 +6350,7 @@ nile_b <- distLexBoot(nile, selection="gev")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Simpsons Paradox}
+\subsection{1. Simpsons Paradox}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6454,7 +6455,7 @@ dummy <- sapply(unique(farming$field), regression)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Normality tests}
+\subsection{2. Normality tests}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6533,7 +6534,7 @@ lines(n, sqrt(-0.5*log(0.01/2))/n, col="blue")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Confidence Intervals}
+\subsection{3. Confidence Intervals}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6632,7 +6633,7 @@ t.test(values, conf.level=.95)$conf.int
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{(Linear) regression}
+\subsection{4. (Linear) regression}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6660,7 +6661,7 @@ and \href{https://rclickhandbuch.wordpress.com/rpackages/}{Rclick page}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Date and time formatting}
+\subsection{1. Date and time formatting}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6808,7 +6809,7 @@ potsdam$date <- as.Date(as.character(potsdam$MESS_DATUM_BEGINN), "%Y%m%d")
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Time series}
+\subsection{2. Time series}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -6830,7 +6831,7 @@ library(xts)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Geostatistics: Kriging}
+\subsection{1. Geostatistics: Kriging}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -7117,7 +7118,7 @@ plot(p, add=T, col=NA, border=8)#; points(cent$x,cent$y, cex=0.8)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{R as GIS}
+\subsection{2. R as GIS}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -7208,7 +7209,7 @@ Until new material is created here, his slides can be obtained as \href{https://
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{NETcdf files}
+\subsection{3. NETcdf files}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -7245,7 +7246,7 @@ vis_nc(nc, cex=11.5)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Practice tasks}
+\subsection{1. Practice tasks}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -7281,7 +7282,7 @@ vis_nc(nc, cex=11.5)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Exam task}
+\subsection{2. Exam task}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -7320,50 +7321,50 @@ vis_nc(nc, cex=11.5)
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
-\begin{frame}{Session 2: Aim (Chapters 2  - 4.3)}
-\pause - itensify and fortify the knowledge obtained in session 1\\
-\pause - learn about Rstudio and objects\\[0.5em]
-\pause afterwards, you should be able to:
-\pause
-\begin{itemize}[<+->]
-% \item install and load add-on packages written by the R community
-\item find the appropriate place and way to get help if you're stuck
-\item distinguish common data and object types
-\item use Rstudio more effectively
-% \item explain the difference between object types and data types
-% \item read 'medium difficult' files into R
-% \item merge two datasets together
-% \item ignore NAs
-% \item apply a function to each column / row of a dataset
-% \item know where to look if you need to
-%    \begin{itemize}[<+->]
-%    \item create matrices and lists and index each to get subsets
-%    \item apply a function to each element in a list (or vector)
-%    \end{itemize}
-\end{itemize}
-\end{frame}
+% \begin{frame}{Session 2: Aim (Chapters 2  - 4.3)}
+% \pause - itensify and fortify the knowledge obtained in session 1\\
+% \pause - learn about Rstudio and objects\\[0.5em]
+% \pause afterwards, you should be able to:
+% \pause
+% \begin{itemize}[<+->]
+% % \item install and load add-on packages written by the R community
+% \item find the appropriate place and way to get help if you're stuck
+% \item distinguish common data and object types
+% \item use Rstudio more effectively
+% % \item explain the difference between object types and data types
+% % \item read 'medium difficult' files into R
+% % \item merge two datasets together
+% % \item ignore NAs
+% % \item apply a function to each column / row of a dataset
+% % \item know where to look if you need to
+% %    \begin{itemize}[<+->]
+% %    \item create matrices and lists and index each to get subsets
+% %    \item apply a function to each element in a list (or vector)
+% %    \end{itemize}
+% \end{itemize}
+% \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Session 2: Take home message}
-\begin{itemize}[<+->]
-% \item Packages are basically (documented) scripts from other people $\rightarrow$ \rcode{install.packages} and \rcode{library}
-\item Reading data: \rcode{setwd}, \rcode{dir}, \rcode{read.table}, \rcode{str}
-% \item \rcode{read.table} arguments: header=TRUE, sep="\textbackslash t", dec=",", skip, fill, comment.char, na.strings, \textit{many more}
-\item Function documentation with \rcode{help} (or F1), \href{www.StackOverflow.com}{StackOverflow} for questions, Reference Cards for an overview and books / tutorials for self-learning (\href{https://bookdown.org/brry/course/resources.html}{bookdown.org/brry/course/resources}).
-% \item factors (categories, groups) are integers internally, useful for color specification in plotting, dangerous when converting to \rcode{as.numeric}!
-\item Rstudio is awesome!
-\item Objects (vector, data.frame, matrix, list, function) can have several data types (numeric, logical, character), see \hyperlink{datatypes}{slide \ref{datatypes}}
-% \item \rcode{rbind} and \rcode{cbind} to join data.frames, \rcode{merge} to (surprise) merge them.
-% \item \rcode{na.rm} argument in many functions, \rcode{na.omit} command otherwise
-\end{itemize}
-\end{frame}
+% \begin{frame}[fragile]{Session 2: Take home message}
+% \begin{itemize}[<+->]
+% % \item Packages are basically (documented) scripts from other people $\rightarrow$ \rcode{install.packages} and \rcode{library}
+% \item Reading data: \rcode{setwd}, \rcode{dir}, \rcode{read.table}, \rcode{str}
+% % \item \rcode{read.table} arguments: header=TRUE, sep="\textbackslash t", dec=",", skip, fill, comment.char, na.strings, \textit{many more}
+% \item Function documentation with \rcode{help} (or F1), \href{www.StackOverflow.com}{StackOverflow} for questions, Reference Cards for an overview and books / tutorials for self-learning (\href{https://bookdown.org/brry/course/resources.html}{bookdown.org/brry/course/resources}).
+% % \item factors (categories, groups) are integers internally, useful for color specification in plotting, dangerous when converting to \rcode{as.numeric}!
+% \item Rstudio is awesome!
+% \item Objects (vector, data.frame, matrix, list, function) can have several data types (numeric, logical, character), see \hyperlink{datatypes}{slide \ref{datatypes}}
+% % \item \rcode{rbind} and \rcode{cbind} to join data.frames, \rcode{merge} to (surprise) merge them.
+% % \item \rcode{na.rm} argument in many functions, \rcode{na.omit} command otherwise
+% \end{itemize}
+% \end{frame}
 
 
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 3/4: if-else conditionals, for loops}
+\subsection{Session: if-else conditionals, for loops}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -7378,7 +7379,7 @@ vis_nc(nc, cex=11.5)
 
 %------------------------------------------------------------%
 
-\begin{frame}{Session 3: Aim (Chapter 7.1 + 7.2)}
+\begin{frame}{Session aim (Chapter 7.1 + 7.2)}
 \pause - conditional code execution (if-else)\\
 \pause - repetitional coding (for-loops)\\
 \pause afterwards, you should be able to:
@@ -7404,7 +7405,7 @@ vis_nc(nc, cex=11.5)
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Session 3: Recap}
+\begin{frame}[fragile]{Session if+for Recap}
 \begin{itemize}[<+->]
 % \item Create project folder with raw data set(s) and empty (or given) script
 % \item set up script: comments on analysis, \rcode{setwd}, \rcode{dir}
@@ -7428,7 +7429,7 @@ vis_nc(nc, cex=11.5)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Session 4/4: functions and apply loops}
+\subsection{Session: functions and apply loops}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
@@ -7624,7 +7625,7 @@ box("outer", col="blue", lwd=5)
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
-\subsection{Feedback, additional material}
+\subsection{Feedback}
 %------------------------------------------------------------%
 %------------------------------------------------------------%
 
