@@ -541,7 +541,7 @@ treesize <- read.table(file="data/treesize.txt", header=TRUE)
 
 plot(treesize$age, treesize$height)
 plot(treesize$age, treesize$height, las=1, ylab="Tree height [m]",
-     xlab="Tree age [years]", col=treesize$measurement,
+     xlab="Tree age [years]", col=as.factor(treesize$measurement),
      main="Older trees are larger", pch=3)
 
 quantile(treesize$height, probs=c(0.1, 0.8))
@@ -3663,6 +3663,7 @@ table(result)
 \begin{frame}[fragile]{For loops}
 \vspace{-0.3em}
 Execute a block of code several times, with different input values.\\
+\pause
 Syntax: ~ \texttt{\alert{for}(aRunningVariable \alert{in} aSequence)\{ doSomething \}}
 \pause
 Often, i (for index) is used, thus ~~ \texttt{\alert{for}(i \alert{in} 1:n) \rcode{doThis}(i)}\\
@@ -3692,6 +3693,7 @@ for(i in c(2,5,9) ) { print(1:i) }
 
 \begin{frame}[fragile]{For loops: execute code multiple times I}
 \hspace{5em} $y = f(x, n) = \frac{12.5*n}{(n-1)!}*(\frac{n x}{8})^{(n-1)}*e^{-\frac{n x}{8}}$
+\pause
 <<for3a, echo=F, size="footnotesize">>=
 par(mar=c(3,3,1,1), mgp=c(2,0.8,0), las=1)
 x <- seq(0,20,0.1)
@@ -4002,75 +4004,136 @@ unlink(paste0("loopexercise/randomdata_", c(10,20,50,100,500), ".txt"))
 
 \begin{frame}[fragile]{for -> lapply I: basics}
 \vspace{-1em}
-<<for_lapply1, eval=FALSE>>=
-files <- dir("../rawdata", pattern="*.csv", full=TRUE)
-
-#
+<<for_lapply1, eval=FALSE, strip.white=FALSE>>=
+files <- dir("rawdata/", pattern="*.csv", full.names=TRUE)
 @
-\pause \vspace{-2.7em}
-<<for_lapply2, eval=FALSE>>=
-# bad and slow way:
+\pause \vspace{-2em}
+<<for_lapply2a, eval=FALSE, strip.white=FALSE>>=
+
+# bad and slow way to read all files:
 ldfs <- list() # initiate empty list
+@
+\pause \vspace{-2em}
+<<for_lapply2b, eval=FALSE, strip.white=FALSE>>=
 for(i in 1:length(files))
    ldfs[[i]] <- read.csv(files[i], as.is=TRUE)
-
-#
 @
-\pause \vspace{-2.7em}
-<<for_lapply3, eval=FALSE>>=
+\pause \vspace{-2em}
+<<for_lapply3, eval=FALSE, strip.white=FALSE>>=
+
 # much better way: apply function to each file
 ldfs <- lapply(X=files, FUN=read.csv, as.is=TRUE)
-
-#
 @
-\pause \vspace{-2.7em}
-<<for_lapply4, eval=FALSE>>=
+\pause \vspace{-2.2em}
+<<for_lapply4, eval=FALSE, strip.white=FALSE>>=
+
+
 # single data.frame if all files have n columns:
 df <- do.call(rbind, ldfs)
-
-#
 @
-\pause \vspace{-2.7em}
-<<for_lapply5, eval=FALSE>>=
+\pause \vspace{-2em}
+<<for_lapply5, eval=FALSE, strip.white=FALSE>>=
+
 # PS: much faster in this example could be
 library("data.table") # fread + rbindlist
 ldfs <- lapply(X=files, FUN=fread, sep=",")
 df <- rbindlist(ldfs)
 @
+\vspace{0.5em}
 \end{frame}
 
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{for -> lapply II: progress bar, names, indexing etc}
-\vspace{-0.6em}
-<<for_lapply6, eval=FALSE>>=
+\vspace{-1em}
+<<for_lapply6, eval=FALSE, strip.white=FALSE>>=
 ldfs <-   lapply(X=files, FUN=read.csv, as.is=TRUE)
-
-#
 @
-\pause \vspace{-3.48em}
-<<for_lapply7, eval=FALSE>>=
+\pause \vspace{-2em}
+<<for_lapply7a, eval=FALSE, strip.white=FALSE>>=
+
 # progress bar with remaining time
 library("pbapply")
-ldfs <- pblapply(X=files, FUN=read.csv, as.is=TRUE)
-
-#
 @
-\pause \vspace{-3.48em}
-<<for_lapply8, eval=FALSE>>=
-# nice additional stuff:
+\pause \vspace{-2em}
+<<for_lapply7b, eval=FALSE, strip.white=FALSE>>=
+ldfs <- pblapply(X=files, FUN=read.csv, as.is=TRUE)
+@
+\pause \vspace{-2em}
+<<for_lapply8, eval=FALSE, strip.white=FALSE>>=
+
+
+# nice additional things:
 names(ldfs) <- files
 str(ldfs, max.level=1)
 ldfs[[2]] # second list element
-
-#
 @
-\pause \vspace{-3.58em}
-<<for_lapply9, eval=FALSE>>=
+\pause \vspace{-2em}
+<<for_lapply9, eval=FALSE, strip.white=FALSE>>=
+
+# get number of rows for each df:
+sapply(ldfs, nrow)
+@
+\pause \vspace{-2em}
+<<for_lapply10, eval=FALSE, strip.white=FALSE>>=
+
 # get third column / fifth row from each df:
 sapply(ldfs, "[",  , j=3)
 sapply(ldfs, "[", 5,    )
 @
+\vspace{1em}
+\end{frame}
+
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{for -> lapply III: parallel on multiple CPU cores}
+\vspace{-0.5em}
+<<for_lapply_par1, eval=FALSE, strip.white=FALSE>>=
+library("parallel") # already comes with R
+# -> don't try to  install.packages("parallel")
+nc <- detectCores()-1 # leave one CPU for xkcd :)
+
+@
+\pause \vspace{-2em}
+<<for_lapply_par2a, eval=FALSE>>=
+# multicore parallel execution: easy on linux
+@
+\pause \vspace{-2em}
+<<for_lapply_par2b, eval=FALSE>>=
+ldfs <- pblapply(X=files, FUN=read.csv, as.is=TRUE)
+@
+\pause \vspace{-2em}
+<<for_lapply_par2c, eval=FALSE, strip.white=FALSE>>=
+ldfs <- pblapply(X=files, FUN=read.csv, as.is=TRUE, cl=nc)
+@
+\pause \vspace{-2em}
+<<for_lapply_par3a, eval=FALSE, strip.white=FALSE>>=
+
+# a bit more work on Windows:
+@
+\pause \vspace{-2em}
+<<for_lapply_par3b, eval=FALSE, strip.white=FALSE>>=
+cl <- makeCluster(nc)
+@
+\pause \vspace{-2em}
+<<for_lapply_par3c, eval=FALSE, strip.white=FALSE>>=
+clusterExport(cl, "files")
+@
+\pause \vspace{-2em}
+<<for_lapply_par3d, eval=FALSE, strip.white=FALSE>>=
+ldfs <- pblapply(X=files, FUN=read.csv, as.is=TRUE, cl=cl)
+@
+\pause \vspace{-2em}
+<<for_lapply_par3e, eval=FALSE, strip.white=FALSE>>=
+stopCluster(cl)
+@
+\pause \vspace{-2em}
+<<for_lapply_par4, eval=FALSE, strip.white=FALSE>>=
+
+# template for windows:
+berryFunctions::parallelCode() 
+@
+\vspace{1.8em}
 \end{frame}
 
 %------------------------------------------------------------%
@@ -4118,9 +4181,9 @@ lapply(Harman74.cor, "[", 1:5)
 \end{frame}
 
 %------------------------------------------------------------%
-\begin{frame}[fragile]{for -> lapply IIIa: parallel on multiple CPU cores}
+\begin{frame}[fragile]{for -> lapply IVa: parallel on multiple CPU cores}
 \vspace{-1em}
-<<for_lapply10, eval=FALSE>>=
+<<for_lapply11a, eval=FALSE>>=
 library("parallel") # already comes with R
 # -> don't try to  install.packages("parallel")
 nc <- detectCores()-1
@@ -4128,7 +4191,7 @@ nc <- detectCores()-1
 #
 @
 \pause \vspace{-2.6em}
-<<for_lapply11, eval=FALSE>>=
+<<for_lapply11b, eval=FALSE>>=
 # multicore parallel execution
 ldfs <-        lapply(X=files, FUN=read.csv, as.is=TRUE)
 ldfs <-      mclapply(X=files, FUN=read.csv, as.is=TRUE,
@@ -4155,13 +4218,13 @@ clusterEvalQ(cl, library("somePackage"))
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{for -> lapply IIIb: parallel AND progress bar}
+\begin{frame}[fragile]{for -> lapply IVb: parallel AND progress bar}
 \vspace{-1em}
-<<for_lapply11b, eval=FALSE>>=
+<<for_lapply11bb, eval=FALSE>>=
 berryFunctions::parallelCode() # template for windows
 
 library(parallel)
-library(pbapply) # (>2016-10-30)
+library(pbapply)
 cl <- makeCluster( detectCores()-1 )
 myfun <- function(...) mean(rnorm(1e6))
 clusterExport(cl, "myfun")
@@ -4176,7 +4239,7 @@ stopCluster(cl)
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{for -> lapply IV: code timing}
+\begin{frame}[fragile]{for -> lapply V: code timing}
 \vspace{-0.8em}
 \scriptsize
 <<for_lapply14, eval=FALSE>>=
