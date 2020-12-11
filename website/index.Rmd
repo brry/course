@@ -108,26 +108,25 @@ gpg: keyserver receive failed: public key not found*
 Rstudio settings I suggest to change for reproducibility and compatibility:
 
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General
+    - **OFF**: Restore most recently opened project at startup
     - **OFF**: Restore .Rdata into workspace at startup  
     - Save workspace to .RData on exit: **NEVER**  
-Instead use `save(object, file="object.Rdata")` after long computations.  
-You can load them later with `load("object.Rdata")`.
-    - **ON**: Restore previously open source documents at startup  
+<span style="color:grey">Instead use `save(object, file="object.Rdata")` after long computations.  
+You can load them later with `load("object.Rdata")`.</span>
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Display
-    - **ON**: Show margin (Margin column: 80)  *People hate horizontal scrolling!*
     - **ON**: Highlight R function calls
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Saving
     - Line ending conversion: **Windows (CR/LF)**
     - Default Text Encoding: **UTF-8**
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Appearance
-    - Editor font size: 10
+    - <span style="color:grey"> Editor font size: 10</span>
     - Editor theme: **Cobalt**
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Sweave
     - Weave Rnw files using: **knitr**
 - <span style="background-color:aquamarine">Tools</span> - Modify Keyboard Shortcuts
-    - remove `CTRL+Y` from the command "paste last yank" (if you want it to mean "redo" as in other programs)
+    - To set the following and more keyboard shortcuts, see [rskey](https://github.com/brry/rskey#rskey)`::setKeyboardBindings()`
+    - Remove `CTRL+Y` from the command "paste last yank" (to mean "redo" as in other programs)
     - Set Working Directory to Current Document's Directory: `CTRL + H`
-- For more keyboard shortcuts, see [rskey](https://github.com/brry/rskey#rskey)
 
 
 
