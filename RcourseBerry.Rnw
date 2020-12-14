@@ -527,7 +527,7 @@ plot(x=xvalues, y=y_values, xlab="nice axis label",
   \item Plot tree height over age.
   \item Add labels to the plot.
   \item Change the point character (\rcode{pch}) and color (\rcode{col}).
-  \item BONUS 1: Use a vector for colors, e.g. treesize\$measurement
+  \item BONUS 1: Use a catogory vector for colors, e.g. as.factor(treesize\$measurement)
   \item BONUS 2: Compare the histogram (\rcode{hist}) of the heights with the \rcode{boxplot} and \rcode{quantile(x, probs=c(0.1, 0.8))}.
 \end{enumerate}
 \end{exercise}
@@ -3608,9 +3608,9 @@ sqrt(ifelse( v >= 0, v, 0))
 <<excondsol2, eval=TRUE, echo=-1>>=
 options(width=80)
 input <- 4
-if( input >= 3 ) message("Input was wrong.
-                         It should be <3") else
-                 message("Input OK")
+if( input >= 3 ) 
+  message("Input was wrong. It should be <3") else
+  message("Input OK")
 
 # run it again after
 input <- 1.8
@@ -3634,14 +3634,27 @@ if( input >= 3 |  input < 0)
    message("Input outside 0...3") else
    message("Input OK")
 
-if( input > 0  &  input <= 3 )   message("Input OK") else
-           message("Input (",input,") outside 0...3")
+if( input > 0  &  input <= 3 )   
+  message("Input OK") else
+  message("Input (",input,") outside 0...3")
 @
 \end{frame}
 
 %------------------------------------------------------------%
 
-\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.3: if else BONUS}
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.4: if else}
+<<excondsol4, eval=FALSE>>=
+# characters can be compared to numerics.
+# All of the following are TRUE:
+"B" > "b"
+"b" > 7 # chars are > numbers
+"2" > 1
+"2" < 3 # but silent conversion is done if possible
+@
+\end{frame}
+%------------------------------------------------------------%
+
+\begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}.5-7: if else}
 <<ifelseexbonus, eval=FALSE>>=
 result <- if(rnorm(1)>2) "unlikely" else "probable"
 
