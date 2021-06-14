@@ -1,6 +1,6 @@
 
 # Guide to creating a package (promise/warning: involves cats)
-# Berry Boessenkool, August 2017, berry-b@gmx.de
+# Berry Boessenkool, 2017-2021, berry-b@gmx.de
 # https://github.com/brry/course#slides       View this script at bit.ly/packdev
 
 
@@ -15,6 +15,18 @@ install_if_needed("devtools")
 install_if_needed("roxygen2")
 install_if_needed("berryFunctions")
 install_if_needed("praise")
+
+
+
+# Step 0.5: github repo ----
+browseURL("https://github.com/new")  
+# or: on "+" in top-right select "New repository"
+# - Name that reflects this is to learn writing R packages
+# - initialize with readme
+
+browseURL("https://bookdown.org/brry/course/git.html#use-git")
+# - On the green field "Code": copy URL
+# - Rstudio - file - new project - version control - git: paste url and create
 
 
 
@@ -121,13 +133,6 @@ devtools::check()
 # https://www.r-consortium.org/blog/2016/08/22/the-r-consortium-funds-three-projects-in-july
 # There are several projects, I find this a promising one:
 # http://r-posts.com/adding-sinew-to-roxygen2-skeletons/
-
-
-
-### Use version control (git + github) ----
-
-# more on this in the course slides (see the top of this script)
-# If you've done it once before, you'll start with it from the beginning
 
 
 
