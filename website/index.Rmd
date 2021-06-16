@@ -191,6 +191,8 @@ Contribute to OS software: <https://egghead.io/courses/how-to-contribute-to-an-o
 
 # packages
 
+### installation
+
 Installing add-on R packages usually is easy from within R (and works without admin rights):
 ```R
 install.packages("ggplot2")
@@ -198,9 +200,9 @@ install.packages("ggplot2")
 On Linux, some packages with external dependencies (like rJava) can be more difficult.  
 In such cases, you can often open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V)  
 `sudo apt-get install r-cran-rjava` (all lower-cased).  
-Here's the [official information](https://cran.r-project.org/bin/linux/ubuntu/README.html#supported-packages) on this topic.
+Here's the [list of supported packages](https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html#supported-packages) and here my [tips for rgdal and rjava](https://github.com/brry/osmscale#installation).
 
-Installing the `sf` package for spatial data is a bit tricky on Linux because it needs a recent version of gdal. 
+Installing the `sf` package for spatial data may be a bit tricky on Linux because it needs a recent version of gdal. 
 If `install.packages("sf")` does not work, you can try the following:
 ```
 sudo apt-get install libudunits2-dev
@@ -208,6 +210,35 @@ sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
 sudo apt-get install gdal-bin
 sudo apt install libgdal-dev libproj-dev
 ```
+
+### usage
+At the top of the script, conditionally install all needed packages.
+
+For a single package, you could use
+```{r packinst, eval=FALSE}
+if(!requireNamespace("berryFunctions", quietly=TRUE)) install.packages("berryFunctions")
+```
+
+To depend on a certain development version, use
+```{r packver, eval=FALSE}
+if(packageVersion("berryFunctions") < "1.19.3")
+  {
+  if(!requireNamespace("remotes", quietly=TRUE)) install.packages("remotes")
+  remotes::install_github("brry/berryFunctions")
+  }
+```
+
+When using several packages, use
+```{r packman, eval=FALSE}
+if(!requireNamespace("pacman", quietly=TRUE)) install.packages("pacman")
+pacman::p_load("berryFunctions", "rdwd")
+```
+
+Whenever possible, use `pack::fun()` instead of `library("pack") ; fun()`.
+It makes clear from wich package 'fun' is used.   
+Otherwise, when multiple packages have `fun`, the one from the lastly loaded package will be used. 
+And that might not be the one you expect.  
+When you use multiple functions from a package, the second option is fine of course.
 
 
 # sumatra
@@ -321,32 +352,5 @@ Before you send someone any code whatsoever, do the following:
 
 ### packages
 
-At the top of the script, conditionally install all needed packages.
-
-For a single package, you could use
-```{r packinst, eval=FALSE}
-if(!requireNamespace("berryFunctions", quietly=TRUE)) install.packages("berryFunctions")
-```
-
-To depend on a certain development version, use
-```{r packver, eval=FALSE}
-if(packageVersion("berryFunctions") < "1.19.3")
-  {
-  if(!requireNamespace("remotes", quietly=TRUE)) install.packages("remotes")
-  remotes::install_github("brry/berryFunctions")
-  }
-```
-
-When using several packages, use
-```{r packman, eval=FALSE}
-if(!requireNamespace("pacman", quietly=TRUE)) install.packages("pacman")
-pacman::p_load("berryFunctions", "rdwd")
-```
-
-Whenever possible, use `pack::fun()` instead of `library("pack") ; fun()`.
-It makes clear from wich package 'fun' is used.   
-Otherwise, when multiple packages have `fun`, the one from the lastly loaded package will be used. 
-And that might not be the one you expect.  
-When you use multiple functions from a package, the second option is fine of course.
-
+Follow the package recommendations in the [packages](#usage) section.
 
