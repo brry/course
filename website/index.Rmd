@@ -53,42 +53,40 @@ Then a single click on `Pull` in Rstudio's git tab wil yield an updated version 
 
 # install
 
+*diese Seite auf [deutsch](#installieren)*
+
 First install R itself and then Rstudio:
 
 * R itself
   * R on **Windows**: [current R install.exe](https://cloud.r-project.org/bin/windows/base/release.htm) (update through [installr](https://github.com/talgalili/installr/blob/master/README.md))
-  * R on **Mac** / **Linux Ubuntu**: See instructions below  
+  * R on **Mac** / **Linux**: See instructions below  
 * **Rstudio on all platforms**: suggested: [development](https://rstudio.com/products/rstudio/download/preview) version.
 Also available: [release](https://rstudio.com/products/rstudio/download/#download) version
 
 To enhance reproducibility, I suggest to change some Rstudio [settings](#settings).
 
 ### Mac
-- Install [Xquartz](https://www.xquartz.org/)
-- From <https://cran.r-project.org/bin/macosx>, download the latest release, e.g. `R-4.0.5.pkg`.  
+- Install [Xquartz](https://www.xquartz.org/).
+- From <https://cran.r-project.org/bin/macosx>, download the latest release, e.g. `R-4.1.2.pkg`.  
 - Open the file with 'Installer' and follow the installation instructions.  
-- Drag the app to the Applications folder
+- Drag the app to the 'Applications' folder.
 
 
 ### Linux
 
-**Installing R on Linux Ubuntu** so that `sudo apt upgrade` updates to the latest R version if outdated 
+Installing R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/bin/linux/ubuntu/)) so that `sudo apt upgrade` updates to the latest R version if outdated 
 (idea from [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) and [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)):  
 Open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines.  
-Replace `focal` with e.g. `bionic` if you have another Ubuntu version (check in shell with `lsb_release -a`  ):  
-20.10 groovy-cran40  
-20.04 focal-cran40  
-18.04 bionic-cran40  
-16.04 xenial-cran40  
-[Current list](https://cloud.r-project.org/bin/linux/ubuntu/)
 
-<pre>
-sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu <b>focal-cran40</b>/" | sudo tee -a /etc/apt/sources.list
+
+
+```
+sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40" | sudo tee -a /etc/apt/sources.list
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
 gpg -a --export E084DAB9 | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install r-base r-base-dev
-</pre>
+```
 
 ### GPG
 
@@ -117,8 +115,7 @@ Rstudio settings I suggest for reproducibility and compatibility:
     - **OFF**: Restore most recently opened project at startup
     - **OFF**: Restore .Rdata into workspace at startup  
     - Save workspace to .RData on exit: **NEVER**  
-<span style="color:grey">Instead use `save(object, file="object.Rdata")` after long computations.  
-You can load them later with `load("object.Rdata")`.</span>
+<span style="color:grey">Use `save` and `load` to restore the results of long computations, see [saveload](#saveload).</span>
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Display
     - **ON**: Show margin (Margin column: 80) - *avoid horizontal scrolling!*
     - **ON**: Highlight R function calls
@@ -338,13 +335,13 @@ Before you send someone any code whatsoever, do the following:
 - `CTRL`+`SHIFT`+`F10` to restart R with a clean workspace. Remember to have the Rstudio [settings](#settings) at `Tools - Global Options - General` set to: _Restore .Rdata into workspace at startup_ **OFF** and _Save workspace to .RData on exit_ **NEVER**
 - copy the script to some other folder than your working place
 - `source()` the entire script with `CTRL`+`SHIFT`+`S`
-- If something fails, fix it! (e.g. stop messing with `setwd`, copy data files to be read, rename all instances of a renamed object, ...)
+- If something fails, fix it! E.g. stop messing with `setwd` (see below), copy data files to be read, rename all instances of a renamed object, ...
 - Only now send the file (or folder with scripts, data files, etc. as zip file)
 
 
 ### Rproj
 
-- Use Rstudio projects.  
+- Use Rstudio projects. They set the wd upon opening and keep projects separate.
 - Never use `setwd()` because others won't have that exact path.  
   Even you yourself might not, after rearranging folders.  
 - Use relative path names, e.g. `read.table("datafolder/file.txt")` instead of `"C:/Users/berry/Desktop/Project/datafolder/file.txt"`
@@ -354,3 +351,73 @@ Before you send someone any code whatsoever, do the following:
 
 Follow the package recommendations in the [packages](#usage) section.
 
+
+### saveload
+
+Store the results of long-running computations on disc.  
+The next time a script is run, they are loaded quickly.
+
+```{r saveload, eval=FALSE}
+if(  file.exists("objects.Rdata")  )
+  {
+  load("objects.Rdata") # load previously saved objects
+  }  else
+  {
+  obj1 <-   mean(rnorm(2e7))             # in the first run,
+  obj2 <- median(rnorm(2e7))             # compute the objects
+  save(obj1, obj2, file="objects.Rdata") # and write them to disc
+  }
+```
+
+If you need to rerun an analysis if the last run is older then 6 hours, this could be the condition:
+```{r difftime, eval=FALSE}
+difftime(Sys.time(), file.mtime("objects.Rdata"), units="h") > 6
+```
+
+For a single object, a good alternative to `save` and `load` is:
+```{r saverds, eval=FALSE}
+saveRDS(one_single_object, "object.Rdata")
+explicit_object_name <- readRDS("object.Rdata")
+```
+
+More on this topic from [Rcrastinate](https://www.r-bloggers.com/2019/05/how-to-save-and-load-datasets-in-r-an-overview/)
+
+
+# installieren
+
+*this page in [english](#install)*
+
+Zuerst R selbst installieren, dann Rstudio:
+
+* R selbst
+  * R für **Windows**: [aktuelle R install.exe](https://cloud.r-project.org/bin/windows/base/release.htm) (aktualisieren mit [installr](https://github.com/talgalili/installr/blob/master/README.md))
+  * R für **Mac** / **Linux**: Siehe Anleitungen unten  
+* **Rstudio für alle OS**: empfohlen: [Entwicklungsversion](https://rstudio.com/products/rstudio/download/preview).
+Auch möglich: [Release](https://rstudio.com/products/rstudio/download/#download)-version
+
+Um die Reproduzierbarkeit zu verbessern, schlage ich vor, einige Rstudio-[Einstellungen](#settings) zu ändern
+
+### Mac
+- [Xquartz](https://www.xquartz.org/) installieren.
+- Auf <https://cran.r-project.org/bin/macosx> das 'latest release' runterladen, z.B. `R-4.1.2.pkg`.  
+- Die Datei mit 'Installer' öffnen und die Installationsanweisungen befolgen.
+- Die App in den 'Applications'-Ordner ziehen.
+
+
+### Linux
+
+R auf Linux **Ubuntu** installieren ([unterstützte Versionen](https://cloud.r-project.org/bin/linux/ubuntu/)) sodass `sudo apt upgrade` auf  die neueste R Version aktualisiert, falls sie veraltet ist
+(Idee von [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) und [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)):  
+Ein Terminal öffnen (STRG+ALT+T) und folgende Zeilen einfügen (STRG+SHIFT+V):
+
+
+```
+sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40" | sudo tee -a /etc/apt/sources.list
+gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+gpg -a --export E084DAB9 | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install r-base r-base-dev
+```
+
+
+Falls GPG Probleme (keyserver no route to host) auftreten, siehe [GPG](#gpg).
