@@ -53,8 +53,6 @@ Then a single click on `Pull` in Rstudio's git tab wil yield an updated version 
 
 # install
 
-*diese Seite auf [deutsch](#installieren)*
-
 First install R itself and then Rstudio:
 
 * R itself
@@ -75,22 +73,34 @@ To enhance reproducibility, I suggest to change some Rstudio [settings](#setting
 ### Linux
 
 Installing R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/bin/linux/ubuntu/)) so that `sudo apt upgrade` updates to the latest R version if outdated 
-(idea from [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) and [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)):  
+(sources: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
 Open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines.  
 
 
 
 ```
-sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40" | sudo tee -a /etc/apt/sources.list
-gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
-gpg -a --export E084DAB9 | sudo apt-key add -
+sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo apt-get update
 sudo apt-get install r-base r-base-dev
 ```
 
+On Ubuntu 20.04, this may work for the downloaded Rstudio file (see [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
+```
+sudo apt -y install r-base gdebi-core
+sudo gdebi rstudio-2021.09.1-372-amd64.deb
+
+```
+
 ### GPG
 
-In case you run into GPG problems like the example below, try replacing both gpg lines with the single line 
+With the old key code
+```
+gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
+gpg -a --export E084DAB9 | sudo apt-key add -
+``` 
+
+I once ran into GPG problems like the example below, and fixed it by replacing both gpg lines with the single line 
 ([idea source](https://superuser.com/questions/620765/sudo-apt-key-adv-keyserver-keyserver-ubuntu-com-recv-7f0ceb10-command-return)):
 ```
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E084DAB9
@@ -407,17 +417,21 @@ Um die Reproduzierbarkeit zu verbessern, schlage ich vor, einige Rstudio-[Einste
 ### Linux
 
 R auf Linux **Ubuntu** installieren ([unterstützte Versionen](https://cloud.r-project.org/bin/linux/ubuntu/)) sodass `sudo apt upgrade` auf  die neueste R Version aktualisiert, falls sie veraltet ist
-(Idee von [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus) und [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)):  
+(Quellen: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
 Ein Terminal öffnen (STRG+ALT+T) und folgende Zeilen einfügen (STRG+SHIFT+V):
 
-
 ```
-sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40" | sudo tee -a /etc/apt/sources.list
-gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
-gpg -a --export E084DAB9 | sudo apt-key add -
+sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo apt-get update
 sudo apt-get install r-base r-base-dev
 ```
 
+Auf Ubuntu 20.04 könnte folgendes für die heruntergeladene Rstudio Datei gut klappen (siehe [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
+```
+sudo apt -y install r-base gdebi-core
+sudo gdebi rstudio-2021.09.1-372-amd64.deb
+
+```
 
 Falls GPG Probleme (keyserver no route to host) auftreten, siehe [GPG](#gpg).
