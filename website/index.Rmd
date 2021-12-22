@@ -31,16 +31,18 @@ _Pro tip: the arrow left/right keys jump between chapters._
 
 # slides
 
-Here are the slides in several versions:
+Here are my old slides in several versions:
 
 * [handout](https://github.com/brry/course/raw/master/RcourseBerry.pdf) (one pdf page per slide)
 * [presentation](https://github.com/brry/course/raw/master/RcourseBerry%20pres.pdf)
 (animated with LaTeX \\onslide et al.)
 * [source code](https://github.com/brry/course/raw/master/RcourseBerry.Rnw) (.Rnw, I suggest rightclick - save as)
 
-
 The presentation template is available through
 [`berryFunctions::createPres()`](https://www.rdocumentation.org/packages/berryFunctions/topics/createPres?).
+
+Note: I have much better slides for my courses, along with interactive autograded exercises.  
+They are not freely shared here, but feel free to [request](mailto:berry-b@gmx.de) a copy.
 
 ### datasets
 
@@ -53,67 +55,42 @@ Then a single click on `Pull` in Rstudio's git tab wil yield an updated version 
 
 # install
 
-First install R itself and then Rstudio:
+First install R itself and then Rstudio. Follow the steps below depending on your operating system.
 
-* R itself
-  * R on **Windows**: [current R install.exe](https://cloud.r-project.org/bin/windows/base/release.htm) (update through [installr](https://github.com/talgalili/installr/blob/master/README.md))
-  * R on **Mac** / **Linux**: See instructions below  
-* **Rstudio on all platforms**: suggested: [development](https://rstudio.com/products/rstudio/download/preview) version.
-Also available: [release](https://rstudio.com/products/rstudio/download/#download) version
+### Windows
 
-To enhance reproducibility, I suggest to change some Rstudio [settings](#settings).
+- install [R](https://cloud.r-project.org/bin/windows/base/release.htm)
+- install [Rstudio](https://rstudio.com/products/rstudio/download/preview)
+- change the .RData [settings](#settings) to enhance reproducibility
 
 ### Mac
-- Install [Xquartz](https://www.xquartz.org/).
-- From <https://cran.r-project.org/bin/macosx>, download the latest release, e.g. `R-4.1.2.pkg`.  
-- Open the file with 'Installer' and follow the installation instructions.  
-- Drag the app to the 'Applications' folder.
 
+- install [Xquartz](https://www.xquartz.org/)
+- from [https://cran.r-project.org/bin/macosx](cran.r-project.org/bin/macosx), download the latest release, e.g. `R-4.1.2.pkg`
+- open the file with 'Installer' and follow the instructions
+- install [Rstudio](https://rstudio.com/products/rstudio/download/preview)
+- drag the app to the 'Applications' folder
+- change the .RData [settings](#settings) to enhance reproducibility
 
 ### Linux
 
-Installing R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/bin/linux/ubuntu/)) so that `sudo apt upgrade` updates to the latest R version if outdated 
+Install R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/bin/linux/ubuntu/)) so that `sudo apt update` installs the latest R version if outdated 
 (sources: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
-Open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines.  
 
-
-
+- open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines one by one:
 ```
 sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-sudo apt-get update
-sudo apt-get install r-base r-base-dev
+sudo apt update
+sudo apt install r-base r-base-dev
 ```
-
-On Ubuntu 20.04, this may work for the downloaded Rstudio file (see [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
+- download [Rstudio](https://rstudio.com/products/rstudio/download/preview)
+-  either install that, or on Ubuntu 20.04 (see [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
 ```
 sudo apt -y install r-base gdebi-core
 sudo gdebi rstudio-2021.09.1-372-amd64.deb
-
 ```
-
-### GPG
-
-With the old key code
-```
-gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9
-gpg -a --export E084DAB9 | sudo apt-key add -
-``` 
-
-I once ran into GPG problems like the example below, and fixed it by replacing both gpg lines with the single line 
-([idea source](https://superuser.com/questions/620765/sudo-apt-key-adv-keyserver-keyserver-ubuntu-com-recv-7f0ceb10-command-return)):
-```
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E084DAB9
-```
-
-*gpg: requesting key E084DAB9 from hkp server keyserver.ubuntu.com  
-?: keyserver.ubuntu.com: No route to host  
-gpgkeys: HTTP fetch error 7: couldn't connect: No route to host  
-gpg: no valid OpenPGP data found.  
-gpg: Total number processed: 0  
-gpg: keyserver communications error: keyserver unreachable  
-gpg: keyserver communications error: public key not found  
-gpg: keyserver receive failed: public key not found*
+- change the .RData [settings](#settings) to enhance reproducibility
 
 
 
@@ -395,43 +372,40 @@ More on this topic from [Rcrastinate](https://www.r-bloggers.com/2019/05/how-to-
 
 # installieren
 
-*this page in [english](#install)*
+Installiere zuerst R selbst, danach Rstudio. Führe je nach Betriebssystem die folgenden Schritte aus.
 
-Zuerst R selbst installieren, dann Rstudio:
 
-* R selbst
-  * R für **Windows**: [aktuelle R install.exe](https://cloud.r-project.org/bin/windows/base/release.htm) (aktualisieren mit [installr](https://github.com/talgalili/installr/blob/master/README.md))
-  * R für **Mac** / **Linux**: Siehe Anleitungen unten  
-* **Rstudio für alle OS**: empfohlen: [Entwicklungsversion](https://rstudio.com/products/rstudio/download/preview).
-Auch möglich: [Release](https://rstudio.com/products/rstudio/download/#download)-version
+### Windows
 
-Um die Reproduzierbarkeit zu verbessern, schlage ich vor, einige Rstudio-[Einstellungen](#settings) zu ändern
+- installiere [R](https://cloud.r-project.org/bin/windows/base/release.htm)
+- installiere [Rstudio](https://rstudio.com/products/rstudio/download/preview)
+- ändere die .RData [settings](#settings) für Reproduzierbarkeit
 
 ### Mac
-- [Xquartz](https://www.xquartz.org/) installieren.
-- Auf <https://cran.r-project.org/bin/macosx> das 'latest release' runterladen, z.B. `R-4.1.2.pkg`.  
-- Die Datei mit 'Installer' öffnen und die Installationsanweisungen befolgen.
-- Die App in den 'Applications'-Ordner ziehen.
 
+- installiere [Xquartz](https://www.xquartz.org/)
+- lade von [https://cran.r-project.org/bin/macosx](cran.r-project.org/bin/macosx) das 'latest release' herunter, z.B. `R-4.1.2.pkg`
+- öffne die Datei mit 'Installer' und befolge die Anweisungen
+- installiere [Rstudio](https://rstudio.com/products/rstudio/download/preview)
+- ziehe die App in den 'Applications'-Ordner
+- ändere die .RData [settings](#settings) für Reproduzierbarkeit
 
 ### Linux
 
-R auf Linux **Ubuntu** installieren ([unterstützte Versionen](https://cloud.r-project.org/bin/linux/ubuntu/)) sodass `sudo apt upgrade` auf  die neueste R Version aktualisiert, falls sie veraltet ist
+Installiere R auf Linux **Ubuntu** ([unterstützte Versionen](https://cloud.r-project.org/bin/linux/ubuntu/)), sodass `sudo apt update` auf die neueste R Version aktualisiert, falls sie veraltet ist
 (Quellen: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
-Ein Terminal öffnen (STRG+ALT+T) und folgende Zeilen einfügen (STRG+SHIFT+V):
 
+- öffne ein Terminal (STRG+ALT+T) und füge folgende Zeilen nacheinander ein (STRG+SHIFT+V):
 ```
 sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-sudo apt-get update
-sudo apt-get install r-base r-base-dev
+sudo apt update
+sudo apt install r-base r-base-dev
 ```
-
-Auf Ubuntu 20.04 könnte folgendes für die heruntergeladene Rstudio Datei gut klappen (siehe [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
+- lade [Rstudio](https://rstudio.com/products/rstudio/download/preview) herunter
+- installiere das, oder auf Ubuntu 20.04 (siehe [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
 ```
 sudo apt -y install r-base gdebi-core
 sudo gdebi rstudio-2021.09.1-372-amd64.deb
-
 ```
-
-Falls GPG Probleme (keyserver no route to host) auftreten, siehe [GPG](#gpg).
+- ändere die .RData [settings](#settings) für Reproduzierbarkeit
