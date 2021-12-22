@@ -49,7 +49,7 @@ They are not freely shared here, but feel free to [request](mailto:berry-b@gmx.d
 You can [download all datasets](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/brry/course/tree/master/data) or the [complete course repository](https://github.com/brry/course/archive/master.zip) at once.  
 
 I suggest to rather install [git](#git) and clone the repo [github.com/brry/course](https://github.com/brry/course).  
-Then a single click on `Pull` in Rstudio's git tab wil yield an updated version of all materials.
+Then a single click on `Pull` in Rstudio's git tab will yield an updated version of all materials.
 
 
 
@@ -186,6 +186,11 @@ In such cases, you can often open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+
 `sudo apt-get install r-cran-rjava` (all lower-cased).  
 Here's the [list of supported packages](https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html#supported-packages) and here my [tips for rgdal and rjava](https://github.com/brry/osmscale#installation).
 
+You might first have to run something like ([source](https://launchpad.net/~c2d4u.team/+archive/ubuntu/c2d4u4.0+?field.series_filter=focal)):
+```
+sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
+```
+
 Installing the `sf` package for spatial data may be a bit tricky on Linux because it needs a recent version of gdal. 
 If `install.packages("sf")` does not work, you can try the following:
 ```
@@ -194,6 +199,7 @@ sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
 sudo apt-get install gdal-bin
 sudo apt install libgdal-dev libproj-dev
 ```
+See also [thinkr.fr](https://rtask.thinkr.fr/installation-of-r-4-0-on-ubuntu-20-04-lts-and-tips-for-spatial-packages/) on R4 on Ubuntu 20.04
 
 ### usage
 At the top of the script, conditionally install all needed packages.
