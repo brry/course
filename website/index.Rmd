@@ -74,7 +74,7 @@ First install R itself and then Rstudio. Follow the steps below depending on you
 
 ### Linux
 
-Install R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/bin/linux/ubuntu/)) so that `sudo apt update` installs the latest R version if outdated 
+Install R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/bin/linux/ubuntu/)) so that `sudo apt upgrade` installs the latest R version if outdated 
 (sources: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
 
 - open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines one by one:
@@ -398,7 +398,7 @@ Installiere zuerst R selbst, danach Rstudio. Führe je nach Betriebssystem die f
 
 ### Linux
 
-Installiere R auf Linux **Ubuntu** ([unterstützte Versionen](https://cloud.r-project.org/bin/linux/ubuntu/)), sodass `sudo apt update` auf die neueste R Version aktualisiert, falls sie veraltet ist
+Installiere R auf Linux **Ubuntu** ([unterstützte Versionen](https://cloud.r-project.org/bin/linux/ubuntu/)), sodass `sudo apt upgrade` auf die neueste R Version aktualisiert, falls sie veraltet ist
 (Quellen: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
 
 - öffne ein Terminal (STRG+ALT+T) und füge folgende Zeilen nacheinander ein (STRG+SHIFT+V):
