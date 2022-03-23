@@ -65,8 +65,16 @@ First install R itself and then Rstudio. Follow the steps below depending on you
 
 ### Mac
 
+Either
+
+- install [homebrew](https://brew.sh/)
+- in the Mac terminal, run `brew install --cask r` and `brew install --cask rstudio`
+- change the .RData [settings](#settings) to enhance reproducibility
+
+or
+
 - install [Xquartz](https://www.xquartz.org/)
-- from [https://cran.r-project.org/bin/macosx](cran.r-project.org/bin/macosx), download the latest release, e.g. `R-4.1.2.pkg`
+- from [cran.r-project.org/bin/macosx](https://cran.r-project.org/bin/macosx), download the latest release, e.g. `R-4.1.2.pkg`
 - open the file with 'Installer' and follow the instructions
 - install [Rstudio](https://rstudio.com/products/rstudio/download/preview)
 - drag the app to the 'Applications' folder
@@ -77,13 +85,17 @@ First install R itself and then Rstudio. Follow the steps below depending on you
 Install R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/bin/linux/ubuntu/)) so that `sudo apt update` installs the latest R version if outdated 
 (sources: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
 
-- open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines one by one:
+- open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines one by one.  
+  On Linux **Mint**, replace `$(lsb_release -cs)` with e.g. `focal`, as [listed](https://cloud.r-project.org/bin/linux/ubuntu/).  
+  On **Debian**, find the link [here](https://cloud.r-project.org/bin/linux/debian/).  
 ```
 sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo apt update
 sudo apt install r-base r-base-dev
 ```
+
+
 - download [Rstudio](https://rstudio.com/products/rstudio/download/preview)
 -  either install that, or on Ubuntu 20.04 (see [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
 ```
@@ -92,17 +104,29 @@ sudo gdebi rstudio-2021.09.1-372-amd64.deb
 ```
 - change the .RData [settings](#settings) to enhance reproducibility
 
+### Manjaro Linux
+
+- enable [AUR](https://www.fosslinux.com/4278/what-is-aur-and-how-to-enable-it-in-manjaro.htm)
+- search for `rstudio-desktop` and install it. R will be installed with it. This may take up to an hour.  
+*(Instructions by Frank de Boer).*
+- change the .RData [settings](#settings) to enhance reproducibility
+
 
 
 # settings
 
-Rstudio settings I suggest for reproducibility and compatibility:
+Rstudio settings I strongly suggest for reproducibility:
+
+- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General
+    - **OFF**: Restore .Rdata into workspace at startup  
+    - Save workspace to .RData on exit: **NEVER**  
+    
+<span style="color:grey">Use `save` and `load` to restore the results of long computations, see [saveload](#saveload).</span>
+
+Settings I use for compatibility and ease of use:
 
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General
     - **OFF**: Restore most recently opened project at startup
-    - **OFF**: Restore .Rdata into workspace at startup  
-    - Save workspace to .RData on exit: **NEVER**  
-<span style="color:grey">Use `save` and `load` to restore the results of long computations, see [saveload](#saveload).</span>
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Display
     - **ON**: Show margin (Margin column: 80) - *avoid horizontal scrolling!*
     - **ON**: Highlight R function calls
@@ -112,8 +136,10 @@ Rstudio settings I suggest for reproducibility and compatibility:
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Appearance
     - <span style="color:grey"> Editor font size: 10</span>
     - Editor theme: **Cobalt**
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Sweave
+- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Sweave (only relevant if you work with Rnw files)
     - Weave Rnw files using: **knitr**
+- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Spelling
+    -  **OFF**: Use real time spell-checking
 - <span style="background-color:aquamarine">Tools</span> - Modify Keyboard Shortcuts
     - To set the following and more keyboard shortcuts, see [rskey](https://github.com/brry/rskey#rskey)`::setKeyboardBindings()`
     - Remove `CTRL+Y` from the command "paste last yank" (to mean "redo" as in other programs)
@@ -389,8 +415,16 @@ Installiere zuerst R selbst, danach Rstudio. Führe je nach Betriebssystem die f
 
 ### Mac
 
+Entweder
+
+- installiere [homebrew](https://brew.sh/)
+- im Mac Terminal, führe aus: `brew install --cask r` und `brew install --cask rstudio`
+- ändere die .RData [settings](#settings) für Reproduzierbarkeit
+
+oder
+
 - installiere [Xquartz](https://www.xquartz.org/)
-- lade von [https://cran.r-project.org/bin/macosx](cran.r-project.org/bin/macosx) das 'latest release' herunter, z.B. `R-4.1.2.pkg`
+- lade von [cran.r-project.org/bin/macosx](https://cran.r-project.org/bin/macosx) das 'latest release' herunter, z.B. `R-4.1.2.pkg`
 - öffne die Datei mit 'Installer' und befolge die Anweisungen
 - installiere [Rstudio](https://rstudio.com/products/rstudio/download/preview)
 - ziehe die App in den 'Applications'-Ordner
@@ -401,17 +435,27 @@ Installiere zuerst R selbst, danach Rstudio. Führe je nach Betriebssystem die f
 Installiere R auf Linux **Ubuntu** ([unterstützte Versionen](https://cloud.r-project.org/bin/linux/ubuntu/)), sodass `sudo apt update` auf die neueste R Version aktualisiert, falls sie veraltet ist
 (Quellen: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
 
-- öffne ein Terminal (STRG+ALT+T) und füge folgende Zeilen nacheinander ein (STRG+SHIFT+V):
+- öffne ein Terminal (STRG+ALT+T) und füge folgende Zeilen nacheinander ein (STRG+SHIFT+V).  
+  Auf Linux **Mint**, ersetze `$(lsb_release -cs)` mit z.B. `focal` gemäß [Liste](https://cloud.r-project.org/bin/linux/ubuntu/).  
+  Auf **Debian**, finde den Link [hier](https://cloud.r-project.org/bin/linux/debian/).  
 ```
 sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo apt update
 sudo apt install r-base r-base-dev
 ```
+
 - lade [Rstudio](https://rstudio.com/products/rstudio/download/preview) herunter
 - installiere das, oder auf Ubuntu 20.04 (siehe [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
 ```
 sudo apt -y install r-base gdebi-core
 sudo gdebi rstudio-2021.09.1-372-amd64.deb
 ```
+- ändere die .RData [settings](#settings) für Reproduzierbarkeit
+
+### Manjaro Linux
+
+- schalte [AUR](https://www.fosslinux.com/4278/what-is-aur-and-how-to-enable-it-in-manjaro.htm) frei (Pamac -  Einstellungen - Drittanbieter) 
+- suche nach `rstudio-desktop` und installiere es. R wird automatisch mit installiert. Das kann eine Stunde dauern.  
+*(Anleitung von Frank de Boer)*
 - ändere die .RData [settings](#settings) für Reproduzierbarkeit
