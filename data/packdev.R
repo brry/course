@@ -1,79 +1,75 @@
 
-# Guide to creating a package (promise/warning: involves cats)
-# Berry Boessenkool, 2017-2021, berry-b@gmx.de
-# https://github.com/brry/course#slides       View this script at bit.ly/packdev
+                                            # View this script at bit.ly/packdev
 
+# Guide to creating a package (promise/warning: involves cats)
+# Berry Boessenkool, 2017-2022, https://brry.github.io
 
 # Pro-Tip: Turn on Rstudio document outline with CTRL + SHIFT + O 
 
 
-# Step 0: get needed packages ----
+# 0: prepare ----
 
-install_if_needed <- function(p) if(!requireNamespace(p, quietly=TRUE)) 
-                                   install.packages(p)
-install_if_needed("devtools")
-install_if_needed("roxygen2")
-install_if_needed("berryFunctions")
-install_if_needed("praise")
+# Get the packages needed for this tutorial:
+if(!requireNamespace("pacman", quietly=TRUE)) install.packages("pacman")
+pacman::p_load(devtools, roxygen2, berryFunctions, praise)
 
-
-
-# Step 0.5: github repo ----
+# If wanted, start with a github repo for version control:
 browseURL("https://github.com/new")  
-# or: on "+" in top-right select "New repository"
-# - Name that reflects this is to learn writing R packages
+# or manually click on "+" in top-right select "New repository"
+# - choose a name that reflects this is to learn writing R packages
 # - initialize with readme
-
 browseURL("https://bookdown.org/brry/course/git.html#use-git")
-# - On the green field "Code": copy URL
-# - Rstudio - file - new project - version control - git: paste url and create
 
 
 
-# Step 1: create package structure ----
+# 1: create ----
 
-# setwd("..") # if you cloned from github and rstudio set the wd to package dir
+# If you cloned from github and rstudio set the wd to package dir, first run:
+# setwd("..") 
+# Create the package structure:
 usethis::create_package("myCatPack")
-# open the myCatPack.Rproj file with Rstudio (normally happens automatically)
-# re-open this file there for easiest usage
+# Open the myCatPack.Rproj file with Rstudio (normally happens automatically).
+# For easiest usage, re-open this file (packdev.R) in that project.
 
 
 
-# Step 2: check whether package is correct ----
+# 2: check ----
 
+# Check whether everything in the package is correct:
 devtools::check()
 # Open DESCRIPTION file (easy via "Files" pane in Rstudio, default bottom right)
 # Change to   Version: 0.0.1
-# Change to   License: GPL (>=2)
+# Change to   License: GPL (>=2)     or whatever you choose
 # Add         Date: 2017-08-04       if you like
 # in real life, change the other information too, but we're good for now ;-)
 devtools::check() # should now be empty
-# Package structure is now set up, let's add a function
 
 
 
-# Step 3: add functions ----
+# 3: write ----
 
-# using the neatly named cat function (concatenate and type) to create a file:
+# Add a function to the package.
+# Use the neatly named cat function (concatenate and type) to create a file:
 cat(' 
 meow <- function(
-  animal,
-  good=TRUE
-  )
-  {
-  message("Fact of the day: ", animal, "s are ", 
-          if(good) "awesome" else "ugly", "!")
-  }
+ animal,
+ good=TRUE
+ )
+ {
+ message("Fact of the day: ", animal, "s are ", 
+         if(good) "awesome" else "ugly", "!")
+ }
 ', file="R/meow.R")
 
-# now open the file in the R folder (again, using the Rstudio "Files" pane)
+# Open the file in the R folder, using the Rstudio "Files" pane or with
+file.show("R/meow.R")
 
 
 
-# Step 4: document your functions ----
+# 4: document ----
 
-# put the cursor inside the function or argument list and click
-# Code - Insert Roxygen skeleton (CTRL + ALT + SHIFT +R)
+# In that file, put the cursor inside the function or argument list and click
+# Code - Insert Roxygen skeleton (CTRL + ALT + SHIFT + R)
 # Edit the newly created top of the file. It could look like the following:
 
 #' Message animal status
@@ -86,29 +82,34 @@ meow <- function(
 #' meow("mosquito", good=FALSE)
 
 devtools::document() # through roxygen2, writes NAMESPACE and man/meow.Rd
-# check out the Rd file - roxygen is the best thing since sliced bread!
+# Check out the Rd file - roxygen is the best thing since sliced bread!
 
 # You can also call
 devtools::check() # this will run document() first
 
 
 
-# Step 5: install the package locally ----
+# 5: install  ----
 
+# Install the package on your computer for later usage in any project:
 devtools::install()
 library("myCatPack")
 ?meow
 meow("Elephant")
 
 
-# That's basically it!
-# The following optional things will make your life better.
+# That's basically it! 
+# You can now develop an R package :)
+# The following things build on this and will make your life better.
 
 
+# Bonus ==== ----
 
-### Depend on other packages properly ----
 
-# In the meow function, after message, add
+# 6. depend ----
+
+# Depend on other packages properly.
+# In the meow function, after `message`, add
 praise::praise("You are doing a ${adjective} job ${creating} your first ${rpackage}!")
 # and in the documentation section (recommended somewhere around @export), add
 #' @importFrom praise praise
@@ -116,17 +117,21 @@ praise::praise("You are doing a ${adjective} job ${creating} your first ${rpacka
 # In the DESCRIPTION file, add       Imports: praise
 # Now run:
 devtools::check()
-# Now the NAMESPACE file is updated accordingly by roxygen2
+# The NAMESPACE file is updated accordingly by roxygen2.
 
 
 
-### Improve documentation routines ----
+# 7. docs 2.0 ----
 
-# It is good for readability to keep the argument description close to argument list!
+# Improve documentation routines for code readability.
+# It is good to keep the argument description close to argument list.
 # To create a complete roxygen structure, I prefer to use
 berryFunctions::createFun("roar", open=FALSE)
 devtools::document()
 devtools::install()
+# To avoid the error .../library/myCatPack/R/myCatPack.rdb' is corrupt,
+# restart R with STRG + SHIFT + F10 (or Click Session - Restart R), then run:
+library(myCatPack)
 ?roar
 devtools::check()
 # In the future, the R package documentation system may be changed!
@@ -136,47 +141,55 @@ devtools::check()
 
 
 
-### Develop an efficient workflow ----
+# 8. work ----
+
+# Work efficiently. Here are a few tips and tricks.
 
 # For developing and testing code use
-load_all(".") # CTRL + SHIFT + L
+devtools::load_all(".") # CTRL + SHIFT + L
 # which is faster than install() + library(), but temporary.
 # Also, doc links are not clickable and generating docs may fail altogether.
 
-# CTRL + SHIFT + F10 to restart R
+# Restart R regularly with CTRL + SHIFT + F10.
 # Recommended Rstudio settings: Tools - Global Options - General
 #   OFF: Restore .Rdata into workspace at startup
 #   Save workspace to .RData on exit: NEVER
 
-check() # very often
+devtools::check() # check very often when developing a package
 
-# write unit tests (see Hadley's book referenced below)
+# To sort folders first in the Rstudio File panel, click twice on the field left of "Name".
 
-# For sorting "folders first" in the Rstudio File panel, 
-# click twice on the unnamed field left of "Name".
-
-
-
-### Always load devtools ----
-
-# Two options: globally or for package project
-
-# Rprofile.site globally, see its help and my (German) page about it
-?Rprofile.site # https://rclickhandbuch.wordpress.com/install-r/rprofile/
-
-# locally:
+# Always load devtools. Either locally for this package (R project):
 cat("\nlibrary(devtools)\n", file=".Rprofile", append=TRUE)
-# on Linux, only the local .Rprofile is executed if available (no longer the global)
-
-# CTRL + SHIFT + F10 to restart R
+# or globally for all Rstudio projects and instances, see
+?Rprofile.site 
+# Only the local .Rprofile is executed if it is available (no longer the global).
 document() # this is now quicker to type without devtools:: prepended
 
+remove.packages("myCatPack") # to undo devtools::install()
 
 
-### Read books and tutorials ----
 
-# Hadley Wickham (2015): "R packages" is a must-read!!!
-# http://r-pkgs.had.co.nz/
+# 9. test ----
 
-# some more good intros are linked here
-# https://github.com/brry/misc#package-development-with-rstudio-and-github
+# Code changes in your package shouldn't break things. unit tests help with that.
+usethis::use_testthat()
+usethis::use_test("meow")
+cat('
+test_that("meow tells the right message", {
+ expect_message(meow("Panda"), "Fact of the day: Pandas are awesome!")
+ expect_message(meow("Rat", FALSE), "Fact of the day: Rats are ugly!")
+ })
+', file="tests/testthat/test-meow.R", append=TRUE)
+devtools::test()
+ 
+
+
+# 10. read ----
+
+# Read books and tutorials, Hadley Wickham (2015): "R packages" is a must-read!!!
+browseURL("http://r-pkgs.had.co.nz/")
+# some more intros are linked here:
+browseURL("https://github.com/brry/misc#package-development-with-rstudio-and-github")
+
+# Have fun developing R packages!
