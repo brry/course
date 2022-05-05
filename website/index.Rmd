@@ -90,6 +90,10 @@ Install R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/
   On **Debian**, find the link [here](https://cloud.r-project.org/bin/linux/debian/).  
 ```
 sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
+```
+Check `/etc/apt/sources.list` manually for the correct link (as referenced above). Make sure there is a `/` at the end.  
+For the next step, other keys may be needed, e.g. <font size="1">95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7</font>
+```
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo apt update
 sudo apt install r-base r-base-dev
@@ -127,6 +131,9 @@ Settings I use for compatibility and ease of use:
 
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General
     - **OFF**: Restore most recently opened project at startup
+- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Editing
+    - **ON**: Use native pipe operator
+    - **OFF**: Auto-indent code after paste - *if you have a custom indenting scheme*
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Display
     - **ON**: Show margin (Margin column: 80) - *avoid horizontal scrolling!*
     - **ON**: Highlight R function calls
@@ -136,8 +143,8 @@ Settings I use for compatibility and ease of use:
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Appearance
     - <span style="color:grey"> Editor font size: 10</span>
     - Editor theme: **Cobalt**
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Sweave (only relevant if you work with Rnw files)
-    - Weave Rnw files using: **knitr**
+- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Sweave
+    - Weave Rnw files using: **knitr** - *if you work with Rnw files*
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Spelling
     -  **OFF**: Use real time spell-checking
 - <span style="background-color:aquamarine">Tools</span> - Modify Keyboard Shortcuts
@@ -440,6 +447,10 @@ Installiere R auf Linux **Ubuntu** ([unterstützte Versionen](https://cloud.r-pr
   Auf **Debian**, finde den Link [hier](https://cloud.r-project.org/bin/linux/debian/).  
 ```
 sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
+```
+Prüfe `/etc/apt/sources.list` manuell auf den richtigen Link (wie oben angegeben). Am Ende muss ein `/` stehen.  
+Für den nächsten Schritt können andere keys erforderlich sein, z.B. <font size="1">95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7</font>
+```
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo apt update
 sudo apt install r-base r-base-dev

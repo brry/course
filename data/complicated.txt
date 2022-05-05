@@ -12,8 +12,8 @@ Dark	71,32776	16`996	cannot
 Sunrise	37,49618	30`692	think
 Sunrise	29,21638	6`245	of
 Sunrise	68,23128	48`544	good
-Sunrise	93,358	5`148	remarks
-Bright	1,05233	16`323	for
+Sunrise	93,35801	5`148	remarks
+Bright	1,052332	16`323	for
 Bright	78,01298	2`016	fake
-Cloudy	29,77	104`877	data
+Cloudy	29,77058	104`877	data
 
