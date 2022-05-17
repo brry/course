@@ -164,8 +164,8 @@ This is tedious, but needs to be done only once.
 
 - Create a github account at <https://github.com/join>
 - Download and install git, see <https://git-scm.com/downloads>
+- Restart Rstudio (if open)
 - Connect git to Rstudio: (instructions [with screenshots](https://www.r-bloggers.com/rstudio-and-github))
-  - RStudio -> Tools -> Version Control: select Git.
   - RStudio -> Tools -> Global Options -> Git/SVN: Ensure the path to the Git executable is correct.
   - `Create RSA Key`, close window
   - `View public key`: copy the displayed public key
