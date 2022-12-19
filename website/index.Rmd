@@ -60,7 +60,7 @@ First install R itself and then Rstudio. Follow the steps below depending on you
 ### Windows
 
 - install [R](https://cloud.r-project.org/bin/windows/base/release.htm)
-- install [Rstudio](https://rstudio.com/products/rstudio/download/preview)
+- install [Rstudio](https://posit.co/download/rstudio-desktop/)
 - change the .RData [settings](#settings) to enhance reproducibility
 
 ### Mac
@@ -76,7 +76,7 @@ or
 - install [Xquartz](https://www.xquartz.org/)
 - from [cran.r-project.org/bin/macosx](https://cran.r-project.org/bin/macosx), download the latest release, e.g. `R-4.1.2.pkg`
 - open the file with 'Installer' and follow the instructions
-- install [Rstudio](https://rstudio.com/products/rstudio/download/preview)
+- install [Rstudio](https://posit.co/download/rstudio-desktop/)
 - drag the app to the 'Applications' folder
 - change the .RData [settings](#settings) to enhance reproducibility
 
@@ -100,7 +100,7 @@ sudo apt install r-base r-base-dev
 ```
 
 
-- download [Rstudio](https://rstudio.com/products/rstudio/download/preview)
+- install [Rstudio](https://posit.co/download/rstudio-desktop/)
 -  either install that, or on Ubuntu 20.04 (see [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
 ```
 sudo apt -y install r-base gdebi-core
@@ -318,7 +318,7 @@ Reference cards
 
 - [base](https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf) and
   [advanced](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf) cheatsheets from
-        [Rstudio](https://www.rstudio.com/resources/cheatsheets)
+        [Rstudio](https://posit.co/resources/cheatsheets/)
 - [RefCard](https://github.com/jonasstein/R-Reference-Card/raw/master/R-refcard.pdf) by Tom Short & Jonas Stein
 
 The internet
@@ -417,7 +417,7 @@ Installiere zuerst R selbst, danach Rstudio. Führe je nach Betriebssystem die f
 ### Windows
 
 - installiere [R](https://cloud.r-project.org/bin/windows/base/release.htm)
-- installiere [Rstudio](https://rstudio.com/products/rstudio/download/preview)
+- installiere [Rstudio](https://posit.co/download/rstudio-desktop/)
 - ändere die .RData [settings](#settings) für Reproduzierbarkeit
 
 ### Mac
@@ -433,7 +433,7 @@ oder
 - installiere [Xquartz](https://www.xquartz.org/)
 - lade von [cran.r-project.org/bin/macosx](https://cran.r-project.org/bin/macosx) das 'latest release' herunter, z.B. `R-4.1.2.pkg`
 - öffne die Datei mit 'Installer' und befolge die Anweisungen
-- installiere [Rstudio](https://rstudio.com/products/rstudio/download/preview)
+- installiere [Rstudio](https://posit.co/download/rstudio-desktop/)
 - ziehe die App in den 'Applications'-Ordner
 - ändere die .RData [settings](#settings) für Reproduzierbarkeit
 
@@ -456,7 +456,7 @@ sudo apt update
 sudo apt install r-base r-base-dev
 ```
 
-- lade [Rstudio](https://rstudio.com/products/rstudio/download/preview) herunter
+- lade [Rstudio](https://posit.co/download/rstudio-desktop/) herunter
 - installiere das, oder auf Ubuntu 20.04 (siehe [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
 ```
 sudo apt -y install r-base gdebi-core
