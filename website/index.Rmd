@@ -41,8 +41,9 @@ Here are my old slides in several versions:
 The presentation template is available through
 [`berryFunctions::createPres()`](https://www.rdocumentation.org/packages/berryFunctions/topics/createPres?).
 
-Note: I have much better slides for my courses, along with interactive autograded exercises.  
+Note: I have much better slides for my [German](https://open.hpi.de/courses/programmieren-r2022) and [English](https://open.hpi.de/courses/hpi-dh-fprog2022) openHPI courses, along with interactive autograded exercises.  
 They are not freely shared here, but feel free to [request](mailto:berry-b@gmx.de) a copy.
+
 
 ### datasets
 
@@ -156,7 +157,7 @@ Settings I use for compatibility and ease of use:
 
 # git
 
-git is a version control software. Even if you do not yet plan to use it actively, it will make updating the course material a lot easier.
+git is a version control software. With it, you can download repositories, track your changes and develop code collaboratively.
 
 ### install git
 
@@ -170,7 +171,7 @@ This is tedious, but needs to be done only once.
   - `Create RSA Key`, close window
   - `View public key`: copy the displayed public key
   - go to <https://github.com/settings/keys> and click `New SSH key`, paste the public key
-  - RStudio -> Tools -> Shell: type the following:
+  - in the RStudio bottom Tab `Terminal`: type the following:
 ```
 git version # just to see git works fine
 git config --global user.email "YourEmail@domain.com"
