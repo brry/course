@@ -31,27 +31,9 @@ _Pro tip: the arrow left/right keys jump between chapters._
 
 # slides
 
-Here are my old slides in several versions:
+Access my slidedeck (in a single PDF) along with autograded exercises through the [German](https://open.hpi.de/courses/programmieren-r2022) or [English](https://open.hpi.de/courses/hpi-dh-fprog2022) openHPI courses. 
 
-* [handout](https://github.com/brry/course/raw/master/RcourseBerry.pdf) (one pdf page per slide)
-* [presentation](https://github.com/brry/course/raw/master/RcourseBerry%20pres.pdf)
-(animated with LaTeX \\onslide et al.)
-* [source code](https://github.com/brry/course/raw/master/RcourseBerry.Rnw) (.Rnw, I suggest rightclick - save as)
-
-The presentation template is available through
-[`berryFunctions::createPres()`](https://www.rdocumentation.org/packages/berryFunctions/topics/createPres?).
-
-Note: I have much better slides for my [German](https://open.hpi.de/courses/programmieren-r2022) and [English](https://open.hpi.de/courses/hpi-dh-fprog2022) openHPI courses, along with interactive autograded exercises.  
-They are not freely shared here, but feel free to [request](mailto:berry-b@gmx.de) a copy.
-
-
-### datasets
-
-You can [download all datasets](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/brry/course/tree/master/data) or the [complete course repository](https://github.com/brry/course/archive/master.zip) at once.  
-
-I suggest to rather install [git](#git) and clone the repo [github.com/brry/course](https://github.com/brry/course).  
-Then a single click on `Pull` in Rstudio's git tab will yield an updated version of all materials.
-
+My [old slides](https://github.com/brry/course/raw/master/RcourseBerry.pdf) are still directly available.
 
 
 # install
