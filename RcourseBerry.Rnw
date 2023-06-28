@@ -2965,9 +2965,10 @@ lines(x=c(5,120,514,918), y=c(37,39,38,37.5), col="green4", type="b")
   \item Plot a dataset of your choice (eg from \rcode{library(help = "datasets")}).
   \item Add some red dotted lines between big quadratic points, filled with blue color.
   \item Label the axis and give your graph a big italic header with \texttt{cex.main, font.main}, see \rcode{?par}.
-  \item Plot with a logarithmic scale on one axis.
-  \item Set the axis to a certain limit. With \texttt{yaxs}, suppress the default 4\% range extension.
-  \item Using \texttt{xaxt}, plot without an x-axis. Look in the help of \rcode{par} how this can be done. Then add a custom \rcode{axis}.
+  \item Plot with a logarithmic scale on the y axis.
+  \item Using \texttt{yaxt}, plot without an y-axis. Look in the help of \rcode{par} how this can be done. 
+  \item Add a \rcode{berryfunctions::logAxis()} for the y axis.
+  \item Set the x axis to a certain limit. With \texttt{xaxs}, suppress the default 4\% range extension.
   \item Add a \rcode{legend} to the plot and thick-lined \rcode{box} around the final plot.
 \end{enumerate}
 \end{exercise}
@@ -2978,19 +2979,17 @@ lines(x=c(5,120,514,918), y=c(37,39,38,37.5), col="green4", type="b")
 \begin{frame}[fragile]{Solution for exercise \arabic{exercisecount}: Plotting I}
 <<ex5sola, size="small", eval=T, fig.height=3.6, fig.show="hide">>=
 # generate "random" data:
-set.seed(42) ; numbers <- cumsum(rnorm(40)) + 20
-x <- c(10, 15, 31, 33); y <- c(19, 22, 17, 23)
+set.seed(12) ; numbers <- cumsum(rnorm(400,sd=150)) + 2000
+x <- c(10, 150, 310, 330); y <- c(190, 2200, 17, 230)
 # Basic plot:
 plot(numbers, type="l", xlab="Time",
      main="Fake Time Series", cex.main=3, font.main=3,
-     log="y", xlim=c(0,50), xaxs="i", xaxt="n" )
+     log="y", xlim=c(0,500), xaxs="i", yaxt="n" )
+berryFunctions::logAxis(2)
 # Add points and lines
-points(x=x, y=y, pch=22, type="p", cex=3, col="orange",
-      bg="green")
-lines(x=c(10, 15, 31, 33), y=c(-6, -3, -8, -2)+25, col="red",
-      lty="dashed")
-# Custom axis, legend and box around plot:
-axis(side=1, at=c(0, 15, 30, 45)  )
+points(x=x, y=y, pch=22, type="p", cex=3, col="orange", bg="green")
+lines(x=x, y=y, col="red", lty="dashed")
+# legend and box around plot:
 legend("topright", legend=c("ts", "more fake stuff"),
        lty=c(1,2), col=c(1,2) )
 box(lwd=5)
@@ -4631,24 +4630,31 @@ which(dimnames(econ)[[2]]=="Industrie")
 \label{functions1}
 \href{http://r4ds.had.co.nz/functions.html}{http://r4ds.had.co.nz/functions.html}\\
 \pause
-\rcode{?"function"}\\
-\pause  Syntax:\\
-\rcode{Functionobjectname <- \alert{function}(argument1, argument2, ...) \\
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\{"DoSomething"\}}\\
-\pause
 <<funct2, echo=T, eval=T, tidy=FALSE>>=
-myfunct <- function(grappig)
-       {plot(grappig, type="l"); return(grappig*7)  }
+multiply_and_plot <- function(some_numbers)
+  {
+  funny_numbers <- some_numbers*7
+  plot(funny_numbers, type="l")
+  return(funny_numbers)
+  }
 @
 \pause
-After \rcode{return()}ing, the execution of the function is terminated, so it should only be positioned at the end. It can also be left away, the last instruction ("expression") will then be returned.
+Then run this with \rcode{multiply\_and\_plot(1:7)}.\\
+\pause
+R executes the code in the body of the function in a separate environment.\\
+\pause
+\texttt{funny\_numbers} will not be available afterwards in the \rcode{globalenv()}.\\[1em]
+\pause
+After \rcode{return()}, the execution of the function is terminated, so it should only be positioned at the end.\\
+\pause
+\rcode{return()} can be left away, the last instruction ("expression") will then be returned.
 \end{frame}
 
 %------------------------------------------------------------%
 
 \begin{frame}[fragile]{Functions II}
 <<funct3>>=
-myfunct(   c(5,11,3,7)  )
+multiply_and_plot(   c(5,11,3,7)  )
 @
 \end{frame}
 
@@ -6071,357 +6077,7 @@ plotLfit(distLfit(x, quiet=T), breaks=30, nbest=11, legargs=c(x="left"))
 \end{frame}
 
 
-%------------------------------------------------------------%
-%------------------------------------------------------------%
-\subsection{5. Extreme Value Statistics}
-%------------------------------------------------------------%
-%------------------------------------------------------------%
 
-\begin{frame}[fragile]{Extreme value statistics (EVS)}
-More extensive script version of these slides (in German):\\
-\footnotesize
-\url{https://github.com/brry/rclick/blob/master/15-Extremwertstatistik.r}\\[2em]
-\normalsize
-\begin{enumerate}
-\item Data
-\item Return period, plotting positions
-\item Fitting extreme value distribution functions
-\item Plotting and computing quantiles from evd
-\item L-moments
-\item R package \texttt{extremeStat}
-\end{enumerate}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Dataset}
-Annual streamflow maxima 1976-2010 at a stream in Austria
-<<EVS_data>>=
-JM <- c(61.5, 77.0, 37.0, 69.3, 75.6, 74.9, 43.7, 50.8,
-55.6, 84.1, 43.6, 81.9, 60.1, 72.4, 61.6, 94.8, 82.6, 57.2,
-63.1, 73.8, 51.3, 93.6, 56.9, 52.1, 40.4, 48.9, 113.6, 
-35.4, 40.1, 89.6, 47.8, 57.6, 38.9, 69.7, 110.8)
-@
-\pause
-Annual maxima must be independent from each other \\ 
--> no extreme event at year-separation used for both years\\[1em]
-\pause
-The alternative to this Block Maxima (BM) approach is using Peak-Over-Threshold (POT) extremes.
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Dataset time series graph}
-\vspace{-1em}
-<<EVS_data_graph, echo=-1, fig.height=2.4>>=
-par(mar=c(2,2,2,0.5), mgp=c(3,0.8,0))
-plot(1976:2010, JM, type="l", las=1, ylab="", xlab="",
-     main="Annual streamflow maxima [m\U00B3/s]")
-# Moving Average (in berryFunctions):
-lines(1976:2010, movAv(JM), col="red", lwd=3) 
-# can indicate trends or cycles, but:
-# window width = "researcher degree of freedom"
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Dataset histgram}
-\vspace{-1em}
-<<EVS_data_hist, fig.height=3.4>>=
-hist(JM, col="salmon", las=1)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: empirical quantiles}
-<<EVS_empquant>>=
-quantile(JM) 
-@
-\pause
-75\% of the annual maxima are smaller than 76.3 m\textsuperscript{3}/s (upper quartile).
-This discharge is exceeded in 25 of 100 years.
-Statistically, we'd expect an event of this magnitude (or larger) once every \pause
-4 years.
-Each year, there's a statistical probability of 25\% for 76 m\textsuperscript{3}/s to be reached/exceeded.\\[1em]
-\pause
-This all assumes a stationary runoff regime in the catchment, i.e. no relevant changes over time in rainfall patterns or landscape composition.\\[1em]
-\pause
-This is also purely empirical, based on past observations only, with no assumptions
-on how the extrema are generally (supposed to be) distributed.
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Plotting Positions + Return Period}
-Plotting Positions (PP) were used back in the olden days to graphically fit 
-extreme value distributions on a Gumbel-scaled axis.\\
-\pause
-Several methods to compute PP are compared in the mentioned \href{https://github.com/brry/rclick/blob/master/15-Extremwertstatistik.r#L71}{Rclick script.}
-\pause
-We'll only use the method from Weibull (1939) with $Pne=\frac{R}{n+1}$, 
-\textcolor{gray}{but there are also e.g. Hazen (1914) $\frac{R-0.50}{n}$, 
-Gringorton (1963) $\frac{R-0.44}{n+0.12}$ or Beard (1943) $\frac{R-0.31}{n+0.38}$}.
-\pause
-These all overestimate the return period and hence underestimate flood risk (compared to Weibull).
-E.g. for 35 years of data, Hazen assigns an RP of 70 years to the highest measured value,
-Weibull 36 years.
-\vspace{-0.5em}
-\pause
-<<EVS_plottingpos_comp>>=
-m <- sort(JM) # ascendingly sorted maxima
-n <- length(m)
-Rank <- 1:n
-# empirical non-exceedance probability = Percentile:
-Pne <- Rank / (n+1) 
-# RP: Return Period = annuality = 1/Pe = 1/(1-Pne)
-RP <- 1/(1-Pne) 
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Plotting Positions - Graph}
-\vspace{-1em}
-<<EVS_plottingpos_plot, echo=-1, size="footnotesize", fig.height=2.2>>=
-par(mfrow=c(1,3), mar=c(4,4,1,0.5), mgp=c(2.2,0.8,0), las=1)
-plot(m,Pne, xlab="Value", ylab="Probability of not being exceeded")
-plot(ecdf(JM), ylab="empirical cumulated density")
-plot(m,RP, xlab="Streamflow value", ylab="Return Period [years]")
-@
-\vspace{-0.5em}
-\footnotesize
-\pause
-{\setstretch{0.9}Plot 1 and 2 are almost equal in nature, but the ECDF goes from 0 to 1 exactly.
-It leaves no room for potentially even higher or lower values.\\
-\pause
-The second-highest value is reached or exceeded twice in the 35 years.
-Statistically, this occurs once in every 18 years. 
-The return period of the third-largest value is 36/3 = 12 years. 
-This reciprocal relationship (1/x) causes the counterintuitive leaps in RP.\\}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Fitting the Gamma distribution}
-The plotting positions are irrelevant for fitting distributions.
-E.g. the parameters of the Gamma-distribution can be determined from the 
-statistical moments of the observations - mean, var, skew (non-symmetry), kurtosis (non-normality).
-\pause
-\vspace{-0.8em}
-<<EVS_gammafit, size="scriptsize", fig.height=2, echo=-1>>=
-par(mar=c(2,2,2,1), mgp=c(3,0.8,0))
-shape <- mean(m)^2/var(m)   ;   rate  <- mean(m)/var(m) 
-hist(m, freq=FALSE, col="salmon", 
-     main="Gamma is OK for this dataset, but underestimates tail")
-Q <- seq(par("usr")[1], par("usr")[2], len=200)
-lines(Q, dgamma(x=Q, shape=shape, rate=rate), lwd=4)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Discharge over Return Periods I}
-\vspace{-1em}
-<<EVS_value_RP_plot, size="scriptsize", fig.height=2.4, echo=-1>>=
-par(mar=c(3.2,3,2,0.5), mgp=c(2.1,0.7,0))
-# remember: RP   =   1/(1-Pne)   =   1/(1- Rank/(n+1) )
-plot(RP, m, ylab="Discharge HQ  [m\U00B3/s]", xlab="Return Period RP  [a]",
-     las=1, main="yearly streamflow extrema / return period", pch=20)
-RPgamma <- 1/( 1-  pgamma( Q, shape=shape, rate=rate)    )
-lines(RPgamma, Q, col="orange", lwd=2)
-text(15,79, paste("mean =",round(mean(m),3),"  sd =",round(sd(m),3)),adj=0)
-text(15,66, bquote("shape = "* mu^2/sigma*" = "*.(round(shape, 2))), adj=0)
-text(15,53, bquote("rate = " * mu/sigma * " = "*.(round(rate,  4))), adj=0)
-text(15,40, bquote("scale = "* 1/rate *   " = "*.(round(1/rate,3))), adj=0)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Return levels}
-$ RP = \frac{1}{Pe} = \frac{1}{1-Pne} $\\[0.5em]
-$ Pne = 1 - \frac{1}{RP} $\\[0.5em]
-$ RL = quantile(x, ~~ prob=Pne) $
-
-<<EVS_value_RP_calc>>=
-ReturnYears <- c(5,10,20,50)
-qgamma(p=1-(1/ReturnYears), shape=shape, rate=rate)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Practicing with the Gumbel distribution}
-\begin{exercise}{Extreme value statistics}
-\begin{enumerate}
-\small
-\item Plot a density histogram of the built-in \rcode{Nile} dataset. 
-\item Fit the Gamma distribution by estimating its parameters from the sample moments.
-$ shape = \mu^2/var$ ~~ ; ~~ $ rate = \mu/var$
-\item Fit the Gumbel distribution as well, using \\
-$ scale = \sqrt{6}*\sigma/\pi $ ~~ ; ~~ $ loc = \mu-0.5772*scale $
-\item Add both distributions to the graph. You can use \rcode{evd::dgumbel}.
-\item BONUS: add a legend or label the lines directly
-\item Plot streamflow over return period using Weibull plotting positions:\\
-\rcode{N\_s <- sort(Nile) ; n <- length(Nile)  ;  RP <- 1/(1-1:n/(n+1))}
-\item Using the help of \rcode{?plot.default}, use a logarithmic axis for the RP.
-\item BONUS: suppress axis drawing and add \rcode{berryFunctions::logAxis(1)}
-\item Add both fitted lines (in the same colors used in the previous plot)
-\item From both distributions, estimate the discharge expected with RPs:\\
-\rcode{ReturnYears <- c(5,10,20,50,100,200)}
-\end{enumerate}
-\end{exercise}
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Solutions to EVD exercise - prob density}
-\vspace{-0.8em}
-<<EVS_ex_hist, echo=-1, fig.height=2.4, size="footnotesize">>=
-par(mar=c(2,2,1,1), mgp=c(3,0.8,0))
-hist(Nile, freq=FALSE, col="burlywood", main="Nile", breaks=20)
-shape <- mean(Nile)^2/var(Nile)   ;   rate  <- mean(Nile)/var(Nile) 
-scale <- sqrt(6)*sd(Nile)/pi  ;  loc <- mean(Nile)-0.5772*scale
-Q <- seq(400, 1600, len=200)
-lines(Q, dgamma(x=Q, shape=shape, rate=rate), lwd=4, col="blue")
-lines(Q, evd::dgumbel(x=Q, loc=loc, scale=scale), lwd=4, col="red")
-legend("topright", c("Gamma", "Gumbel"), col=c("blue","red"), lwd=3)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Solutions to EVD exercise - EV plot}
-\vspace{-0.8em}
-<<EVS_ex_plot, echo=-1, fig.height=2.4, size="footnotesize">>=
-par(mar=c(2.7,3.7,1,1), mgp=c(2.6,0.7,0), las=1)
-N_s <- sort(Nile) ; n <- length(Nile)  ;  RP <- 1/(1-1:n/(n+1))
-plot(RP, N_s, ylab="Nile flow", xlab="", log="x", ylim=c(500,1500), 
-     xlim=c(1,200), xaxt="n") ; berryFunctions::logAxis(1)
-title(xlab="Return period", line=1.5)
-lines(1/(1-    pgamma(q=Q, shape=shape, rate=rate)), Q, lwd=4,col="blue")
-lines(1/(1-evd::pgumbel(q=Q, loc=loc, scale=scale)), Q, lwd=4, col="red")
-legend("bottomright", c("Gamma", "Gumbel"), col=c("blue","red"), lwd=3)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: Solutions to EVD exercise - return levels}
-\vspace{-0.8em}
-<<EVS_ex_calc, echo=2:4>>=
-options(digits=0)
-ReturnYears <- c(5,10,20,50,100,200)
-      qgamma(p=1-(1/ReturnYears), shape=shape, rate=rate)
-evd::qgumbel(p=1-(1/ReturnYears), loc=loc, scale=scale)
-options(digits=7)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: L moments I, \url{http://en.wikipedia.org/wiki/L-moment}}
-\small
-Block maxima should approach the General Extreme Value Distribution (GEV)\\
-Peaks over a threshold should approach the General Pareto Distribution (GPD).
-<<EVS_lmom_calc>>=
-# SAMLMU: Unbiased SAMple L-Moments
-moments <- lmom::samlmu(JM, sort.data=TRUE, nmom=3)
-# PEL: Parameter Estimation from L-moments
-param <- lmom::pelgev(moments) 
-moments;   param 
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: L moments II}
-\vspace{-1em}
-<<EVS_lmom_plot, fig.height=2.2, echo=-1>>=
-par(mar=c(2,2,2,1))
-hist(JM, freq=FALSE, col="salmon", main="GEV")
-lines(Q, evd::dgev(x=Q, loc=param["xi"],
-                   scale=param["alpha"], shape=param["k"]), 
-      col="purple", lwd=3)
-@
-\vspace{-0.6em}
-<<EVS_lmom_quant, eval=FALSE>>=
-lmom::quagev(f=0.99, param) # 99% of values under 127.5
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: extremeStat}
-Read the \href{https://cran.r-project.org/web/packages/extremeStat/vignettes/extremeStat.html}{extremeStat vignette}, especially the 
-\href{https://cran.r-project.org/web/packages/extremeStat/vignettes/extremeStat.html#extreme-value-statistics-return-periods}{last section} for more info.
-<<EVS_ES_calc>>=
-library(extremeStat)
-Q50 <- distLextreme(JM, gpd=FALSE, quiet=TRUE)
-quantile(Q50$returnlev[1:16,"RP.50"])
-@
-107-132, quite a range! Most suitable distributions agree around 115.
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: extremeStat plots: streamflow - return period}
-<<EVS_plot, echo=-1, fig.height=3.5>>=
-par(mar=c(3,4,1,1))
-plotLextreme(Q50)
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: extremeStat plots: streamflow distribution}
-<<EVS_plot_nbest, echo=-1, fig.height=3.5>>=
-par(mar=c(3,4,1,1))
-plotLfit(Q50, nbest=17, legargs=list(x="topright"))
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: extremeStat plots: streamflow CDF}
-<<EVS_plot_cdf, echo=-1, fig.height=3.5>>=
-par(mar=c(3,4,1,1))
-plotLfit(Q50, cdf=TRUE, legargs=list(x="bottomright"))
-@
-\end{frame}
-
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: use extremeStat}
-\begin{exercise}{extremeStat}
-\begin{enumerate}
-\item Using distLextreme, printL and plotLextreme in extremeStat, 
-explore the extremes of the \rcode{Nile} streamflow.
-\item What streamflow is expected once per 200 years?
-\item BONUS 1: get uncertainty ranges for the GEV estimate with \rcode{distLexBoot}
-\item BONUS 2: use the POT method with a useful truncation
-\end{enumerate}
-\end{exercise}
-\end{frame}
-%------------------------------------------------------------%
-
-\begin{frame}[fragile]{EVS: use extremeStat}
-<<EVS_ES_Nile, echo=2:3>>=
-options(digits=0)
-nile <- distLextreme(Nile, RPs=c(50,100,200), quiet=TRUE)
-head(nile$returnlev)
-options(digits=7)
-@
-\vspace{-1em}
-<<EVS_ES_Nile_explore, eval=FALSE>>=
-printL(nile)
-plotLextreme(nile)
-plotLweights(nile)
-nile_b <- distLexBoot(nile, selection="gev")
-@
-\end{frame}
 
 %------------------------------------------------------------%
 %------------------------------------------------------------%
@@ -6727,7 +6383,7 @@ It is excluded from this main document and can be obtained as \href{https://dl.d
 
 \begin{frame}[fragile]{Linear Regression}
 \href{http://www.econ.queensu.ca/files/other/storks.pdf}{Storks Deliver Babies (p = 0.008)}\\[1em]
-\href{https://livefreeordichotomize.com/2019/08/24/extending-the-analogy-the-boy-you-cried-wolf-p-hacking}{p-hacking}\\[1em]
+\href{https://livefreeordichotomize.com/posts/2019-08-24-extending-the-analogy-the-boy-you-cried-wolf-p-hackin/}{p-hacking}\\[1em]
 Fit multiple functions: berryFunctions::mReg. See the mReg sections in the 
 \href{https://cran.rstudio.com/web/packages/berryFunctions/vignettes/berryFunctions.html}{Vignette} 
 and \href{https://rclickhandbuch.wordpress.com/rpackages/}{Rclick page}
