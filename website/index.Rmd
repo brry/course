@@ -17,28 +17,33 @@ editor_options:
 
 # welcome
 
+**to programming with R!**  
+I hope learning to code will change your life like it did mine :). 
+
 <img src="https://github.com/brry/course/raw/master/externalfig/Blogo.png" width="100">
 
-This website provides instructions to get started with R.  
-It serves as a companion for courses I teach, see [brry.github.io](https://brry.github.io).  
-The source code is available at [github.com/brry/course](https://github.com/brry/course),
-specifically the [website](https://github.com/brry/course/tree/master/website) folder.
+Since 2012, I teach R courses with great joy, see [brry.github.io](https://brry.github.io).  
+This website is here to help you start your coding journey.  
 
-In case the table of content on the left is not shown, click the four bars.
+My main slidedeck (in a single PDF) is avalaible through two openHPI courses.
+These have autograded exercises and are fairly suitable to learn R on your own.
+Feel free to book me as a trainer in addition.  
+- [German](https://open.hpi.de/courses/programmieren-r2022), ca 20-50 hours   
+- [English](https://open.hpi.de/courses/hpi-dh-fprog2022), ca 30-70 hours
 
-_Pro tip: the arrow left/right keys jump between chapters._
-
-
-# slides
-
-Access my slidedeck (in a single PDF) along with autograded exercises through the [German](https://open.hpi.de/courses/programmieren-r2022) or [English](https://open.hpi.de/courses/hpi-dh-fprog2022) openHPI courses. 
-
+There is also material for a course taking [a few hours](https://github.com/brry/hour).  
 My [old slides](https://github.com/brry/course/raw/master/RcourseBerry.pdf) are still directly available.
+
+**A few notes on this website:**  
+The source code is available at [github.com/brry/course](https://github.com/brry/course/blob/master/website/index.Rmd).   
+In case the table of content on the left is not shown, click the four bars at the top.  
+_Pro tip: the arrow left/right keys jump between chapters._
 
 
 # install
 
-First install R itself and then Rstudio. Follow the steps below depending on your operating system.
+First install R itself and then Rstudio. Follow the steps below depending on your operating system.  
+[Windows](#windows), [Mac](#mac), [Linux](#linux), [Manjaro](#manjaro-linux)
 
 ### Windows
 
@@ -108,7 +113,7 @@ Rstudio settings I strongly suggest for reproducibility:
     - **OFF**: Restore .Rdata into workspace at startup  
     - Save workspace to .RData on exit: **NEVER**  
     
-<span style="color:grey">Use `save` and `load` to restore the results of long computations, see [saveload](#saveload).</span>
+<span style="color:grey">For professionals: Use `save` and `load` to restore the results of long computations, see [saveload](#saveload).</span>
 
 Settings I use for compatibility and ease of use:
 
@@ -121,7 +126,7 @@ Settings I use for compatibility and ease of use:
     - **ON**: Show margin (Margin column: 80) - *avoid horizontal scrolling!*
     - **ON**: Highlight R function calls
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Saving
-    - Line ending conversion: **Windows (CR/LF)**
+    - Line ending conversion: **Windows (CR/LF)** - *compatible across OS platforms*
     - Default Text Encoding: **UTF-8**
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Appearance
     - <span style="color:grey"> Editor font size: 10</span>
@@ -176,7 +181,7 @@ _I recommend to keep the Project directory name so local and github folder names
 
 ![](https://github.com/brry/course/raw/master/externalfig/git_clone_Rstudio.png) 
 
-- 3. From now on, get the latest version of my slides with a single click on `Pull`:
+- 3. From now on, get the latest version with a single click on `Pull`:
 
 <img src="https://github.com/brry/course/raw/master/externalfig/git_clone_6.PNG" width="400">
 
@@ -257,10 +262,7 @@ It comes in `Rstudio/bin/sumatra` and I like to change some [settings](https://w
 ### with R
 
 ```{r sumatrainit, eval=FALSE}
-install.packages("berryFunctions")
-# needs packageVersion("berryFunctions")  > 1.19.3 :
-remotes::install_github("brry/berryFunctions") 
-
+# install.packages("berryFunctions")
 berryFunctions::sumatraInitialize()
 ```
 
