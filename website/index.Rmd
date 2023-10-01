@@ -202,25 +202,7 @@ Installing add-on R packages usually is easy from within R (and works without ad
 ```R
 install.packages("ggplot2")
 ```
-On Linux, some packages with external dependencies (like rJava) can be more difficult.  
-In such cases, you can often open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V)  
-`sudo apt-get install r-cran-rjava` (all lower-cased).  
-Here's the [list of supported packages](https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html#supported-packages) and here my [tips for rgdal and rjava](https://github.com/brry/osmscale#installation).
-
-You might first have to run something like ([source](https://launchpad.net/~c2d4u.team/+archive/ubuntu/c2d4u4.0+?field.series_filter=focal)):
-```
-sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
-```
-
-Installing the `sf` package for spatial data may be a bit tricky on Linux because it needs a recent version of gdal. 
-If `install.packages("sf")` does not work, you can try the following:
-```
-sudo apt-get install libudunits2-dev
-sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
-sudo apt-get install gdal-bin
-sudo apt install libgdal-dev libproj-dev
-```
-See also [thinkr.fr](https://rtask.thinkr.fr/installation-of-r-4-0-on-ubuntu-20-04-lts-and-tips-for-spatial-packages/) on R4 on Ubuntu 20.04
+For potential installation [issues](#issues), see below.
 
 ### usage
 At the top of the script, conditionally install all needed packages.
@@ -250,6 +232,64 @@ It makes clear from wich package 'fun' is used.
 Otherwise, when multiple packages have `fun`, the one from the lastly loaded package will be used. 
 And that might not be the one you expect.  
 When you use multiple functions from a package, the second option is fine of course.
+
+
+### issues
+
+Here are solutions to some issues I have encountered in the past while installing packages with external (i.e. non-R) dependencies.
+
+#### rJava on Windows
+
+Check if Java is available. 
+There should be no errors when running (in R):
+```
+install.packages("rJava") ; library(rJava)
+```
+If necessary, install [Java](http://www.java.com/de/download/manual.jsp) in the same bit-version as R (eg 64bit).
+The Java binary file must be on the [search path](http://www.java.com/en/download/help/path.xml), 
+which will normally happen automatically.
+
+In case you run into the 32/64 bits error: "JAVA_HOME cannot be determined from the Registry", try installing the package with no multiarchitecture support, e.g.:
+`remotes::install_github("brry/OSMscale", build_opts="--no-multiarch")`
+
+#### rJava on Linux
+Open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) all lower-cased:
+```
+sudo apt-get install r-cran-rjava
+```
+Here's the [list of other supported packages](https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html#supported-packages) using this mechanism.  
+You might first have to run something like ([source](https://launchpad.net/~c2d4u.team/+archive/ubuntu/c2d4u4.0+?field.series_filter=focal)):
+```
+sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
+```
+
+#### sf
+
+If `install.packages("sf")` on Linux does not work, you can try the following:
+```
+sudo apt-get install libudunits2-dev
+sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
+sudo apt-get install gdal-bin
+sudo apt install libgdal-dev libproj-dev
+```
+See also [thinkr.fr](https://rtask.thinkr.fr/installation-of-r-4-0-on-ubuntu-20-04-lts-and-tips-for-spatial-packages/) on R4 on Ubuntu 20.04
+
+#### gdal
+
+Probably obsolete with the retirement of `rgdal`, but just for reference:
+```
+sudo apt update
+sudo apt install libgdal-dev libproj-dev
+```
+
+#### source
+
+If you cannot install a package, you might be able to `source` some functions.  
+Download the package zip folder on github (see [git](#git)) and then run:
+```R
+Vectorize(source)(dir("unzipped_package_path/R", full=TRUE))
+```
+This creates all R functions as objects in your globalenv workspace (and overwrites existing objects of the same name!).
 
 
 # sumatra
