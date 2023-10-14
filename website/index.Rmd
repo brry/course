@@ -196,6 +196,14 @@ Contribute to OS software: <https://egghead.io/courses/how-to-contribute-to-an-o
 
 # packages
 
+### usage
+
+Whenever possible, use `pack::fun()` instead of `library("pack") ; fun()`.
+It makes clear from wich package 'fun' is used.   
+Otherwise, when multiple packages have `fun`, the one from the lastly loaded package will be used. 
+And that might not be the one you expect.  
+When you use multiple functions from a package, the second option is fine of course.
+
 ### installation
 
 Installing add-on R packages usually is easy from within R (and works without admin rights):
@@ -204,8 +212,7 @@ install.packages("ggplot2")
 ```
 For potential installation [issues](#issues), see below.
 
-### usage
-At the top of the script, conditionally install all needed packages.
+At the top of a script, conditionally install all needed packages.
 
 For a single package, you could use
 ```{r packinst, eval=FALSE}
@@ -226,13 +233,6 @@ When using several packages, use
 if(!requireNamespace("pacman", quietly=TRUE)) install.packages("pacman")
 pacman::p_load("berryFunctions", "rdwd")
 ```
-
-Whenever possible, use `pack::fun()` instead of `library("pack") ; fun()`.
-It makes clear from wich package 'fun' is used.   
-Otherwise, when multiple packages have `fun`, the one from the lastly loaded package will be used. 
-And that might not be the one you expect.  
-When you use multiple functions from a package, the second option is fine of course.
-
 
 ### issues
 
