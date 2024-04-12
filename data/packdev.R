@@ -2,9 +2,9 @@
                                             # View this script at bit.ly/packdev
 
 # Guide to creating a package (promise/warning: involves cats)
-# Berry Boessenkool, 2017-2022, https://brry.github.io
+# Berry Boessenkool, 2017-2024, https://brry.github.io
 
-# Pro-Tip: Turn on Rstudio document outline with CTRL + SHIFT + O 
+# Pro-Tip: Turn on the Rstudio document outline with CTRL + SHIFT + O 
 
 
 # 0: prepare ----
@@ -100,11 +100,14 @@ meow("Elephant")
 
 # That's basically it! 
 # You can now develop an R package :)
-# The following things build on this and will make your life better.
+
+# Next time, use the convenient point-and-click-approach:
+# Rstudio -> File -> New Project -> New Directory -> R Package
 
 
 # Bonus ==== ----
 
+# The following things are more advanced and will make your life better.
 
 # 6. depend ----
 
