@@ -29,7 +29,7 @@ My main slidedeck (in a single PDF) is avalaible through two openHPI courses.
 These have autograded exercises and are fairly suitable to learn R on your own.
 Feel free to book me as a trainer in addition.  
 - [German](https://open.hpi.de/courses/programmieren-r2022), ca 20-50 hours   
-- [English](https://open.hpi.de/courses/hpi-dh-fprog2022), ca 30-70 hours
+- [English](https://open.hpi.de/courses/hpi-dh-fprog2023), ca 30-70 hours
 
 There is also material for a course taking [a few hours](https://github.com/brry/hour).  
 My [old slides](https://github.com/brry/course/raw/master/RcourseBerry.pdf) are still directly available.
@@ -327,25 +327,26 @@ There, change the following entries:
 
 # resources
 
+Reference cards
+
+- [RefCard](https://github.com/jonasstein/R-Reference-Card/raw/master/R-refcard.pdf) by Tom Short & Jonas Stein
+- [base](https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf) and
+  [advanced](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf) cheatsheets from
+        [Rstudio](https://posit.co/resources/cheatsheets/)
+
 Books
 
-- Grolemund & Wickham (2017): [R for Data Science](http://r4ds.had.co.nz/)
+- Grolemund & Wickham (2017): [R for Data Science](https://r4ds.hadley.nz/)
 - J. Adler (2010): R in a Nutshell
 - U. Ligges (2008): Programmieren mit R (German)
 - M. Crawley (2007): The R-book
-- H. Wickham (2014): [Advanced R](http://adv-r.had.co.nz)
-- H. Wickham (2015): [R Packages]( http://r-pkgs.had.co.nz)
+- H. Wickham (2014): [Advanced R](https://adv-r.hadley.nz/)
+- H. Wickham (2015): [R Packages](https://r-pkgs.org/)
 - domain specific: [Chapman and Hall R Series](https://www.routledge.com/Chapman--HallCRC-The-R-Series/book-series/crctherser)
 - Many more listed at [github.com/RomanTsegelskyi/rbooks]( https://github.com/RomanTsegelskyi/rbooks)
 - Review list at [ecotope.org](https://web.archive.org/web/20130619094650/http://ecotope.org/blogs/page/R-Book-Review.aspx) or
   [r4stats.com](http://r4stats.com/articles/book-reviews)
 
-Reference cards
-
-- [base](https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf) and
-  [advanced](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf) cheatsheets from
-        [Rstudio](https://posit.co/resources/cheatsheets/)
-- [RefCard](https://github.com/jonasstein/R-Reference-Card/raw/master/R-refcard.pdf) by Tom Short & Jonas Stein
 
 The internet
 
