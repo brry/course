@@ -155,7 +155,7 @@ This is tedious, but needs to be done only once.
 - Restart Rstudio (if open)
 - Connect git to Rstudio: (instructions [with screenshots](https://www.r-bloggers.com/rstudio-and-github))
   - RStudio -> Tools -> Global Options -> Git/SVN: Ensure the path to the Git executable is correct.
-  - `Create RSA Key`, close window
+  - `Create SSH Key`, close window
   - `View public key`: copy the displayed public key
   - go to <https://github.com/settings/keys> and click `New SSH key`, paste the public key
   - in the RStudio bottom Tab `Terminal`: type the following:
