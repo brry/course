@@ -25,14 +25,13 @@ I hope learning to code will change your life like it did mine :).
 Since 2012, I teach R courses with great joy, see [brry.github.io](https://brry.github.io).  
 This website is here to help you start your coding journey.  
 
-My main slidedeck (in a single PDF) is avalaible through two openHPI courses.
-These have autograded exercises and are fairly suitable to learn R on your own.
-Feel free to book me as a trainer in addition.  
-- [German](https://open.hpi.de/courses/programmieren-r2022), ca 20-50 hours   
-- [English](https://open.hpi.de/courses/hpi-dh-fprog2023), ca 30-70 hours
+Here is an overview of my free online courses. They have autograded exercises and are fairly suitable to learn programming on your own.
 
-There is also material for a course taking [a few hours](https://github.com/brry/hour).  
-My [old slides](https://github.com/brry/course/raw/master/RcourseBerry.pdf) are still directly available.
+- Short **R intro** (ca 1-5 hours): [slides](https://github.com/brry/hour), [videos](https://www.youtube.com/playlist?list=PLww5S2oes385cta316emIBe-GH6LDaHlF)
+- Full **R course** (ca 30-70 hours): [slides](https://www.dropbox.com/scl/fi/d07pma4zbnlmdto455s0g/Rcourse.pdf?rlkey=1oo6bi6k8u0u3850nki7zzmfj&dl=0), [videos+exercises](https://open.hpi.de/courses/hpi-dh-fprog2024), [German](https://open.hpi.de/courses/programmieren-r2022) variant (ca 20-50 hours)
+- **Python intro** (ca 20-50 hours): [slides](https://www.dropbox.com/scl/fi/pr7i6rb8gp7jo5xv4c2c7/PyCourse.pdf?rlkey=2jk64ugd0sym4xs6g0gnl3b0c&dl=0), [videos+exercises](https://open.hpi.de/courses/hpi-dh-fprog2024), [German](https://open.hpi.de/courses/python2024) variant (ca 10-40 hours)
+
+Feel free to book me as a trainer in addition.  
 
 **A few notes on this website:**  
 The source code is available at [github.com/brry/course](https://github.com/brry/course/blob/master/website/index.Rmd).   
@@ -74,7 +73,7 @@ Install R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/
 (sources: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
 
 - open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines one by one.  
-  On Linux **Mint**, replace `$(lsb_release -cs)` with e.g. `focal`, as [listed](https://cloud.r-project.org/bin/linux/ubuntu/).  
+  On Linux **Mint**, replace `$(lsb_release -cs)` with e.g. `jammy` or `noble`, as [listed](https://cloud.r-project.org/bin/linux/ubuntu/).  
   On **Debian**, find the link [here](https://cloud.r-project.org/bin/linux/debian/).  
 ```
 sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
@@ -95,6 +94,8 @@ sudo apt -y install r-base gdebi-core
 sudo gdebi rstudio-2021.09.1-372-amd64.deb
 ```
 - change the .RData [settings](#settings) to enhance reproducibility
+
+- if you expect to install many packages with non-R dependencies, check out [r2u](https://eddelbuettel.github.io/r2u/)
 
 ### Manjaro Linux
 
@@ -117,8 +118,6 @@ Rstudio settings I strongly suggest for reproducibility:
 
 Settings I use for compatibility and ease of use:
 
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General
-    - **OFF**: Restore most recently opened project at startup
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Editing
     - **ON**: Use native pipe operator
     - **OFF**: Auto-indent code after paste - *if you have a custom indenting scheme*
