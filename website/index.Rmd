@@ -435,6 +435,104 @@ explicit_object_name <- readRDS("object.Rdata")
 More on this topic from [Rcrastinate](https://www.r-bloggers.com/2019/05/how-to-save-and-load-datasets-in-r-an-overview/)
 
 
+# VS Code
+
+Replicate Rstudio functionalities in VScode such as syntax highlighting, script execution, R help & plots display:
+
+<img src="https://github.com/brry/course/raw/master/externalfig/vscode.png" width="600">
+
+*Guide provided by Laura Spies*
+
+### Step 1: installation
+
+1. install Visual Studio Code from [code.visualstudio.com](https://code.visualstudio.com)
+2. install R with the section [install](#install)
+3. install Python from [python.org/downloads](https://www.python.org/downloads/) (hints for [Windows users](https://docs.python.org/using/windows.html)), preferably using the Anaconda distribution
+4. optional: create a Conda environment for R (in the terminal):
+```bash
+conda create -n ProFun r-base=4.4 r-essentials radian -c conda-forge
+```
+5. optional: connect R to Jupyter (in the R console):
+```R
+install.packages("IRkernel")
+IRkernel::installspec(name = 'ir', displayname = 'R (ProFun)')
+install.packages(c("repr", "IRdisplay", "IRkernel"))
+```
+6. install the necessary R packages (in the R console):
+```R
+install.packages(c("languageserver", "httpgd", "jsonlite", "rmarkdown"))
+```
+7. install Radian, an improved R console REPL interface (in the terminal):
+```bash
+pip install -U radian
+# alternatively, if employing Conda:
+conda activate ProFun
+conda install -U radian
+```
+8. check if the following initiates the R console within the terminal:
+```bash
+radian
+```
+9. download the following extensions for VSCode:
+- Python
+- Jupyter
+- R Debugger
+- R Tools
+- R Extension Pack
+
+### Step 2: configuration
+To access the `settings.json` file, press `Ctrl + Shift + P`, then type "Preferences: Open Settings (JSON)." Utilize the following JSON configuration: 
+```json
+{
+    "editor.fontSize": 15,
+
+    // R Settings
+    "r.rterm.windows": "C:\\Users\\YOUR_USERNAME\\miniconda3\\envs\\ProFun\\Scripts\\radian.exe",
+    "r.bracketedPaste": true,
+    "r.lsp.path": "C:\\Program Files\\R\\R-4.4.1\\bin\\x64\\R.exe",
+
+    // Terminal Profiles for R and Python
+    "terminal.integrated.profiles.windows": {
+        "ProFun (Radian)": {
+        "path": "C:\\Windows\\System32\\cmd.exe",
+        "args": ["/K", "conda activate ProFun && radian"]
+ },
+        "Python (Base)": {
+            "path": "C:\\Windows\\System32\\cmd.exe",
+            "args": ["/K", "conda activate base"]
+ }
+ },
+
+    // Set Default Terminal Profile to Radian
+    "terminal.integrated.defaultProfile.windows": "ProFun (Radian)",
+
+    // Keybindings for R-Specific Behavior
+    "r.alwaysUseActiveTerminal": true,
+    "r.plot.useHttpgd": true
+}
+```
+
+Search for your `keybindings.json` and set keyboard shortcuts a sdesired, e.g.:
+
+```json
+// R-Specific Keybindings
+ { "key": "ctrl+shift+f10", "command": "r.restartSession" },
+ { "key": "ctrl+shift+enter", "command": "r.runSource" },
+ { "key": "ctrl+alt+i", "command": "r.createRmdChunk" },
+ { "key": "ctrl+alt+h", "command": "r.help" },
+ { "key": "ctrl+alt+o", "command": "r.viewObject" },
+ { "key": "ctrl+alt+p", "command": "r.showPlotHistory" },
+ { "key": "ctrl+alt+k", "command": "r.knit" },
+ { "key": "ctrl+alt+f", "command": "r.changeWorkingDirectory" },
+ { "key": "ctrl+alt+enter", "command": "r.executeCode" },
+ { "key": "ctrl+enter", "command": "r.runSelectionAndMoveCursor", "when": "editorTextFocus && editorLangId == 'r'" },
+ { "key": "ctrl+shift+m", "command": "type", "args": { "text": " %>% " }, "when": "editorTextFocus && editorLangId == 'r'" },
+ { "key": "alt+-", "command": "type", "args": { "text": " <- " }, "when": "editorTextFocus && editorLangId == 'r'" },
+ { "key": "ctrl+shift+l", "command": "workbench.action.terminal.clear", "when": "terminalFocus" },
+ { "key": "ctrl+alt+w", "command": "r.openWebHelp", "when": "editorTextFocus && editorLangId == 'r'" },
+ { "key": "f1", "command": "r.help", "when": "editorTextFocus && editorLangId == 'r'" },
+ ```
+
 # installieren
 
 Installiere zuerst R selbst, danach Rstudio. Führe je nach Betriebssystem die folgenden Schritte aus.
