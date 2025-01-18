@@ -113,13 +113,12 @@ Rstudio settings I strongly suggest for reproducibility:
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General
     - **OFF**: Restore .Rdata into workspace at startup  
     - Save workspace to .RData on exit: **NEVER**  
-    
-<span style="color:grey">For professionals: Use `save` and `load` to restore the results of long computations, see [saveload](#saveload).</span>
+    - <span style="color:grey">Rather restore the results of long computations [manually](#saveload) if needed.</span>
 
 Settings I use for compatibility and ease of use:
 
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General - Advanced
-    - set a project user data directory *if you work in Dropbox / Google Drive, see [issue](https://github.com/rstudio/rstudio/issues/14778) & [solution](https://github.com/rstudio/rstudio/pull/14875)*
+    - set a project user data directory - *if you work in Dropbox / Google Drive, see [issue](https://github.com/rstudio/rstudio/issues/14778) & [solution](https://github.com/rstudio/rstudio/pull/14875)*
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Editing
     - **ON**: Use native pipe operator
     - **OFF**: Auto-indent code after paste - *if you have a custom indenting scheme*
