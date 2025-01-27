@@ -437,8 +437,7 @@ More on this topic from [Rcrastinate](https://www.r-bloggers.com/2019/05/how-to-
 
 
 # VS Code
-
-Replicate Rstudio functionalities in VScode such as syntax highlighting, script execution, R help & plots display:
+Integrate RStudio-like features to Visual Studio Code. This includes syntax highlighting, script execution, accessing R help, and visual representation of plots.
 
 <img src="https://github.com/brry/course/raw/master/externalfig/vscode.png" width="600">
 
@@ -449,7 +448,9 @@ Replicate Rstudio functionalities in VScode such as syntax highlighting, script 
 1. install Visual Studio Code from [code.visualstudio.com](https://code.visualstudio.com)
 2. install R with the section [install](#install)
 3. install Python from [python.org/downloads](https://www.python.org/downloads/) (hints for [Windows users](https://docs.python.org/using/windows.html)), preferably using the Anaconda distribution
-4. optional: create a Conda environment for R (in the terminal):
+4. optional: Set up a dedicated Conda environment for R by running the following command (in the terminal)  
+*This conda environment has been designated using the name of my folder, `ProFun`.*
+*You can change the name or use an existing one if you would like.* 
 ```bash
 conda create -n ProFun r-base=4.4 r-essentials radian -c conda-forge
 ```
