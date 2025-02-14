@@ -125,6 +125,7 @@ Settings I use for compatibility and ease of use:
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Display
     - **ON**: Show margin (Margin column: 80) - *avoid horizontal scrolling!*
     - **ON**: Highlight R function calls
+    - **ON**: Use rainbow parentheses
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Saving
     - Line ending conversion: **Windows (CR/LF)** - *compatible across OS platforms*
     - Default Text Encoding: **UTF-8**
