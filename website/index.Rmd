@@ -122,6 +122,7 @@ Settings I use for compatibility and ease of use:
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Editing
     - **ON**: Use native pipe operator
     - **OFF**: Auto-indent code after paste - *if you have a custom indenting scheme*
+    - **OFF**: Enable Code snippets - *personal preference of mine*
 - <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Display
     - **ON**: Show margin (Margin column: 80) - *avoid horizontal scrolling!*
     - **ON**: Highlight R function calls
@@ -142,6 +143,17 @@ Settings I use for compatibility and ease of use:
     - Set Working Directory to Current Document's Directory: `CTRL + H`
 
 
+# quarto
+
+quarto documents allow you to mix code and markdown text to generate hassle-free and reproducible reports / presentations / websites. It's a full publishing ecosystem, see [quarto.org](https://quarto.org/). :)
+
+In **Rstudio**, click File -> New File -> Quarto Document.  
+Click "Create" for a template, or "Create Empty Document" on the left for just the file.
+
+In **VScode** under [extensions](https://marketplace.visualstudio.com/items?itemName=quarto.quarto), search for quarto and install quarto-vscode.  
+Create a qmd file and for a template, copy content e.g. from the [quarto guide](https://quarto.org/docs/get-started/hello/vscode.html#render-and-preview).
+
+![](https://github.com/brry/course/raw/master/externalfig/quarto.png)
 
 # git
 
