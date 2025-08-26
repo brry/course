@@ -28,8 +28,10 @@ This website is here to help you start your coding journey.
 Here is an overview of my free online courses. They have autograded exercises and are fairly suitable to learn programming on your own.
 
 - Short **R intro** (ca 1-5 hours): [slides](https://github.com/brry/hour), [videos](https://www.youtube.com/playlist?list=PLww5S2oes385cta316emIBe-GH6LDaHlF)
-- Full **R course** (ca 30-70 hours): [slides](https://www.dropbox.com/scl/fi/d07pma4zbnlmdto455s0g/Rcourse.pdf?rlkey=1oo6bi6k8u0u3850nki7zzmfj&dl=0), [videos+exercises](https://open.hpi.de/courses/hpi-dh-fprog2024), [German](https://open.hpi.de/courses/programmieren-r2022) variant (ca 20-50 hours)
-- **Python intro** (ca 20-50 hours): [slides](https://www.dropbox.com/scl/fi/pr7i6rb8gp7jo5xv4c2c7/PyCourse.pdf?rlkey=2jk64ugd0sym4xs6g0gnl3b0c&dl=0), [videos+exercises](https://open.hpi.de/courses/hpi-dh-fprog2024), [German](https://open.hpi.de/courses/python2024) variant (ca 10-40 hours)
+- Full **R course** (ca 30-70 hours): [slides](https://www.dropbox.com/scl/fi/d07pma4zbnlmdto455s0g/Rcourse.pdf?rlkey=1oo6bi6k8u0u3850nki7zzmfj&dl=0), [videos+exercises](https://open.hpi.de/courses/hpi-dh-fprog2024) 
+- **Python intro** (ca 20-50 hours): [slides](https://www.dropbox.com/scl/fi/pr7i6rb8gp7jo5xv4c2c7/PyCourse.pdf?rlkey=2jk64ugd0sym4xs6g0gnl3b0c&dl=0), [videos+exercises](https://open.hpi.de/courses/hpi-dh-fprog2024)
+- **German R** course (ca 20-50 hours): [MOOC](https://open.hpi.de/courses/programmieren-r2022)
+- **German Python** course (ca 10-40 hours): [MOOC](https://open.hpi.de/courses/python2024)
 
 Feel free to book me as a trainer in addition.  
 
@@ -392,31 +394,52 @@ These are some instructions to start an R research project under version control
 
 # good practice
 
-I review a lot of code from students, clients or colleagues and keep giving the same basic recommendations over and over again.  
-Now I collect important things here so I can easily point to them. Expect this to be expanded :).
+Apply best practices when coding!
 
-### source scripts
-Before you send someone any code whatsoever, do the following:
+- Write readable code that is easy to maintain (see below).
+- Use [version control](#git) with a single source of truth (SSOT).
+- For reports / presentations, use [quarto](#quarto) instead of separate files with scripts, Jupyter notebook, images, code outputs, word document.
 
-- `CTRL`+`SHIFT`+`F10` to restart R with a clean workspace. Remember to have the Rstudio [settings](#settings) at `Tools - Global Options - General` set to: _Restore .Rdata into workspace at startup_ **OFF** and _Save workspace to .RData on exit_ **NEVER**
-- copy the script to some other folder than your working place
-- `source()` the entire script with `CTRL`+`SHIFT`+`S`
-- If something fails, fix it! E.g. stop messing with `setwd` (see below), copy data files to be read, rename all instances of a renamed object, ...
-- Only now send the file (or folder with scripts, data files, etc. as zip file)
+### good code
 
+- clear
+- simple (one job per function)
+- documented
+- performant
+- bug-free
+- well tested
 
-### Rproj
+### organisation / workflow
 
-- Use Rstudio projects. They set the wd upon opening and keep projects separate.
-- Never use `setwd()` because others won't have that exact path.  
-  Even you yourself might not, after rearranging folders.  
+- Use Rstudio projects (File -> New project). They set the working directory and manage settings & opened scripts.
+- Never use `setwd()`: others don't have that path and neither do you, after rearranging folders.  
 - Use relative path names, e.g. `read.table("datafolder/file.txt")` instead of `"C:/Users/berry/Desktop/Project/datafolder/file.txt"`
+- Put `source("functions.R")` in your main (quarto) script, or write your own [package](https://github.com/brry/course/blob/master/data/packdev.R).
 
+### code format
 
-### packages
+- Follow a style guide consistantly ([example](http://adv-r.had.co.nz/Style.html)).
+- Choose short but descriptive object names.
+- Use expressive verbs for function names. Functions *do* something.
+- Functions should call each other, instead of being one big multi-purpose monster.
+- Use Rstudio script sections `\# 1 clean data ----` for an outline (`CTRL`+`SHIFT`+`O`).
+- Use line breaks to avoid horizontal scrolling (margin [settings](#settings)).
 
-Follow the package recommendations in the [packages](#usage) section.
+### code quality
 
+- Vectorize code whenever possible.
+- If not, use `lapply/sapply` instead of `for` loops (lesson 4.3 and 8.3).
+- DRY: don't repeat yourself
+- Write [defensive code](https://www.r-bloggers.com/2018/07/the-ten-rules-of-defensive-programming-in-r/) that checks inputs (lesson 8.1).
+- Use arrays for all-numeric data (lesson 4.4).
+- Do not load >2 packages from the library, instead use `pack::fun`.
+- Install [packages](#packages) conditionally.
+- Do not create more objects than needed, clean up with `rm`.
+- Make sure your code runs in a clean session:
+  - `CTRL`+`SHIFT`+`F10` to restart R with a clean workspace (Rdata [settings](#settings))
+  - `source()` the entire script with `CTRL`+`SHIFT`+`S`
+
+To practice writing good R code, improve the examples in [elegant code](#elegant-code).
 
 ### saveload
 
@@ -447,6 +470,139 @@ explicit_object_name <- readRDS("object.Rdata")
 ```
 
 More on this topic from [Rcrastinate](https://www.r-bloggers.com/2019/05/how-to-save-and-load-datasets-in-r-an-overview/)
+
+
+# elegant code
+
+#### get the average Sepal.Length per Species
+■ Consider a better alternative:
+```{r elegant_coding1a, eval=FALSE}
+groups <- levels(iris$Species)
+averages <- c()
+for(g in groups) averages[g] <- 
+                 mean(iris$Sepal.Length[iris$Species==g])
+rm(g, groups)
+averages
+```
+<details><summary>then click here to see the elegant approach:</summary>
+```{r elegant_coding1b, eval=FALSE}
+tapply(iris$Sepal.Length, iris$Species, mean)
+```
+</details>
+<br>
+
+#### conditionally set invalid records to NA
+■ Consider a better alternative:
+```{r elegant_coding2a, eval=FALSE}
+for(i in c(1:nrow(DF))){
+  if(DF[i, "column1"] != "valid"){  # Where column1 is not
+   DF[i, "column2"] <- NA           # 'valid', set
+  }                                 # column2 to NA
+}
+```
+<details><summary>then click here to see the elegant approach:</summary>
+```{r elegant_coding2b, eval=FALSE}
+DF$column2[DF$column1 != "valid"] <- NA
+```
+</details>
+<br>
+
+#### collect results
+■ Consider a better alternative:
+```{r elegant_coding3a, eval=FALSE}
+results <- c()
+for(i in 1:10000) {
+  results <- c(results, some_calculation(i))
+}
+```
+<details><summary>then click here to see the elegant approach:</summary>
+```{r elegant_coding3b, eval=FALSE}
+results <- sapply(1:1e6, some_calculation)
+```
+</details>
+<br>
+
+#### scale numeric columns
+■ Consider a better alternative:
+```{r elegant_coding4a, eval=FALSE}
+for(col in names(DF)) {
+  if(is.numeric(DF[ ,col])) {
+    mean_val <- mean(DF[ ,col], na.rm=TRUE)
+    sd_val <- sd(DF[ ,col], na.rm=TRUE)
+    for(i in 1:nrow(DF)) {
+      DF[i, col] <- (DF[i, col] - mean_val) / sd_val
+    }
+  }
+}
+```
+<details><summary>then click here to see the elegant approach:</summary>
+```{r elegant_coding4b, eval=FALSE}
+numcols <- sapply(DF, is.numeric)
+DF[ ,numcols] <- scale(DF[ ,numcols])
+rm(numcols)
+```
+</details>
+<br>
+
+#### read multiple csv files
+■ Consider a better alternative:
+```{r elegant_coding5a, eval=FALSE}
+file1 <- read.csv("data1.csv")
+file2 <- read.csv("data2.csv")
+file3 <- read.csv("data3.csv")
+# ... repeat for 50 files
+combined <- rbind(file1, file2, file3) # ... and so on
+```
+<details><summary>then click here to see the elegant approach:</summary>
+```{r elegant_coding5b, eval=FALSE}
+files <- list.files(pattern="*.csv", full.names=TRUE)
+combined <- do.call(rbind, lapply(files, read.csv))
+```
+</details>
+<br>
+
+#### count occurrences
+■ Consider a better alternative:
+```{r elegant_coding6a, eval=FALSE}
+categories <- unique(DF$category)
+counts <- numeric(length(categories))
+names(counts) <- categories
+for(i in 1:nrow(DF)) {
+  cat <- DF$category[i]
+  counts[cat] <- counts[cat] + 1
+}
+```
+<details><summary>then click here to see the elegant approach:</summary>
+```{r elegant_coding6b, eval=FALSE}
+table(DF$category)
+```
+</details>
+<br>
+
+#### create age groups
+■ Consider a better alternative:
+```{r elegant_coding7a, eval=FALSE}
+DF$age_group <- NA
+for(i in 1:nrow(DF)) {
+       if(DF$age[i] >=  0 & DF$age[i] < 18) DF$age_group[i] <- "0-17"
+  else if(DF$age[i] >= 18 & DF$age[i] < 30) DF$age_group[i] <- "18-29"
+  else if(DF$age[i] >= 30 & DF$age[i] < 50) DF$age_group[i] <- "30-49"
+  else if(DF$age[i] >= 50 & DF$age[i] < 65) DF$age_group[i] <- "50-64"
+  else if(DF$age[i] >= 65)                  DF$age_group[i] <- "65+"
+  else                                      DF$age_group[i] <- NA
+}
+```
+<details><summary>then click here to see the elegant approach:</summary>
+```{r elegant_coding7b, eval=FALSE}
+DF$age_group <- cut(DF$age, 
+                    breaks = c(0, 18, 30, 50, 65, Inf),
+                    labels = c("0-17", "18-29", "30-49", "50-64", "65+"),
+                    right = FALSE)
+```
+</details>
+<br>
+
+More examples are shown in the [full R course](#welcome) tutorial slides.
 
 
 # VS Code
