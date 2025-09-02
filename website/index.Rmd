@@ -25,13 +25,15 @@ I hope learning to code will change your life like it did mine :).
 Since 2012, I teach R courses with great joy, see [brry.github.io](https://brry.github.io).  
 This website is here to help you start your coding journey.  
 
-Here is an overview of my free online courses. They have autograded exercises and are fairly suitable to learn programming on your own.
+My free online courses are fairly suitable to learn programming on your own.
 
-- Short **R intro** (ca 1-5 hours): [slides](https://github.com/brry/hour), [videos](https://www.youtube.com/playlist?list=PLww5S2oes385cta316emIBe-GH6LDaHlF)
-- Full **R course** (ca 30-70 hours): [slides](https://www.dropbox.com/scl/fi/d07pma4zbnlmdto455s0g/Rcourse.pdf?rlkey=1oo6bi6k8u0u3850nki7zzmfj&dl=0), [videos+exercises](https://open.hpi.de/courses/hpi-dh-fprog2024) 
-- **Python intro** (ca 20-50 hours): [slides](https://www.dropbox.com/scl/fi/pr7i6rb8gp7jo5xv4c2c7/PyCourse.pdf?rlkey=2jk64ugd0sym4xs6g0gnl3b0c&dl=0), [videos+exercises](https://open.hpi.de/courses/hpi-dh-fprog2024)
-- **German R** course (ca 20-50 hours): [MOOC](https://open.hpi.de/courses/programmieren-r2022)
-- **German Python** course (ca 10-40 hours): [MOOC](https://open.hpi.de/courses/python2024)
+- Short [R intro](https://github.com/brry/hour) (ca 1-5 hours)
+- **Fundamentals of Programming** [videos + autograded exercises](https://open.hpi.de/courses/hpi-dh-fprog2024), slides:
+  - [Infrastructure](https://www.dropbox.com/scl/fi/4g68kmorldgwoq2f4bgqr/FP_infrastructure.pdf?rlkey=atbxlifjzz3ns4zuvtjvhwn3y&dl=0) (ca 1-3 hours) 
+  - [Python](https://www.dropbox.com/scl/fi/pr7i6rb8gp7jo5xv4c2c7/PyCourse.pdf?rlkey=2jk64ugd0sym4xs6g0gnl3b0c&dl=0) (ca 20-50 hours) 
+  - [R](https://www.dropbox.com/scl/fi/d07pma4zbnlmdto455s0g/Rcourse.pdf?rlkey=1oo6bi6k8u0u3850nki7zzmfj&dl=0) (ca 30-70 hours)
+- [German R MOOC](https://open.hpi.de/courses/programmieren-r2022) (ca 20-50 hours)
+- [German Python MOOC](https://open.hpi.de/courses/python2024) (ca 10-40 hours) 
 
 Feel free to book me as a trainer in addition.  
 
