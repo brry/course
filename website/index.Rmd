@@ -15,228 +15,406 @@ editor_options:
   chunk_output_type: console
 ---
 
-# welcome
+# welcome {#welcome}
 
-**to programming with R!**  
-I hope learning to code will change your life like it did mine :). 
+**to programming with R!**\
+I hope learning to code will change your life like it did mine :).
 
-<img src="https://github.com/brry/course/raw/master/externalfig/Blogo.png" width="100">
+<img src="https://github.com/brry/course/raw/master/externalfig/Blogo.png" width="100"/>
 
-Since 2012, I teach R courses with great joy, see [brry.github.io](https://brry.github.io).  
-This website is here to help you start your coding journey.  
+Since 2012, I teach R courses with great joy, see [brry.github.io](https://brry.github.io).\
+This website is here to help you start your coding journey.
 
 My free online courses are fairly suitable to learn programming on your own.
 
-- Short [R intro](https://github.com/brry/hour) (ca 1-5 hours)
-- **Fundamentals of Programming** [videos + autograded exercises](https://open.hpi.de/courses/hpi-dh-fprog2024), slides:
-  - [Infrastructure](https://www.dropbox.com/scl/fi/4g68kmorldgwoq2f4bgqr/FP_infrastructure.pdf?rlkey=atbxlifjzz3ns4zuvtjvhwn3y&dl=0) (ca 1-3 hours) 
-  - [Python](https://www.dropbox.com/scl/fi/pr7i6rb8gp7jo5xv4c2c7/PyCourse.pdf?rlkey=2jk64ugd0sym4xs6g0gnl3b0c&dl=0) (ca 20-50 hours) 
-  - [R](https://www.dropbox.com/scl/fi/d07pma4zbnlmdto455s0g/Rcourse.pdf?rlkey=1oo6bi6k8u0u3850nki7zzmfj&dl=0) (ca 30-70 hours)
-- [German R MOOC](https://open.hpi.de/courses/programmieren-r2022) (ca 20-50 hours)
-- [German Python MOOC](https://open.hpi.de/courses/python2024) (ca 10-40 hours) 
+-   Short [R intro](https://github.com/brry/hour) (ca 1-5 hours)
+-   **Fundamentals of Programming** [videos + autograded exercises](https://open.hpi.de/courses/hpi-dh-fprog2024), slides:
+    -   Infrastructure](link coming soon) (ca 1-3 hours)
+    -   [Python](https://www.dropbox.com/scl/fi/pr7i6rb8gp7jo5xv4c2c7/PyCourse.pdf?rlkey=2jk64ugd0sym4xs6g0gnl3b0c&dl=0) (ca 20-50 hours)
+    -   [R](https://www.dropbox.com/scl/fi/d07pma4zbnlmdto455s0g/Rcourse.pdf?rlkey=1oo6bi6k8u0u3850nki7zzmfj&dl=0) (ca 30-70 hours)
+-   [German R MOOC](https://open.hpi.de/courses/programmieren-r2022) (ca 20-50 hours)
+-   [German Python MOOC](https://open.hpi.de/courses/python2024) (ca 10-40 hours)
 
-Feel free to book me as a trainer in addition.  
+Feel free to book me as a trainer in addition.
 
-**A few notes on this website:**  
-The source code is available at [github.com/brry/course](https://github.com/brry/course/blob/master/website/index.Rmd).   
-In case the table of content on the left is not shown, click the four bars at the top.  
-_Pro tip: the arrow left/right keys jump between chapters._
+**A few notes on this website:**\
+The source code is available at [github.com/brry/course](https://github.com/brry/course/blob/master/website/index.Rmd).\
+In case the table of content on the left is not shown, click the four bars at the top.\
+*Pro tip: the arrow left/right keys jump between chapters.*
 
+# install {#install}
 
-# install
-
-First install R itself and then Rstudio. Follow the steps below depending on your operating system.  
+First install R itself and then Rstudio. Follow the steps below depending on your operating system.\
 Jump to section: [Windows](#windows), [Mac](#mac), [Linux](#linux), [Manjaro](#manjaro-linux)
 
-### Windows
+### Windows {#windows}
 
-- install [R](https://cloud.r-project.org/bin/windows/base/release.htm)
-- install [Rstudio](https://posit.co/download/rstudio-desktop/)
-- change the .RData [settings](#settings) to enhance reproducibility
+-   install [R](https://cloud.r-project.org/bin/windows/base/release.htm)
+-   install [Rstudio](https://posit.co/download/rstudio-desktop/)
+-   change the .RData [settings](#settings) to enhance reproducibility
 
-### Mac
+### Mac {#mac}
 
 Either
 
-- install [homebrew](https://brew.sh/)
-- in the Mac terminal, run `brew install --cask r` and `brew install --cask rstudio`
-- change the .RData [settings](#settings) to enhance reproducibility
+-   install [homebrew](https://brew.sh/)
+-   in the Mac terminal, run `brew install --cask r` and `brew install --cask rstudio`
+-   change the .RData [settings](#settings) to enhance reproducibility
 
 or
 
-- install [Xquartz](https://www.xquartz.org/)
-- from [cran.r-project.org/bin/macosx](https://cran.r-project.org/bin/macosx), download the latest release, e.g. `R-4.1.2.pkg`
-- open the file with 'Installer' and follow the instructions
-- install [Rstudio](https://posit.co/download/rstudio-desktop/)
-- drag the app to the 'Applications' folder
-- change the .RData [settings](#settings) to enhance reproducibility
+-   install [Xquartz](https://www.xquartz.org/)
+-   from [cran.r-project.org/bin/macosx](https://cran.r-project.org/bin/macosx), download the latest release, e.g. `R-4.1.2.pkg`
+-   open the file with 'Installer' and follow the instructions
+-   install [Rstudio](https://posit.co/download/rstudio-desktop/)
+-   drag the app to the 'Applications' folder
+-   change the .RData [settings](#settings) to enhance reproducibility
 
-### Linux
+### Linux {#linux}
 
-Install R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/bin/linux/ubuntu/)) so that `sudo apt upgrade` installs the latest R version if outdated 
-(sources: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
+Install R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/bin/linux/ubuntu/)) so that `sudo apt upgrade` installs the latest R version if outdated (sources: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):
 
-- open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines one by one.  
-  On Linux **Mint**, replace `$(lsb_release -cs)` with e.g. `jammy` or `noble`, as [listed](https://cloud.r-project.org/bin/linux/ubuntu/).  
-  On **Debian**, find the link [here](https://cloud.r-project.org/bin/linux/debian/).  
-```
+-   open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines one by one.\
+    On Linux **Mint**, replace `$(lsb_release -cs)` with e.g. `jammy` or `noble`, as [listed](https://cloud.r-project.org/bin/linux/ubuntu/).\
+    On **Debian**, find the link [here](https://cloud.r-project.org/bin/linux/debian/).\
+
+```         
 sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
 ```
-Check `/etc/apt/sources.list` manually for the correct link (as referenced above). Make sure there is a `/` at the end.  
+
+Check `/etc/apt/sources.list` manually for the correct link (as referenced above). Make sure there is a `/` at the end.\
 For the next step, other keys may be needed, e.g. <font size="1">95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7</font>
-```
+
+```         
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo apt update
 sudo apt install r-base r-base-dev
 ```
 
+-   install [Rstudio](https://posit.co/download/rstudio-desktop/)
+-   either install that, or on Ubuntu 20.04 (see [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
 
-- install [Rstudio](https://posit.co/download/rstudio-desktop/)
--  either install that, or on Ubuntu 20.04 (see [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
-```
+```         
 sudo apt -y install r-base gdebi-core
 sudo gdebi rstudio-2021.09.1-372-amd64.deb
 ```
-- change the .RData [settings](#settings) to enhance reproducibility
 
-- if you expect to install many packages with non-R dependencies, check out [r2u](https://eddelbuettel.github.io/r2u/)
+-   change the .RData [settings](#settings) to enhance reproducibility
 
-### Manjaro Linux
+-   if you expect to install many packages with non-R dependencies, check out [r2u](https://eddelbuettel.github.io/r2u/)
 
-- enable [AUR](https://www.fosslinux.com/4278/what-is-aur-and-how-to-enable-it-in-manjaro.htm)
-- search for `rstudio-desktop` and install it. R will be installed with it. This may take up to an hour.  
-*(Instructions by Frank de Boer).*
-- change the .RData [settings](#settings) to enhance reproducibility
+### Manjaro Linux {#manjaro-linux}
 
+-   enable [AUR](https://www.fosslinux.com/4278/what-is-aur-and-how-to-enable-it-in-manjaro.htm)
+-   search for `rstudio-desktop` and install it. R will be installed with it. This may take up to an hour.\
+    *(Instructions by Frank de Boer).*
+-   change the .RData [settings](#settings) to enhance reproducibility
 
-
-# settings
+# settings {#settings}
 
 Rstudio settings I strongly suggest for reproducibility:
 
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General
-    - **OFF**: Restore .Rdata into workspace at startup  
-    - Save workspace to .RData on exit: **NEVER**  
-    - <span style="color:grey">Rather restore the results of long computations [manually](#saveload) if needed.</span>
+-   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - General
+    -   **OFF**: Restore .Rdata into workspace at startup\
+    -   Save workspace to .RData on exit: **NEVER**\
+    -   [Rather restore the results of long computations [manually](#saveload) if needed.]{style="color:grey"}
 
 Settings I use for compatibility and ease of use:
 
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General - Advanced
-    - set a project user data directory - *if you work in Dropbox / Google Drive, see [issue](https://github.com/rstudio/rstudio/issues/14778) & [solution](https://github.com/rstudio/rstudio/pull/14875)*
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Editing
-    - **ON**: Use native pipe operator
-    - **OFF**: Auto-indent code after paste - *if you have a custom indenting scheme*
-    - **OFF**: Enable Code snippets - *personal preference of mine*
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Display
-    - **ON**: Show margin (Margin column: 80) - *avoid horizontal scrolling!*
-    - **ON**: Highlight R function calls
-    - **ON**: Use rainbow parentheses
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Saving
-    - Line ending conversion: **Windows (CR/LF)** - *compatible across OS platforms*
-    - Default Text Encoding: **UTF-8**
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Appearance
-    - <span style="color:grey"> Editor font size: 10</span>
-    - Editor theme: **Cobalt**
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Sweave
-    - Weave Rnw files using: **knitr** - *if you work with Rnw files*
-- <span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Spelling
-    -  **OFF**: Use real time spell-checking
-- <span style="background-color:aquamarine">Tools</span> - Modify Keyboard Shortcuts
-    - To set the following and more keyboard shortcuts, see [rskey](https://github.com/brry/rskey#rskey)`::setKeyboardBindings()`
-    - Remove `CTRL+Y` from the command "paste last yank" (to mean "redo" as in other programs)
-    - Set Working Directory to Current Document's Directory: `CTRL + H`
+-   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - General - Advanced
+    -   set a project user data directory - *if you work in Dropbox / Google Drive, see [issue](https://github.com/rstudio/rstudio/issues/14778) & [solution](https://github.com/rstudio/rstudio/pull/14875)*
+-   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - [Code]{style="background-color:palegreen"} - Editing
+    -   **ON**: Use native pipe operator
+    -   **OFF**: Auto-indent code after paste - *if you have a custom indenting scheme*
+    -   **OFF**: Enable Code snippets - *personal preference of mine*
+-   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - [Code]{style="background-color:palegreen"} - Display
+    -   **ON**: Show margin (Margin column: 80) - *avoid horizontal scrolling!*
+    -   **ON**: Highlight R function calls
+    -   **ON**: Use rainbow parentheses
+-   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - [Code]{style="background-color:palegreen"} - Saving
+    -   Line ending conversion: **Windows (CR/LF)** - *compatible across OS platforms*
+    -   Default Text Encoding: **UTF-8**
+-   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - Appearance
+    -   [Editor font size: 10]{style="color:grey"}
+    -   Editor theme: **Cobalt**
+-   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - Sweave
+    -   Weave Rnw files using: **knitr** - *if you work with Rnw files*
+-   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - Spelling
+    -   **OFF**: Use real time spell-checking
+-   [Tools]{style="background-color:aquamarine"} - Modify Keyboard Shortcuts
+    -   To set the following and more keyboard shortcuts, see [rskey](https://github.com/brry/rskey#rskey)`::setKeyboardBindings()`
+    -   Remove `CTRL+Y` from the command "paste last yank" (to mean "redo" as in other programs)
+    -   Set Working Directory to Current Document's Directory: `CTRL + H`
 
 
-# quarto
+# good practice {#good-practice}
 
-quarto documents allow you to mix code and markdown text to generate hassle-free and reproducible reports / presentations / websites. It's a full publishing ecosystem, see [quarto.org](https://quarto.org/). :)
+Apply best practices when coding!
 
-In **Rstudio**, click File -> New File -> Quarto Document.  
-Click "Create" for a template, or "Create Empty Document" on the left for just the file.
+-   Write readable code that is easy to maintain (see below).
+-   Use [version control](#git) with a single source of truth (SSOT).
+-   For reports / presentations, use [quarto](#quarto) instead of separate files with scripts, Jupyter notebook, images, code outputs, word document.
 
-In **VScode** under [extensions](https://marketplace.visualstudio.com/items?itemName=quarto.quarto), search for quarto and install quarto-vscode.  
-Create a qmd file and for a template, copy content e.g. from the [quarto guide](https://quarto.org/docs/get-started/hello/vscode.html#render-and-preview).
+### good code
 
-![](https://github.com/brry/course/raw/master/externalfig/quarto.png)
+-   clear
+-   simple (one job per function)
+-   documented
+-   performant
+-   bug-free
+-   well tested
 
-# git
+The following points are written for R, but apply (in spirit) to Python and other languages as well.
 
-git is a version control software. With it, you can download repositories, track your changes and develop code collaboratively.
+### organisation / workflow
 
-### install git
+-   Use Rstudio projects (File -\> New project). They set the working directory and manage settings & opened scripts.
+-   Never use `setwd()`: others don't have that path and neither do you, after rearranging folders.\
+-   Use relative path names, e.g. `read.table("datafolder/file.txt")` instead of `"C:/Users/berry/Desktop/Project/datafolder/file.txt"`.
+-   Put `source("functions.R")` in your main (quarto) script, or write your own [package](https://github.com/brry/course/blob/master/data/packdev.R).
 
-This is tedious, but needs to be done only once.
+### code format
 
-- Create a github account at <https://github.com/join>
-- Download and install git, see <https://git-scm.com/downloads>
-- Restart Rstudio (if open)
-- Connect git to Rstudio: (instructions [with screenshots](https://www.r-bloggers.com/rstudio-and-github))
-  - RStudio -> Tools -> Global Options -> Git/SVN: Ensure the path to the Git executable is correct.
-  - `Create SSH Key`, close window
-  - `View public key`: copy the displayed public key
-  - go to <https://github.com/settings/keys> and click `New SSH key`, paste the public key
-  - in the RStudio bottom Tab `Terminal`: type the following:
+-   Follow a style guide consistantly ([example](http://adv-r.had.co.nz/Style.html)).
+-   Choose short but descriptive object names.
+-   Use expressive verbs for function names. Functions *do* something.
+-   Functions should call each other, instead of being one big multi-purpose monster.
+-   Use Rstudio script sections `\# 1 clean data ----` for an outline (`CTRL`+`SHIFT`+`O`).
+-   Use line breaks to avoid horizontal scrolling (margin [settings](#settings)).
+
+### code quality
+
+-   Vectorize code whenever possible.
+-   If not, use `lapply/sapply` instead of `for` loops (lesson 4.3 and 8.3).
+-   DRY: don't repeat yourself.
+-   Write [defensive code](https://www.r-bloggers.com/2018/07/the-ten-rules-of-defensive-programming-in-r/) that checks inputs (lesson 8.1).
+-   Use arrays for all-numeric data (lesson 4.4).
+-   Do not load \>2 packages from the library, instead use `pack::fun`.
+-   Install [packages](#packages) conditionally.
+-   Do not create more objects than needed, clean up with `rm`.
+-   Make sure your code runs in a clean session:
+    -   `CTRL`+`SHIFT`+`F10` to restart R with a clean workspace (Rdata [settings](#settings))
+    -   `source()` the entire script with `CTRL`+`SHIFT`+`S`.
+
+To practice writing good R code, improve the examples in [elegant code](#elegant-code).
+
+# elegant code {#elegant-code}
+
+#### get the average Sepal.Length per Species
+
+■ Consider a better alternative:
+
+```{r elegant_coding1a, eval=FALSE}
+groups <- levels(iris$Species)
+averages <- c()
+for(g in groups) averages[g] <- 
+                 mean(iris$Sepal.Length[iris$Species==g])
+rm(g, groups)
+averages
 ```
-git version # just to see git works fine
-git config --global user.email "YourEmail@domain.com"
-git config --global user.name "YourUserNameHere"
+
+<details>
+
+<summary>then click here to see the elegant approach:</summary>
+
+```{r elegant_coding1b, eval=FALSE}
+tapply(iris$Sepal.Length, iris$Species, mean)
 ```
 
+</details>
 
-### use git
+<br>
 
-To clone a git repo, Rstudio handles most the work for you.
+#### conditionally set invalid records to NA
 
-- 1. Go to [github.com/brry/course](https://github.com/brry/course) - <span style="background-color:lime">Code</span> - Copy URL
+■ Consider a better alternative:
 
-![](https://github.com/brry/course/raw/master/externalfig/git_clone_1.PNG)
+```{r elegant_coding2a, eval=FALSE}
+for(i in c(1:nrow(DF))){
+  if(DF[i, "column1"] != "valid"){  # Where column1 is not
+   DF[i, "column2"] <- NA           # 'valid', set
+  }                                 # column2 to NA
+}
+```
+
+<details>
+
+<summary>then click here to see the elegant approach:</summary>
+
+```{r elegant_coding2b, eval=FALSE}
+DF$column2[DF$column1 != "valid"] <- NA
+```
+
+</details>
+
+<br>
+
+#### collect results
+
+■ Consider a better alternative:
+
+```{r elegant_coding3a, eval=FALSE}
+results <- c()
+for(i in 1:10000) {
+  results <- c(results, some_calculation(i))
+}
+```
+
+<details>
+
+<summary>then click here to see the elegant approach:</summary>
+
+```{r elegant_coding3b, eval=FALSE}
+results <- sapply(1:1e6, some_calculation)
+```
+
+</details>
+
+<br>
+
+#### scale numeric columns
+
+■ Consider a better alternative:
+
+```{r elegant_coding4a, eval=FALSE}
+for(col in names(DF)) {
+  if(is.numeric(DF[ ,col])) {
+    mean_val <- mean(DF[ ,col], na.rm=TRUE)
+    sd_val <- sd(DF[ ,col], na.rm=TRUE)
+    for(i in 1:nrow(DF)) {
+      DF[i, col] <- (DF[i, col] - mean_val) / sd_val
+    }
+  }
+}
+```
+
+<details>
+
+<summary>then click here to see the elegant approach:</summary>
+
+```{r elegant_coding4b, eval=FALSE}
+numcols <- sapply(DF, is.numeric)
+DF[ ,numcols] <- scale(DF[ ,numcols])
+rm(numcols)
+```
+
+</details>
+
+<br>
+
+#### read multiple csv files
+
+■ Consider a better alternative:
+
+```{r elegant_coding5a, eval=FALSE}
+file1 <- read.csv("data1.csv")
+file2 <- read.csv("data2.csv")
+file3 <- read.csv("data3.csv")
+# ... repeat for 50 files
+combined <- rbind(file1, file2, file3) # ... and so on
+```
+
+<details>
+
+<summary>then click here to see the elegant approach:</summary>
+
+```{r elegant_coding5b, eval=FALSE}
+files <- list.files(pattern="*.csv", full.names=TRUE)
+combined <- do.call(rbind, lapply(files, read.csv))
+```
+
+</details>
+
+<br>
+
+#### count occurrences
+
+■ Consider a better alternative:
+
+```{r elegant_coding6a, eval=FALSE}
+categories <- unique(DF$category)
+counts <- numeric(length(categories))
+names(counts) <- categories
+for(i in 1:nrow(DF)) {
+  cat <- DF$category[i]
+  counts[cat] <- counts[cat] + 1
+}
+```
+
+<details>
+
+<summary>then click here to see the elegant approach:</summary>
+
+```{r elegant_coding6b, eval=FALSE}
+table(DF$category)
+```
+
+</details>
+
+<br>
+
+#### create age groups
+
+■ Consider a better alternative:
+
+```{r elegant_coding7a, eval=FALSE}
+DF$age_group <- NA
+for(i in 1:nrow(DF)) {
+       if(DF$age[i] >=  0 & DF$age[i] < 18) DF$age_group[i] <- "0-17"
+  else if(DF$age[i] >= 18 & DF$age[i] < 30) DF$age_group[i] <- "18-29"
+  else if(DF$age[i] >= 30 & DF$age[i] < 50) DF$age_group[i] <- "30-49"
+  else if(DF$age[i] >= 50 & DF$age[i] < 65) DF$age_group[i] <- "50-64"
+  else if(DF$age[i] >= 65)                  DF$age_group[i] <- "65+"
+  else                                      DF$age_group[i] <- NA
+}
+```
+
+<details>
+
+<summary>then click here to see the elegant approach:</summary>
+
+```{r elegant_coding7b, eval=FALSE}
+DF$age_group <- cut(DF$age, 
+                    breaks = c(0, 18, 30, 50, 65, Inf),
+                    labels = c("0-17", "18-29", "30-49", "50-64", "65+"),
+                    right = FALSE)
+```
+
+</details>
+
+<br>
+
+More examples are shown in the [fundamentals of programming](#welcome) tutorial slides.
 
 
-- 2. At Rstudio - File - New Project - Version Control - Git,  
-paste the repository URL, set the subdirectory and create project.  
-_I recommend to keep the Project directory name so local and github folder names match exactly._
-
-![](https://github.com/brry/course/raw/master/externalfig/git_clone_Rstudio.png) 
-
-- 3. From now on, get the latest version with a single click on `Pull`:
-
-<img src="https://github.com/brry/course/raw/master/externalfig/git_clone_6.PNG" width="400">
-
-
-### git resources 
-Happy Git with R: <https://happygitwithr.com>  
-Excellent tutorial on git in general (mostly without Rstudio): <http://kbroman.org/github_tutorial>   
-HPI course: <https://open.hpi.de/courses/git2020>   
-Contribute to OS software: <https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github>  
-
-
-
-# packages
+# packages {#packages}
 
 ### usage
 
-Whenever possible, use `pack::fun()` instead of `library("pack") ; fun()`.
-It makes clear from wich package 'fun' is used.   
-Otherwise, when multiple packages have `fun`, the one from the lastly loaded package will be used. 
-And that might not be the one you expect.  
+Whenever possible, use `pack::fun()` instead of `library("pack") ; fun()`. It makes clear from wich package 'fun' is used.\
+Otherwise, when multiple packages have `fun`, the one from the lastly loaded package will be used. And that might not be the one you expect.\
 When you use multiple functions from a package, the second option is fine of course.
 
 ### installation
 
 Installing add-on R packages usually is easy from within R (and works without admin rights):
-```R
+
+``` r
 install.packages("ggplot2")
 ```
+
 For potential installation [issues](#issues), see below.
 
 At the top of a script, conditionally install all needed packages.
 
 For a single package, you could use
+
 ```{r packinst, eval=FALSE}
 if(!requireNamespace("berryFunctions", quietly=TRUE)) install.packages("berryFunctions")
 ```
 
 To depend on a certain development version, use
+
 ```{r packver, eval=FALSE}
 if(packageVersion("berryFunctions") < "1.19.3")
   {
@@ -246,206 +424,188 @@ if(packageVersion("berryFunctions") < "1.19.3")
 ```
 
 When using several packages, use
+
 ```{r packman, eval=FALSE}
 if(!requireNamespace("pacman", quietly=TRUE)) install.packages("pacman")
 pacman::p_load("berryFunctions", "rdwd")
 ```
 
-### issues
+### issues {#issues}
 
 Here are solutions to some issues I have encountered in the past while installing packages with external (i.e. non-R) dependencies.
 
 #### rJava on Windows
 
-Check if Java is available. 
-There should be no errors when running (in R):
-```
+Check if Java is available. There should be no errors when running (in R):
+
+```         
 install.packages("rJava") ; library(rJava)
 ```
-If necessary, install [Java](http://www.java.com/de/download/manual.jsp) in the same bit-version as R (eg 64bit).
-The Java binary file must be on the [search path](http://www.java.com/en/download/help/path.xml), 
-which will normally happen automatically.
 
-In case you run into the 32/64 bits error: "JAVA_HOME cannot be determined from the Registry", try installing the package with no multiarchitecture support, e.g.:
-`remotes::install_github("brry/OSMscale", build_opts="--no-multiarch")`
+If necessary, install [Java](http://www.java.com/de/download/manual.jsp) in the same bit-version as R (eg 64bit). The Java binary file must be on the [search path](http://www.java.com/en/download/help/path.xml), which will normally happen automatically.
+
+In case you run into the 32/64 bits error: "JAVA_HOME cannot be determined from the Registry", try installing the package with no multiarchitecture support, e.g.: `remotes::install_github("brry/OSMscale", build_opts="--no-multiarch")`
 
 #### rJava on Linux
+
 Open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) all lower-cased:
-```
+
+```         
 sudo apt-get install r-cran-rjava
 ```
-Here's the [list of other supported packages](https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html#supported-packages) using this mechanism.  
+
+Here's the [list of other supported packages](https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html#supported-packages) using this mechanism.\
 You might first have to run something like ([source](https://launchpad.net/~c2d4u.team/+archive/ubuntu/c2d4u4.0+?field.series_filter=focal)):
-```
+
+```         
 sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
 ```
 
 #### sf
 
 If `install.packages("sf")` on Linux does not work, you can try the following:
-```
+
+```         
 sudo apt-get install libudunits2-dev
 sudo add-apt-repository ppa:ubuntugis/ppa && sudo apt-get update
 sudo apt-get install gdal-bin
 sudo apt install libgdal-dev libproj-dev
 ```
+
 See also [thinkr.fr](https://rtask.thinkr.fr/installation-of-r-4-0-on-ubuntu-20-04-lts-and-tips-for-spatial-packages/) on R4 on Ubuntu 20.04
 
 #### gdal
 
 Probably obsolete with the retirement of `rgdal`, but just for reference:
-```
+
+```         
 sudo apt update
 sudo apt install libgdal-dev libproj-dev
 ```
 
 #### source
 
-If you cannot install a package, you might be able to `source` some functions.  
+If you cannot install a package, you might be able to `source` some functions.\
 Download the package zip folder on github (see [git](#git)) and then run:
-```R
+
+``` r
 Vectorize(source)(dir("unzipped_package_path/R", full=TRUE))
 ```
+
 This creates all R functions as objects in your globalenv workspace (and overwrites existing objects of the same name!).
 
 
-# sumatra
+# git {#git}
 
-I like to use sumatra PDF viewer as the default viewer.  
-It doesn't lock files from editing, hence currently opened files can be changed (e.g. by R).
+git is a version control software. With it, you can download repositories, track your changes and develop code collaboratively.
 
-It comes in `Rstudio/resources/app/bin/sumatra` and I like to change some [settings](https://www.sumatrapdfreader.org/settings.html).  
+### install git
 
-### with R
+This is tedious, but needs to be done only once.
 
-```{r sumatrainit, eval=FALSE}
-# install.packages("berryFunctions")
-# remotes::install_github("brry/berryFunctions") # Version 1.22.1 (2023-11-17)
-berryFunctions::sumatraInitialize()
-```
+-   Create a github account at <https://github.com/join>
+
+-   Download and install git, see <https://git-scm.com/downloads>
+
+-   Restart Rstudio (if open)
+
+-   Connect git to Rstudio: (instructions [with screenshots](https://www.r-bloggers.com/rstudio-and-github))
+
+    -   RStudio -\> Tools -\> Global Options -\> Git/SVN: Ensure the path to the Git executable is correct.
+    -   `Create SSH Key`, close window
+    -   `View public key`: copy the displayed public key
+    -   go to <https://github.com/settings/keys> and click `New SSH key`, paste the public key
+    -   in the RStudio bottom Tab `Terminal`: type the following:
+
+    ```         
+    git version # just to see git works fine
+    git config --global user.email "YourEmail@domain.com"
+    git config --global user.name "YourUserNameHere"
+    ```
+
+### use git
+
+To clone a git repo, Rstudio handles most the work for you.
+
+-   
+
+    1.  Go to [github.com/brry/course](https://github.com/brry/course) - [Code]{style="background-color:lime"} - Copy URL
+
+![](https://github.com/brry/course/raw/master/externalfig/git_clone_1.PNG)
+
+-   
+
+    2.  At Rstudio - File - New Project - Version Control - Git,\
+        paste the repository URL, set the subdirectory and create project.\
+        *I recommend to keep the Project directory name so local and github folder names match exactly.*
+
+![](https://github.com/brry/course/raw/master/externalfig/git_clone_Rstudio.png)
+
+-   
+
+    3.  From now on, get the latest version with a single click on `Pull`:
+
+<img src="https://github.com/brry/course/raw/master/externalfig/git_clone_6.PNG" width="400"/>
+
+### git resources
+
+Happy Git with R: <https://happygitwithr.com>\
+Excellent tutorial on git in general (mostly without Rstudio): <http://kbroman.org/github_tutorial>\
+HPI course: <https://open.hpi.de/courses/git2020>\
+Contribute to OS software: <https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github>
 
 
-### manually
+# quarto {#quarto}
 
-In `C:/Program Files/`, set write permissions for the `RStudio` folder (or at least the sumatra folder, see next step) with rightclick - properties - safety - edit.
+quarto documents allow you to mix code and markdown text to generate hassle-free and reproducible reports / presentations / websites. It's a full publishing ecosystem, see [quarto.org](https://quarto.org/). :)
 
-Open `C:/Program Files/RStudio/resources/app/bin/sumatra/sumatrapdfrestrict.ini` and set 
+In **Rstudio**, click File -\> New File -\> Quarto Document.\
+Click "Create" for a template, or "Create Empty Document" on the left for just the file.
 
-* `SavePreferences = 1`  
-* `FullscreenAccess = 1`
+In **VScode** under [extensions](https://marketplace.visualstudio.com/items?itemName=quarto.quarto), search for quarto and install quarto-vscode.\
+Create a qmd file and for a template, copy content e.g. from the [quarto guide](https://quarto.org/docs/get-started/hello/vscode.html#render-and-preview).
 
-Open and close a pdf, so that `C:/Users/berry/AppData/Roaming/SumatraPDF/SumatraPDF-settings.txt` will be created.  
-There, change the following entries:
+![](https://github.com/brry/course/raw/master/externalfig/quarto.png)
 
-* `DefaultZoom = fit page` (probably already the default)
-* `ShowToc = 0`
-* `DefaultDisplayMode = single page`
 
 
 # resources
 
 Reference cards
 
-- [RefCard](https://github.com/jonasstein/R-Reference-Card/raw/master/R-refcard.pdf) by Tom Short & Jonas Stein
-- [base](https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf) and
-  [advanced](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf) cheatsheets from
-        [Rstudio](https://posit.co/resources/cheatsheets/)
+-   [RefCard](https://github.com/jonasstein/R-Reference-Card/raw/master/R-refcard.pdf) by Tom Short & Jonas Stein
+-   [base](https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf) and [advanced](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf) cheatsheets from [Rstudio](https://posit.co/resources/cheatsheets/)
 
 Books
 
-- Grolemund & Wickham (2017): [R for Data Science](https://r4ds.hadley.nz/)
-- J. Adler (2010): R in a Nutshell
-- U. Ligges (2008): Programmieren mit R (German)
-- M. Crawley (2007): The R-book
-- H. Wickham (2014): [Advanced R](https://adv-r.hadley.nz/)
-- H. Wickham (2015): [R Packages](https://r-pkgs.org/)
-- domain specific: [Chapman and Hall R Series](https://www.routledge.com/Chapman--HallCRC-The-R-Series/book-series/crctherser)
-- Many more listed at [github.com/RomanTsegelskyi/rbooks]( https://github.com/RomanTsegelskyi/rbooks)
-- Review list at [ecotope.org](https://web.archive.org/web/20130619094650/http://ecotope.org/blogs/page/R-Book-Review.aspx) or
-  [r4stats.com](http://r4stats.com/articles/book-reviews)
-
+-   Grolemund & Wickham (2017): [R for Data Science](https://r4ds.hadley.nz/)
+-   J. Adler (2010): R in a Nutshell
+-   U. Ligges (2008): Programmieren mit R (German)
+-   M. Crawley (2007): The R-book
+-   H. Wickham (2014): [Advanced R](https://adv-r.hadley.nz/)
+-   H. Wickham (2015): [R Packages](https://r-pkgs.org/)
+-   domain specific: [Chapman and Hall R Series](https://www.routledge.com/Chapman--HallCRC-The-R-Series/book-series/crctherser)
+-   Many more listed at [github.com/RomanTsegelskyi/rbooks](https://github.com/RomanTsegelskyi/rbooks)
+-   Review list at [ecotope.org](https://web.archive.org/web/20130619094650/http://ecotope.org/blogs/page/R-Book-Review.aspx) or [r4stats.com](http://r4stats.com/articles/book-reviews)
 
 The internet
 
-- [R-weekly](https://rweekly.org/) - weekly newsletter about all things R
-- [Rbloggers](https://www.r-bloggers.com/) - blog aggregator about R
-- [StackOverflow](https://stackoverflow.com/questions/tagged/r) - programming questions (main resource)
-- [CrossValidated](https://stats.stackexchange.com) - statistical questions
-- [rseek.org](https://rseek.org) - R focused internet search
-- [R-Manuals](https://cran.r-project.org/manuals.html) - official introduction to the language
-- [Mailing lists](https://www.r-project.org/mail.html), [Nabble](http://r.789695.n4.nabble.com/) with a forum-like view of the r-help mailing list
-- [stat545](https://stat545.com) - excellent online tutorial
-- [Shiny](https://shiny.rstudio.com) - web application framework for R/Rstudio
-- [Rmarkdown](http://rmarkdown.rstudio.com) - document/notebook generation framework for R/Rstudio
-- [Github guides](https://guides.github.com) - Introduction to github
+-   [R-weekly](https://rweekly.org/) - weekly newsletter about all things R
+-   [Rbloggers](https://www.r-bloggers.com/) - blog aggregator about R
+-   [StackOverflow](https://stackoverflow.com/questions/tagged/r) - programming questions (main resource)
+-   [CrossValidated](https://stats.stackexchange.com) - statistical questions
+-   [rseek.org](https://rseek.org) - R focused internet search
+-   [R-Manuals](https://cran.r-project.org/manuals.html) - official introduction to the language
+-   [Mailing lists](https://www.r-project.org/mail.html), [Nabble](http://r.789695.n4.nabble.com/) with a forum-like view of the r-help mailing list
+-   [stat545](https://stat545.com) - excellent online tutorial
+-   [Shiny](https://shiny.rstudio.com) - web application framework for R/Rstudio
+-   [Rmarkdown](http://rmarkdown.rstudio.com) - document/notebook generation framework for R/Rstudio
+-   [Github guides](https://guides.github.com) - Introduction to github
 
 
+# saveload
 
-# project
-
-These are some instructions to start an R research project under version control.
-
-- install [R, Rstudio](#install) and [git](#git) 
-- create a new github repository (<https://github.com/new>), initialize with Readme
-- `Code` -> Copy URL
-- Rstudio -> File -> New Project -> Version Control -> Git: paste URL, set subdirectory, create project.
-- Rstudio -> File -> New File -> R script / R markdown
-- follow [good practices](#good-practice)
-- Work, then commit changes and push to github
-
-
-# good practice
-
-Apply best practices when coding!
-
-- Write readable code that is easy to maintain (see below).
-- Use [version control](#git) with a single source of truth (SSOT).
-- For reports / presentations, use [quarto](#quarto) instead of separate files with scripts, Jupyter notebook, images, code outputs, word document.
-
-### good code
-
-- clear
-- simple (one job per function)
-- documented
-- performant
-- bug-free
-- well tested
-
-### organisation / workflow
-
-- Use Rstudio projects (File -> New project). They set the working directory and manage settings & opened scripts.
-- Never use `setwd()`: others don't have that path and neither do you, after rearranging folders.  
-- Use relative path names, e.g. `read.table("datafolder/file.txt")` instead of `"C:/Users/berry/Desktop/Project/datafolder/file.txt"`
-- Put `source("functions.R")` in your main (quarto) script, or write your own [package](https://github.com/brry/course/blob/master/data/packdev.R).
-
-### code format
-
-- Follow a style guide consistantly ([example](http://adv-r.had.co.nz/Style.html)).
-- Choose short but descriptive object names.
-- Use expressive verbs for function names. Functions *do* something.
-- Functions should call each other, instead of being one big multi-purpose monster.
-- Use Rstudio script sections `\# 1 clean data ----` for an outline (`CTRL`+`SHIFT`+`O`).
-- Use line breaks to avoid horizontal scrolling (margin [settings](#settings)).
-
-### code quality
-
-- Vectorize code whenever possible.
-- If not, use `lapply/sapply` instead of `for` loops (lesson 4.3 and 8.3).
-- DRY: don't repeat yourself
-- Write [defensive code](https://www.r-bloggers.com/2018/07/the-ten-rules-of-defensive-programming-in-r/) that checks inputs (lesson 8.1).
-- Use arrays for all-numeric data (lesson 4.4).
-- Do not load >2 packages from the library, instead use `pack::fun`.
-- Install [packages](#packages) conditionally.
-- Do not create more objects than needed, clean up with `rm`.
-- Make sure your code runs in a clean session:
-  - `CTRL`+`SHIFT`+`F10` to restart R with a clean workspace (Rdata [settings](#settings))
-  - `source()` the entire script with `CTRL`+`SHIFT`+`S`
-
-To practice writing good R code, improve the examples in [elegant code](#elegant-code).
-
-### saveload
-
-Store the results of long-running computations on disc.  
+Store the results of long-running computations on disc.\
 The next time a script is run, they are loaded quickly.
 
 ```{r saveload, eval=FALSE}
@@ -461,11 +621,13 @@ if(  file.exists("objects.Rdata")  )
 ```
 
 If you need to rerun an analysis if the last run is older then 6 hours, this could be the condition:
+
 ```{r difftime, eval=FALSE}
 difftime(Sys.time(), file.mtime("objects.Rdata"), units="h") > 6
 ```
 
 For a single object, a good alternative to `save` and `load` is:
+
 ```{r saverds, eval=FALSE}
 saveRDS(one_single_object, "object.Rdata")
 explicit_object_name <- readRDS("object.Rdata")
@@ -474,188 +636,113 @@ explicit_object_name <- readRDS("object.Rdata")
 More on this topic from [Rcrastinate](https://www.r-bloggers.com/2019/05/how-to-save-and-load-datasets-in-r-an-overview/)
 
 
-# elegant code
+# sumatra {#sumatra}
 
-#### get the average Sepal.Length per Species
-■ Consider a better alternative:
-```{r elegant_coding1a, eval=FALSE}
-groups <- levels(iris$Species)
-averages <- c()
-for(g in groups) averages[g] <- 
-                 mean(iris$Sepal.Length[iris$Species==g])
-rm(g, groups)
-averages
-```
-<details><summary>then click here to see the elegant approach:</summary>
-```{r elegant_coding1b, eval=FALSE}
-tapply(iris$Sepal.Length, iris$Species, mean)
-```
-</details>
-<br>
+I like to use sumatra PDF viewer as the default viewer.\
+It doesn't lock files from editing, hence currently opened files can be changed (e.g. by R).
 
-#### conditionally set invalid records to NA
-■ Consider a better alternative:
-```{r elegant_coding2a, eval=FALSE}
-for(i in c(1:nrow(DF))){
-  if(DF[i, "column1"] != "valid"){  # Where column1 is not
-   DF[i, "column2"] <- NA           # 'valid', set
-  }                                 # column2 to NA
-}
-```
-<details><summary>then click here to see the elegant approach:</summary>
-```{r elegant_coding2b, eval=FALSE}
-DF$column2[DF$column1 != "valid"] <- NA
-```
-</details>
-<br>
+It comes in `Rstudio/resources/app/bin/sumatra` and I like to change some [settings](https://www.sumatrapdfreader.org/settings.html).
 
-#### collect results
-■ Consider a better alternative:
-```{r elegant_coding3a, eval=FALSE}
-results <- c()
-for(i in 1:10000) {
-  results <- c(results, some_calculation(i))
-}
-```
-<details><summary>then click here to see the elegant approach:</summary>
-```{r elegant_coding3b, eval=FALSE}
-results <- sapply(1:1e6, some_calculation)
-```
-</details>
-<br>
+### with R
 
-#### scale numeric columns
-■ Consider a better alternative:
-```{r elegant_coding4a, eval=FALSE}
-for(col in names(DF)) {
-  if(is.numeric(DF[ ,col])) {
-    mean_val <- mean(DF[ ,col], na.rm=TRUE)
-    sd_val <- sd(DF[ ,col], na.rm=TRUE)
-    for(i in 1:nrow(DF)) {
-      DF[i, col] <- (DF[i, col] - mean_val) / sd_val
-    }
-  }
-}
+```{r sumatrainit, eval=FALSE}
+# install.packages("berryFunctions")
+# remotes::install_github("brry/berryFunctions") # Version 1.22.1 (2023-11-17)
+berryFunctions::sumatraInitialize()
 ```
-<details><summary>then click here to see the elegant approach:</summary>
-```{r elegant_coding4b, eval=FALSE}
-numcols <- sapply(DF, is.numeric)
-DF[ ,numcols] <- scale(DF[ ,numcols])
-rm(numcols)
-```
-</details>
-<br>
 
-#### read multiple csv files
-■ Consider a better alternative:
-```{r elegant_coding5a, eval=FALSE}
-file1 <- read.csv("data1.csv")
-file2 <- read.csv("data2.csv")
-file3 <- read.csv("data3.csv")
-# ... repeat for 50 files
-combined <- rbind(file1, file2, file3) # ... and so on
-```
-<details><summary>then click here to see the elegant approach:</summary>
-```{r elegant_coding5b, eval=FALSE}
-files <- list.files(pattern="*.csv", full.names=TRUE)
-combined <- do.call(rbind, lapply(files, read.csv))
-```
-</details>
-<br>
+### manually
 
-#### count occurrences
-■ Consider a better alternative:
-```{r elegant_coding6a, eval=FALSE}
-categories <- unique(DF$category)
-counts <- numeric(length(categories))
-names(counts) <- categories
-for(i in 1:nrow(DF)) {
-  cat <- DF$category[i]
-  counts[cat] <- counts[cat] + 1
-}
-```
-<details><summary>then click here to see the elegant approach:</summary>
-```{r elegant_coding6b, eval=FALSE}
-table(DF$category)
-```
-</details>
-<br>
+In `C:/Program Files/`, set write permissions for the `RStudio` folder (or at least the sumatra folder, see next step) with rightclick - properties - safety - edit.
 
-#### create age groups
-■ Consider a better alternative:
-```{r elegant_coding7a, eval=FALSE}
-DF$age_group <- NA
-for(i in 1:nrow(DF)) {
-       if(DF$age[i] >=  0 & DF$age[i] < 18) DF$age_group[i] <- "0-17"
-  else if(DF$age[i] >= 18 & DF$age[i] < 30) DF$age_group[i] <- "18-29"
-  else if(DF$age[i] >= 30 & DF$age[i] < 50) DF$age_group[i] <- "30-49"
-  else if(DF$age[i] >= 50 & DF$age[i] < 65) DF$age_group[i] <- "50-64"
-  else if(DF$age[i] >= 65)                  DF$age_group[i] <- "65+"
-  else                                      DF$age_group[i] <- NA
-}
-```
-<details><summary>then click here to see the elegant approach:</summary>
-```{r elegant_coding7b, eval=FALSE}
-DF$age_group <- cut(DF$age, 
-                    breaks = c(0, 18, 30, 50, 65, Inf),
-                    labels = c("0-17", "18-29", "30-49", "50-64", "65+"),
-                    right = FALSE)
-```
-</details>
-<br>
+Open `C:/Program Files/RStudio/resources/app/bin/sumatra/sumatrapdfrestrict.ini` and set
 
-More examples are shown in the [full R course](#welcome) tutorial slides.
+-   `SavePreferences = 1`\
+-   `FullscreenAccess = 1`
+
+Open and close a pdf, so that `C:/Users/berry/AppData/Roaming/SumatraPDF/SumatraPDF-settings.txt` will be created.\
+There, change the following entries:
+
+-   `DefaultZoom = fit page` (probably already the default)
+-   `ShowToc = 0`
+-   `DefaultDisplayMode = single page`
+
+
+# project
+
+Quick guide: start a research project under version control
+
+-   install [R, Rstudio](#install) and [git](#git)
+-   create a new github repository (<https://github.com/new>), initialize with Readme
+-   `Code` -\> Copy URL
+-   Rstudio -\> File -\> New Project -\> Version Control -\> Git: paste URL, set subdirectory, create project.
+-   Rstudio -\> File -\> New File -\> R script / R markdown
+-   follow [good practices](#good-practice)
+-   Work, then commit changes and push to github
 
 
 # VS Code
+
 Integrate RStudio-like features to Visual Studio Code. This includes syntax highlighting, script execution, accessing R help, and visual representation of plots.
 
-<img src="https://github.com/brry/course/raw/master/externalfig/vscode.png" width="600">
+<img src="https://github.com/brry/course/raw/master/externalfig/vscode.png" width="600"/>
 
 *Guide provided by Laura Spies*
 
 ### Step 1: installation
 
-1. install Visual Studio Code from [code.visualstudio.com](https://code.visualstudio.com)
-2. install R with the section [install](#install)
-3. install Python from [python.org/downloads](https://www.python.org/downloads/) (hints for [Windows users](https://docs.python.org/using/windows.html)), preferably using the Anaconda distribution
-4. optional: Set up a dedicated Conda environment for R by running the following command (in the terminal)  
-*This conda environment has been designated using the name of my folder, `ProFun`.*
-*You can change the name or use an existing one if you would like.* 
-```bash
+1.  install Visual Studio Code from [code.visualstudio.com](https://code.visualstudio.com)
+2.  install R with the section [install](#install)
+3.  install Python from [python.org/downloads](https://www.python.org/downloads/) (hints for [Windows users](https://docs.python.org/using/windows.html)), preferably using the Anaconda distribution
+4.  optional: Set up a dedicated Conda environment for R by running the following command (in the terminal)\
+    *This conda environment has been designated using the name of my folder, `ProFun`.* *You can change the name or use an existing one if you would like.*
+
+``` bash
 conda create -n ProFun r-base=4.4 r-essentials radian -c conda-forge
 ```
-5. optional: connect R to Jupyter (in the R console):
-```R
+
+5.  optional: connect R to Jupyter (in the R console):
+
+``` r
 install.packages("IRkernel")
 IRkernel::installspec(name = 'ir', displayname = 'R (ProFun)')
 install.packages(c("repr", "IRdisplay", "IRkernel"))
 ```
-6. install the necessary R packages (in the R console):
-```R
+
+6.  install the necessary R packages (in the R console):
+
+``` r
 install.packages(c("languageserver", "httpgd", "jsonlite", "rmarkdown"))
 ```
-7. install Radian, an improved R console REPL interface (in the terminal):
-```bash
+
+7.  install Radian, an improved R console REPL interface (in the terminal):
+
+``` bash
 pip install -U radian
 # alternatively, if employing Conda:
 conda activate ProFun
 conda install -U radian
 ```
-8. check if the following initiates the R console within the terminal:
-```bash
+
+8.  check if the following initiates the R console within the terminal:
+
+``` bash
 radian
 ```
-9. download the following extensions for VSCode:
-- Python
-- Jupyter
-- R Debugger
-- R Tools
-- R Extension Pack
+
+9.  download the following extensions for VSCode:
+
+-   Python
+-   Jupyter
+-   R Debugger
+-   R Tools
+-   R Extension Pack
 
 ### Step 2: configuration
-To access the `settings.json` file, press `Ctrl + Shift + P`, then type "Preferences: Open Settings (JSON)." Utilize the following JSON configuration: 
-```json
+
+To access the `settings.json` file, press `Ctrl + Shift + P`, then type "Preferences: Open Settings (JSON)." Utilize the following JSON configuration:
+
+``` json
 {
     "editor.fontSize": 15,
 
@@ -687,7 +774,7 @@ To access the `settings.json` file, press `Ctrl + Shift + P`, then type "Prefere
 
 Search for your `keybindings.json` and set keyboard shortcuts a sdesired, e.g.:
 
-```json
+``` json
 // R-Specific Keybindings
  { "key": "ctrl+shift+f10", "command": "r.restartSession" },
  { "key": "ctrl+shift+enter", "command": "r.runSource" },
@@ -704,66 +791,69 @@ Search for your `keybindings.json` and set keyboard shortcuts a sdesired, e.g.:
  { "key": "ctrl+shift+l", "command": "workbench.action.terminal.clear", "when": "terminalFocus" },
  { "key": "ctrl+alt+w", "command": "r.openWebHelp", "when": "editorTextFocus && editorLangId == 'r'" },
  { "key": "f1", "command": "r.help", "when": "editorTextFocus && editorLangId == 'r'" },
- ```
+```
 
 # installieren
 
 Installiere zuerst R selbst, danach Rstudio. Führe je nach Betriebssystem die folgenden Schritte aus.
 
-
 ### Windows
 
-- installiere [R](https://cloud.r-project.org/bin/windows/base/release.htm)
-- installiere [Rstudio](https://posit.co/download/rstudio-desktop/)
-- ändere die .RData [settings](#settings) für Reproduzierbarkeit
+-   installiere [R](https://cloud.r-project.org/bin/windows/base/release.htm)
+-   installiere [Rstudio](https://posit.co/download/rstudio-desktop/)
+-   ändere die .RData [settings](#settings) für Reproduzierbarkeit
 
 ### Mac
 
 Entweder
 
-- installiere [homebrew](https://brew.sh/)
-- im Mac Terminal, führe aus: `brew install --cask r` und `brew install --cask rstudio`
-- ändere die .RData [settings](#settings) für Reproduzierbarkeit
+-   installiere [homebrew](https://brew.sh/)
+-   im Mac Terminal, führe aus: `brew install --cask r` und `brew install --cask rstudio`
+-   ändere die .RData [settings](#settings) für Reproduzierbarkeit
 
 oder
 
-- installiere [Xquartz](https://www.xquartz.org/)
-- lade von [cran.r-project.org/bin/macosx](https://cran.r-project.org/bin/macosx) das 'latest release' herunter, z.B. `R-4.1.2.pkg`
-- öffne die Datei mit 'Installer' und befolge die Anweisungen
-- installiere [Rstudio](https://posit.co/download/rstudio-desktop/)
-- ziehe die App in den 'Applications'-Ordner
-- ändere die .RData [settings](#settings) für Reproduzierbarkeit
+-   installiere [Xquartz](https://www.xquartz.org/)
+-   lade von [cran.r-project.org/bin/macosx](https://cran.r-project.org/bin/macosx) das 'latest release' herunter, z.B. `R-4.1.2.pkg`
+-   öffne die Datei mit 'Installer' und befolge die Anweisungen
+-   installiere [Rstudio](https://posit.co/download/rstudio-desktop/)
+-   ziehe die App in den 'Applications'-Ordner
+-   ändere die .RData [settings](#settings) für Reproduzierbarkeit
 
 ### Linux
 
-Installiere R auf Linux **Ubuntu** ([unterstützte Versionen](https://cloud.r-project.org/bin/linux/ubuntu/)), sodass `sudo apt upgrade` auf die neueste R Version aktualisiert, falls sie veraltet ist
-(Quellen: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):  
+Installiere R auf Linux **Ubuntu** ([unterstützte Versionen](https://cloud.r-project.org/bin/linux/ubuntu/)), sodass `sudo apt upgrade` auf die neueste R Version aktualisiert, falls sie veraltet ist (Quellen: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):
 
-- öffne ein Terminal (STRG+ALT+T) und füge folgende Zeilen nacheinander ein (STRG+SHIFT+V).  
-  Auf Linux **Mint**, ersetze `$(lsb_release -cs)` mit z.B. `focal` gemäß [Liste](https://cloud.r-project.org/bin/linux/ubuntu/).  
-  Auf **Debian**, finde den Link [hier](https://cloud.r-project.org/bin/linux/debian/).  
-```
+-   öffne ein Terminal (STRG+ALT+T) und füge folgende Zeilen nacheinander ein (STRG+SHIFT+V).\
+    Auf Linux **Mint**, ersetze `$(lsb_release -cs)` mit z.B. `focal` gemäß [Liste](https://cloud.r-project.org/bin/linux/ubuntu/).\
+    Auf **Debian**, finde den Link [hier](https://cloud.r-project.org/bin/linux/debian/).\
+
+```         
 sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
 ```
-Prüfe `/etc/apt/sources.list` manuell auf den richtigen Link (wie oben angegeben). Am Ende muss ein `/` stehen.  
+
+Prüfe `/etc/apt/sources.list` manuell auf den richtigen Link (wie oben angegeben). Am Ende muss ein `/` stehen.\
 Für den nächsten Schritt können andere keys erforderlich sein, z.B. <font size="1">95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7</font>
-```
+
+```         
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo apt update
 sudo apt install r-base r-base-dev
 ```
 
-- lade [Rstudio](https://posit.co/download/rstudio-desktop/) herunter
-- installiere das, oder auf Ubuntu 20.04 (siehe [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
-```
+-   lade [Rstudio](https://posit.co/download/rstudio-desktop/) herunter
+-   installiere das, oder auf Ubuntu 20.04 (siehe [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
+
+```         
 sudo apt -y install r-base gdebi-core
 sudo gdebi rstudio-2021.09.1-372-amd64.deb
 ```
-- ändere die .RData [settings](#settings) für Reproduzierbarkeit
+
+-   ändere die .RData [settings](#settings) für Reproduzierbarkeit
 
 ### Manjaro Linux
 
-- schalte [AUR](https://www.fosslinux.com/4278/what-is-aur-and-how-to-enable-it-in-manjaro.htm) frei (Pamac -  Einstellungen - Drittanbieter) 
-- suche nach `rstudio-desktop` und installiere es. R wird automatisch mit installiert. Das kann eine Stunde dauern.  
-*(Anleitung von Frank de Boer)*
-- ändere die .RData [settings](#settings) für Reproduzierbarkeit
+-   schalte [AUR](https://www.fosslinux.com/4278/what-is-aur-and-how-to-enable-it-in-manjaro.htm) frei (Pamac - Einstellungen - Drittanbieter)
+-   suche nach `rstudio-desktop` und installiere es. R wird automatisch mit installiert. Das kann eine Stunde dauern.\
+    *(Anleitung von Frank de Boer)*
+-   ändere die .RData [settings](#settings) für Reproduzierbarkeit
