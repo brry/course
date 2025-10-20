@@ -28,10 +28,10 @@ This website is here to help you start your coding journey.
 My free online courses are fairly suitable to learn programming on your own.
 
 -   Short [R intro](https://github.com/brry/hour) (ca 1-5 hours)
--   **Fundamentals of Programming** [videos + autograded exercises](https://open.hpi.de/courses/hpi-dh-fprog2024), slides:
-    -   Infrastructure](link coming soon) (ca 1-3 hours)
-    -   [Python](https://www.dropbox.com/scl/fi/pr7i6rb8gp7jo5xv4c2c7/PyCourse.pdf?rlkey=2jk64ugd0sym4xs6g0gnl3b0c&dl=0) (ca 20-50 hours)
-    -   [R](https://www.dropbox.com/scl/fi/d07pma4zbnlmdto455s0g/Rcourse.pdf?rlkey=1oo6bi6k8u0u3850nki7zzmfj&dl=0) (ca 30-70 hours)
+-   **Fundamentals of Programming** [videos + autograded exercises](https://open.hpi.de/courses/hpi-dh-fprog2025), slides:
+    - [Infrastructure](https://www.dropbox.com/scl/fi/f3ybm79lfecg51ywoag4l/FP_infrastructure.pdf?rlkey=sdqv7k1rxac1bk45hgxn54r2r&dl=0) (ca 1-3 hours)
+    - [Python](https://www.dropbox.com/scl/fi/7omcctqlypryi16l7tkqy/PyCourse.pdf?rlkey=dyfe44uc0g6g97xssl1oz9wy6&dl=0) (ca 20-50 hours)
+    - [R](https://www.dropbox.com/scl/fi/d07pma4zbnlmdto455s0g/Rcourse.pdf?rlkey=1oo6bi6k8u0u3850nki7zzmfj&dl=0) (ca 30-70 hours)
 -   [German R MOOC](https://open.hpi.de/courses/programmieren-r2022) (ca 20-50 hours)
 -   [German Python MOOC](https://open.hpi.de/courses/python2024) (ca 10-40 hours)
 
@@ -137,8 +137,6 @@ Settings I use for compatibility and ease of use:
 -   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - Appearance
     -   [Editor font size: 10]{style="color:grey"}
     -   Editor theme: **Cobalt**
--   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - Sweave
-    -   Weave Rnw files using: **knitr** - *if you work with Rnw files*
 -   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - Spelling
     -   **OFF**: Use real time spell-checking
 -   [Tools]{style="background-color:aquamarine"} - Modify Keyboard Shortcuts
@@ -501,9 +499,9 @@ git is a version control software. With it, you can download repositories, track
 
 ### install git
 
-This is tedious, but needs to be done only once.
+This can be tedious, but needs to be done only once.
 
--   Create a github account at <https://github.com/join>
+-   Create a github account at <https://github.com/signup>. Use a short username!
 
 -   Download and install git, see <https://git-scm.com/downloads>
 
@@ -529,7 +527,7 @@ To clone a git repo, Rstudio handles most the work for you.
 
 -   
 
-    1.  Go to [github.com/brry/course](https://github.com/brry/course) - [Code]{style="background-color:lime"} - Copy URL
+    1.  Go to a repo (for example [github.com/brry/course](https://github.com/brry/course)) and click on  [Code]{style="background-color:lime"} - Copy URL
 
 ![](https://github.com/brry/course/raw/master/externalfig/git_clone_1.PNG)
 
