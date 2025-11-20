@@ -162,7 +162,9 @@ Apply best practices when coding!
 -   bug-free
 -   well tested
 
-The following points are written for R, but apply (in spirit) to Python and other languages as well.
+The following points are written for R, but apply (in spirit) to Python and other languages as well.  
+See also the [Rstudio best practice cheatsheet](https://rstudio.github.io/cheatsheets/R-best-practice.pdf).
+
 
 ### organisation / workflow
 
@@ -572,7 +574,7 @@ Create a qmd file and for a template, copy content e.g. from the [quarto guide](
 Reference cards
 
 -   [RefCard](https://github.com/jonasstein/R-Reference-Card/raw/master/R-refcard.pdf) by Tom Short & Jonas Stein
--   [base](https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf) and [advanced](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf) cheatsheets from [Rstudio](https://posit.co/resources/cheatsheets/)
+-   [base](https://rstudio.github.io/cheatsheets/base-r.pdf) and [advanced](https://rklopotek.blog.uksw.edu.pl/files/2017/09/advancedR.pdf) cheatsheets from [Posit](https://posit.co/resources/cheatsheets/)
 
 Books
 
@@ -594,11 +596,11 @@ The internet
 -   [CrossValidated](https://stats.stackexchange.com) - statistical questions
 -   [rseek.org](https://rseek.org) - R focused internet search
 -   [R-Manuals](https://cran.r-project.org/manuals.html) - official introduction to the language
--   [Mailing lists](https://www.r-project.org/mail.html), [Nabble](http://r.789695.n4.nabble.com/) with a forum-like view of the r-help mailing list
+-   [Mailing lists](https://www.r-project.org/mail.html)
 -   [stat545](https://stat545.com) - excellent online tutorial
--   [Shiny](https://shiny.rstudio.com) - web application framework for R/Rstudio
--   [Rmarkdown](http://rmarkdown.rstudio.com) - document/notebook generation framework for R/Rstudio
--   [Github guides](https://guides.github.com) - Introduction to github
+-   [Shiny](https://shiny.posit.co/m) - web application framework for R
+-   [quarto markdown](https://quarto.org/) - document generation and publishing framework
+-   [Github guides](https://docs.github.com/en) - Introduction to github
 
 
 # saveload
