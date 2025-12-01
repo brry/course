@@ -603,6 +603,44 @@ The internet
 -   [Github guides](https://docs.github.com/en) - Introduction to github
 
 
+# AI
+
+pro AI in coding
+
+- quickly solves a problem
+- works in unfamiliar coding areas, concepts, languages
+- suggests unknown functions and approaches
+
+contra AI in coding
+
+- AI generated solutions often do not represent [best practices](#good-practice)
+- false sense of competence may become problematic in debugging complex issues
+- critical thinking is (and remains) important
+- structured thinking is helpful
+- actually learning to code yourself is rewarding and conductive to these goals
+- make mistakes, debug, struggle, research, think, build problem solving skills
+- develop good coding habits from the beginning
+
+detailed problems
+
+- Coders with AI assistance write more [security leaks](https://www.louisbouchard.ai/genai-coding-risks) (with less awareness of them)
+- AI assistants actually [slow down software development](https://open.substack.com/pub/mikelovesrobots/p/wheres-the-shovelware-why-ai-coding)
+- AI coding tools chase phantom bugs and [destroy real production databases](https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/)
+- Vibe coding creates [unmaintainable code](https://open.substack.com/pub/addyo/p/vibe-coding-is-not-the-same-as-ai) without engineering discipline
+- AI coding collapses under real-world pressure, requires [expertise for final 30%](https://open.substack.com/pub/addyo/p/the-70-problem-hard-truths-about)
+- Coding agents create [cybersecurity vulnerabilities](https://open.substack.com/pub/garymarcus/p/llms-coding-agents-security-nightmare) in numerous ways
+- 95% of companies see [no return on AI investment](https://www.reddit.com/r/cscareerquestions/s/JHrH5pGxDU)
+ (reasons [why](https://open.substack.com/pub/garymarcus/p/why-is-the-roi-on-generative-ai-so))
+- With increasing complexity, it gets [harder to check](https://open.substack.com/pub/oneusefulthing/p/on-working-with-wizards) if AI output is correct
+
+on learning 
+
+- Outsourcing work to AI hurts long-term growth of [learning skills](https://open.substack.com/pub/fitzyhistory/p/students-arent-obsessing-about-ai)
+- AI stunts intellectual [development as engineer](https://open.substack.com/pub/theargument/p/chatgpt-and-the-end-of-learning) + reasoning about complex concepts
+- Chatbots threaten [critical thinking](https://www.forkingpaths.co/p/the-death-of-the-student-essayand) and cognitive development skills
+- Students using AI lose [critical skills](https://mileswilliams.substack.com/p/ai-data-and-international-relations) and become dependent on unreliable tools
+
+
 # saveload
 
 Store the results of long-running computations on disc.\
@@ -772,7 +810,7 @@ To access the `settings.json` file, press `Ctrl + Shift + P`, then type "Prefere
 }
 ```
 
-Search for your `keybindings.json` and set keyboard shortcuts a sdesired, e.g.:
+Search for your `keybindings.json` and set keyboard shortcuts as desired, e.g.:
 
 ``` json
 // R-Specific Keybindings
