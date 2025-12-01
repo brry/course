@@ -624,7 +624,8 @@ contra AI in coding
 detailed problems
 
 - Coders with AI assistance write more [security leaks](https://www.louisbouchard.ai/genai-coding-risks) (with less awareness of them)
-- AI assistants actually [slow down software development](https://open.substack.com/pub/mikelovesrobots/p/wheres-the-shovelware-why-ai-coding)
+- AI assistants actually [slow down software development](https://open.substack.com/pub/mikelovesrobots/p/wheres-the-shovelware-why-ai-coding) ([reproducible](https://arxiv.org/abs/2507.09089
+))
 - AI coding tools chase phantom bugs and [destroy real production databases](https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/)
 - Vibe coding creates [unmaintainable code](https://open.substack.com/pub/addyo/p/vibe-coding-is-not-the-same-as-ai) without engineering discipline
 - AI coding collapses under real-world pressure, requires [expertise for final 30%](https://open.substack.com/pub/addyo/p/the-70-problem-hard-truths-about)
@@ -632,6 +633,8 @@ detailed problems
 - 95% of companies see [no return on AI investment](https://www.reddit.com/r/cscareerquestions/s/JHrH5pGxDU)
  (reasons [why](https://open.substack.com/pub/garymarcus/p/why-is-the-roi-on-generative-ai-so))
 - With increasing complexity, it gets [harder to check](https://open.substack.com/pub/oneusefulthing/p/on-working-with-wizards) if AI output is correct
+- AI usage [degrades our ability to catch bugs]( https://codebytom.blog/2025/07/the-hidden-cost-of-ai-reliance), creates a reliability problem
+- AI output [lowers skepticism](https://open.substack.com/pub/addyo/p/treat-ai-generated-code-as-a-draft) during reviews, stunts junior devs knowledge gain
 
 on learning 
 
