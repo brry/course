@@ -1,1 +1,2 @@
-Slides, R / git installation instructions, generic R tips and good practices can now be found at [bookdown.org/brry/course](https://bookdown.org/brry/course/)
+Slides, R / git installation instructions, generic R tips and good practices:
+[https://brry.github.io/course/](https://brry.github.io/course/)
