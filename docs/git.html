@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>git | R course</title>
+  <meta name="description" content="git | R course" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="git | R course" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="git | R course" />
+  
+  
+  
+
+<meta name="author" content="Berry Boessenkool, berry-b@gmx.de" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="packages.html"/>
+<link rel="next" href="quarto.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>welcome</a></li>
+<li class="chapter" data-level="" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i>install</a></li>
+<li class="chapter" data-level="" data-path="settings.html"><a href="settings.html"><i class="fa fa-check"></i>settings</a></li>
+<li class="chapter" data-level="" data-path="good-practice.html"><a href="good-practice.html"><i class="fa fa-check"></i>good practice</a></li>
+<li class="chapter" data-level="" data-path="elegant-code.html"><a href="elegant-code.html"><i class="fa fa-check"></i>elegant code</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>packages</a></li>
+<li class="chapter" data-level="" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i>git</a></li>
+<li class="chapter" data-level="" data-path="quarto.html"><a href="quarto.html"><i class="fa fa-check"></i>quarto</a></li>
+<li class="chapter" data-level="" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i>resources</a></li>
+<li class="chapter" data-level="" data-path="ai.html"><a href="ai.html"><i class="fa fa-check"></i>AI</a></li>
+<li class="chapter" data-level="" data-path="saveload.html"><a href="saveload.html"><i class="fa fa-check"></i>saveload</a></li>
+<li class="chapter" data-level="" data-path="sumatra.html"><a href="sumatra.html"><i class="fa fa-check"></i>sumatra</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i>project</a></li>
+<li class="chapter" data-level="" data-path="vs-code.html"><a href="vs-code.html"><i class="fa fa-check"></i>VS Code</a></li>
+<li class="chapter" data-level="" data-path="installieren.html"><a href="installieren.html"><i class="fa fa-check"></i>installieren</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R course</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="git" class="section level1 hasAnchor">
+<h1>git<a href="git.html#git" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>git is a version control software. With it, you can download repositories, track your changes and develop code collaboratively.</p>
+<div id="install-git" class="section level3 hasAnchor">
+<h3>install git<a href="git.html#install-git" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This can be tedious, but needs to be done only once.</p>
+<ul>
+<li><p>If not already done before: create a github account at <a href="https://github.com/signup" class="uri">https://github.com/signup</a>. Use a short username!</p></li>
+<li><p>Download and install git, see <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></p></li>
+<li><p>Restart Rstudio (if open)</p></li>
+<li><p>Connect git to Rstudio: (instructions <a href="https://www.r-bloggers.com/rstudio-and-github">with screenshots</a>)</p>
+<ul>
+<li>RStudio -&gt; Tools -&gt; Global Options -&gt; Git/SVN: Ensure the path to the Git executable is correct.</li>
+<li><code>Create SSH Key</code>, close window</li>
+<li><code>View public key</code>: copy the displayed public key</li>
+<li>go to <a href="https://github.com/settings/keys" class="uri">https://github.com/settings/keys</a> and click <code>New SSH key</code>, paste the public key</li>
+<li>in the RStudio bottom Tab <code>Terminal</code>: type the following:</li>
+</ul>
+<pre><code>git version # just to see git works fine
+git config --global user.email &quot;YourEmail@domain.com&quot;
+git config --global user.name &quot;YourUserNameHere&quot;</code></pre></li>
+</ul>
+</div>
+<div id="use-git" class="section level3 hasAnchor">
+<h3>use git<a href="git.html#use-git" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To clone a git repo, Rstudio handles most the work for you.</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Go to a repo (for example <a href="https://github.com/brry/fpsetup">github.com/brry/fpsetup</a>) and click on <span style="background-color:lime">Code</span> - Copy URL</li>
+</ol></li>
+</ul>
+<p><img src="https://github.com/brry/course/raw/master/externalfig/git_clone_1.PNG" /></p>
+<ul>
+<li><ol start="2" style="list-style-type: decimal">
+<li>At Rstudio - File - New Project - Version Control - Git,<br />
+paste the repository URL, set the subdirectory and create project.<br />
+<em>I recommend to keep the Project directory name so local and github folder names match exactly.</em></li>
+</ol></li>
+</ul>
+<p><img src="https://github.com/brry/course/raw/master/externalfig/git_clone_Rstudio.png" /></p>
+<ul>
+<li><ol start="3" style="list-style-type: decimal">
+<li>From now on, get the latest version with a single click on <code>Pull</code>:</li>
+</ol></li>
+</ul>
+<p><img src="https://github.com/brry/course/raw/master/externalfig/git_clone_6.PNG" width="400"/></p>
+</div>
+<div id="git-resources" class="section level3 hasAnchor">
+<h3>git resources<a href="git.html#git-resources" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Happy Git with R: <a href="https://happygitwithr.com" class="uri">https://happygitwithr.com</a><br />
+Excellent tutorial on git in general (mostly without Rstudio): <a href="http://kbroman.org/github_tutorial" class="uri">http://kbroman.org/github_tutorial</a><br />
+HPI course: <a href="https://open.hpi.de/courses/git2020" class="uri">https://open.hpi.de/courses/git2020</a><br />
+Contribute to OS software: <a href="https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github" class="uri">https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github</a></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="quarto.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

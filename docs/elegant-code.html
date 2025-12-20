@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>elegant code | R course</title>
+  <meta name="description" content="elegant code | R course" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="elegant code | R course" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="elegant code | R course" />
+  
+  
+  
+
+<meta name="author" content="Berry Boessenkool, berry-b@gmx.de" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="good-practice.html"/>
+<link rel="next" href="packages.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>welcome</a></li>
+<li class="chapter" data-level="" data-path="install.html"><a href="install.html"><i class="fa fa-check"></i>install</a></li>
+<li class="chapter" data-level="" data-path="settings.html"><a href="settings.html"><i class="fa fa-check"></i>settings</a></li>
+<li class="chapter" data-level="" data-path="good-practice.html"><a href="good-practice.html"><i class="fa fa-check"></i>good practice</a></li>
+<li class="chapter" data-level="" data-path="elegant-code.html"><a href="elegant-code.html"><i class="fa fa-check"></i>elegant code</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>packages</a></li>
+<li class="chapter" data-level="" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i>git</a></li>
+<li class="chapter" data-level="" data-path="quarto.html"><a href="quarto.html"><i class="fa fa-check"></i>quarto</a></li>
+<li class="chapter" data-level="" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i>resources</a></li>
+<li class="chapter" data-level="" data-path="ai.html"><a href="ai.html"><i class="fa fa-check"></i>AI</a></li>
+<li class="chapter" data-level="" data-path="saveload.html"><a href="saveload.html"><i class="fa fa-check"></i>saveload</a></li>
+<li class="chapter" data-level="" data-path="sumatra.html"><a href="sumatra.html"><i class="fa fa-check"></i>sumatra</a></li>
+<li class="chapter" data-level="" data-path="project.html"><a href="project.html"><i class="fa fa-check"></i>project</a></li>
+<li class="chapter" data-level="" data-path="vs-code.html"><a href="vs-code.html"><i class="fa fa-check"></i>VS Code</a></li>
+<li class="chapter" data-level="" data-path="installieren.html"><a href="installieren.html"><i class="fa fa-check"></i>installieren</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R course</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="elegant-code" class="section level1 hasAnchor">
+<h1>elegant code<a href="elegant-code.html#elegant-code" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="get-the-average-sepal.length-per-species" class="section level4 hasAnchor">
+<h4>get the average Sepal.Length per Species<a href="elegant-code.html#get-the-average-sepal.length-per-species" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>■ Consider a better alternative:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="elegant-code.html#cb4-1" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">levels</span>(iris<span class="sc">$</span>Species)</span>
+<span id="cb4-2"><a href="elegant-code.html#cb4-2" tabindex="-1"></a>averages <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb4-3"><a href="elegant-code.html#cb4-3" tabindex="-1"></a><span class="cf">for</span>(g <span class="cf">in</span> groups) averages[g] <span class="ot">&lt;-</span> </span>
+<span id="cb4-4"><a href="elegant-code.html#cb4-4" tabindex="-1"></a>                 <span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Length[iris<span class="sc">$</span>Species<span class="sc">==</span>g])</span>
+<span id="cb4-5"><a href="elegant-code.html#cb4-5" tabindex="-1"></a><span class="fu">rm</span>(g, groups)</span>
+<span id="cb4-6"><a href="elegant-code.html#cb4-6" tabindex="-1"></a>averages</span></code></pre></div>
+<details>
+<summary>
+then click here to see the elegant approach:
+</summary>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="elegant-code.html#cb5-1" tabindex="-1"></a><span class="fu">tapply</span>(iris<span class="sc">$</span>Sepal.Length, iris<span class="sc">$</span>Species, mean)</span></code></pre></div>
+</details>
+<p><br></p>
+</div>
+<div id="conditionally-set-invalid-records-to-na" class="section level4 hasAnchor">
+<h4>conditionally set invalid records to NA<a href="elegant-code.html#conditionally-set-invalid-records-to-na" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>■ Consider a better alternative:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="elegant-code.html#cb6-1" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(DF))){</span>
+<span id="cb6-2"><a href="elegant-code.html#cb6-2" tabindex="-1"></a>  <span class="cf">if</span>(DF[i, <span class="st">&quot;column1&quot;</span>] <span class="sc">!=</span> <span class="st">&quot;valid&quot;</span>){  <span class="co"># Where column1 is not</span></span>
+<span id="cb6-3"><a href="elegant-code.html#cb6-3" tabindex="-1"></a>   DF[i, <span class="st">&quot;column2&quot;</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span>           <span class="co"># &#39;valid&#39;, set</span></span>
+<span id="cb6-4"><a href="elegant-code.html#cb6-4" tabindex="-1"></a>  }                                 <span class="co"># column2 to NA</span></span>
+<span id="cb6-5"><a href="elegant-code.html#cb6-5" tabindex="-1"></a>}</span></code></pre></div>
+<details>
+<summary>
+then click here to see the elegant approach:
+</summary>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="elegant-code.html#cb7-1" tabindex="-1"></a>DF<span class="sc">$</span>column2[DF<span class="sc">$</span>column1 <span class="sc">!=</span> <span class="st">&quot;valid&quot;</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+</details>
+<p><br></p>
+</div>
+<div id="collect-results" class="section level4 hasAnchor">
+<h4>collect results<a href="elegant-code.html#collect-results" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>■ Consider a better alternative:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="elegant-code.html#cb8-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb8-2"><a href="elegant-code.html#cb8-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) {</span>
+<span id="cb8-3"><a href="elegant-code.html#cb8-3" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">c</span>(results, <span class="fu">some_calculation</span>(i))</span>
+<span id="cb8-4"><a href="elegant-code.html#cb8-4" tabindex="-1"></a>}</span></code></pre></div>
+<details>
+<summary>
+then click here to see the elegant approach:
+</summary>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="elegant-code.html#cb9-1" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fl">1e6</span>, some_calculation)</span></code></pre></div>
+</details>
+<p><br></p>
+</div>
+<div id="scale-numeric-columns" class="section level4 hasAnchor">
+<h4>scale numeric columns<a href="elegant-code.html#scale-numeric-columns" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>■ Consider a better alternative:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="elegant-code.html#cb10-1" tabindex="-1"></a><span class="cf">for</span>(col <span class="cf">in</span> <span class="fu">names</span>(DF)) {</span>
+<span id="cb10-2"><a href="elegant-code.html#cb10-2" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.numeric</span>(DF[ ,col])) {</span>
+<span id="cb10-3"><a href="elegant-code.html#cb10-3" tabindex="-1"></a>    mean_val <span class="ot">&lt;-</span> <span class="fu">mean</span>(DF[ ,col], <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb10-4"><a href="elegant-code.html#cb10-4" tabindex="-1"></a>    sd_val <span class="ot">&lt;-</span> <span class="fu">sd</span>(DF[ ,col], <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb10-5"><a href="elegant-code.html#cb10-5" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(DF)) {</span>
+<span id="cb10-6"><a href="elegant-code.html#cb10-6" tabindex="-1"></a>      DF[i, col] <span class="ot">&lt;-</span> (DF[i, col] <span class="sc">-</span> mean_val) <span class="sc">/</span> sd_val</span>
+<span id="cb10-7"><a href="elegant-code.html#cb10-7" tabindex="-1"></a>    }</span>
+<span id="cb10-8"><a href="elegant-code.html#cb10-8" tabindex="-1"></a>  }</span>
+<span id="cb10-9"><a href="elegant-code.html#cb10-9" tabindex="-1"></a>}</span></code></pre></div>
+<details>
+<summary>
+then click here to see the elegant approach:
+</summary>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="elegant-code.html#cb11-1" tabindex="-1"></a>numcols <span class="ot">&lt;-</span> <span class="fu">sapply</span>(DF, is.numeric)</span>
+<span id="cb11-2"><a href="elegant-code.html#cb11-2" tabindex="-1"></a>DF[ ,numcols] <span class="ot">&lt;-</span> <span class="fu">scale</span>(DF[ ,numcols])</span>
+<span id="cb11-3"><a href="elegant-code.html#cb11-3" tabindex="-1"></a><span class="fu">rm</span>(numcols)</span></code></pre></div>
+</details>
+<p><br></p>
+</div>
+<div id="read-multiple-csv-files" class="section level4 hasAnchor">
+<h4>read multiple csv files<a href="elegant-code.html#read-multiple-csv-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>■ Consider a better alternative:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="elegant-code.html#cb12-1" tabindex="-1"></a>file1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data1.csv&quot;</span>)</span>
+<span id="cb12-2"><a href="elegant-code.html#cb12-2" tabindex="-1"></a>file2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data2.csv&quot;</span>)</span>
+<span id="cb12-3"><a href="elegant-code.html#cb12-3" tabindex="-1"></a>file3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data3.csv&quot;</span>)</span>
+<span id="cb12-4"><a href="elegant-code.html#cb12-4" tabindex="-1"></a><span class="co"># ... repeat for 50 files</span></span>
+<span id="cb12-5"><a href="elegant-code.html#cb12-5" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">rbind</span>(file1, file2, file3) <span class="co"># ... and so on</span></span></code></pre></div>
+<details>
+<summary>
+then click here to see the elegant approach:
+</summary>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="elegant-code.html#cb13-1" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern=</span><span class="st">&quot;*.csv&quot;</span>, <span class="at">full.names=</span><span class="cn">TRUE</span>)</span>
+<span id="cb13-2"><a href="elegant-code.html#cb13-2" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(files, read.csv))</span></code></pre></div>
+</details>
+<p><br></p>
+</div>
+<div id="count-occurrences" class="section level4 hasAnchor">
+<h4>count occurrences<a href="elegant-code.html#count-occurrences" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>■ Consider a better alternative:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="elegant-code.html#cb14-1" tabindex="-1"></a>categories <span class="ot">&lt;-</span> <span class="fu">unique</span>(DF<span class="sc">$</span>category)</span>
+<span id="cb14-2"><a href="elegant-code.html#cb14-2" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(categories))</span>
+<span id="cb14-3"><a href="elegant-code.html#cb14-3" tabindex="-1"></a><span class="fu">names</span>(counts) <span class="ot">&lt;-</span> categories</span>
+<span id="cb14-4"><a href="elegant-code.html#cb14-4" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(DF)) {</span>
+<span id="cb14-5"><a href="elegant-code.html#cb14-5" tabindex="-1"></a>  cat <span class="ot">&lt;-</span> DF<span class="sc">$</span>category[i]</span>
+<span id="cb14-6"><a href="elegant-code.html#cb14-6" tabindex="-1"></a>  counts[cat] <span class="ot">&lt;-</span> counts[cat] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb14-7"><a href="elegant-code.html#cb14-7" tabindex="-1"></a>}</span></code></pre></div>
+<details>
+<summary>
+then click here to see the elegant approach:
+</summary>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="elegant-code.html#cb15-1" tabindex="-1"></a><span class="fu">table</span>(DF<span class="sc">$</span>category)</span></code></pre></div>
+</details>
+<p><br></p>
+</div>
+<div id="create-age-groups" class="section level4 hasAnchor">
+<h4>create age groups<a href="elegant-code.html#create-age-groups" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>■ Consider a better alternative:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="elegant-code.html#cb16-1" tabindex="-1"></a>DF<span class="sc">$</span>age_group <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-2"><a href="elegant-code.html#cb16-2" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(DF)) {</span>
+<span id="cb16-3"><a href="elegant-code.html#cb16-3" tabindex="-1"></a>       <span class="cf">if</span>(DF<span class="sc">$</span>age[i] <span class="sc">&gt;=</span>  <span class="dv">0</span> <span class="sc">&amp;</span> DF<span class="sc">$</span>age[i] <span class="sc">&lt;</span> <span class="dv">18</span>) DF<span class="sc">$</span>age_group[i] <span class="ot">&lt;-</span> <span class="st">&quot;0-17&quot;</span></span>
+<span id="cb16-4"><a href="elegant-code.html#cb16-4" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(DF<span class="sc">$</span>age[i] <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> DF<span class="sc">$</span>age[i] <span class="sc">&lt;</span> <span class="dv">30</span>) DF<span class="sc">$</span>age_group[i] <span class="ot">&lt;-</span> <span class="st">&quot;18-29&quot;</span></span>
+<span id="cb16-5"><a href="elegant-code.html#cb16-5" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(DF<span class="sc">$</span>age[i] <span class="sc">&gt;=</span> <span class="dv">30</span> <span class="sc">&amp;</span> DF<span class="sc">$</span>age[i] <span class="sc">&lt;</span> <span class="dv">50</span>) DF<span class="sc">$</span>age_group[i] <span class="ot">&lt;-</span> <span class="st">&quot;30-49&quot;</span></span>
+<span id="cb16-6"><a href="elegant-code.html#cb16-6" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(DF<span class="sc">$</span>age[i] <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> DF<span class="sc">$</span>age[i] <span class="sc">&lt;</span> <span class="dv">65</span>) DF<span class="sc">$</span>age_group[i] <span class="ot">&lt;-</span> <span class="st">&quot;50-64&quot;</span></span>
+<span id="cb16-7"><a href="elegant-code.html#cb16-7" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">if</span>(DF<span class="sc">$</span>age[i] <span class="sc">&gt;=</span> <span class="dv">65</span>)                  DF<span class="sc">$</span>age_group[i] <span class="ot">&lt;-</span> <span class="st">&quot;65+&quot;</span></span>
+<span id="cb16-8"><a href="elegant-code.html#cb16-8" tabindex="-1"></a>  <span class="cf">else</span>                                      DF<span class="sc">$</span>age_group[i] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb16-9"><a href="elegant-code.html#cb16-9" tabindex="-1"></a>}</span></code></pre></div>
+<details>
+<summary>
+then click here to see the elegant approach:
+</summary>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="elegant-code.html#cb17-1" tabindex="-1"></a>DF<span class="sc">$</span>age_group <span class="ot">&lt;-</span> <span class="fu">cut</span>(DF<span class="sc">$</span>age, </span>
+<span id="cb17-2"><a href="elegant-code.html#cb17-2" tabindex="-1"></a>                    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">18</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">65</span>, <span class="cn">Inf</span>),</span>
+<span id="cb17-3"><a href="elegant-code.html#cb17-3" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;0-17&quot;</span>, <span class="st">&quot;18-29&quot;</span>, <span class="st">&quot;30-49&quot;</span>, <span class="st">&quot;50-64&quot;</span>, <span class="st">&quot;65+&quot;</span>),</span>
+<span id="cb17-4"><a href="elegant-code.html#cb17-4" tabindex="-1"></a>                    <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</details>
+<p><br></p>
+<p>More examples are shown in the <a href="index.html#welcome">fundamentals of programming</a> tutorial slides.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="good-practice.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
