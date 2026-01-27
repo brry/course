@@ -180,7 +180,7 @@ See also the [Rstudio best practice cheatsheet](https://rstudio.github.io/cheats
 -   Use expressive verbs for function names. Functions *do* something.
 -   Functions should call each other, instead of being one big multi-purpose monster.
 -   Use Rstudio script sections `\# 1 clean data ----` for an outline (`CTRL`+`SHIFT`+`O`).
--   Use line breaks to avoid horizontal scrolling (margin [settings](#settings)).
+-   Use line breaks (with indentation) to avoid horizontal scrolling (margin [settings](#settings)).
 
 ### code quality
 
