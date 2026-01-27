@@ -38,7 +38,7 @@ My free online courses are fairly suitable to learn programming on your own.
 Feel free to book me as a trainer in addition.
 
 **A few notes on this website:**\
-The source code is available at [github.com/brry/course](https://github.com/brry/course/blob/master/website/index.Rmd).\
+The source code is available at [github.com/brry/course/docs](https://github.com/brry/course/blob/master/docs/index.Rmd).\
 In case the table of content on the left is not shown, click the four bars at the top.\
 *Pro tip: the arrow left/right keys jump between chapters.*
 

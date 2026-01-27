@@ -2,7 +2,7 @@
                                             # View this script at bit.ly/packdev
 
 # Guide to creating a package (promise/warning: involves cats)
-# Berry Boessenkool, 2017-2024, https://brry.github.io
+# Berry Boessenkool, 2017-2025, https://brry.github.io
 
 # Pro-Tip: Turn on the Rstudio document outline with CTRL + SHIFT + O 
 
@@ -18,7 +18,7 @@ browseURL("https://github.com/new")
 # or manually click on "+" in top-right select "New repository"
 # - choose a name that reflects this is to learn writing R packages
 # - initialize with readme
-browseURL("https://bookdown.org/brry/course/git.html#use-git")
+browseURL("https://brry.github.io/course/git.html#use-git")
 
 
 
