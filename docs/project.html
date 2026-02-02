@@ -170,16 +170,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="project" class="section level1 hasAnchor">
 <h1>project<a href="project.html#project" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Quick guide: start a research project under version control</p>
+<p><strong>Start a research project under version control</strong></p>
 <ul>
 <li>install <a href="install.html#install">R, Rstudio</a> and <a href="git.html#git">git</a></li>
-<li>create a new github repository (<a href="https://github.com/new" class="uri">https://github.com/new</a>), initialize with Readme</li>
-<li><code>Code</code> -&gt; Copy URL</li>
+<li>create a well-named github repository (<a href="https://github.com/new" class="uri">https://github.com/new</a>), initialize with Readme</li>
+<li><code>Code</code> -&gt; Copy URL (SSH)</li>
 <li>Rstudio -&gt; File -&gt; New Project -&gt; Version Control -&gt; Git: paste URL, set subdirectory, create project.</li>
-<li>Rstudio -&gt; File -&gt; New File -&gt; R script / R markdown</li>
+<li>Rstudio -&gt; File -&gt; New File -&gt; R script / quarto document</li>
 <li>follow <a href="good-practice.html#good-practice">good practices</a></li>
-<li>Work, then commit changes and push to github</li>
+<li>work, then commit changes and push to github</li>
 </ul>
+<p><strong>Organize a research project</strong></p>
+<p>in the git folder you could have something like:</p>
+<pre><code>project/
+├── raw_data_large/
+├── reduce_data_size.R
+├── raw_data_small/
+│   ├── file1.csv
+│   └── file2.csv
+├── process_data.R
+├── data_full.csv
+├── functions.R
+├── test_functions.R
+└── main_file.qmd</code></pre>
+<ul>
+<li><code>raw_data_large/</code> (only locally, i.e. listed in <code>.gitignore</code>)</li>
+<li><code>reduce_data_size.R</code>: read big files, select interesting bits, store in <code>raw_data_small/</code> with <code>write.csv</code>. If you have (many) text entries with commas but no tabstops, use <code>write.table(..., sep="\t", row.names=FALSE, fileEncoding="UTF-8")</code></li>
+<li><code>process_data.R</code> with</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="project.html#cb34-1" tabindex="-1"></a>data_csv <span class="ot">&lt;-</span> <span class="fu">lapply</span>(csvfiles, read.csv)</span>
+<span id="cb34-2"><a href="project.html#cb34-2" tabindex="-1"></a>data_full <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(merge, data_csv)</span>
+<span id="cb34-3"><a href="project.html#cb34-3" tabindex="-1"></a><span class="fu">write.csv</span>(data_full, <span class="st">&quot;data_full.csv&quot;</span>)</span></code></pre></div>
+<ul>
+<li><code>functions.R</code> with</li>
+</ul>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="project.html#cb35-1" tabindex="-1"></a>helper <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x</span>
+<span id="cb35-2"><a href="project.html#cb35-2" tabindex="-1"></a>analyze <span class="ot">&lt;-</span> <span class="cf">function</span>(df) <span class="fu">sapply</span>(df, helper)</span>
+<span id="cb35-3"><a href="project.html#cb35-3" tabindex="-1"></a>visualize <span class="ot">&lt;-</span> <span class="cf">function</span>(column) <span class="fu">plot</span>(<span class="fu">analyze</span>(full_data)[,column])</span></code></pre></div>
+<ul>
+<li><code>test_functions.R</code> with</li>
+</ul>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="project.html#cb36-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions.R&quot;</span>)</span>
+<span id="cb36-2"><a href="project.html#cb36-2" tabindex="-1"></a><span class="fu">helper</span>(input) <span class="sc">==</span> expected</span>
+<span id="cb36-3"><a href="project.html#cb36-3" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_number</span>(<span class="fu">helper</span>(example))</span>
+<span id="cb36-4"><a href="project.html#cb36-4" tabindex="-1"></a>testthat<span class="sc">::</span><span class="fu">expect_equal</span>(<span class="fu">analyze</span>(example_df), expected)</span>
+<span id="cb36-5"><a href="project.html#cb36-5" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">analyze</span>(example_df)</span>
+<span id="cb36-6"><a href="project.html#cb36-6" tabindex="-1"></a><span class="cf">if</span>(res <span class="sc">!=</span> expected) <span class="fu">stop</span>(<span class="st">&quot;analyze(example_df) should be &quot;</span>, expected, <span class="st">&quot;, not &quot;</span>, res)</span></code></pre></div>
+<ul>
+<li><code>main_file.qmd</code> with code chunks for</li>
+</ul>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="project.html#cb37-1" tabindex="-1"></a>full_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data_full.csv&quot;</span>)</span>
+<span id="cb37-2"><a href="project.html#cb37-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions.R&quot;</span>)</span>
+<span id="cb37-3"><a href="project.html#cb37-3" tabindex="-1"></a><span class="fu">visualize</span>(<span class="st">&quot;columnname&quot;</span>)</span></code></pre></div>
 </div>
             </section>
 

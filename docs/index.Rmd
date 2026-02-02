@@ -171,7 +171,7 @@ See also the [Rstudio best practice cheatsheet](https://rstudio.github.io/cheats
 -   Use Rstudio projects (File -\> New project). They set the working directory and manage settings & opened scripts.
 -   Never use `setwd()`: others don't have that path and neither do you, after rearranging folders.\
 -   Use relative path names, e.g. `read.table("datafolder/file.txt")` instead of `"C:/Users/berry/Desktop/Project/datafolder/file.txt"`.
--   Put `source("functions.R")` in your main (quarto) script, or write your own [package](https://github.com/brry/course/blob/master/data/packdev.R).
+-   Put `source("functions.R")` in your main (quarto) script (see [project](#project)), or write your own [package](https://github.com/brry/course/blob/master/data/packdev.R).
 
 ### code format
 
@@ -711,16 +711,63 @@ There, change the following entries:
 
 # project
 
-Quick guide: start a research project under version control
+**Start a research project under version control**
 
 -   install [R, Rstudio](#install) and [git](#git)
--   create a new github repository (<https://github.com/new>), initialize with Readme
--   `Code` -\> Copy URL
+-   create a well-named github repository (<https://github.com/new>), initialize with Readme
+-   `Code` -\> Copy URL (SSH)
 -   Rstudio -\> File -\> New Project -\> Version Control -\> Git: paste URL, set subdirectory, create project.
--   Rstudio -\> File -\> New File -\> R script / R markdown
+-   Rstudio -\> File -\> New File -\> R script / quarto document
 -   follow [good practices](#good-practice)
--   Work, then commit changes and push to github
+-   work, then commit changes and push to github
 
+**Organize a research project**
+
+in the git folder you could have something like:
+
+```
+project/
+├── raw_data_large/
+├── reduce_data_size.R
+├── raw_data_small/
+│   ├── file1.csv
+│   └── file2.csv
+├── process_data.R
+├── data_full.csv
+├── functions.R
+├── test_functions.R
+└── main_file.qmd
+```
+
+- `raw_data_large/`   (only locally, i.e. listed in `.gitignore`)
+- `reduce_data_size.R`: read big files, select interesting bits, store in `raw_data_small/` with `write.csv`. If you have (many) text entries with commas but no tabstops, use `write.table(..., sep="\t", row.names=FALSE, fileEncoding="UTF-8")`
+- `process_data.R` with
+```{r, proj_process, eval=FALSE}
+data_csv <- lapply(csvfiles, read.csv)
+data_full <- Reduce(merge, data_csv)
+write.csv(data_full, "data_full.csv")
+```
+- `functions.R` with
+```{r, proj_functions, eval=FALSE}
+helper <- function(x) x
+analyze <- function(df) sapply(df, helper)
+visualize <- function(column) plot(analyze(full_data)[,column])
+```
+- `test_functions.R` with
+```{r, proj_, eval=FALSE}
+source("functions.R")
+helper(input) == expected
+checkmate::assert_number(helper(example))
+testthat::expect_equal(analyze(example_df), expected)
+res <- analyze(example_df)
+if(res != expected) stop("analyze(example_df) should be ", expected, ", not ", res)
+```
+- `main_file.qmd` with code chunks for
+```{r, proj_qmd, eval=FALSE}
+full_data <- read.csv("data_full.csv")
+source("functions.R")
+visualize("columnname")
+```
 
 # VS Code
 
