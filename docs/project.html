@@ -194,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 └── main_file.qmd</code></pre>
 <ul>
 <li><code>raw_data_large/</code> (only locally, i.e. listed in <code>.gitignore</code>)</li>
-<li><code>reduce_data_size.R</code>: read big files, select interesting bits, store in <code>raw_data_small/</code> with <code>write.csv</code>. If you have (many) text entries with commas but no tabstops, use <code>write.table(..., sep="\t", row.names=FALSE, fileEncoding="UTF-8")</code></li>
+<li><code>reduce_data_size.R</code>: read big files, select interesting bits, store in <code>raw_data_small/</code> with <code>write.csv</code>. If you have (many) text entries with commas but no tabstops, use <code>write.table(..., sep="\t", row.names=FALSE, fileEncoding="UTF-8")</code> instead.</li>
 <li><code>process_data.R</code> with</li>
 </ul>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="project.html#cb34-1" tabindex="-1"></a>data_csv <span class="ot">&lt;-</span> <span class="fu">lapply</span>(csvfiles, read.csv)</span>

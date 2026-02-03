@@ -740,7 +740,7 @@ project/
 ```
 
 - `raw_data_large/`   (only locally, i.e. listed in `.gitignore`)
-- `reduce_data_size.R`: read big files, select interesting bits, store in `raw_data_small/` with `write.csv`. If you have (many) text entries with commas but no tabstops, use `write.table(..., sep="\t", row.names=FALSE, fileEncoding="UTF-8")`
+- `reduce_data_size.R`: read big files, select interesting bits, store in `raw_data_small/` with `write.csv`. If you have (many) text entries with commas but no tabstops, use `write.table(..., sep="\t", row.names=FALSE, fileEncoding="UTF-8")` instead.
 - `process_data.R` with
 ```{r, proj_process, eval=FALSE}
 data_csv <- lapply(csvfiles, read.csv)
