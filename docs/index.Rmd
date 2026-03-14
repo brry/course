@@ -44,13 +44,13 @@ In case the table of content on the left is not shown, click the four bars at th
 
 # install {#install}
 
-First install R itself and then Rstudio. Follow the steps below depending on your operating system.\
+First install R itself and then RStudio. Follow the steps below depending on your operating system.\
 Jump to section: [Windows](#windows), [Mac](#mac), [Linux](#linux), [Manjaro](#manjaro-linux)
 
 ### Windows {#windows}
 
 -   install [R](https://cloud.r-project.org/bin/windows/base/release.htm)
--   install [Rstudio](https://posit.co/download/rstudio-desktop/)
+-   install [RStudio](https://posit.co/download/rstudio-desktop/)
 -   change the .RData [settings](#settings) to enhance reproducibility
 
 ### Mac {#mac}
@@ -58,49 +58,32 @@ Jump to section: [Windows](#windows), [Mac](#mac), [Linux](#linux), [Manjaro](#m
 Either
 
 -   install [homebrew](https://brew.sh/)
--   in the Mac terminal, run `brew install --cask r` and `brew install --cask rstudio`
+-   in the terminal, run (one after the other)\
+`brew install --cask r`\
+`brew install --cask rstudio`
 -   change the .RData [settings](#settings) to enhance reproducibility
 
 or
 
 -   install [Xquartz](https://www.xquartz.org/)
--   from [cran.r-project.org/bin/macosx](https://cran.r-project.org/bin/macosx), download the latest release, e.g. `R-4.1.2.pkg`
+-   from [cran.r-project.org/bin/macosx](https://cran.r-project.org/bin/macosx), download the latest release, e.g. `R-4.5.2.pkg`
 -   open the file with 'Installer' and follow the instructions
--   install [Rstudio](https://posit.co/download/rstudio-desktop/)
+-   install [RStudio](https://posit.co/download/rstudio-desktop/)
 -   drag the app to the 'Applications' folder
 -   change the .RData [settings](#settings) to enhance reproducibility
 
 ### Linux {#linux}
 
-Install R on Linux **Ubuntu** ([supported versions](https://cloud.r-project.org/bin/linux/ubuntu/)) so that `sudo apt upgrade` installs the latest R version if outdated (sources: [Kris Eberwein](https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus), [Dean Attali](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04), [Lisa Tagliaferri](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04)):
-
--   open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines one by one.\
-    On Linux **Mint**, replace `$(lsb_release -cs)` with e.g. `jammy` or `noble`, as [listed](https://cloud.r-project.org/bin/linux/ubuntu/).\
-    On **Debian**, find the link [here](https://cloud.r-project.org/bin/linux/debian/).\
-
-```         
-sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" | sudo tee -a /etc/apt/sources.list
-```
-
-Check `/etc/apt/sources.list` manually for the correct link (as referenced above). Make sure there is a `/` at the end.\
-For the next step, other keys may be needed, e.g. <font size="1">95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7</font>
-
-```         
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-sudo apt update
-sudo apt install r-base r-base-dev
-```
-
--   install [Rstudio](https://posit.co/download/rstudio-desktop/)
--   either install that, or on Ubuntu 20.04 (see [LinuxConfig](https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux)):
-
-```         
-sudo apt -y install r-base gdebi-core
-sudo gdebi rstudio-2021.09.1-372-amd64.deb
-```
-
+- open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the lines from the [Ubuntu instructions](https://cloud.r-project.org/bin/linux/ubuntu/) one by one, but:
+   - instead of the last line, use\
+   `sudo apt install r-base r-base-dev`
+   - on Linux **Mint**, replace `$(lsb_release -cs)` with e.g. `jammy` or `noble`
+   - on **Debian**, use this [link](https://cloud.r-project.org/bin/linux/debian/#supported-branches) and 
+[key](https://cloud.r-project.org/bin/linux/debian/#secure-apt)
+- download the [RStudio](https://posit.co/download/rstudio-desktop/) deb file and run:\
+`sudo apt install gdebi-core`\
+`sudo gdebi rstudio-*.deb`
 -   change the .RData [settings](#settings) to enhance reproducibility
-
 -   if you expect to install many packages with non-R dependencies, check out [r2u](https://eddelbuettel.github.io/r2u/)
 
 ### Manjaro Linux {#manjaro-linux}
@@ -112,7 +95,7 @@ sudo gdebi rstudio-2021.09.1-372-amd64.deb
 
 # settings {#settings}
 
-Rstudio settings I strongly suggest for reproducibility:
+RStudio settings I strongly suggest for reproducibility:
 
 -   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - General
     -   **OFF**: Restore .Rdata into workspace at startup\
@@ -163,24 +146,25 @@ Apply best practices when coding!
 -   well tested
 
 The following points are written for R, but apply (in spirit) to Python and other languages as well.  
-See also the [Rstudio best practice cheatsheet](https://rstudio.github.io/cheatsheets/R-best-practice.pdf).
+See also the [RStudio best practice cheatsheet](https://rstudio.github.io/cheatsheets/R-best-practice.pdf).
 
 
 ### organisation / workflow
 
--   Use Rstudio projects (File -\> New project). They set the working directory and manage settings & opened scripts.
--   Never use `setwd()`: others don't have that path and neither do you, after rearranging folders.\
+-   Use RStudio projects (File -\> New project). They set the working directory and manage settings & opened scripts.
+-   Never use `setwd()`: others don't have that path and neither do you, after rearranging folders.
 -   Use relative path names, e.g. `read.table("datafolder/file.txt")` instead of `"C:/Users/berry/Desktop/Project/datafolder/file.txt"`.
 -   Put `source("functions.R")` in your main (quarto) script (see [project](#project)), or write your own [package](https://github.com/brry/course/blob/master/data/packdev.R).
 
 ### code format
 
 -   Follow a style guide consistantly ([example](http://adv-r.had.co.nz/Style.html)).
--   Choose short but descriptive object names.
+-   Choose short but descriptive object names. `df`, `data`, `X` are not!
 -   Use expressive verbs for function names. Functions *do* something.
 -   Functions should call each other, instead of being one big multi-purpose monster.
--   Use Rstudio script sections `\# 1 clean data ----` for an outline (`CTRL`+`SHIFT`+`O`).
+-   Use RStudio script sections `# 1 clean data ----` for an outline (`CTRL`+`SHIFT`+`O`).
 -   Use line breaks (with indentation) to avoid horizontal scrolling (margin [settings](#settings)).
+-   In qmd text sections, use line breaks for version control.
 
 ### code quality
 
@@ -507,9 +491,9 @@ This can be tedious, but needs to be done only once.
 
 -   Download and install git, see <https://git-scm.com/downloads>
 
--   Restart Rstudio (if open)
+-   Restart RStudio (if open)
 
--   Connect git to Rstudio: (instructions [with screenshots](https://www.r-bloggers.com/rstudio-and-github))
+-   Connect git to RStudio: (instructions [with screenshots](https://www.r-bloggers.com/rstudio-and-github))
 
     -   RStudio -\> Tools -\> Global Options -\> Git/SVN: Ensure the path to the Git executable is correct.
     -   `Create SSH Key`, close window
@@ -525,7 +509,7 @@ This can be tedious, but needs to be done only once.
 
 ### use git
 
-To clone a git repo, Rstudio handles most the work for you.
+To clone a git repo, RStudio handles most the work for you.
 
 -   
 
@@ -535,7 +519,7 @@ To clone a git repo, Rstudio handles most the work for you.
 
 -   
 
-    2.  At Rstudio - File - New Project - Version Control - Git,\
+    2.  At RStudio - File - New Project - Version Control - Git,\
         paste the repository URL, set the subdirectory and create project.\
         *I recommend to keep the Project directory name so local and github folder names match exactly.*
 
@@ -550,7 +534,7 @@ To clone a git repo, Rstudio handles most the work for you.
 ### git resources
 
 Happy Git with R: <https://happygitwithr.com>\
-Excellent tutorial on git in general (mostly without Rstudio): <http://kbroman.org/github_tutorial>\
+Excellent tutorial on git in general (mostly without RStudio): <http://kbroman.org/github_tutorial>\
 HPI course: <https://open.hpi.de/courses/git2020>\
 Contribute to OS software: <https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github>
 
@@ -559,7 +543,7 @@ Contribute to OS software: <https://egghead.io/courses/how-to-contribute-to-an-o
 
 quarto documents allow you to mix code and markdown text to generate hassle-free and reproducible reports / presentations / websites. It's a full publishing ecosystem, see [quarto.org](https://quarto.org/). :)
 
-In **Rstudio**, click File -\> New File -\> Quarto Document.\
+In **RStudio**, click File -\> New File -\> Quarto Document.\
 Click "Create" for a template, or "Create Empty Document" on the left for just the file.
 
 In **VScode** under [extensions](https://marketplace.visualstudio.com/items?itemName=quarto.quarto), search for quarto and install quarto-vscode.\
@@ -682,7 +666,7 @@ More on this topic from [Rcrastinate](https://www.r-bloggers.com/2019/05/how-to-
 I like to use sumatra PDF viewer as the default viewer.\
 It doesn't lock files from editing, hence currently opened files can be changed (e.g. by R).
 
-It comes in `Rstudio/resources/app/bin/sumatra` and I like to change some [settings](https://www.sumatrapdfreader.org/settings.html).
+It comes in `RStudio/resources/app/bin/sumatra` and I like to change some [settings](https://www.sumatrapdfreader.org/settings.html).
 
 ### with R
 
@@ -713,11 +697,11 @@ There, change the following entries:
 
 **Start a research project under version control**
 
--   install [R, Rstudio](#install) and [git](#git)
+-   install [R, RStudio](#install) and [git](#git)
 -   create a well-named github repository (<https://github.com/new>), initialize with Readme
 -   `Code` -\> Copy URL (SSH)
--   Rstudio -\> File -\> New Project -\> Version Control -\> Git: paste URL, set subdirectory, create project.
--   Rstudio -\> File -\> New File -\> R script / quarto document
+-   RStudio -\> File -\> New Project -\> Version Control -\> Git: paste URL, set subdirectory, create project.
+-   RStudio -\> File -\> New File -\> R script / quarto document
 -   follow [good practices](#good-practice)
 -   work, then commit changes and push to github
 

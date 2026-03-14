@@ -171,20 +171,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>saveload<a href="saveload.html#saveload" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Store the results of long-running computations on disc.<br />
 The next time a script is run, they are loaded quickly.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="saveload.html#cb29-1" tabindex="-1"></a><span class="cf">if</span>(  <span class="fu">file.exists</span>(<span class="st">&quot;objects.Rdata&quot;</span>)  )</span>
-<span id="cb29-2"><a href="saveload.html#cb29-2" tabindex="-1"></a>  {</span>
-<span id="cb29-3"><a href="saveload.html#cb29-3" tabindex="-1"></a>  <span class="fu">load</span>(<span class="st">&quot;objects.Rdata&quot;</span>) <span class="co"># load previously saved objects</span></span>
-<span id="cb29-4"><a href="saveload.html#cb29-4" tabindex="-1"></a>  }  <span class="cf">else</span></span>
-<span id="cb29-5"><a href="saveload.html#cb29-5" tabindex="-1"></a>  {</span>
-<span id="cb29-6"><a href="saveload.html#cb29-6" tabindex="-1"></a>  obj1 <span class="ot">&lt;-</span>   <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="fl">2e7</span>))             <span class="co"># in the first run,</span></span>
-<span id="cb29-7"><a href="saveload.html#cb29-7" tabindex="-1"></a>  obj2 <span class="ot">&lt;-</span> <span class="fu">median</span>(<span class="fu">rnorm</span>(<span class="fl">2e7</span>))             <span class="co"># compute the objects</span></span>
-<span id="cb29-8"><a href="saveload.html#cb29-8" tabindex="-1"></a>  <span class="fu">save</span>(obj1, obj2, <span class="at">file=</span><span class="st">&quot;objects.Rdata&quot;</span>) <span class="co"># and write them to disc</span></span>
-<span id="cb29-9"><a href="saveload.html#cb29-9" tabindex="-1"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="saveload.html#cb26-1" tabindex="-1"></a><span class="cf">if</span>(  <span class="fu">file.exists</span>(<span class="st">&quot;objects.Rdata&quot;</span>)  )</span>
+<span id="cb26-2"><a href="saveload.html#cb26-2" tabindex="-1"></a>  {</span>
+<span id="cb26-3"><a href="saveload.html#cb26-3" tabindex="-1"></a>  <span class="fu">load</span>(<span class="st">&quot;objects.Rdata&quot;</span>) <span class="co"># load previously saved objects</span></span>
+<span id="cb26-4"><a href="saveload.html#cb26-4" tabindex="-1"></a>  }  <span class="cf">else</span></span>
+<span id="cb26-5"><a href="saveload.html#cb26-5" tabindex="-1"></a>  {</span>
+<span id="cb26-6"><a href="saveload.html#cb26-6" tabindex="-1"></a>  obj1 <span class="ot">&lt;-</span>   <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="fl">2e7</span>))             <span class="co"># in the first run,</span></span>
+<span id="cb26-7"><a href="saveload.html#cb26-7" tabindex="-1"></a>  obj2 <span class="ot">&lt;-</span> <span class="fu">median</span>(<span class="fu">rnorm</span>(<span class="fl">2e7</span>))             <span class="co"># compute the objects</span></span>
+<span id="cb26-8"><a href="saveload.html#cb26-8" tabindex="-1"></a>  <span class="fu">save</span>(obj1, obj2, <span class="at">file=</span><span class="st">&quot;objects.Rdata&quot;</span>) <span class="co"># and write them to disc</span></span>
+<span id="cb26-9"><a href="saveload.html#cb26-9" tabindex="-1"></a>  }</span></code></pre></div>
 <p>If you need to rerun an analysis if the last run is older then 6 hours, this could be the condition:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="saveload.html#cb30-1" tabindex="-1"></a><span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), <span class="fu">file.mtime</span>(<span class="st">&quot;objects.Rdata&quot;</span>), <span class="at">units=</span><span class="st">&quot;h&quot;</span>) <span class="sc">&gt;</span> <span class="dv">6</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="saveload.html#cb27-1" tabindex="-1"></a><span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), <span class="fu">file.mtime</span>(<span class="st">&quot;objects.Rdata&quot;</span>), <span class="at">units=</span><span class="st">&quot;h&quot;</span>) <span class="sc">&gt;</span> <span class="dv">6</span></span></code></pre></div>
 <p>For a single object, a good alternative to <code>save</code> and <code>load</code> is:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="saveload.html#cb31-1" tabindex="-1"></a><span class="fu">saveRDS</span>(one_single_object, <span class="st">&quot;object.Rdata&quot;</span>)</span>
-<span id="cb31-2"><a href="saveload.html#cb31-2" tabindex="-1"></a>explicit_object_name <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;object.Rdata&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="saveload.html#cb28-1" tabindex="-1"></a><span class="fu">saveRDS</span>(one_single_object, <span class="st">&quot;object.Rdata&quot;</span>)</span>
+<span id="cb28-2"><a href="saveload.html#cb28-2" tabindex="-1"></a>explicit_object_name <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;object.Rdata&quot;</span>)</span></code></pre></div>
 <p>More on this topic from <a href="https://www.r-bloggers.com/2019/05/how-to-save-and-load-datasets-in-r-an-overview/">Rcrastinate</a></p>
 </div>
             </section>

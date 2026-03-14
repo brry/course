@@ -169,13 +169,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="install" class="section level1 hasAnchor">
 <h1>install<a href="install.html#install" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>First install R itself and then Rstudio. Follow the steps below depending on your operating system.<br />
+<p>First install R itself and then RStudio. Follow the steps below depending on your operating system.<br />
 Jump to section: <a href="install.html#windows">Windows</a>, <a href="install.html#mac">Mac</a>, <a href="install.html#linux">Linux</a>, <a href="install.html#manjaro-linux">Manjaro</a></p>
 <div id="windows" class="section level3 hasAnchor">
 <h3>Windows<a href="install.html#windows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>install <a href="https://cloud.r-project.org/bin/windows/base/release.htm">R</a></li>
-<li>install <a href="https://posit.co/download/rstudio-desktop/">Rstudio</a></li>
+<li>install <a href="https://posit.co/download/rstudio-desktop/">RStudio</a></li>
 <li>change the .RData <a href="settings.html#settings">settings</a> to enhance reproducibility</li>
 </ul>
 </div>
@@ -184,43 +184,37 @@ Jump to section: <a href="install.html#windows">Windows</a>, <a href="install.ht
 <p>Either</p>
 <ul>
 <li>install <a href="https://brew.sh/">homebrew</a></li>
-<li>in the Mac terminal, run <code>brew install --cask r</code> and <code>brew install --cask rstudio</code></li>
+<li>in the terminal, run (one after the other)<br />
+<code>brew install --cask r</code><br />
+<code>brew install --cask rstudio</code></li>
 <li>change the .RData <a href="settings.html#settings">settings</a> to enhance reproducibility</li>
 </ul>
 <p>or</p>
 <ul>
 <li>install <a href="https://www.xquartz.org/">Xquartz</a></li>
-<li>from <a href="https://cran.r-project.org/bin/macosx">cran.r-project.org/bin/macosx</a>, download the latest release, e.g. <code>R-4.1.2.pkg</code></li>
+<li>from <a href="https://cran.r-project.org/bin/macosx">cran.r-project.org/bin/macosx</a>, download the latest release, e.g. <code>R-4.5.2.pkg</code></li>
 <li>open the file with ‘Installer’ and follow the instructions</li>
-<li>install <a href="https://posit.co/download/rstudio-desktop/">Rstudio</a></li>
+<li>install <a href="https://posit.co/download/rstudio-desktop/">RStudio</a></li>
 <li>drag the app to the ‘Applications’ folder</li>
 <li>change the .RData <a href="settings.html#settings">settings</a> to enhance reproducibility</li>
 </ul>
 </div>
 <div id="linux" class="section level3 hasAnchor">
 <h3>Linux<a href="install.html#linux" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Install R on Linux <strong>Ubuntu</strong> (<a href="https://cloud.r-project.org/bin/linux/ubuntu/">supported versions</a>) so that <code>sudo apt upgrade</code> installs the latest R version if outdated (sources: <a href="https://www.r-bloggers.com/how-to-install-r-on-linux-ubuntu-16-04-xenial-xerus">Kris Eberwein</a>, <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04">Dean Attali</a>, <a href="https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-20-04">Lisa Tagliaferri</a>):</p>
 <ul>
-<li>open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the following lines one by one.<br />
-On Linux <strong>Mint</strong>, replace <code>$(lsb_release -cs)</code> with e.g. <code>jammy</code> or <code>noble</code>, as <a href="https://cloud.r-project.org/bin/linux/ubuntu/">listed</a>.<br />
-On <strong>Debian</strong>, find the link <a href="https://cloud.r-project.org/bin/linux/debian/">here</a>.<br />
-</li>
-</ul>
-<pre><code>sudo echo &quot;deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/&quot; | sudo tee -a /etc/apt/sources.list</code></pre>
-<p>Check <code>/etc/apt/sources.list</code> manually for the correct link (as referenced above). Make sure there is a <code>/</code> at the end.<br />
-For the next step, other keys may be needed, e.g. <font size="1">95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7</font></p>
-<pre><code>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-sudo apt update
-sudo apt install r-base r-base-dev</code></pre>
+<li>open a terminal (CTRL+ALT+T) and paste (CTRL+SHIFT+V) the lines from the <a href="https://cloud.r-project.org/bin/linux/ubuntu/">Ubuntu instructions</a> one by one, but:
 <ul>
-<li>install <a href="https://posit.co/download/rstudio-desktop/">Rstudio</a></li>
-<li>either install that, or on Ubuntu 20.04 (see <a href="https://linuxconfig.org/how-to-install-rstudio-on-ubuntu-20-04-focal-fossa-linux">LinuxConfig</a>):</li>
-</ul>
-<pre><code>sudo apt -y install r-base gdebi-core
-sudo gdebi rstudio-2021.09.1-372-amd64.deb</code></pre>
-<ul>
-<li><p>change the .RData <a href="settings.html#settings">settings</a> to enhance reproducibility</p></li>
-<li><p>if you expect to install many packages with non-R dependencies, check out <a href="https://eddelbuettel.github.io/r2u/">r2u</a></p></li>
+<li>instead of the last line, use<br />
+<code>sudo apt install r-base r-base-dev</code></li>
+<li>on Linux <strong>Mint</strong>, replace <code>$(lsb_release -cs)</code> with e.g. <code>jammy</code> or <code>noble</code></li>
+<li>on <strong>Debian</strong>, use this <a href="https://cloud.r-project.org/bin/linux/debian/#supported-branches">link</a> and
+<a href="https://cloud.r-project.org/bin/linux/debian/#secure-apt">key</a></li>
+</ul></li>
+<li>download the <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> deb file and run:<br />
+<code>sudo apt install gdebi-core</code><br />
+<code>sudo gdebi rstudio-*.deb</code></li>
+<li>change the .RData <a href="settings.html#settings">settings</a> to enhance reproducibility</li>
+<li>if you expect to install many packages with non-R dependencies, check out <a href="https://eddelbuettel.github.io/r2u/">r2u</a></li>
 </ul>
 </div>
 <div id="manjaro-linux" class="section level3 hasAnchor">

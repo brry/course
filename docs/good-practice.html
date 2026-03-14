@@ -186,14 +186,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>well tested</li>
 </ul>
 <p>The following points are written for R, but apply (in spirit) to Python and other languages as well.<br />
-See also the <a href="https://rstudio.github.io/cheatsheets/R-best-practice.pdf">Rstudio best practice cheatsheet</a>.</p>
+See also the <a href="https://rstudio.github.io/cheatsheets/R-best-practice.pdf">RStudio best practice cheatsheet</a>.</p>
 </div>
 <div id="organisation-workflow" class="section level3 hasAnchor">
 <h3>organisation / workflow<a href="good-practice.html#organisation-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Use Rstudio projects (File -&gt; New project). They set the working directory and manage settings &amp; opened scripts.</li>
-<li>Never use <code>setwd()</code>: others don’t have that path and neither do you, after rearranging folders.<br />
-</li>
+<li>Use RStudio projects (File -&gt; New project). They set the working directory and manage settings &amp; opened scripts.</li>
+<li>Never use <code>setwd()</code>: others don’t have that path and neither do you, after rearranging folders.</li>
 <li>Use relative path names, e.g. <code>read.table("datafolder/file.txt")</code> instead of <code>"C:/Users/berry/Desktop/Project/datafolder/file.txt"</code>.</li>
 <li>Put <code>source("functions.R")</code> in your main (quarto) script (see <a href="project.html#project">project</a>), or write your own <a href="https://github.com/brry/course/blob/master/data/packdev.R">package</a>.</li>
 </ul>
@@ -202,11 +201,12 @@ See also the <a href="https://rstudio.github.io/cheatsheets/R-best-practice.pdf"
 <h3>code format<a href="good-practice.html#code-format" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Follow a style guide consistantly (<a href="http://adv-r.had.co.nz/Style.html">example</a>).</li>
-<li>Choose short but descriptive object names.</li>
+<li>Choose short but descriptive object names. <code>df</code>, <code>data</code>, <code>X</code> are not!</li>
 <li>Use expressive verbs for function names. Functions <em>do</em> something.</li>
 <li>Functions should call each other, instead of being one big multi-purpose monster.</li>
-<li>Use Rstudio script sections <code>\# 1 clean data ----</code> for an outline (<code>CTRL</code>+<code>SHIFT</code>+<code>O</code>).</li>
+<li>Use RStudio script sections <code># 1 clean data ----</code> for an outline (<code>CTRL</code>+<code>SHIFT</code>+<code>O</code>).</li>
 <li>Use line breaks (with indentation) to avoid horizontal scrolling (margin <a href="settings.html#settings">settings</a>).</li>
+<li>In qmd text sections, use line breaks for version control.</li>
 </ul>
 </div>
 <div id="code-quality" class="section level3 hasAnchor">
