@@ -767,18 +767,21 @@ There, change the following entries:
 For VScode, R needs to be on the PATH (locations where executables are found).  
 You can check this in the **Terminal**, also known as console, shell, bash, cmd.
 
+For most other things (like `git add -A` or `git clean -fd`), you can use the terminal built into your IDE (RStudio, VScode).  
+For this particular check, I suggest using a clean OS-provided terminal:
+
 ### Mac OS
 
 - search (`CMD` + `SPACE`) for "Terminal"
 - run the command `R`
-- if it succeeds, it shows some version info
+- if it succeeds, it shows the R version and other info
 - quit with `q("no")`
 
 ### Windows
 
 - search (`Windows key`) for "Terminal"
 - run the command `R.exe` (if not using the Windows Powershell, just `R`)
-- if it succeeds, it shows some version info
+- if it succeeds, it shows the R version and other info
 - quit with `q("no")`
 - if R is not found / recognized, add it to the _system_ (not user) PATH:
     - copy the path where you installed R  -  or  - in RStudio -> Tools -> Global Options,

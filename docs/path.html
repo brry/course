@@ -172,12 +172,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>PATH<a href="path.html#path" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>For VScode, R needs to be on the PATH (locations where executables are found).<br />
 You can check this in the <strong>Terminal</strong>, also known as console, shell, bash, cmd.</p>
+<p>For most other things (like <code>git add -A</code> or <code>git clean -fd</code>), you can use the terminal built into your IDE (RStudio, VScode).<br />
+For this particular check, I suggest using a clean OS-provided terminal:</p>
 <div id="mac-os" class="section level3 hasAnchor">
 <h3>Mac OS<a href="path.html#mac-os" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>search (<code>CMD</code> + <code>SPACE</code>) for “Terminal”</li>
 <li>run the command <code>R</code></li>
-<li>if it succeeds, it shows some version info</li>
+<li>if it succeeds, it shows the R version and other info</li>
 <li>quit with <code>q("no")</code></li>
 </ul>
 </div>
@@ -186,7 +188,7 @@ You can check this in the <strong>Terminal</strong>, also known as console, shel
 <ul>
 <li>search (<code>Windows key</code>) for “Terminal”</li>
 <li>run the command <code>R.exe</code> (if not using the Windows Powershell, just <code>R</code>)</li>
-<li>if it succeeds, it shows some version info</li>
+<li>if it succeeds, it shows the R version and other info</li>
 <li>quit with <code>q("no")</code></li>
 <li>if R is not found / recognized, add it to the <em>system</em> (not user) PATH:
 <ul>
