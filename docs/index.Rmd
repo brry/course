@@ -133,7 +133,7 @@ Settings I use for compatibility and ease of use:
 Apply best practices when coding!
 
 -   Write readable code that is easy to maintain (see below).
--   Use [version control](#git) with a single source of truth (SSOT).
+-   Use [version control](#git) with a single source of truth (SSOT). Do not have duplicate code versions in both .qmd and .R/py scripts.
 -   For reports / presentations, use [quarto](#quarto) instead of separate files with scripts, Jupyter notebook, images, code outputs, word document.
 
 ### good code
@@ -155,6 +155,8 @@ See also the [RStudio best practice cheatsheet](https://rstudio.github.io/cheats
 -   Never use `setwd()`: others don't have that path and neither do you, after rearranging folders.
 -   Use relative path names, e.g. `read.table("datafolder/file.txt")` instead of `"C:/Users/berry/Desktop/Project/datafolder/file.txt"`.
 -   Put `source("functions.R")` in your main (quarto) script (see [project](#project)), or write your own [package](https://github.com/brry/course/blob/master/data/packdev.R).
+-   Use short informative script names without spaces.
+-   Reference the source / authors of copied code (including chatbot model info).
 
 ### code format
 
@@ -165,6 +167,7 @@ See also the [RStudio best practice cheatsheet](https://rstudio.github.io/cheats
 -   Use RStudio script sections `# 1 clean data ----` for an outline (`CTRL`+`SHIFT`+`O`).
 -   Use line breaks (with indentation) to avoid horizontal scrolling (margin [settings](#settings)).
 -   In qmd text sections, use line breaks for version control.
+-   In qmd documents, use short code chunk names (labels) with no spaces. 
 
 ### code quality
 
@@ -394,7 +397,9 @@ At the top of a script, conditionally install all needed packages.
 For a single package, you could use
 
 ```{r packinst, eval=FALSE}
-if(!requireNamespace("berryFunctions", quietly=TRUE)) install.packages("berryFunctions")
+# if package cannot be loaded, install it:
+if(!requireNamespace("berryFunctions", quietly=TRUE)) 
+  install.packages("berryFunctions")
 ```
 
 To depend on a certain development version, use
@@ -413,6 +418,9 @@ When using several packages, use
 if(!requireNamespace("pacman", quietly=TRUE)) install.packages("pacman")
 pacman::p_load("berryFunctions", "rdwd")
 ```
+
+If you know of a short, elegant way to conditionally install packs without loading them, please let me know. (`pak::pkg_install` re-installs packages and creates local directories, no bueno.)
+
 
 ### issues {#issues}
 
