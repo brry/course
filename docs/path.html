@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>good practice | R course</title>
-  <meta name="description" content="good practice | R course" />
+  <title>PATH | R course</title>
+  <meta name="description" content="PATH | R course" />
   <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="good practice | R course" />
+  <meta property="og:title" content="PATH | R course" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="good practice | R course" />
+  <meta name="twitter:title" content="PATH | R course" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="settings.html"/>
-<link rel="next" href="elegant-code.html"/>
+<link rel="prev" href="sumatra.html"/>
+<link rel="next" href="vs-code.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -168,69 +168,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="good-practice" class="section level1 hasAnchor">
-<h1>good practice<a href="good-practice.html#good-practice" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Apply best practices when coding!</p>
+<div id="path" class="section level1 hasAnchor">
+<h1>PATH<a href="path.html#path" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For VScode, R needs to be on the PATH (locations where executables are found).<br />
+You can check this in the <strong>Terminal</strong>, also known as console, shell, bash, cmd.</p>
+<div id="mac-os" class="section level3 hasAnchor">
+<h3>Mac OS<a href="path.html#mac-os" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Write readable code that is easy to maintain (see below).</li>
-<li>Use <a href="git.html#git">version control</a> with a single source of truth (SSOT). Do not have duplicate code versions in both .qmd and .R/py scripts.</li>
-<li>For reports / presentations, use <a href="quarto.html#quarto">quarto</a> instead of separate files with scripts, Jupyter notebook, images, code outputs, word document.</li>
-</ul>
-<div id="good-code" class="section level3 hasAnchor">
-<h3>good code<a href="good-practice.html#good-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>clear</li>
-<li>simple (one job per function)</li>
-<li>documented</li>
-<li>performant</li>
-<li>bug-free</li>
-<li>well tested</li>
-</ul>
-<p>The following points are written for R, but apply (in spirit) to Python and other languages as well.<br />
-See also the <a href="https://rstudio.github.io/cheatsheets/R-best-practice.pdf">RStudio best practice cheatsheet</a>.</p>
-</div>
-<div id="organisation-workflow" class="section level3 hasAnchor">
-<h3>organisation / workflow<a href="good-practice.html#organisation-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Use RStudio projects (File -&gt; New project). They set the working directory and manage settings &amp; opened scripts.</li>
-<li>Never use <code>setwd()</code>: others don’t have that path and neither do you, after rearranging folders.</li>
-<li>Use relative path names, e.g. <code>read.table("datafolder/file.txt")</code> instead of <code>"C:/Users/berry/Desktop/Project/datafolder/file.txt"</code>.</li>
-<li>Put <code>source("functions.R")</code> in your main (quarto) script (see <a href="project.html#project">project</a>), or write your own <a href="https://github.com/brry/course/blob/master/data/packdev.R">package</a>.</li>
-<li>Use short informative script names without spaces.</li>
-<li>Reference the source / authors of copied code (including chatbot model info).</li>
+<li>search (<code>CMD</code> + <code>SPACE</code>) for “Terminal”</li>
+<li>run the command <code>R</code></li>
+<li>if it succeeds, it shows some version info</li>
+<li>quit with <code>q("no")</code></li>
 </ul>
 </div>
-<div id="code-format" class="section level3 hasAnchor">
-<h3>code format<a href="good-practice.html#code-format" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="windows-1" class="section level3 hasAnchor">
+<h3>Windows<a href="path.html#windows-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Follow a style guide consistantly (<a href="http://adv-r.had.co.nz/Style.html">example</a>).</li>
-<li>Choose short but descriptive object names. <code>df</code>, <code>data</code>, <code>X</code> are not!</li>
-<li>Use expressive verbs for function names. Functions <em>do</em> something.</li>
-<li>Functions should call each other, instead of being one big multi-purpose monster.</li>
-<li>Use RStudio script sections <code># 1 clean data ----</code> for an outline (<code>CTRL</code>+<code>SHIFT</code>+<code>O</code>).</li>
-<li>Use line breaks (with indentation) to avoid horizontal scrolling (margin <a href="settings.html#settings">settings</a>).</li>
-<li>In qmd text sections, use line breaks for version control.</li>
-<li>In qmd documents, use short code chunk names (labels) with no spaces.</li>
-</ul>
-</div>
-<div id="code-quality" class="section level3 hasAnchor">
-<h3>code quality<a href="good-practice.html#code-quality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<li>search (<code>Windows key</code>) for “Terminal”</li>
+<li>run the command <code>R.exe</code> (if not using the Windows Powershell, just <code>R</code>)</li>
+<li>if it succeeds, it shows some version info</li>
+<li>quit with <code>q("no")</code></li>
+<li>if R is not found / recognized, add it to the <em>system</em> (not user) PATH:
 <ul>
-<li>Vectorize code whenever possible.</li>
-<li>If not, use <code>lapply/sapply</code> instead of <code>for</code> loops (lesson 4.3 and 8.3).</li>
-<li>DRY: don’t repeat yourself.</li>
-<li>Write <a href="https://www.r-bloggers.com/2018/07/the-ten-rules-of-defensive-programming-in-r/">defensive code</a> that checks inputs (lesson 8.1).</li>
-<li>Use arrays for all-numeric data (lesson 4.4).</li>
-<li>Do not load &gt;2 packages from the library, instead use <code>pack::fun</code>.</li>
-<li>Install <a href="packages.html#packages">packages</a> conditionally.</li>
-<li>Do not create more objects than needed, clean up with <code>rm</code>.</li>
-<li>Make sure your code runs in a clean session:
-<ul>
-<li><code>CTRL</code>+<code>SHIFT</code>+<code>F10</code> to restart R with a clean workspace (Rdata <a href="settings.html#settings">settings</a>)</li>
-<li><code>source()</code> the entire script with <code>CTRL</code>+<code>SHIFT</code>+<code>S</code>.</li>
+<li>copy the path where you installed R - or - in RStudio -&gt; Tools -&gt; Global Options,
+copy the path (e.g. <code>C:\Program Files\R\R-4.5.1)</code></li>
+<li>search (<code>Windows key</code>) for “env”, click “Edit the system environment variables”,
+then “Environment Variables” (<a href="https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/">guide with images</a>)</li>
+<li>under “<strong>System</strong> Variables” (in the bottom half) double click on “Path”</li>
+<li>click “New” and copy-paste your installation location (if from RStudio, add <code>\bin</code> at the end)</li>
+<li>close the variable windows + the terminal, open a new one and try <code>R</code>/<code>R.exe</code> again.<br />
+Potentially restart Windows inbetween.</li>
 </ul></li>
 </ul>
-<p>To practice writing good R code, improve the examples in <a href="elegant-code.html#elegant-code">elegant code</a>.</p>
 </div>
 </div>
             </section>
@@ -238,8 +207,8 @@ See also the <a href="https://rstudio.github.io/cheatsheets/R-best-practice.pdf"
           </div>
         </div>
       </div>
-<a href="settings.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="elegant-code.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sumatra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vs-code.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
