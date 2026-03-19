@@ -762,6 +762,35 @@ There, change the following entries:
 -   `DefaultDisplayMode = single page`
 
 
+# PATH
+
+For VScode, R needs to be on the PATH (locations where executables are found).  
+You can check this in the **Terminal**, also known as console, shell, bash, cmd.
+
+### Mac OS
+
+- search (`CMD` + `SPACE`) for "Terminal"
+- run the command `R`
+- if it succeeds, it shows some version info
+- quit with `q("no")`
+
+### Windows
+
+- search (`Windows key`) for "Terminal"
+- run the command `R.exe` (if not using the Windows Powershell, just `R`)
+- if it succeeds, it shows some version info
+- quit with `q("no")`
+- if R is not found / recognized, add it to the _system_ (not user) PATH:
+    - copy the path where you installed R  -  or  - in RStudio -> Tools -> Global Options,
+      copy the path (e.g. `C:\Program Files\R\R-4.5.1)` 
+    - search (`Windows key`)  for "env", click "Edit the system environment variables",
+      then "Environment Variables" ([guide with images](https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/))
+    - under "**System** Variables" (in the bottom half) double click on "Path"
+    - click "New" and copy-paste your installation location (if from RStudio, add `\bin` at the end)
+    - close the variable windows + the terminal, open a new one and try `R`/`R.exe` again.  
+      Potentially restart Windows inbetween.
+      
+      
 # VS Code
 
 Integrate RStudio-like features to Visual Studio Code. This includes syntax highlighting, script execution, accessing R help, and visual representation of plots.
