@@ -679,6 +679,7 @@ detailed problems
 - Coders with AI assistance write more [security leaks](https://www.louisbouchard.ai/genai-coding-risks) (with less awareness of them)
 - AI assistants actually [slow down software development](https://open.substack.com/pub/mikelovesrobots/p/wheres-the-shovelware-why-ai-coding) ([reproducible](https://arxiv.org/abs/2507.09089
 ))
+- AI-generated code contains [more bugs and errors](https://www.techradar.com/pro/security/ai-generated-code-contains-more-bugs-and-errors-than-human-output) than human output
 - AI coding tools chase phantom bugs and [destroy real production databases](https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/)
 - Vibe coding creates [unmaintainable code](https://open.substack.com/pub/addyo/p/vibe-coding-is-not-the-same-as-ai) without engineering discipline
 - AI coding collapses under real-world pressure, requires [expertise for final 30%](https://open.substack.com/pub/addyo/p/the-70-problem-hard-truths-about)
@@ -686,8 +687,11 @@ detailed problems
 - 95% of companies see [no return on AI investment](https://www.reddit.com/r/cscareerquestions/s/JHrH5pGxDU)
  (reasons [why](https://open.substack.com/pub/garymarcus/p/why-is-the-roi-on-generative-ai-so))
 - With increasing complexity, it gets [harder to check](https://open.substack.com/pub/oneusefulthing/p/on-working-with-wizards) if AI output is correct
-- AI usage [degrades our ability to catch bugs]( https://codebytom.blog/2025/07/the-hidden-cost-of-ai-reliance), creates a reliability problem
+- AI usage [degrades our ability to catch bugs](https://codebytom.blog/2025/07/the-hidden-cost-of-ai-reliance), creates a reliability problem
 - AI output [lowers skepticism](https://open.substack.com/pub/addyo/p/treat-ai-generated-code-as-a-draft) during reviews, stunts junior devs knowledge gain
+- Gen-AI-assisted changes cause outages, [decrease maintainability](https://garymarcus.substack.com/p/a-spate-of-outages-including-incidents)
+- AI-written code causes [security breaches](https://www.techradar.com/pro/security/one-in-five-security-breaches-now-thought-to-be-caused-by-ai-written-code), hard to track down vulnerabilites
+
 
 on learning 
 
@@ -695,6 +699,7 @@ on learning
 - AI stunts intellectual [development as engineer](https://open.substack.com/pub/theargument/p/chatgpt-and-the-end-of-learning) + reasoning about complex concepts
 - Chatbots threaten [critical thinking](https://www.forkingpaths.co/p/the-death-of-the-student-essayand) and cognitive development skills
 - Students using AI lose [critical skills](https://mileswilliams.substack.com/p/ai-data-and-international-relations) and become dependent on unreliable tools
+- LLM-assisted writing [lowers cognitive activity](https://arxiv.org/abs/2506.08872), engagement, memory recall, ownership
 
 
 # saveload
