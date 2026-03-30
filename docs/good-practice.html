@@ -196,7 +196,7 @@ See also the <a href="https://rstudio.github.io/cheatsheets/R-best-practice.pdf"
 <li>Never use <code>setwd()</code>: others don’t have that path and neither do you, after rearranging folders.</li>
 <li>Use relative path names, e.g. <code>read.table("datafolder/file.txt")</code> instead of <code>"C:/Users/berry/Desktop/Project/datafolder/file.txt"</code>.</li>
 <li>Put <code>source("functions.R")</code> in your main (quarto) script (see <a href="project.html#project">project</a>), or write your own <a href="https://github.com/brry/course/blob/master/data/packdev.R">package</a>.</li>
-<li>Use short informative script names without spaces.</li>
+<li>Use short informative folder + script names without spaces.</li>
 <li>Reference the source / authors of copied code (including chatbot model info).</li>
 </ul>
 </div>
@@ -209,7 +209,7 @@ See also the <a href="https://rstudio.github.io/cheatsheets/R-best-practice.pdf"
 <li>Functions should call each other, instead of being one big multi-purpose monster.</li>
 <li>Use RStudio script sections <code># 1 clean data ----</code> for an outline (<code>CTRL</code>+<code>SHIFT</code>+<code>O</code>).</li>
 <li>Use line breaks (with indentation) to avoid horizontal scrolling (margin <a href="settings.html#settings">settings</a>).</li>
-<li>In qmd text sections, use line breaks for version control.</li>
+<li>In qmd text sections, use line breaks for nicer version control history.</li>
 <li>In qmd documents, use short code chunk names (labels) with no spaces.</li>
 </ul>
 </div>

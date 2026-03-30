@@ -155,7 +155,7 @@ See also the [RStudio best practice cheatsheet](https://rstudio.github.io/cheats
 -   Never use `setwd()`: others don't have that path and neither do you, after rearranging folders.
 -   Use relative path names, e.g. `read.table("datafolder/file.txt")` instead of `"C:/Users/berry/Desktop/Project/datafolder/file.txt"`.
 -   Put `source("functions.R")` in your main (quarto) script (see [project](#project)), or write your own [package](https://github.com/brry/course/blob/master/data/packdev.R).
--   Use short informative script names without spaces.
+-   Use short informative folder + script names without spaces.
 -   Reference the source / authors of copied code (including chatbot model info).
 
 ### code format
@@ -166,7 +166,7 @@ See also the [RStudio best practice cheatsheet](https://rstudio.github.io/cheats
 -   Functions should call each other, instead of being one big multi-purpose monster.
 -   Use RStudio script sections `# 1 clean data ----` for an outline (`CTRL`+`SHIFT`+`O`).
 -   Use line breaks (with indentation) to avoid horizontal scrolling (margin [settings](#settings)).
--   In qmd text sections, use line breaks for version control.
+-   In qmd text sections, use line breaks for nicer version control history.
 -   In qmd documents, use short code chunk names (labels) with no spaces. 
 
 ### code quality
@@ -691,6 +691,8 @@ detailed problems
 - AI output [lowers skepticism](https://open.substack.com/pub/addyo/p/treat-ai-generated-code-as-a-draft) during reviews, stunts junior devs knowledge gain
 - Gen-AI-assisted changes cause outages, [decrease maintainability](https://garymarcus.substack.com/p/a-spate-of-outages-including-incidents)
 - AI-written code causes [security breaches](https://www.techradar.com/pro/security/one-in-five-security-breaches-now-thought-to-be-caused-by-ai-written-code), hard to track down vulnerabilites
+- LLMs are [bad at conceptual programming](https://open.substack.com/pub/clauswilke/p/llms-excel-at-programminghow-can) 
+- Medical X-ray [benchmark scores are worthless](https://arxiv.org/abs/2603.21687) (top rank without using an image)
 
 
 on learning 
