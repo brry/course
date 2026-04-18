@@ -693,7 +693,10 @@ detailed problems
 - AI-written code causes [security breaches](https://www.techradar.com/pro/security/one-in-five-security-breaches-now-thought-to-be-caused-by-ai-written-code), hard to track down vulnerabilites
 - LLMs are [bad at conceptual programming](https://open.substack.com/pub/clauswilke/p/llms-excel-at-programminghow-can) 
 - Medical X-ray [benchmark scores are worthless](https://arxiv.org/abs/2603.21687) (top rank without using an image)
-
+- ChatGPT cannot reliably keep track of [time](https://gizmodo.com/sam-altman-says-itll-take-another-year-before-chatgpt-can-start-a-timer-2000743487)
+- Widespread AI usage takes a large [toll on senior developers](https://techtrenches.dev/p/the-human-cost-of-10x-how-ai-is-physically) through additional maintenance
+- AI adoption stalls, [performance gains plateau](https://hbr.org/2026/02/why-ai-adoption-stalls-according-to-industry-data), AI fails to deliver durable impact
+- Claude code itself has "[corner-cutting](https://techtrenches.dev/p/the-snake-that-ate-itself-what-claude) and wilful blindness at scale"
 
 on learning 
 
