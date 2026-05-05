@@ -679,7 +679,7 @@ The internet
 - 2026-04: AI agents [still destroy production databases](https://garymarcus.substack.com/p/dario-amodei-hype-ai-safety-and-the) and cannot be trusted
 - 2026-04: sycophantic AI reduces healthy skepticism, AI [agents need clear specs](https://open.substack.com/pub/handyai/p/your-ceo-is-suffering-from-ai-psychosis)
 - 2026-04: as a society, we may [forget how to code](https://techtrenches.dev/p/the-west-forgot-how-to-make-things) and have a hard time re-learning
-- 2026-04: widespread AI usage takes a large [toll on senior developers](https://techtrenches.dev/p/the-human-cost-of-10x-how-ai-is-physically) through additional maintenance
+- 2026-04: widespread AI usage creates additional [maintenance load on senior developers](https://techtrenches.dev/p/the-human-cost-of-10x-how-ai-is-physically)
 - 2026-04: Claude code itself has "[corner-cutting](https://techtrenches.dev/p/the-snake-that-ate-itself-what-claude) and wilful blindness at scale"
 - 2026-04: ChatGPT cannot reliably keep track of [time](https://gizmodo.com/sam-altman-says-itll-take-another-year-before-chatgpt-can-start-a-timer-2000743487)
 - 2026-03: AI adoption [decreases delivery speed](https://dev.to/alexcloudstar/the-ai-productivity-paradox-why-developers-who-ship-more-code-are-not-actually-more-productive-12f7) and causes a drop in system stability
