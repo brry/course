@@ -173,30 +173,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>git is a version control software. With it, you can download repositories, track your changes and develop code collaboratively.</p>
 <div id="install-git" class="section level3 hasAnchor">
 <h3>install git<a href="git.html#install-git" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This can be tedious, but needs to be done only once.</p>
+<p><em>This needs to be done only once :)</em></p>
 <ul>
 <li><p>If not already done before: create a github account at <a href="https://github.com/signup" class="uri">https://github.com/signup</a>. Use a short username!</p></li>
 <li><p>Download and install git, see <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></p></li>
 <li><p>Restart RStudio (if open)</p></li>
-<li><p>Connect git to RStudio: (instructions <a href="https://www.r-bloggers.com/rstudio-and-github">with screenshots</a>)</p>
+<li><p>Manage authentification without renewing PAT access tokes via SSH (<a href="https://www.r-bloggers.com/rstudio-and-github">screenshots</a> for these instructions, if wanted):</p>
 <ul>
 <li>RStudio -&gt; Tools -&gt; Global Options -&gt; Git/SVN: Ensure the path to the Git executable is correct.</li>
 <li><code>Create SSH Key</code>, close window</li>
 <li><code>View public key</code>: copy the displayed public key</li>
-<li>go to <a href="https://github.com/settings/keys" class="uri">https://github.com/settings/keys</a> and click <code>New SSH key</code>, paste the public key</li>
-<li>in the RStudio bottom Tab <code>Terminal</code>: type the following:</li>
+<li>go to <a href="https://github.com/settings/keys" class="uri">https://github.com/settings/keys</a> and click <code>New SSH key</code>, name it and paste the public key</li>
+<li>in the RStudio bottom/left Tab <code>Terminal</code>: type the following (line by line):</li>
 </ul>
 <pre><code>git version # just to see git works fine
-git config --global user.email &quot;YourEmail@domain.com&quot;
-git config --global user.name &quot;YourUserNameHere&quot;</code></pre></li>
+git config --global user.email &quot;Your_Email_Used_For_Github@domain.com&quot;
+git config --global user.name &quot;Your_Github_UserName_Here&quot;</code></pre></li>
 </ul>
 </div>
 <div id="use-git" class="section level3 hasAnchor">
 <h3>use git<a href="git.html#use-git" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To clone a git repo, RStudio handles most the work for you.</p>
+<p><em>To clone a git repo, RStudio handles most the work for you :)</em></p>
 <ul>
 <li><ol style="list-style-type: decimal">
-<li>Go to a repo (for example <a href="https://github.com/brry/fpsetup">github.com/brry/fpsetup</a>) and click on <span style="background-color:lime">Code</span> - Copy URL</li>
+<li>Go to a repo (for example <a href="https://github.com/brry/fpsetup">github.com/brry/fpsetup</a>) and click on <span style="background-color:lime">Code</span> - SSH <em>(if logged in)</em> - Copy URL</li>
 </ol></li>
 </ul>
 <p><img src="https://github.com/brry/course/raw/master/externalfig/git_clone_1.PNG" /></p>

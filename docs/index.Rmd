@@ -554,7 +554,7 @@ git is a version control software. With it, you can download repositories, track
 
 ### install git
 
-This can be tedious, but needs to be done only once.
+*This needs to be done only once :)*
 
 -   If not already done before: create a github account at <https://github.com/signup>. Use a short username!
 
@@ -562,27 +562,27 @@ This can be tedious, but needs to be done only once.
 
 -   Restart RStudio (if open)
 
--   Connect git to RStudio: (instructions [with screenshots](https://www.r-bloggers.com/rstudio-and-github))
+-   Manage authentification without renewing PAT access tokes via SSH ([screenshots](https://www.r-bloggers.com/rstudio-and-github) for these instructions, if wanted):
 
     -   RStudio -\> Tools -\> Global Options -\> Git/SVN: Ensure the path to the Git executable is correct.
     -   `Create SSH Key`, close window
     -   `View public key`: copy the displayed public key
-    -   go to <https://github.com/settings/keys> and click `New SSH key`, paste the public key
-    -   in the RStudio bottom Tab `Terminal`: type the following:
+    -   go to <https://github.com/settings/keys> and click `New SSH key`, name it and paste the public key
+    -   in the RStudio bottom/left Tab `Terminal`: type the following (line by line):
 
     ```         
     git version # just to see git works fine
-    git config --global user.email "YourEmail@domain.com"
-    git config --global user.name "YourUserNameHere"
+    git config --global user.email "Your_Email_Used_For_Github@domain.com"
+    git config --global user.name "Your_Github_UserName_Here"
     ```
 
 ### use git
 
-To clone a git repo, RStudio handles most the work for you.
+*To clone a git repo, RStudio handles most the work for you :)*
 
 -   
 
-    1.  Go to a repo (for example [github.com/brry/fpsetup](https://github.com/brry/fpsetup)) and click on  [Code]{style="background-color:lime"} - Copy URL
+    1.  Go to a repo (for example [github.com/brry/fpsetup](https://github.com/brry/fpsetup)) and click on  [Code]{style="background-color:lime"} - SSH *(if logged in)* - Copy URL
 
 ![](https://github.com/brry/course/raw/master/externalfig/git_clone_1.PNG)
 
