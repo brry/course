@@ -658,47 +658,50 @@ The internet
 
 # AI
 
-pro AI in coding
+## pro AI in coding
 
 - quickly solves a problem
 - works in unfamiliar coding areas, concepts, languages
 - suggests unknown functions and approaches
 
-contra AI in coding
+## contra AI in coding
 
 - AI generated solutions often do not represent [best practices](#good-practice)
 - false sense of competence may become problematic in debugging complex issues
-- critical thinking is (and remains) important
-- structured thinking is helpful
-- actually learning to code yourself is rewarding and conductive to these goals
+- experienced senior developers are desperately needed to catch security issues
+- writing code yourself teaches you to think in a structured manner!
 - make mistakes, debug, struggle, research, think, build problem solving skills
-- develop good coding habits from the beginning
 
-detailed problems
+## detailed problems
 
-- Coders with AI assistance write more [security leaks](https://www.louisbouchard.ai/genai-coding-risks) (with less awareness of them)
-- AI assistants actually [slow down software development](https://open.substack.com/pub/mikelovesrobots/p/wheres-the-shovelware-why-ai-coding) ([reproducible](https://arxiv.org/abs/2507.09089
-))
-- AI-generated code contains [more bugs and errors](https://www.techradar.com/pro/security/ai-generated-code-contains-more-bugs-and-errors-than-human-output) than human output
-- AI coding tools chase phantom bugs and [destroy real production databases](https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/)
-- Vibe coding creates [unmaintainable code](https://open.substack.com/pub/addyo/p/vibe-coding-is-not-the-same-as-ai) without engineering discipline
-- AI coding collapses under real-world pressure, requires [expertise for final 30%](https://open.substack.com/pub/addyo/p/the-70-problem-hard-truths-about)
-- Coding agents create [cybersecurity vulnerabilities](https://open.substack.com/pub/garymarcus/p/llms-coding-agents-security-nightmare) in numerous ways
-- 95% of companies see [no return on AI investment](https://www.reddit.com/r/cscareerquestions/s/JHrH5pGxDU)
- (reasons [why](https://open.substack.com/pub/garymarcus/p/why-is-the-roi-on-generative-ai-so))
-- With increasing complexity, it gets [harder to check](https://open.substack.com/pub/oneusefulthing/p/on-working-with-wizards) if AI output is correct
-- AI usage [degrades our ability to catch bugs](https://codebytom.blog/2025/07/the-hidden-cost-of-ai-reliance), creates a reliability problem
-- AI output [lowers skepticism](https://open.substack.com/pub/addyo/p/treat-ai-generated-code-as-a-draft) during reviews, stunts junior devs knowledge gain
-- Gen-AI-assisted changes cause outages, [decrease maintainability](https://garymarcus.substack.com/p/a-spate-of-outages-including-incidents)
-- AI-written code causes [security breaches](https://www.techradar.com/pro/security/one-in-five-security-breaches-now-thought-to-be-caused-by-ai-written-code), hard to track down vulnerabilites
-- LLMs are [bad at conceptual programming](https://open.substack.com/pub/clauswilke/p/llms-excel-at-programminghow-can) 
-- Medical X-ray [benchmark scores are worthless](https://arxiv.org/abs/2603.21687) (top rank without using an image)
-- ChatGPT cannot reliably keep track of [time](https://gizmodo.com/sam-altman-says-itll-take-another-year-before-chatgpt-can-start-a-timer-2000743487)
-- Widespread AI usage takes a large [toll on senior developers](https://techtrenches.dev/p/the-human-cost-of-10x-how-ai-is-physically) through additional maintenance
-- AI adoption stalls, [performance gains plateau](https://hbr.org/2026/02/why-ai-adoption-stalls-according-to-industry-data), AI fails to deliver durable impact
-- Claude code itself has "[corner-cutting](https://techtrenches.dev/p/the-snake-that-ate-itself-what-claude) and wilful blindness at scale"
+*(sorted by publication time, hoping that some of the older problems get solved over time)*
 
-on learning 
+- 2026-04: AI agents [still destroy production databases](https://garymarcus.substack.com/p/dario-amodei-hype-ai-safety-and-the) and cannot be trusted
+- 2026-04: sycophantic AI reduces healthy skepticism, AI [agents need clear specs](https://open.substack.com/pub/handyai/p/your-ceo-is-suffering-from-ai-psychosis)
+- 2026-04: as a society, we may [forget how to code](https://techtrenches.dev/p/the-west-forgot-how-to-make-things) and have a hard time re-learning
+- 2026-04: widespread AI usage takes a large [toll on senior developers](https://techtrenches.dev/p/the-human-cost-of-10x-how-ai-is-physically) through additional maintenance
+- 2026-04: Claude code itself has "[corner-cutting](https://techtrenches.dev/p/the-snake-that-ate-itself-what-claude) and wilful blindness at scale"
+- 2026-04: ChatGPT cannot reliably keep track of [time](https://gizmodo.com/sam-altman-says-itll-take-another-year-before-chatgpt-can-start-a-timer-2000743487)
+- 2026-03: AI adoption [decreases delivery speed](https://dev.to/alexcloudstar/the-ai-productivity-paradox-why-developers-who-ship-more-code-are-not-actually-more-productive-12f7) and causes a drop in system stability
+- 2026-03: Medical X-ray [benchmark scores are worthless](https://arxiv.org/abs/2603.21687) (top rank without using an image)
+- 2026-03: measured [productivity gains are lower than perceived](https://www.nber.org/papers/w34984)
+- 2026-03: Gen-AI-assisted changes cause outages, [decrease maintainability](https://garymarcus.substack.com/p/a-spate-of-outages-including-incidents)
+- 2026-02: AI adoption stalls, [performance gains plateau](https://hbr.org/2026/02/why-ai-adoption-stalls-according-to-industry-data), AI fails to deliver durable impact
+- 2025-12: AI-generated code contains [more bugs and errors](https://www.techradar.com/pro/security/ai-generated-code-contains-more-bugs-and-errors-than-human-output) than human output
+- 2025-11: With increasing complexity, it gets [harder to check](https://open.substack.com/pub/oneusefulthing/p/on-working-with-wizards) if AI output is correct
+- 2025-11: AI output [lowers skepticism](https://open.substack.com/pub/addyo/p/treat-ai-generated-code-as-a-draft) during reviews, stunts junior devs knowledge gain
+- 2025-11: LLMs are [bad at conceptual programming](https://open.substack.com/pub/clauswilke/p/llms-excel-at-programminghow-can) 
+- 2025-10: AI-written code causes [security breaches](https://www.techradar.com/pro/security/one-in-five-security-breaches-now-thought-to-be-caused-by-ai-written-code), hard to track down vulnerabilites
+- 2025-09: 95% of companies see [no return on AI investment](https://www.reddit.com/r/cscareerquestions/s/JHrH5pGxDU) (reasons [why](https://open.substack.com/pub/garymarcus/p/why-is-the-roi-on-generative-ai-so))
+- 2025-09: AI assistants actually [slow down software development](https://open.substack.com/pub/mikelovesrobots/p/wheres-the-shovelware-why-ai-coding) ([reproducible](https://arxiv.org/abs/2507.09089))
+- 2025-07: AI usage [degrades our ability to catch bugs](https://codebytom.blog/2025/07/the-hidden-cost-of-ai-reliance), creates a reliability problem
+- 2025-08: Vibe coding without engineering discipline creates [unmaintainable code](https://open.substack.com/pub/addyo/p/vibe-coding-is-not-the-same-as-ai) 
+- 2025-08: Coding agents create [cybersecurity vulnerabilities](https://open.substack.com/pub/garymarcus/p/llms-coding-agents-security-nightmare) in numerous ways
+- 2025-07: AI coding tools chase phantom bugs and [destroy real production databases](https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/)
+- 2024-12: AI coding collapses under real-world pressure, requires [expertise for final 30%](https://open.substack.com/pub/addyo/p/the-70-problem-hard-truths-about)
+- 2024-05: Coders with AI assistance write more [security leaks](https://www.louisbouchard.ai/genai-coding-risks) (with less awareness of them)
+
+## AI in learning
 
 - Outsourcing work to AI hurts long-term growth of [learning skills](https://open.substack.com/pub/fitzyhistory/p/students-arent-obsessing-about-ai)
 - AI stunts intellectual [development as engineer](https://open.substack.com/pub/theargument/p/chatgpt-and-the-end-of-learning) + reasoning about complex concepts
