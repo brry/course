@@ -297,6 +297,59 @@ then click here to see the elegant approach:
 <span id="cb14-4"><a href="elegant-code.html#cb14-4" tabindex="-1"></a>                    <span class="at">right =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </details>
 <p><br></p>
+</div>
+<div id="summary-statistics-per-group" class="section level4 hasAnchor">
+<h4>summary statistics per group<a href="elegant-code.html#summary-statistics-per-group" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>■ Consider a better alternative:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="elegant-code.html#cb15-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4</span>)</span>
+<span id="cb15-2"><a href="elegant-code.html#cb15-2" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">v1=</span><span class="fu">rpois</span>(<span class="dv">40</span>,<span class="dv">3</span>), <span class="at">v2=</span><span class="fu">rexp</span>(<span class="dv">40</span>), <span class="at">group=</span><span class="fu">rep</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="dv">20</span>))</span>
+<span id="cb15-3"><a href="elegant-code.html#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="elegant-code.html#cb15-4" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-5"><a href="elegant-code.html#cb15-5" tabindex="-1"></a>compare_groups <span class="ot">&lt;-</span> <span class="cf">function</span>(data, variable) {</span>
+<span id="cb15-6"><a href="elegant-code.html#cb15-6" tabindex="-1"></a>    summary_stats <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a href="elegant-code.html#cb15-7" tabindex="-1"></a>    <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a href="elegant-code.html#cb15-8" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb15-9"><a href="elegant-code.html#cb15-9" tabindex="-1"></a>      <span class="at">Min =</span> <span class="fu">min</span>(<span class="fu">get</span>(variable), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-10"><a href="elegant-code.html#cb15-10" tabindex="-1"></a>      <span class="at">Q25 =</span> <span class="fu">quantile</span>(<span class="fu">get</span>(variable), <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-11"><a href="elegant-code.html#cb15-11" tabindex="-1"></a>      <span class="at">Median =</span> <span class="fu">median</span>(<span class="fu">get</span>(variable), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-12"><a href="elegant-code.html#cb15-12" tabindex="-1"></a>      <span class="at">Mean =</span> <span class="fu">mean</span>(<span class="fu">get</span>(variable), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-13"><a href="elegant-code.html#cb15-13" tabindex="-1"></a>      <span class="at">Q75 =</span> <span class="fu">quantile</span>(<span class="fu">get</span>(variable), <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-14"><a href="elegant-code.html#cb15-14" tabindex="-1"></a>      <span class="at">Max =</span> <span class="fu">max</span>(<span class="fu">get</span>(variable), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-15"><a href="elegant-code.html#cb15-15" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb15-16"><a href="elegant-code.html#cb15-16" tabindex="-1"></a>    )</span>
+<span id="cb15-17"><a href="elegant-code.html#cb15-17" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">as.data.frame</span>(summary_stats))</span>
+<span id="cb15-18"><a href="elegant-code.html#cb15-18" tabindex="-1"></a>}</span>
+<span id="cb15-19"><a href="elegant-code.html#cb15-19" tabindex="-1"></a><span class="fu">compare_groups</span>(values, <span class="st">&quot;v1&quot;</span>)</span></code></pre></div>
+<details>
+<summary>
+then click here to see the elegant approach:
+</summary>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="elegant-code.html#cb16-1" tabindex="-1"></a><span class="fu">aggregate</span>(v1<span class="sc">~</span>group, <span class="at">data=</span>values, summary)</span></code></pre></div>
+</details>
+<p><br></p>
+</div>
+<div id="cohens-d-for-goup-mean-differences" class="section level4 hasAnchor">
+<h4>Cohen’s D for goup mean differences<a href="elegant-code.html#cohens-d-for-goup-mean-differences" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>■ Consider a better alternative:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="elegant-code.html#cb17-1" tabindex="-1"></a>cohens_d <span class="ot">&lt;-</span> <span class="cf">function</span>(group1, group2) {</span>
+<span id="cb17-2"><a href="elegant-code.html#cb17-2" tabindex="-1"></a>  mean_diff <span class="ot">&lt;-</span> <span class="fu">mean</span>(group1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">mean</span>(group2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-3"><a href="elegant-code.html#cb17-3" tabindex="-1"></a>  pooled_sd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((<span class="fu">var</span>(group1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">var</span>(group2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb17-4"><a href="elegant-code.html#cb17-4" tabindex="-1"></a>  <span class="fu">return</span>(mean_diff <span class="sc">/</span> pooled_sd)</span>
+<span id="cb17-5"><a href="elegant-code.html#cb17-5" tabindex="-1"></a>}</span>
+<span id="cb17-6"><a href="elegant-code.html#cb17-6" tabindex="-1"></a>variables_to_compare <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;V1&quot;</span>, <span class="st">&quot;V2&quot;</span>, <span class="st">&quot;V3&quot;</span>, <span class="st">&quot;V4&quot;</span>)</span>
+<span id="cb17-7"><a href="elegant-code.html#cb17-7" tabindex="-1"></a>effect_sizes <span class="ot">&lt;-</span> <span class="fu">sapply</span>(variables_to_compare, <span class="cf">function</span>(var) {</span>
+<span id="cb17-8"><a href="elegant-code.html#cb17-8" tabindex="-1"></a>  gr1 <span class="ot">&lt;-</span> values[values<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;gr1&quot;</span>, var]</span>
+<span id="cb17-9"><a href="elegant-code.html#cb17-9" tabindex="-1"></a>  gr2 <span class="ot">&lt;-</span> values[values<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;gr2&quot;</span>, var]</span>
+<span id="cb17-10"><a href="elegant-code.html#cb17-10" tabindex="-1"></a>  <span class="fu">abs</span>(<span class="fu">cohens_d</span>(gr1, gr2))</span>
+<span id="cb17-11"><a href="elegant-code.html#cb17-11" tabindex="-1"></a>})</span></code></pre></div>
+<details>
+<summary>
+then click here to see the elegant approach:
+</summary>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="elegant-code.html#cb18-1" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;V1&quot;</span>,<span class="st">&quot;V2&quot;</span>,<span class="st">&quot;V3&quot;</span>,<span class="st">&quot;V4&quot;</span>), <span class="cf">function</span>(col)</span>
+<span id="cb18-2"><a href="elegant-code.html#cb18-2" tabindex="-1"></a>  effectsize<span class="sc">::</span><span class="fu">cohens_d</span>(values[,col] <span class="sc">~</span> values<span class="sc">$</span>group)<span class="sc">$</span>Cohens_d)</span></code></pre></div>
+</details>
+<p><br></p>
 <p>More examples are shown in the <a href="index.html#welcome">fundamentals of programming</a> tutorial slides.</p>
 </div>
 </div>

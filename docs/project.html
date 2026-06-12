@@ -198,30 +198,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>reduce_data_size.R</code>: read big files, select interesting bits, store in <code>raw_data_small/</code> with <code>write.csv</code>. If you have (many) text entries with commas but no tabstops, use <code>write.table(..., sep="\t", row.names=FALSE, fileEncoding="UTF-8")</code> instead.</li>
 <li><code>process_data.R</code> with</li>
 </ul>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="project.html#cb26-1" tabindex="-1"></a>data_csv <span class="ot">&lt;-</span> <span class="fu">lapply</span>(csvfiles, read.csv)</span>
-<span id="cb26-2"><a href="project.html#cb26-2" tabindex="-1"></a>data_full <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(merge, data_csv)</span>
-<span id="cb26-3"><a href="project.html#cb26-3" tabindex="-1"></a><span class="fu">write.csv</span>(data_full, <span class="st">&quot;data_full.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="project.html#cb30-1" tabindex="-1"></a>data_csv <span class="ot">&lt;-</span> <span class="fu">lapply</span>(csvfiles, read.csv)</span>
+<span id="cb30-2"><a href="project.html#cb30-2" tabindex="-1"></a>data_full <span class="ot">&lt;-</span> <span class="fu">Reduce</span>(merge, data_csv)</span>
+<span id="cb30-3"><a href="project.html#cb30-3" tabindex="-1"></a><span class="fu">write.csv</span>(data_full, <span class="st">&quot;data_full.csv&quot;</span>)</span></code></pre></div>
 <ul>
 <li><code>functions.R</code> with</li>
 </ul>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="project.html#cb27-1" tabindex="-1"></a>helper <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x</span>
-<span id="cb27-2"><a href="project.html#cb27-2" tabindex="-1"></a>analyze <span class="ot">&lt;-</span> <span class="cf">function</span>(df) <span class="fu">sapply</span>(df, helper)</span>
-<span id="cb27-3"><a href="project.html#cb27-3" tabindex="-1"></a>visualize <span class="ot">&lt;-</span> <span class="cf">function</span>(column) <span class="fu">plot</span>(<span class="fu">analyze</span>(full_data)[,column])</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="project.html#cb31-1" tabindex="-1"></a>helper <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x</span>
+<span id="cb31-2"><a href="project.html#cb31-2" tabindex="-1"></a>analyze <span class="ot">&lt;-</span> <span class="cf">function</span>(df) <span class="fu">sapply</span>(df, helper)</span>
+<span id="cb31-3"><a href="project.html#cb31-3" tabindex="-1"></a>visualize <span class="ot">&lt;-</span> <span class="cf">function</span>(column) <span class="fu">plot</span>(<span class="fu">analyze</span>(full_data)[,column])</span></code></pre></div>
 <ul>
 <li><code>test_functions.R</code> with</li>
 </ul>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="project.html#cb28-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions.R&quot;</span>)</span>
-<span id="cb28-2"><a href="project.html#cb28-2" tabindex="-1"></a><span class="fu">helper</span>(input) <span class="sc">==</span> expected</span>
-<span id="cb28-3"><a href="project.html#cb28-3" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_number</span>(<span class="fu">helper</span>(example))</span>
-<span id="cb28-4"><a href="project.html#cb28-4" tabindex="-1"></a>testthat<span class="sc">::</span><span class="fu">expect_equal</span>(<span class="fu">analyze</span>(example_df), expected)</span>
-<span id="cb28-5"><a href="project.html#cb28-5" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">analyze</span>(example_df)</span>
-<span id="cb28-6"><a href="project.html#cb28-6" tabindex="-1"></a><span class="cf">if</span>(res <span class="sc">!=</span> expected) <span class="fu">stop</span>(<span class="st">&quot;analyze(example_df) should be &quot;</span>, expected, <span class="st">&quot;, not &quot;</span>, res)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="project.html#cb32-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions.R&quot;</span>)</span>
+<span id="cb32-2"><a href="project.html#cb32-2" tabindex="-1"></a><span class="fu">helper</span>(input) <span class="sc">==</span> expected</span>
+<span id="cb32-3"><a href="project.html#cb32-3" tabindex="-1"></a>checkmate<span class="sc">::</span><span class="fu">assert_number</span>(<span class="fu">helper</span>(example))</span>
+<span id="cb32-4"><a href="project.html#cb32-4" tabindex="-1"></a>testthat<span class="sc">::</span><span class="fu">expect_equal</span>(<span class="fu">analyze</span>(example_df), expected)</span>
+<span id="cb32-5"><a href="project.html#cb32-5" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">analyze</span>(example_df)</span>
+<span id="cb32-6"><a href="project.html#cb32-6" tabindex="-1"></a><span class="cf">if</span>(res <span class="sc">!=</span> expected) <span class="fu">stop</span>(<span class="st">&quot;analyze(example_df) should be &quot;</span>, expected, <span class="st">&quot;, not &quot;</span>, res)</span></code></pre></div>
 <ul>
 <li><code>main_file.qmd</code> with code chunks for</li>
 </ul>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="project.html#cb29-1" tabindex="-1"></a>full_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data_full.csv&quot;</span>)</span>
-<span id="cb29-2"><a href="project.html#cb29-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions.R&quot;</span>)</span>
-<span id="cb29-3"><a href="project.html#cb29-3" tabindex="-1"></a><span class="fu">visualize</span>(<span class="st">&quot;columnname&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="project.html#cb33-1" tabindex="-1"></a>full_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data_full.csv&quot;</span>)</span>
+<span id="cb33-2"><a href="project.html#cb33-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions.R&quot;</span>)</span>
+<span id="cb33-3"><a href="project.html#cb33-3" tabindex="-1"></a><span class="fu">visualize</span>(<span class="st">&quot;columnname&quot;</span>)</span></code></pre></div>
 </div>
             </section>
 

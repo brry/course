@@ -58,7 +58,7 @@ Jump to section: [Windows](#windows), [Mac](#mac), [Linux](#linux), [Manjaro](#m
 Either
 
 -   install [homebrew](https://brew.sh/)
--   in the terminal, run (one after the other)\
+-   in the terminal (search with `CMD` + `SPACE`), run (one after the other)\
 `brew install --cask r`\
 `brew install --cask rstudio`
 -   change the .RData [settings](#settings) to enhance reproducibility
@@ -365,6 +365,75 @@ DF$age_group <- cut(DF$age,
                     breaks = c(0, 18, 30, 50, 65, Inf),
                     labels = c("0-17", "18-29", "30-49", "50-64", "65+"),
                     right = FALSE)
+```
+
+</details>
+
+<br>
+
+#### summary statistics per group
+
+■ Consider a better alternative:
+
+```{r elegant_coding8a, eval=FALSE}
+set.seed(4)
+values <- data.frame(v1=rpois(40,3), v2=rexp(40), group=rep(0:1, 20))
+
+library(dplyr)
+compare_groups <- function(data, variable) {
+	summary_stats <- data %>%
+    group_by(group) %>%
+    summarise(
+      Min = min(get(variable), na.rm = TRUE),
+      Q25 = quantile(get(variable), 0.25, na.rm = TRUE),
+      Median = median(get(variable), na.rm = TRUE),
+      Mean = mean(get(variable), na.rm = TRUE),
+      Q75 = quantile(get(variable), 0.75, na.rm = TRUE),
+      Max = max(get(variable), na.rm = TRUE),
+      .groups = "drop"
+    )
+	return(as.data.frame(summary_stats))
+}
+compare_groups(values, "v1")
+```
+
+<details>
+
+<summary>then click here to see the elegant approach:</summary>
+
+```{r elegant_coding8b, eval=FALSE}
+aggregate(v1~group, data=values, summary)
+```
+
+</details>
+
+<br>
+
+#### Cohen's D for goup mean differences
+
+■ Consider a better alternative:
+
+```{r elegant_coding9a, eval=FALSE}
+cohens_d <- function(group1, group2) {
+  mean_diff <- mean(group1, na.rm = TRUE) - mean(group2, na.rm = TRUE)
+  pooled_sd <- sqrt((var(group1, na.rm = TRUE) + var(group2, na.rm = TRUE)) / 2)
+  return(mean_diff / pooled_sd)
+}
+variables_to_compare <- c("V1", "V2", "V3", "V4")
+effect_sizes <- sapply(variables_to_compare, function(var) {
+  gr1 <- values[values$group == "gr1", var]
+  gr2 <- values[values$group == "gr2", var]
+  abs(cohens_d(gr1, gr2))
+})
+```
+
+<details>
+
+<summary>then click here to see the elegant approach:</summary>
+
+```{r elegant_coding9b, eval=FALSE}
+sapply(c("V1","V2","V3","V4"), function(col)
+  effectsize::cohens_d(values[,col] ~ values$group)$Cohens_d)
 ```
 
 </details>
