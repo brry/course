@@ -753,7 +753,7 @@ The internet
 
 *(sorted by publication time, hoping that some of the older problems get solved over time)*
 
-
+- 2026-07 when OpenAI guardrails are circumvented, [agents use zero-day-exploits](https://open.substack.com/pub/garymarcus/p/openais-disconcerting-hack-of-huggingface)
 - 2026-07: developers have [decreasing trust AI coding tools output](https://uvik.net/blog/ai-coding-assistant-statistics/)
 - 2026-06: AI has [faulty medical reasoning and hallucinations, uses inappropriate shortcuts](https://www.nature.com/articles/s41591-026-04501-8)
 - 2026-06: AI support system used to [hijack over 20,000 accounts](https://www.helpnetsecurity.com/2026/06/08/instagram-ai-support-vulnerability-account-takeovers/)
