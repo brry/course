@@ -336,17 +336,17 @@ then click here to see the elegant approach:
 <span id="cb17-3"><a href="elegant-code.html#cb17-3" tabindex="-1"></a>  pooled_sd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((<span class="fu">var</span>(group1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">var</span>(group2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">/</span> <span class="dv">2</span>)</span>
 <span id="cb17-4"><a href="elegant-code.html#cb17-4" tabindex="-1"></a>  <span class="fu">return</span>(mean_diff <span class="sc">/</span> pooled_sd)</span>
 <span id="cb17-5"><a href="elegant-code.html#cb17-5" tabindex="-1"></a>}</span>
-<span id="cb17-6"><a href="elegant-code.html#cb17-6" tabindex="-1"></a>variables_to_compare <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;V1&quot;</span>, <span class="st">&quot;V2&quot;</span>, <span class="st">&quot;V3&quot;</span>, <span class="st">&quot;V4&quot;</span>)</span>
+<span id="cb17-6"><a href="elegant-code.html#cb17-6" tabindex="-1"></a>variables_to_compare <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;v1&quot;</span>, <span class="st">&quot;v2&quot;</span>)</span>
 <span id="cb17-7"><a href="elegant-code.html#cb17-7" tabindex="-1"></a>effect_sizes <span class="ot">&lt;-</span> <span class="fu">sapply</span>(variables_to_compare, <span class="cf">function</span>(var) {</span>
-<span id="cb17-8"><a href="elegant-code.html#cb17-8" tabindex="-1"></a>  gr1 <span class="ot">&lt;-</span> values[values<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;gr1&quot;</span>, var]</span>
-<span id="cb17-9"><a href="elegant-code.html#cb17-9" tabindex="-1"></a>  gr2 <span class="ot">&lt;-</span> values[values<span class="sc">$</span>group <span class="sc">==</span> <span class="st">&quot;gr2&quot;</span>, var]</span>
+<span id="cb17-8"><a href="elegant-code.html#cb17-8" tabindex="-1"></a>  gr1 <span class="ot">&lt;-</span> values[values<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">0</span>, var]</span>
+<span id="cb17-9"><a href="elegant-code.html#cb17-9" tabindex="-1"></a>  gr2 <span class="ot">&lt;-</span> values[values<span class="sc">$</span>group <span class="sc">==</span> <span class="dv">1</span>, var]</span>
 <span id="cb17-10"><a href="elegant-code.html#cb17-10" tabindex="-1"></a>  <span class="fu">abs</span>(<span class="fu">cohens_d</span>(gr1, gr2))</span>
 <span id="cb17-11"><a href="elegant-code.html#cb17-11" tabindex="-1"></a>})</span></code></pre></div>
 <details>
 <summary>
 then click here to see the elegant approach:
 </summary>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="elegant-code.html#cb18-1" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;V1&quot;</span>,<span class="st">&quot;V2&quot;</span>,<span class="st">&quot;V3&quot;</span>,<span class="st">&quot;V4&quot;</span>), <span class="cf">function</span>(col)</span>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="elegant-code.html#cb18-1" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">&quot;v1&quot;</span>,<span class="st">&quot;v2&quot;</span>), <span class="cf">function</span>(col)</span>
 <span id="cb18-2"><a href="elegant-code.html#cb18-2" tabindex="-1"></a>  effectsize<span class="sc">::</span><span class="fu">cohens_d</span>(values[,col] <span class="sc">~</span> values<span class="sc">$</span>group)<span class="sc">$</span>Cohens_d)</span></code></pre></div>
 </details>
 <p><br></p>

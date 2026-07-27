@@ -419,10 +419,10 @@ cohens_d <- function(group1, group2) {
   pooled_sd <- sqrt((var(group1, na.rm = TRUE) + var(group2, na.rm = TRUE)) / 2)
   return(mean_diff / pooled_sd)
 }
-variables_to_compare <- c("V1", "V2", "V3", "V4")
+variables_to_compare <- c("v1", "v2")
 effect_sizes <- sapply(variables_to_compare, function(var) {
-  gr1 <- values[values$group == "gr1", var]
-  gr2 <- values[values$group == "gr2", var]
+  gr1 <- values[values$group == 0, var]
+  gr2 <- values[values$group == 1, var]
   abs(cohens_d(gr1, gr2))
 })
 ```
@@ -432,7 +432,7 @@ effect_sizes <- sapply(variables_to_compare, function(var) {
 <summary>then click here to see the elegant approach:</summary>
 
 ```{r elegant_coding9b, eval=FALSE}
-sapply(c("V1","V2","V3","V4"), function(col)
+sapply(c("v1","v2"), function(col)
   effectsize::cohens_d(values[,col] ~ values$group)$Cohens_d)
 ```
 
