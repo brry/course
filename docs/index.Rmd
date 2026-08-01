@@ -753,8 +753,10 @@ The internet
 
 *(sorted by publication time, hoping that some of the older problems get solved over time)*
 
+
 - 2026-07 when OpenAI guardrails are circumvented, [agents use zero-day-exploits](https://open.substack.com/pub/garymarcus/p/openais-disconcerting-hack-of-huggingface)
 - 2026-07: developers have [decreasing trust in AI coding tools output](https://uvik.net/blog/ai-coding-assistant-statistics/)
+- 2026-07 [jailbreaking still is a problem](https://www.technologyreview.com/2026/07/30/1140927/a-fundamental-flaw-leaves-llms-vulnerable-to-attack/) and may remain one forever
 - 2026-06: AI has [faulty medical reasoning and hallucinations, uses inappropriate shortcuts](https://www.nature.com/articles/s41591-026-04501-8)
 - 2026-06: AI support system used to [hijack over 20,000 accounts](https://www.helpnetsecurity.com/2026/06/08/instagram-ai-support-vulnerability-account-takeovers/)
 - 2026-06: OpenAI and Anthropic [do not trust their own AI](https://techtrenches.dev/p/when-your-vendor-becomes-your-competitor) and hire humans instead
