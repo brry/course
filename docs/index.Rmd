@@ -6,7 +6,7 @@ documentclass: book
 output:
   bookdown::gitbook:
     number_sections: false
-    toc_depth: 1
+    toc_depth: 3
     split_by: chapter
     config:
       toc:
