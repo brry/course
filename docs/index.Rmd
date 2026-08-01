@@ -828,8 +828,8 @@ difftime(Sys.time(), file.mtime("objects.Rdata"), units="h") > 6
 For a single object, a good alternative to `save` and `load` is:
 
 ```{r saverds, eval=FALSE}
-saveRDS(one_single_object, "object.Rdata")
-explicit_object_name <- readRDS("object.Rdata")
+saveRDS(one_single_object, "object.rds")
+explicit_object_name <- readRDS("object.rds")
 ```
 
 More on this topic from [Rcrastinate](https://www.r-bloggers.com/2019/05/how-to-save-and-load-datasets-in-r-an-overview/)
