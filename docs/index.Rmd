@@ -631,7 +631,7 @@ git is a version control software. With it, you can download repositories, track
 
 -   Restart RStudio (if open)
 
--   Manage authentification without renewing PAT access tokes via SSH ([screenshots](https://www.r-bloggers.com/rstudio-and-github) for these instructions, if wanted):
+-   Manage authentification without renewing PAT access tokens via SSH ([screenshots](https://www.r-bloggers.com/rstudio-and-github) for these instructions, if wanted):
 
     -   RStudio -\> Tools -\> Global Options -\> Git/SVN: Ensure the path to the Git executable is correct.
     -   `Create SSH Key`, close window
