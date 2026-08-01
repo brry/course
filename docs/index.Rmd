@@ -749,6 +749,17 @@ The internet
 - implement AI-assisted code critically
 
 
+## AI in learning
+
+*don't bring a forklift to a fitness studio to lift weights*
+
+- Outsourcing work to AI hurts long-term growth of [learning skills](https://open.substack.com/pub/fitzyhistory/p/students-arent-obsessing-about-ai)
+- AI stunts intellectual [development as engineer](https://open.substack.com/pub/theargument/p/chatgpt-and-the-end-of-learning) + reasoning about complex concepts
+- Chatbots threaten [critical thinking](https://www.forkingpaths.co/p/the-death-of-the-student-essayand) and cognitive development skills
+- Students using AI lose [critical skills](https://mileswilliams.substack.com/p/ai-data-and-international-relations) and become dependent on unreliable tools
+- LLM-assisted writing [lowers cognitive activity](https://arxiv.org/abs/2506.08872), engagement, memory recall, ownership
+
+
 ## detailed problems
 
 *(sorted by publication time, hoping that some of the older problems get solved over time)*
@@ -792,17 +803,6 @@ The internet
 - 2025-07: AI coding tools chase phantom bugs and [destroy real production databases](https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/)
 - 2024-12: AI coding collapses under real-world pressure, requires [expertise for final 30%](https://open.substack.com/pub/addyo/p/the-70-problem-hard-truths-about)
 - 2024-05: Coders with AI assistance write more [security leaks](https://www.louisbouchard.ai/genai-coding-risks) (with less awareness of them)
-
-## AI in learning
-
-*don't bring a forklift to a fitness studio to lift weights*
-
-- Outsourcing work to AI hurts long-term growth of [learning skills](https://open.substack.com/pub/fitzyhistory/p/students-arent-obsessing-about-ai)
-- AI stunts intellectual [development as engineer](https://open.substack.com/pub/theargument/p/chatgpt-and-the-end-of-learning) + reasoning about complex concepts
-- Chatbots threaten [critical thinking](https://www.forkingpaths.co/p/the-death-of-the-student-essayand) and cognitive development skills
-- Students using AI lose [critical skills](https://mileswilliams.substack.com/p/ai-data-and-international-relations) and become dependent on unreliable tools
-- LLM-assisted writing [lowers cognitive activity](https://arxiv.org/abs/2506.08872), engagement, memory recall, ownership
-
 
 # saveload
 
