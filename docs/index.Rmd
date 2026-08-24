@@ -764,10 +764,11 @@ The internet
 
 *(sorted by publication time, hoping that some of the older problems get solved over time)*
 
-
+- 2026-08 AI R&D progress may [need pacing to be safe](https://open.substack.com/pub/noahpinion/p/should-we-pace-ai-self-improvement?) for humanity
 - 2026-07 when OpenAI guardrails are circumvented, [agents use zero-day-exploits](https://open.substack.com/pub/garymarcus/p/openais-disconcerting-hack-of-huggingface)
 - 2026-07: developers have [decreasing trust in AI coding tools output](https://uvik.net/blog/ai-coding-assistant-statistics/)
 - 2026-07 [jailbreaking still is a problem](https://www.technologyreview.com/2026/07/30/1140927/a-fundamental-flaw-leaves-llms-vulnerable-to-attack/) and may remain one forever
+- 2026-07 AI coding has [not yet changed the world](https://freddiedeboer.substack.com/p/the-project-of-software-is-complete) all that much
 - 2026-06: AI has [faulty medical reasoning and hallucinations, uses inappropriate shortcuts](https://www.nature.com/articles/s41591-026-04501-8)
 - 2026-06: AI support system used to [hijack over 20,000 accounts](https://www.helpnetsecurity.com/2026/06/08/instagram-ai-support-vulnerability-account-takeovers/)
 - 2026-06: OpenAI and Anthropic [do not trust their own AI](https://techtrenches.dev/p/when-your-vendor-becomes-your-competitor) and hire humans instead
@@ -801,6 +802,7 @@ The internet
 - 2025-08: Coding agents create [cybersecurity vulnerabilities](https://open.substack.com/pub/garymarcus/p/llms-coding-agents-security-nightmare) in numerous ways
 - 2025-07: AI usage [degrades our ability to catch bugs](https://codebytom.blog/2025/07/the-hidden-cost-of-ai-reliance), creates a reliability problem
 - 2025-07: AI coding tools chase phantom bugs and [destroy real production databases](https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/)
+- 2025-05: With / despite AI tools, the [number of software developers is still increasing](https://www.slashdata.co/post/global-developer-population-trends-2025-how-many-developers-are-there)
 - 2024-12: AI coding collapses under real-world pressure, requires [expertise for final 30%](https://open.substack.com/pub/addyo/p/the-70-problem-hard-truths-about)
 - 2024-05: Coders with AI assistance write more [security leaks](https://www.louisbouchard.ai/genai-coding-risks) (with less awareness of them)
 
