@@ -751,7 +751,8 @@ The internet
 
 ## AI in learning
 
-*don't bring a forklift to a fitness studio to lift weights*
+*don't bring a forklift to a fitness studio to lift weights*  
+*AI = amplified intelligence -> develop skills to be augmented*
 
 - Outsourcing work to AI hurts long-term growth of [learning skills](https://open.substack.com/pub/fitzyhistory/p/students-arent-obsessing-about-ai)
 - AI stunts intellectual [development as engineer](https://open.substack.com/pub/theargument/p/chatgpt-and-the-end-of-learning) + reasoning about complex concepts
