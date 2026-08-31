@@ -1,5 +1,22 @@
 # grading
 
-These are the grading info for the couse **Fundamentals of Programming for Digital Health**.
+These are the grading info for the couse **Fundamentals of Programming for Digital Health** for the components
+
+- [weekly exercises](#weekly-exercises),
+- [coding project](#coding-project%5D),
+- [oral exam](#oral-exam),
+- [course improvements](#course-improvements).
+
+
+## weekly exercises {#weekly-exercises}
+
+
+## coding project
+
+
+## oral exam {#oral-exam}
+
+
+## course improvements {#course-improvements}
 
 
