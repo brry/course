@@ -1015,3 +1015,6 @@ Search for your `keybindings.json` and set keyboard shortcuts as desired, e.g.:
  { "key": "ctrl+alt+w", "command": "r.openWebHelp", "when": "editorTextFocus && editorLangId == 'r'" },
  { "key": "f1", "command": "r.help", "when": "editorTextFocus && editorLangId == 'r'" },
 ```
+
+```{r gradingpage, child='_grading.Rmd'}
+```

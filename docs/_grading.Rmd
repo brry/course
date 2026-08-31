@@ -1,0 +1,5 @@
+# grading
+
+These are the grading info for the couse **Fundamentals of Programming for Digital Health**.
+
+
