@@ -570,7 +570,7 @@ This creates all R functions as objects in your globalenv workspace (and overwri
 
 **Organize a research project**
 
-in the git folder you could have something like:
+In the git folder you could use the following structure (the names are suggestive only, adapt to your needs):
 
 ```
 project/
