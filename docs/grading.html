@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>grading | R course</title>
   <meta name="description" content="grading | R course" />
-  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
   <meta property="og:title" content="grading | R course" />
   <meta property="og:type" content="book" />
@@ -218,24 +218,132 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="grading" class="section level1 hasAnchor">
 <h1>grading<a href="grading.html#grading" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>These are the grading info for the couse <strong>Fundamentals of Programming for Digital Health</strong> for the components</p>
+<p>These are the grading info for the course <strong>Fundamentals of Programming for Digital Health</strong> for the components</p>
 <ul>
 <li><a href="grading.html#weekly-exercises">weekly exercises</a>,</li>
-<li><a href="#coding-project%5D">coding project</a>,</li>
+<li><a href="grading.html#coding-project">coding project</a>,</li>
 <li><a href="grading.html#oral-exam">oral exam</a>,</li>
 <li><a href="grading.html#course-improvements">course improvements</a>.</li>
 </ul>
+<p>The total course grade is a weighted average of the weekly autograded exercises (10%),
+the coding project (60%) and the oral exam (30%).<br />
+The grade can be improved with contributions to the course material.<br />
+The rationale for the grading allotment is for you to learn proper programming (project),
+stay on track during the course (exercises), engage with the course material (improvements)
+as well as for us to ensure you did the work yourself and understand it (oral exam).</p>
+<p><em>If you have objections to these criteria, please tell me before Christmas and things can still be adapted.</em><br />
+<em>This document is still developing, see the <a href="https://github.com/brry/course/commits/master/docs/_grading.Rmd">version history</a>.</em></p>
 <div id="weekly-exercises" class="section level2 hasAnchor">
 <h2>weekly exercises<a href="grading.html#weekly-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You may trigger the exercise autograding as often as you like and adapt your solutions.
+The exercise scores are recorded weekly on the evening before the tutorial day.
+The points get summed up at the end of the course (last year to a possible total of 479 points, this may change a bit this year).<br />
+You only need 90% for a 1.0, so use the pareto principle and don’t
+spend too much time on a single task, rather save questions for the tutorial sessions.
+The exercise grade follows the <a href="https://www.bcp.fu-berlin.de/studium-lehre/verwaltung/pruefungsausschuesse/chemie_beschluesse/pruefungen/notenskala.html">FU scheme</a>
+relative to 90% of the possible points.<br />
+You may continue to work on the exercises after the tutorial,
+but it will not change the recorded score.</p>
 </div>
 <div id="coding-project" class="section level2 hasAnchor">
 <h2>coding project<a href="grading.html#coding-project" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The main grade comes from a coding project with a topic, question and dataset of your choice.<br />
+</p>
+<ul>
+<li>use a quarto markdown document in a self-contained github repo</li>
+<li>write a <strong>short</strong> report or presentation (max 800 words) that describes the project / code requirements</li>
+<li>the programming language (R and/or Python) is up to you to choose</li>
+<li>ideally, analyse a dataset with some stats/graphics</li>
+<li>the code should be <strong>clean, elegant, human-readable and reproducible</strong></li>
+<li>declare all AI-assistance (e.g. in code comments)</li>
+<li>aim to spend 10-25 hours on the project (very individual)</li>
+<li>be done 3 weeks after the last tutorial (Feb 23 EOD)</li>
+<li>submit by giving me the github repo link (or inviting me as a collaborator if the repo needs to be private)</li>
+<li>apply 4-5 concepts from the course, e.g.
+<ul>
+<li>loading data</li>
+<li>cleaning / merging data</li>
+<li>suitable visualisations</li>
+<li>descriptive statistics</li>
+<li>handling missing values</li>
+<li>control structures (loops, conditions) &amp; functions</li>
+<li>unit tests / input checks / try-error management</li>
+</ul></li>
+<li>grading is first and foremost based on <a href="good-practice.html#good-practice">good programming practices</a>. Some examples for grade penalties (based on last year’s experiences, not an exhaustive list):
+<ul>
+<li>report at submission time does not compile on my computer: 2.0 grade points (GP); open source reproducibility is a core concept; use the feedback opportunity early on (see below)</li>
+<li>fewer than 5 substantial qmd commits along the code development: 1.0 grade points; to disincentivize mindlessly outsourcing to AI</li>
+<li>code duplication in a separate python/R script: 0.5 GP; develop code within the qmd from the start</li>
+<li>duplicate code that should have been a vectorized/looped function call: 0.3-1.0 GP (depending on severity)</li>
+<li>unchecked raw data problems: 0.5 GP; you learn all the tools to check data</li>
+<li>bad object names or horizontal scrolling in code / comments: 0.2 GP per instance</li>
+</ul></li>
+<li>apply all the <a href="good-practice.html#good-practice">good coding principles</a>. Those encapsulate the mindset you should take away from this course.</li>
+</ul>
+<p><strong>More project information</strong> (most important first)</p>
+<ul>
+<li>You may start work on your project as early as you want.</li>
+<li>You can get feedback on your project (including commit habits) anytime before Feb 15. Send/show your github repo (with issues for the questions) via email / in person sessions.</li>
+<li>The tutorials serve as concrete examples of improvable code - do not disregard those principles. Especially avoid duplicate code (DRY), i.e. write functions and loop/vectorize when needed.</li>
+<li><strong>Do not include unnecessary code</strong> for the sake of using many programming concepts. Use what makes sense for your analysis! E.g. to show a distribution of values, use a histogram, not <em>also</em> a boxplot. Do not hesitate to delete superfluous code again (or put it in a collapsed section).</li>
+<li>Organize your code as suggested in <a href="project.html#project">project</a> (adapt filenames as needed). Large raw data may be excluded from your repo if needed, but do include the processing script. A main script or qmd file loading functions from a separate R/python script is very good practice. Unit tests for your functions in this project are not required (but suggested for real life and definitely count for the 4-5 concepts you need to apply).</li>
+<li>I’m working on a compilation of project examples from last year (with my feedback included where allowed by the students).</li>
+<li>The document may have code visible, collapsed, or hidden - I’ll look at the qmd source anyways.</li>
+<li>Do not bother too much with grammar and spelling - the code is the important component for grading.</li>
+<li>There is no minimum LOC-requirement (but under 50 would need good reasoning).</li>
+<li>The dataset(s) should be suitable for your project, not too small, allowed to share with me (a <em>private</em> repo is OK).</li>
+<li>Create a decent level of source code documentation (comments).</li>
+<li>Data cleaning is important in real life, but for this course a kaggle dataset would be fine.</li>
+<li>The coding project does not need to be scientifically valuable (but reasonable is good).</li>
+<li>You may do hypothesis testing, but don’t have to. Graphics are better than p-values anyways.</li>
+<li>If you want to create a code-heavy application (e.g. an <a href="https://github.com/brry/course/blob/master/data/packdev.R">R package</a> with a shiny app with UI-element-based visualizations), your qmd can be really short and mainly describe the UI design choices and access points.</li>
+<li>Your project domain does not have to be digital health.</li>
+<li>You may use an existing project, as long as it is your own and you wrote the code.</li>
+<li>You may collect your own data for the project, but have a good plan to get that done. Do not underestimate the time needed for good data collection (preparation).</li>
+</ul>
 </div>
 <div id="oral-exam" class="section level2 hasAnchor">
 <h2>oral exam<a href="grading.html#oral-exam" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>At the end of the course, you must pass a brief oral exam with me and Bert.
+This is for us to make sure you did not just blindly outsource the work to an AI but instead understand your code and can explain tradeoffs and alternatives.</p>
+<ul>
+<li>If you coded the exercises and report yourself and can answer a few coding questions, you should easily get a good grade.
+The more you used AI (or wrote bad code), the harder it will prove to be (due to <a href="ai.html#ai-in-learning">reduced learning</a>).</li>
+<li>If you actively participated in the tutorials and I saw you developing the project yourself, the questions will not be hard.</li>
+<li>If you fail the oral exam, you fail the course and will have to retake the class next year. In the first semester, this will not appear on the transcript of records.</li>
+<li>I recommend to use only one programming language in your project,
+but we do reserve the right to ask about things from the other language (more about structural topics than concrete syntax).</li>
+<li>The exam will last 15 minutes and cover a few questions about your project and beyond (within course scope).</li>
+<li>The exams will be scheduled with a survey.
+There will be several days from late February to late March, each with several time slots back to back.</li>
+<li>If you need the oral exam early, submit the project early and we’ll manage that.</li>
+<li>I plan to assess and grade your project before the oral exam.</li>
+</ul>
 </div>
 <div id="course-improvements" class="section level2 hasAnchor">
 <h2>course improvements<a href="grading.html#course-improvements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You can enhance your total course grade up to a full grade point by contributing to the course material.<br />
+This counts for slides, videos, website, tasks, fpsetup, autograding code, lesson content, …<br />
+Rejected suggestions will rather not count.<br />
+Amongst other things, I’m interested in what lessons, functions and tasks are particularly helpful, which ones should be expanded/added and which ones should rather become bonus material.<br />
+100 improvement points constitute a 1.0 grade point improvement.
+Typo fixes and minor wording changes count about 1-2 points,
+minor improvements ca 5 and major changes up to 15 points.<br />
+You may write suggestions in the feedback section of each exercise, per email or in-class, whatever suits you.<br />
+Please be constructive and concrete; here are some examples for exercise tasks in increasing quality:</p>
+<ul>
+<li>“Some tasks were hard to understand” (does not help me to make them better)</li>
+<li>“Task xy was hard to understand” (mh, okay)</li>
+<li>“In Task xy, split the two questions into two separate lines” (Roger, done)</li>
+<li>“Tasks x-y will not be relevant to many DH students, consider moving them to the bonus section” (thanks)</li>
+<li>“The wording in the first line of Task xy is ambiguous, it could mean A or B” (oh good)</li>
+<li>“For Task xy, use this digital health dataset” (oh very nice)</li>
+<li>“For Task xy, a nice bonus task building up on it would be …” (yes please!)</li>
+<li>“You could expand section AB with the following tasks …” (precious!)</li>
+</ul>
+<p>Happy bug-bounty hunting :)</p>
+<p><em>If any questions remain, do not hesitate to approach me!</em><br />
+<em>Again, these criteria are not set in stone, contact me early to request changes.</em></p>
 
 </div>
 </div>
