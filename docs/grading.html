@@ -218,21 +218,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="grading" class="section level1 hasAnchor">
 <h1>grading<a href="grading.html#grading" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>These are the grading info for the course <strong>Fundamentals of Programming for Digital Health</strong> for the components</p>
+<p>These are the grading info for the course <strong>Fundamentals of Programming for Digital Health</strong>.<br />
+The total course grade is a weighted average of</p>
 <ul>
-<li><a href="grading.html#weekly-exercises">weekly exercises</a>,</li>
-<li><a href="grading.html#coding-project">coding project</a>,</li>
-<li><a href="grading.html#oral-exam">oral exam</a>,</li>
-<li><a href="grading.html#course-improvements">course improvements</a>.</li>
+<li>10% <a href="grading.html#weekly-exercises">weekly exercises</a>, for you to stay on track during the course</li>
+<li>60% <a href="grading.html#coding-project">coding project</a>, for you to learn proper programming</li>
+<li>30% <a href="grading.html#oral-exam">oral exam</a>, for us to ensure you did the work yourself and understand it</li>
+<li>optional <a href="grading.html#course-improvements">course improvements</a>, for you to engange with the material.</li>
 </ul>
-<p>The total course grade is a weighted average of the weekly autograded exercises (10%),
-the coding project (60%) and the oral exam (30%).<br />
-The grade can be improved with contributions to the course material.<br />
-The rationale for the grading allotment is for you to learn proper programming (project),
-stay on track during the course (exercises), engage with the course material (improvements)
-as well as for us to ensure you did the work yourself and understand it (oral exam).</p>
-<p><em>If you have objections to these criteria, please tell me before Christmas and things can still be adapted.</em><br />
-<em>This document is still developing, see the <a href="https://github.com/brry/course/commits/master/docs/_grading.Rmd">version history</a>.</em></p>
+<p><em>If you have objections to these criteria, please tell me before Christmas and things can be adapted.</em><br />
+<em>That means this document is still developing, see the <a href="https://github.com/brry/course/commits/master/docs/_grading.Rmd">version history</a>.</em></p>
 <div id="weekly-exercises" class="section level2 hasAnchor">
 <h2>weekly exercises<a href="grading.html#weekly-exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You may trigger the exercise autograding as often as you like and adapt your solutions.
@@ -288,6 +283,7 @@ but it will not change the recorded score.</p>
 <li><strong>Do not include unnecessary code</strong> for the sake of using many programming concepts. Use what makes sense for your analysis! E.g. to show a distribution of values, use a histogram, not <em>also</em> a boxplot. Do not hesitate to delete superfluous code again (or put it in a collapsed section).</li>
 <li>Organize your code as suggested in <a href="project.html#project">project</a> (adapt filenames as needed). Large raw data may be excluded from your repo if needed, but do include the processing script. A main script or qmd file loading functions from a separate R/python script is very good practice. Unit tests for your functions in this project are not required (but suggested for real life and definitely count for the 4-5 concepts you need to apply).</li>
 <li>I’m working on a compilation of project examples from last year (with my feedback included where allowed by the students).</li>
+<li>You may use AI (declare all usage); to maximize learning, I suggest to develop the code yourself first and only then ask AI to check it against the grading criteria.</li>
 <li>The document may have code visible, collapsed, or hidden - I’ll look at the qmd source anyways.</li>
 <li>Do not bother too much with grammar and spelling - the code is the important component for grading.</li>
 <li>There is no minimum LOC-requirement (but under 50 would need good reasoning).</li>
@@ -310,7 +306,6 @@ This is for us to make sure you did not just blindly outsource the work to an AI
 <li>If you coded the exercises and report yourself and can answer a few coding questions, you should easily get a good grade.
 The more you used AI (or wrote bad code), the harder it will prove to be (due to <a href="ai.html#ai-in-learning">reduced learning</a>).</li>
 <li>If you actively participated in the tutorials and I saw you developing the project yourself, the questions will not be hard.</li>
-<li>If you fail the oral exam, you fail the course and will have to retake the class next year. In the first semester, this will not appear on the transcript of records.</li>
 <li>I recommend to use only one programming language in your project,
 but we do reserve the right to ask about things from the other language (more about structural topics than concrete syntax).</li>
 <li>The exam will last 15 minutes and cover a few questions about your project and beyond (within course scope).</li>
@@ -322,24 +317,26 @@ There will be several days from late February to late March, each with several t
 </div>
 <div id="course-improvements" class="section level2 hasAnchor">
 <h2>course improvements<a href="grading.html#course-improvements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You can enhance your total course grade up to a full grade point by contributing to the course material.<br />
+<p>You can enhance your total course grade up to 0.7 grade points by contributing to the course material.<br />
 This counts for slides, videos, website, tasks, fpsetup, autograding code, lesson content, …<br />
 Rejected suggestions will rather not count.<br />
 Amongst other things, I’m interested in what lessons, functions and tasks are particularly helpful, which ones should be expanded/added and which ones should rather become bonus material.<br />
-100 improvement points constitute a 1.0 grade point improvement.
+70 improvement points constitute a 0.7 grade point improvement.
 Typo fixes and minor wording changes count about 1-2 points,
 minor improvements ca 5 and major changes up to 15 points.<br />
 You may write suggestions in the feedback section of each exercise, per email or in-class, whatever suits you.<br />
-Please be constructive and concrete; here are some examples for exercise tasks in increasing quality:</p>
+Please be constructive and concrete; here are some examples in increasing quality:</p>
 <ul>
 <li>“Some tasks were hard to understand” (does not help me to make them better)</li>
 <li>“Task xy was hard to understand” (mh, okay)</li>
+<li>“Lesson xy was boring” (ok but why?)</li>
 <li>“In Task xy, split the two questions into two separate lines” (Roger, done)</li>
 <li>“Tasks x-y will not be relevant to many DH students, consider moving them to the bonus section” (thanks)</li>
+<li>“Lesson xy would benefit from the additional content …” (good idea)</li>
 <li>“The wording in the first line of Task xy is ambiguous, it could mean A or B” (oh good)</li>
-<li>“For Task xy, use this digital health dataset” (oh very nice)</li>
+<li>“For Task xy, use the digital health dataset …” (oh very nice)</li>
 <li>“For Task xy, a nice bonus task building up on it would be …” (yes please!)</li>
-<li>“You could expand section AB with the following tasks …” (precious!)</li>
+<li>“You could expand section xy with the following tasks …” (precious!)</li>
 </ul>
 <p>Happy bug-bounty hunting :)</p>
 <p><em>If any questions remain, do not hesitate to approach me!</em><br />

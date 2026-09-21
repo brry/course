@@ -1,22 +1,122 @@
 # grading
 
-These are the grading info for the couse **Fundamentals of Programming for Digital Health** for the components
+These are the grading info for the course **Fundamentals of Programming for Digital Health**.\
+The total course grade is a weighted average of 
 
-- [weekly exercises](#weekly-exercises),
-- [coding project](#coding-project%5D),
-- [oral exam](#oral-exam),
-- [course improvements](#course-improvements).
+- 10% [weekly exercises](#weekly-exercises), for you to stay on track during the course
+- 60% [coding project](#coding-project), for you to learn proper programming
+- 30% [oral exam](#oral-exam), for us to ensure you did the work yourself and understand it
+- optional [course improvements](#course-improvements), for you to engange with the material.
 
+*If you have objections to these criteria, please tell me before Christmas and things can be adapted.*\
+*That means this document is still developing, see the [version history](https://github.com/brry/course/commits/master/docs/_grading.Rmd).*
 
 ## weekly exercises {#weekly-exercises}
 
+You may trigger the exercise autograding as often as you like and adapt your solutions.
+The exercise scores are recorded weekly on the evening before the tutorial day.
+The points get summed up at the end of the course (last year to a possible total of 479 points, this may change a bit this year).\
+You only need 90% for a 1.0, so use the pareto principle and don't 
+spend too much time on a single task, rather save questions for the tutorial sessions.
+The exercise grade follows the [FU scheme](https://www.bcp.fu-berlin.de/studium-lehre/verwaltung/pruefungsausschuesse/chemie_beschluesse/pruefungen/notenskala.html)
+relative to 90% of the possible points.\
+You may continue to work on the exercises after the tutorial,
+but it will not change the recorded score.
 
-## coding project
+## coding project {#coding-project}
+
+The main grade comes from a coding project with a topic, question and dataset of your choice.\
+
+- use a quarto markdown document in a self-contained github repo
+- write a **short** report or presentation (max 800 words) that describes the project / code requirements
+- the programming language (R and/or Python) is up to you to choose
+- ideally, analyse a dataset with some stats/graphics
+- the code should be **clean, elegant, human-readable and reproducible**
+- declare all AI-assistance (e.g. in code comments)
+- aim to spend 10-25 hours on the project (very individual)
+- be done 3 weeks after the last tutorial (Feb 23 EOD)
+- submit by giving me the github repo link (or inviting me as a collaborator if the repo needs to be private)
+- apply 4-5 concepts from the course, e.g.
+  - loading data
+  - cleaning / merging data
+  - suitable visualisations
+  - descriptive statistics
+  - handling missing values
+  - control structures (loops, conditions) & functions
+  - unit tests / input checks / try-error management
+- grading is first and foremost based on [good programming practices](#good-practice). Some examples for grade penalties (based on last year's experiences, not an exhaustive list):
+  - report at submission time does not compile on my computer: 2.0 grade points (GP); open source reproducibility is a core concept; use the feedback opportunity early on (see below)
+  - fewer than 5 substantial qmd commits along the code development: 1.0 grade points; to disincentivize mindlessly outsourcing to AI
+  - code duplication in a separate python/R script: 0.5 GP; develop code within the qmd from the start
+  - duplicate code that should have been a vectorized/looped function call: 0.3-1.0 GP (depending on severity)
+  - unchecked raw data problems: 0.5 GP; you learn all the tools to check data
+  - bad object names or horizontal scrolling in code / comments: 0.2 GP per instance
+- apply all the [good coding principles](#good-practice). Those encapsulate the mindset you should take away from this course.
+
+**More project information** (most important first)
+
+- You may start work on your project as early as you want.
+- You can get feedback on your project (including commit habits) anytime before Feb 15. Send/show your github repo (with issues for the questions) via email / in person sessions.
+- The tutorials serve as concrete examples of improvable code - do not disregard those principles. Especially avoid duplicate code (DRY), i.e. write functions and loop/vectorize when needed.
+- **Do not include unnecessary code** for the sake of using many programming concepts. Use what makes sense for your analysis! E.g. to show a distribution of values, use a histogram, not *also* a boxplot. Do not hesitate to delete superfluous code again (or put it in a collapsed section).
+- Organize your code as suggested in [project](#project) (adapt filenames as needed). Large raw data may be excluded from your repo if needed, but do include the processing script. A main script or qmd file loading functions from a separate R/python script is very good practice. Unit tests for your functions in this project are not required (but suggested for real life and definitely count for the 4-5 concepts you need to apply).
+- I'm working on a compilation of project examples from last year (with my feedback included where allowed by the students).
+- You may use AI (declare all usage); to maximize learning, I suggest to develop the code yourself first and only then ask AI to check it against the grading criteria.
+- The document may have code visible, collapsed, or hidden - I'll look at the qmd source anyways.
+- Do not bother too much with grammar and spelling - the code is the important component for grading.
+- There is no minimum LOC-requirement (but under 50 would need good reasoning).
+- The dataset(s) should be suitable for your project, not too small, allowed to share with me (a *private* repo is OK).
+- Create a decent level of source code documentation (comments).
+- Data cleaning is important in real life, but for this course a kaggle dataset would be fine.
+- The coding project does not need to be scientifically valuable (but reasonable is good).
+- You may do hypothesis testing, but don't have to. Graphics are better than p-values anyways.
+- If you want to create a code-heavy application (e.g. an [R package](https://github.com/brry/course/blob/master/data/packdev.R) with a shiny app with UI-element-based visualizations), your qmd can be really short and mainly describe the UI design choices and access points.
+- Your project domain does not have to be digital health.
+- You may use an existing project, as long as it is your own and you wrote the code.
+- You may collect your own data for the project, but have a good plan to get that done. Do not underestimate the time needed for good data collection (preparation).
+
 
 
 ## oral exam {#oral-exam}
 
+At the end of the course, you must pass a brief oral exam with me and Bert.
+This is for us to make sure you did not just blindly outsource the work to an AI but instead understand your code and can explain tradeoffs and alternatives.
+
+- If you coded the exercises and report yourself and can answer a few coding questions, you should easily get a good grade.
+  The more you used AI (or wrote bad code), the harder it will prove to be (due to [reduced learning](#ai-in-learning)).
+- If you actively participated in the tutorials and I saw you developing the project yourself, the questions will not be hard.
+- I recommend to use only one programming language in your project,
+  but we do reserve the right to ask about things from the other language (more about structural topics than concrete syntax).
+- The exam will last 15 minutes and cover a few questions about your project and beyond (within course scope).
+- The exams will be scheduled with a survey.
+  There will be several days from late February to late March, each with several time slots back to back.
+- If you need the oral exam early, submit the project early and we'll manage that.
+- I plan to assess and grade your project before the oral exam.
 
 ## course improvements {#course-improvements}
 
+You can enhance your total course grade up to 0.7 grade points by contributing to the course material.\
+This counts for slides, videos, website, tasks, fpsetup, autograding code, lesson content, ...\
+Rejected suggestions will rather not count.\
+Amongst other things, I'm interested in what lessons, functions and tasks are particularly helpful, which ones should be expanded/added and which ones should rather become bonus material.\
+70 improvement points constitute a 0.7 grade point improvement.
+Typo fixes and minor wording changes count about 1-2 points,
+minor improvements ca 5 and major changes up to 15 points.\
+You may write suggestions in the feedback section of each exercise, per email or in-class, whatever suits you.\
+Please be constructive and concrete; here are some examples in increasing quality:
 
+- "Some tasks were hard to understand" (does not help me to make them better)
+- "Task xy was hard to understand" (mh, okay)
+- "Lesson xy was boring" (ok but why?)
+- "In Task xy, split the two questions into two separate lines" (Roger, done)
+- "Tasks x-y will not be relevant to many DH students, consider moving them to the bonus section" (thanks)
+- "Lesson xy would benefit from the additional content ..." (good idea)
+- "The wording in the first line of Task xy is ambiguous, it could mean A or B" (oh good)
+- "For Task xy, use the digital health dataset ..." (oh very nice)
+- "For Task xy, a nice bonus task building up on it would be ..." (yes please!)
+- "You could expand section xy with the following tasks ..." (precious!)
+
+Happy bug-bounty hunting :)
+
+*If any questions remain, do not hesitate to approach me!*\
+*Again, these criteria are not set in stone, contact me early to request changes.*
