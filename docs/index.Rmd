@@ -747,6 +747,7 @@ The internet
 - develop good coding habits from the beginning  
 - make mistakes, debug, struggle, research, think, build problem solving skills
 - implement AI-assisted code critically
+- enjoy [good employment perspectives](https://www.noahpinion.blog/p/ai-keeps-stubbornly-refusing-to-take)
 
 
 ## AI in learning
@@ -765,6 +766,7 @@ The internet
 
 *(sorted by publication time, hoping that some of the older problems get solved over time)*
 
+- 2026-09 OpenAI disrespecting IP may cause [damage to open science](https://garymarcus.substack.com/p/two-dire-warnings-one-from-terence)
 - 2026-08 AI R&D progress may [need pacing to be safe](https://open.substack.com/pub/noahpinion/p/should-we-pace-ai-self-improvement?) for humanity
 - 2026-07 when OpenAI guardrails are circumvented, [agents use zero-day-exploits](https://open.substack.com/pub/garymarcus/p/openais-disconcerting-hack-of-huggingface)
 - 2026-07: developers have [decreasing trust in AI coding tools output](https://uvik.net/blog/ai-coding-assistant-statistics/)
