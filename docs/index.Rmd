@@ -27,13 +27,16 @@ This website is here to help you start your coding journey.
 
 My free online courses are fairly suitable to learn programming on your own.
 
--   Short [R intro](https://github.com/brry/hour) (ca 1-5 hours)
--   **Fundamentals of Programming** [videos + autograded exercises](https://open.hpi.de/learn/hpi-dh-fprog2026), slides:
-    - [Infrastructure](https://www.dropbox.com/scl/fi/8dfua3fayq3qt70q55fzo/FP_infrastructure.pdf?rlkey=w2otnwioxpgnjmqcgu6i9boze&dl=0) (ca 1-3 hours)
-    - [Python](https://www.dropbox.com/scl/fi/mfsj541kd2tw3pc99uvkq/PyCourse.pdf?rlkey=olwpsady0qqnzvt7v9xyorkve&dl=0) (ca 20-50 hours)
-    - [R](https://www.dropbox.com/scl/fi/j52rck96bqo6gj288ylcy/Rcourse.pdf?rlkey=ie313crdx0dxs0yaik0ukk8mx&dl=0) (ca 30-70 hours)
--   [German R MOOC](https://open.hpi.de/courses/programmieren-r2022) (ca 20-50 hours)
--   [German Python MOOC](https://open.hpi.de/courses/python2024) (ca 10-40 hours)
+- Short [R intro](https://github.com/brry/hour) (ca 1-5 hours)
+- **Fundamentals of Programming** 
+  - [videos + autograded exercises](https://open.hpi.de/learn/hpi-dh-fprog2026) (free, email registration needed)
+  - [slides](https://www.dropbox.com/scl/fo/h8j6ckpeaqlfq5nbbcrok/ACzRP2qmnHjAxgFZMaqoz5I?rlkey=u6tknfg3szpqy3rshxnlxn6l2&dl=0) for:
+    - Infrastructure Git + Quarto (ca 1-3 hours)
+    - Python (ca 20-50 hours)
+    - R (ca 30-70 hours)
+  - [software installation guide](https://github.com/brry/fpsetup#software-installation-guide)
+- [German R MOOC](https://open.hpi.de/courses/programmieren-r2022) (ca 20-50 hours)
+- [German Python MOOC](https://open.hpi.de/courses/python2024) (ca 10-40 hours)
 
 Feel free to book me as a trainer in addition.
 
