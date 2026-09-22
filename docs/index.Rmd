@@ -1,5 +1,5 @@
 ---
-title: "R course"
+title: "programming course"
 author: "Berry Boessenkool, <berry-b@gmx.de>"
 site: bookdown::bookdown_site
 documentclass: book
@@ -17,7 +17,7 @@ editor_options:
 
 # welcome {#welcome}
 
-**to programming with R!**\
+**to programming with R (and Python)!**\
 I hope learning to code will change your life like it did mine :).
 
 <img src="https://github.com/brry/course/raw/master/externalfig/Blogo.png" width="100"/>
