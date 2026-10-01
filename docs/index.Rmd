@@ -656,7 +656,7 @@ git is a version control software. With it, you can download repositories, track
 
     1.  Go to a repo (for example [github.com/brry/fpsetup](https://github.com/brry/fpsetup)) and click on  [Code]{style="background-color:lime"} - SSH *(if logged in)* - Copy URL
 
-![](https://github.com/brry/course/raw/master/externalfig/git_clone_1.PNG)
+![](https://github.com/brry/course/raw/master/externalfig/git_clone_browser.png)
 
 -   
 
@@ -668,9 +668,15 @@ git is a version control software. With it, you can download repositories, track
 
 -   
 
-    3.  From now on, get the latest version with a single click on `Pull`:
+    3.  Make sure you're in the Rproject (RStudio topright):
 
-<img src="https://github.com/brry/course/raw/master/externalfig/git_clone_6.PNG" width="400"/>
+<img src="https://github.com/brry/course/raw/master/externalfig/git_clone_project.png" width="400"/>
+
+-   
+
+    4.  From now on, get the latest version with a single click on `Pull`:
+
+<img src="https://github.com/brry/course/raw/master/externalfig/git_clone_pull.png" width="400"/>
 
 ### git resources
 
