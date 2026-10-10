@@ -223,10 +223,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>install git<a href="git.html#install-git" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><em>This needs to be done only once :)</em></p>
 <ul>
-<li><p>If not already done before: create a github account at <a href="https://github.com/signup" class="uri">https://github.com/signup</a>. Use a short username!</p></li>
-<li><p>Download and install git, see <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></p></li>
-<li><p>Restart RStudio (if open)</p></li>
-<li><p>Manage authentification without renewing PAT access tokens via SSH (<a href="https://www.r-bloggers.com/rstudio-and-github">screenshots</a> for these instructions, if wanted):</p>
+<li>If not already done before: create a github account at <a href="https://github.com/signup" class="uri">https://github.com/signup</a>. Use a short username!</li>
+<li>Download and install git, see <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></li>
+<li>Restart RStudio (if open)</li>
+<li>Manage authentification without renewing PAT access tokens via SSH (<a href="https://www.r-bloggers.com/rstudio-and-github">screenshots</a> for these instructions, if wanted):
 <ul>
 <li>RStudio -&gt; Tools -&gt; Global Options -&gt; Git/SVN: Ensure the path to the Git executable is correct.</li>
 <li><code>Create SSH Key</code>, close window</li>
@@ -234,14 +234,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>go to <a href="https://github.com/settings/keys" class="uri">https://github.com/settings/keys</a> and click <code>New SSH key</code>, name it and paste the public key</li>
 <li>in the RStudio bottom/left Tab <code>Terminal</code>: type the following (line by line):</li>
 </ul>
-<pre><code>git version # just to see git works fine
-git config --global user.email &quot;Your_Email_Used_For_Github@domain.com&quot;
-git config --global user.name &quot;Your_Github_UserName_Here&quot;</code></pre></li>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="git.html#cb34-1" tabindex="-1"></a><span class="fu">git</span> version <span class="co"># just to see git works fine</span></span>
+<span id="cb34-2"><a href="git.html#cb34-2" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">&quot;Your_Email_Used_For_Github@domain.com&quot;</span></span>
+<span id="cb34-3"><a href="git.html#cb34-3" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">&quot;Your_Github_UserName_Here&quot;</span></span></code></pre></div></li>
 </ul>
 </div>
 <div id="use-git" class="section level3 hasAnchor">
 <h3>use git<a href="git.html#use-git" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><em>To clone a git repo, RStudio handles most the work for you :)</em></p>
+<p><em>To clone a git repo, your IDE handles most the work for you :)</em></p>
 <ul>
 <li><ol style="list-style-type: decimal">
 <li>Go to a repo (for example <a href="https://github.com/brry/fpsetup">github.com/brry/fpsetup</a>) and click on <span style="background-color:lime">Code</span> - SSH <em>(if logged in)</em> - Copy URL</li>
@@ -249,6 +249,9 @@ git config --global user.name &quot;Your_Github_UserName_Here&quot;</code></pre>
 </ul>
 <p><img src="https://github.com/brry/course/raw/master/externalfig/git_clone_browser.png" /></p>
 <ul>
+<li><ol start="2" style="list-style-type: decimal">
+<li>For VScode, follow their <a href="https://code.visualstudio.com/docs/sourcecontrol/quickstart">instructions</a>.</li>
+</ol></li>
 <li><ol start="2" style="list-style-type: decimal">
 <li>At RStudio - File - New Project - Version Control - Git,<br />
 paste the repository URL, set the subdirectory and create project.<br />
