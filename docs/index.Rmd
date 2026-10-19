@@ -126,7 +126,8 @@ Settings I use for compatibility and ease of use:
 -   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - Spelling
     -   **OFF**: Use real time spell-checking
 -   [Tools]{style="background-color:aquamarine"} - Modify Keyboard Shortcuts
-    -   To set the following and more keyboard shortcuts, see [rskey](https://github.com/brry/rskey#rskey)`::setKeyboardBindings()`
+    -   *To set the following and more keyboard shortcuts, use [rskey](https://github.com/brry/rskey#rskey)`::setKeyboardBindings()`*
+    -   Filter for "wrap" and set "toggle soft wrap mode" to e.g. `ALT` + `W` (Windows) or `control` + `W` (Mac)
     -   Remove `CTRL+Y` from the command "paste last yank" (to mean "redo" as in other programs)
     -   Set Working Directory to Current Document's Directory: `CTRL + H`
 
