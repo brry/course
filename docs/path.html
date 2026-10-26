@@ -238,18 +238,27 @@ For this particular check, I suggest using a clean OS-provided terminal:</p>
 <li>run the command <code>R.exe</code> (if not using the Windows Powershell, just <code>R</code>)</li>
 <li>if it succeeds, it shows the R version and other info</li>
 <li>quit with <code>q("no")</code></li>
-<li>if R is not found / recognized, add it to the <em>system</em> (not user) PATH:
+</ul>
+<p>If R is not found / recognized, add it to the PATH:</p>
 <ul>
-<li>copy the path where you installed R - or - in RStudio -&gt; Tools -&gt; Global Options,
-copy the path (e.g. <code>C:\Program Files\R\R-4.5.1)</code></li>
-<li>search (<code>Windows key</code>) for “env”, click “Edit the system environment variables”,
-then “Environment Variables” (<a href="https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/">guide with images</a>)</li>
-<li>under “<strong>System</strong> Variables” (in the bottom half) double click on “Path”</li>
+<li>copy the path where you installed R - <em>or</em> - in RStudio -&gt; Tools -&gt; Global Options,
+copy the path (e.g. <code>C:\Program Files\R\R-4.6.1)</code></li>
+<li>search (<code>Windows key</code>) for “env”, click
+<ul>
+<li>“Edit the system environment variables”</li>
+<li><em>or if you’re not an admin: “Edit the <strong>user</strong> environment variables”</em></li>
+</ul></li>
+<li>then click “Environment Variables” and
+<ul>
+<li>under “<strong>System</strong> Variables” (in the bottom half)</li>
+<li><em>or for non-admin: under “<strong>User</strong> Variables” (in the top half)</em></li>
+</ul></li>
+<li>double click on “Path”</li>
 <li>click “New” and copy-paste your installation location (if from RStudio, add <code>\bin</code> at the end)</li>
 <li>close the variable windows + the terminal, open a new one and try <code>R</code>/<code>R.exe</code> again.<br />
 Potentially restart Windows inbetween.</li>
-</ul></li>
 </ul>
+<p>(optional <a href="https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/">guide with images</a>)</p>
 </div>
 </div>
             </section>
