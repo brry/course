@@ -61,5 +61,6 @@ if(Sys.info()[["sysname"]]=="Windows") fn <- gsub("\\","/",Sys.getenv("APPDATA")
 if(length(sel)>1)
 message("RStudio settings adapted.\nTo edit individually, run:\n",
         "file.edit('", fn, "/rstudio/rstudio-prefs.json')\n",
+        "Restart RStudio fo all settings to take effect.\n",
         "For Keyboard shortcuts, see:\nhttps://brry.github.io/course/#settings")
 
