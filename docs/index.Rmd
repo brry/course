@@ -137,6 +137,8 @@ go to  `Tools` -> `Global Options`:
     -   **ON**: Show syntax highlighting in console input
 - -> `Packages` -> `Development`
     -   **ON**: Save all files before building a package
+- -> `R Markdown`
+    -   Show output preview in: **Viewer Pane**
 - not in menu, only per code:
 ```{r prefs_hide_hidden, eval=FALSE}
 # Hide hidden files (.git, .Rproj.user, ...) when "Show hidden files" is off:
@@ -158,8 +160,17 @@ my preferences, skip if unsure:
     -   **OFF**: Enable Code snippets - *if they annoy you*
 - -> `Code`-> `Saving`
     -   Line ending conversion: **Windows (CR/LF)** - *compatible across OS platforms*
+- -> `Sweave`
+    -   Weave Rnw files using: **knitr** - *for Rnw documents (use quarto instead now)*
 - -> `Spelling`
     -   **OFF**: Use real time spell-checking - *if it annoys you*
+- -> `Terminal` (Windows only)
+    -   New terminals open with: **Windows PowerShell** - *to enable `CTRL + V` in the terminal*
+- not in menu, only per code:
+```{r prefs_jobs_tab, eval=FALSE}
+# Keep the "Background jobs" tab open to check results later:
+rstudioapi::writeRStudioPreference("jobs_tab_visibility", "shown")
+```
 
 
 # good practice {#good-practice}

@@ -12,19 +12,20 @@ settings <- list(
 
 "always_save_history"=FALSE, # don't save record of running code, work with git
 
-"default_encoding"="UTF-8", # avoid file encoding hassle
+"highlight_r_function_calls"=TRUE, # function names get their own color
+"rainbow_parentheses"=TRUE,        # matching brackets share a color
 
-"always_shown_extensions"=list(), # actually hide hidden files in RStudio
-"always_shown_files"=list(),      # when 'Show hidden files' is off
+"default_encoding"="UTF-8",  # avoid file encoding hassle
+"auto_append_newline"=TRUE,  # end scripts with empty line for cleaner git diffs
 
-"highlight_r_function_calls"=TRUE, # make
-"rainbow_parentheses"=TRUE,        # syntax highlighting
-"syntax_color_console"=TRUE,       # nicer
+"syntax_color_console"=TRUE, # syntax highlighting in console input
 
-"auto_append_newline"=TRUE, # end scripts with empty line for cleaner git diffs
 "save_files_before_build"=TRUE, # for package developers
 
 "rmd_viewer_type"="pane", # rendered quarto documents in RStudio instead of browser
+
+"always_shown_extensions"=list(), # actually hide hidden files in RStudio
+"always_shown_files"=list(),      # when 'Show hidden files' is off
 
 # level 2:
 "editor_theme"="Cobalt", # dark mode
@@ -35,9 +36,9 @@ settings <- list(
 "enable_snippets"=FALSE, # avoid annoying snippet expansion when pressing TAB
 "line_ending_conversion"="windows", # CR/LF line endings on every OS
 "default_sweave_engine"="knitr", # for Rnw documents (use quarto instead now)
-"jobs_tab_visibility"="shown", # keep "Background jobs" open to check results later
+"real_time_spellchecking"=FALSE, # no red squiggles under words in the editor
 "windows_terminal_shell"="win-ps", # to enable CTRL + V in the terminal
-"real_time_spellchecking"=FALSE # no red squiggles under words in the editor
+"jobs_tab_visibility"="shown" # keep "Background jobs" open to check results later
 )
 
 message("Select which RStudio settings are to be changed:\n",
