@@ -98,38 +98,68 @@ or
 
 # settings {#settings}
 
-RStudio settings I strongly suggest for reproducibility:
+There are a few **RStudio settings** ([reference](https://docs.posit.co/ide/server-pro/admin/reference/session_user_settings.html))
+that should be changed for reproducibility,
+and several more that I suggest for ease of use.\
+You can set them manually (see below) or run 
+[this script](https://github.com/brry/course/blob/master/set_rstudio_prefs.R):
+```{r prefs_source, eval=FALSE}
+source("https://raw.githubusercontent.com/brry/course/master/set_rstudio_prefs.R")
+```
 
--   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - General
+
+I also suggest to set several **keyboard shortcuts**
+with the [rskey](https://github.com/brry/rskey#rskey) quick setup,\
+or a few manually at `Tools` -> `Modify Keyboard Shortcuts` (search with part of the name):
+
+- "toggle soft wrap mode": set to e.g. `ALT + W` (Windows) or `control + W` (Mac)
+- "paste last yank": remove `CTRL + Y` so it means "redo" as in other programs
+- "set working directory to current document's directory: set to e.g. `CTRL + H`
+
+-----
+
+To **manually change RStudio settings** if you don't want to run the script,\
+go to  `Tools` -> `Global Options`:
+
+
+- -> `General` -> `Basic`
     -   **OFF**: Restore .Rdata into workspace at startup\
     -   Save workspace to .RData on exit: **NEVER**\
+    -   **OFF**: Always save history (even when not saving .RData)\
     -   [Rather restore the results of long computations [manually](#saveload) if needed.]{style="color:grey"}
-
-Settings I use for compatibility and ease of use:
-
--   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - General - Advanced
-    -   set a project user data directory - *if you work in Dropbox / Google Drive, see [issue](https://github.com/rstudio/rstudio/issues/14778) & [solution](https://github.com/rstudio/rstudio/pull/14875)*
--   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - [Code]{style="background-color:palegreen"} - Editing
-    -   **ON**: Use native pipe operator
-    -   **OFF**: Auto-indent code after paste - *if you have a custom indenting scheme*
-    -   **OFF**: Enable Code snippets - *personal preference of mine*
--   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - [Code]{style="background-color:palegreen"} - Display
-    -   **ON**: Show margin (Margin column: 80) - *avoid horizontal scrolling!*
+- -> `Code`-> `Display`
     -   **ON**: Highlight R function calls
     -   **ON**: Use rainbow parentheses
--   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - [Code]{style="background-color:palegreen"} - Saving
-    -   Line ending conversion: **Windows (CR/LF)** - *compatible across OS platforms*
+- -> `Code`-> `Saving`
     -   Default Text Encoding: **UTF-8**
--   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - Appearance
-    -   [Editor font size: 10]{style="color:grey"}
+    -   **ON**: Ensure that source files end with newline
+- -> `Console`
+    -   **ON**: Show syntax highlighting in console input
+- -> `Packages` -> `Development`
+    -   **ON**: Save all files before building a package
+- not in menu, only per code:
+```{r prefs_hide_hidden, eval=FALSE}
+# Hide hidden files (.git, .Rproj.user, ...) when "Show hidden files" is off:
+rstudioapi::writeRStudioPreference("always_shown_extensions", list())
+rstudioapi::writeRStudioPreference("always_shown_files", list())
+```
+
+matter of taste:
+
+- -> `Appearance`
     -   Editor theme: **Cobalt**
--   [Tools]{style="background-color:aquamarine"} - [Global Options]{style="background-color:aquamarine"} - Spelling
-    -   **OFF**: Use real time spell-checking
--   [Tools]{style="background-color:aquamarine"} - Modify Keyboard Shortcuts
-    -   *To set the following and more keyboard shortcuts, use [rskey](https://github.com/brry/rskey#rskey)`::setKeyboardBindings()`*
-    -   Filter for "wrap" and set "toggle soft wrap mode" to e.g. `ALT` + `W` (Windows) or `control` + `W` (Mac)
-    -   Remove `CTRL+Y` from the command "paste last yank" (to mean "redo" as in other programs)
-    -   Set Working Directory to Current Document's Directory: `CTRL + H`
+
+my preferences, skip if unsure:
+
+- -> `General` -> `Advanced`
+    -   set a project user data directory - *if you work in Dropbox etc, see [issue](https://github.com/rstudio/rstudio/issues/14778) & [solution](https://github.com/rstudio/rstudio/pull/14875)*
+- -> `Code`-> `Editing`
+    -   **OFF**: Auto-indent code after paste - *if you have a custom indenting scheme*
+    -   **OFF**: Enable Code snippets - *if they annoy you*
+- -> `Code`-> `Saving`
+    -   Line ending conversion: **Windows (CR/LF)** - *compatible across OS platforms*
+- -> `Spelling`
+    -   **OFF**: Use real time spell-checking - *if it annoys you*
 
 
 # good practice {#good-practice}
