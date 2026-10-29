@@ -7,18 +7,18 @@ if(!rstudioapi::isAvailable()) stop("This script must be run inside RStudio.", c
 # See what will be set, depending on selection when asked below:
 settings <- list(
 # level 1:
-"load_workspace"=FALSE,   # do not carry objects over to new sessions,
+"load_workspace"=FALSE,   # do not carry objects over to new sessions
 "save_workspace"="never", # keep code reproducible
 
 "always_save_history"=FALSE, # don't save record of running code, work with git
 
 "default_encoding"="UTF-8", # avoid file encoding hassle
 
-"always_shown_extensions"=list(), # actually hide hidden files in Rstudio
+"always_shown_extensions"=list(), # actually hide hidden files in RStudio
 "always_shown_files"=list(),      # when 'Show hidden files' is off
 
 "highlight_r_function_calls"=TRUE, # make
-"rainbow_parentheses"=TRUE,        # syntax higlighting
+"rainbow_parentheses"=TRUE,        # syntax highlighting
 "syntax_color_console"=TRUE,       # nicer
 
 "auto_append_newline"=TRUE, # end scripts with empty line for cleaner git diffs
@@ -36,7 +36,7 @@ settings <- list(
 "line_ending_conversion"="windows", # CR/LF line endings on every OS
 "default_sweave_engine"="knitr", # for Rnw documents (use quarto instead now)
 "jobs_tab_visibility"="shown", # keep "Background jobs" open to check results later
-"windows_terminal_shell"="win-ps", # to enable CTRL + V in the termnal
+"windows_terminal_shell"="win-ps", # to enable CTRL + V in the terminal
 "real_time_spellchecking"=FALSE # no red squiggles under words in the editor
 )
 
