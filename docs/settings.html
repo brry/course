@@ -218,57 +218,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="settings" class="section level1 hasAnchor">
 <h1>settings<a href="settings.html#settings" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>RStudio settings I strongly suggest for reproducibility:</p>
+<p>There are a few <strong>RStudio settings</strong> (<a href="https://docs.posit.co/ide/server-pro/admin/reference/session_user_settings.html">reference</a>)
+that should be changed for reproducibility,
+and several more that I suggest for ease of use.<br />
+You can set them manually (see below) or run
+<a href="https://github.com/brry/course/blob/master/set_rstudio_prefs.R">this script</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="settings.html#cb1-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;https://raw.githubusercontent.com/brry/course/master/set_rstudio_prefs.R&quot;</span>)</span></code></pre></div>
+<p>I also suggest to set several <strong>keyboard shortcuts</strong>
+with the <a href="https://github.com/brry/rskey#rskey">rskey</a> quick setup,<br />
+or a few manually at <code>Tools</code> -&gt; <code>Modify Keyboard Shortcuts</code> (search with part of the name):</p>
 <ul>
-<li><span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General
+<li>“toggle soft wrap mode”: set to e.g. <code>ALT + W</code> (Windows) or <code>control + W</code> (Mac)</li>
+<li>“paste last yank”: remove <code>CTRL + Y</code> so it means “redo” as in other programs</li>
+<li>“set working directory to current document’s directory: set to e.g. <code>CTRL + H</code></li>
+</ul>
+<hr />
+<p>To <strong>manually change RStudio settings</strong> if you don’t want to run the script,<br />
+go to <code>Tools</code> -&gt; <code>Global Options</code>:</p>
+<ul>
+<li>-&gt; <code>General</code> -&gt; <code>Basic</code>
 <ul>
 <li><strong>OFF</strong>: Restore .Rdata into workspace at startup<br />
 </li>
 <li>Save workspace to .RData on exit: <strong>NEVER</strong><br />
 </li>
+<li><strong>OFF</strong>: Always save history (even when not saving .RData)<br />
+</li>
 <li><span style="color:grey">Rather restore the results of long computations <a href="saveload.html#saveload">manually</a> if needed.</span></li>
 </ul></li>
-</ul>
-<p>Settings I use for compatibility and ease of use:</p>
+<li>-&gt; <code>Code</code>-&gt; <code>Display</code>
 <ul>
-<li><span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - General - Advanced
-<ul>
-<li>set a project user data directory - <em>if you work in Dropbox / Google Drive, see <a href="https://github.com/rstudio/rstudio/issues/14778">issue</a> &amp; <a href="https://github.com/rstudio/rstudio/pull/14875">solution</a></em></li>
-</ul></li>
-<li><span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Editing
-<ul>
-<li><strong>ON</strong>: Use native pipe operator</li>
-<li><strong>OFF</strong>: Auto-indent code after paste - <em>if you have a custom indenting scheme</em></li>
-<li><strong>OFF</strong>: Enable Code snippets - <em>personal preference of mine</em></li>
-</ul></li>
-<li><span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Display
-<ul>
-<li><strong>ON</strong>: Show margin (Margin column: 80) - <em>avoid horizontal scrolling!</em></li>
 <li><strong>ON</strong>: Highlight R function calls</li>
 <li><strong>ON</strong>: Use rainbow parentheses</li>
 </ul></li>
-<li><span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - <span style="background-color:palegreen">Code</span> - Saving
+<li>-&gt; <code>Code</code>-&gt; <code>Saving</code>
 <ul>
-<li>Line ending conversion: <strong>Windows (CR/LF)</strong> - <em>compatible across OS platforms</em></li>
 <li>Default Text Encoding: <strong>UTF-8</strong></li>
+<li><strong>ON</strong>: Ensure that source files end with newline</li>
 </ul></li>
-<li><span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Appearance
+<li>-&gt; <code>Console</code>
 <ul>
-<li><span style="color:grey">Editor font size: 10</span></li>
+<li><strong>ON</strong>: Show syntax highlighting in console input</li>
+</ul></li>
+<li>-&gt; <code>Packages</code> -&gt; <code>Development</code>
+<ul>
+<li><strong>ON</strong>: Save all files before building a package</li>
+</ul></li>
+<li>-&gt; <code>R Markdown</code>
+<ul>
+<li>Show output preview in: <strong>Viewer Pane</strong></li>
+</ul></li>
+<li>not in menu, only per code:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="settings.html#cb2-1" tabindex="-1"></a><span class="co"># Hide hidden files (.git, .Rproj.user, ...) when &quot;Show hidden files&quot; is off:</span></span>
+<span id="cb2-2"><a href="settings.html#cb2-2" tabindex="-1"></a>rstudioapi<span class="sc">::</span><span class="fu">writeRStudioPreference</span>(<span class="st">&quot;always_shown_extensions&quot;</span>, <span class="fu">list</span>())</span>
+<span id="cb2-3"><a href="settings.html#cb2-3" tabindex="-1"></a>rstudioapi<span class="sc">::</span><span class="fu">writeRStudioPreference</span>(<span class="st">&quot;always_shown_files&quot;</span>, <span class="fu">list</span>())</span></code></pre></div>
+<p>matter of taste:</p>
+<ul>
+<li>-&gt; <code>Appearance</code>
+<ul>
 <li>Editor theme: <strong>Cobalt</strong></li>
 </ul></li>
-<li><span style="background-color:aquamarine">Tools</span> - <span style="background-color:aquamarine">Global Options</span> - Spelling
-<ul>
-<li><strong>OFF</strong>: Use real time spell-checking</li>
-</ul></li>
-<li><span style="background-color:aquamarine">Tools</span> - Modify Keyboard Shortcuts
-<ul>
-<li><em>To set the following and more keyboard shortcuts, use <a href="https://github.com/brry/rskey#rskey">rskey</a><code>::setKeyboardBindings()</code></em></li>
-<li>Filter for “wrap” and set “toggle soft wrap mode” to e.g. <code>ALT</code> + <code>W</code> (Windows) or <code>control</code> + <code>W</code> (Mac)</li>
-<li>Remove <code>CTRL+Y</code> from the command “paste last yank” (to mean “redo” as in other programs)</li>
-<li>Set Working Directory to Current Document’s Directory: <code>CTRL + H</code></li>
-</ul></li>
 </ul>
+<p>my preferences, skip if unsure:</p>
+<ul>
+<li>-&gt; <code>General</code> -&gt; <code>Advanced</code>
+<ul>
+<li>set a project user data directory - <em>if you work in Dropbox etc, see <a href="https://github.com/rstudio/rstudio/issues/14778">issue</a> &amp; <a href="https://github.com/rstudio/rstudio/pull/14875">solution</a></em></li>
+</ul></li>
+<li>-&gt; <code>Code</code>-&gt; <code>Editing</code>
+<ul>
+<li><strong>OFF</strong>: Auto-indent code after paste - <em>if you have a custom indenting scheme</em></li>
+<li><strong>OFF</strong>: Enable Code snippets - <em>if they annoy you</em></li>
+</ul></li>
+<li>-&gt; <code>Code</code>-&gt; <code>Saving</code>
+<ul>
+<li>Line ending conversion: <strong>Windows (CR/LF)</strong> - <em>compatible across OS platforms</em></li>
+</ul></li>
+<li>-&gt; <code>Sweave</code>
+<ul>
+<li>Weave Rnw files using: <strong>knitr</strong> - <em>for Rnw documents (use quarto instead now)</em></li>
+</ul></li>
+<li>-&gt; <code>Spelling</code>
+<ul>
+<li><strong>OFF</strong>: Use real time spell-checking - <em>if it annoys you</em></li>
+</ul></li>
+<li>-&gt; <code>Terminal</code> (Windows only)
+<ul>
+<li>New terminals open with: <strong>Windows PowerShell</strong> - <em>to enable <code>CTRL + V</code> in the terminal</em></li>
+</ul></li>
+<li>not in menu, only per code:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="settings.html#cb3-1" tabindex="-1"></a><span class="co"># Keep the &quot;Background jobs&quot; tab open to check results later:</span></span>
+<span id="cb3-2"><a href="settings.html#cb3-2" tabindex="-1"></a>rstudioapi<span class="sc">::</span><span class="fu">writeRStudioPreference</span>(<span class="st">&quot;jobs_tab_visibility&quot;</span>, <span class="st">&quot;shown&quot;</span>)</span></code></pre></div>
 </div>
             </section>
 
