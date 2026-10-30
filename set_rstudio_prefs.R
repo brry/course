@@ -34,7 +34,7 @@ settings <- list(
 "project_user_data_directory"="~/.R/rstudioprojects_SetbyBerry", # outside of (synced) project folder
 "reindent_on_paste"=FALSE, # keep indentation of pasted code as it is
 "enable_snippets"=FALSE, # avoid annoying snippet expansion when pressing TAB
-"line_ending_conversion"="windows", # CR/LF line endings on every OS
+"line_ending_conversion"="posix", # LF line endings on every OS
 "default_sweave_engine"="knitr", # for Rnw documents (use quarto instead now)
 "real_time_spellchecking"=FALSE, # no red squiggles under words in the editor
 "windows_terminal_shell"="win-ps", # to enable CTRL + V in the terminal

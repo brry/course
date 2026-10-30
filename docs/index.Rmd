@@ -159,7 +159,7 @@ my preferences, skip if unsure:
     -   **OFF**: Auto-indent code after paste - *if you have a custom indenting scheme*
     -   **OFF**: Enable Code snippets - *if they annoy you*
 - -> `Code`-> `Saving`
-    -   Line ending conversion: **Windows (CR/LF)** - *compatible across OS platforms*
+    -   Line ending conversion: **posix (LF)** - *compatible across OS platforms*
 - -> `Sweave`
     -   Weave Rnw files using: **knitr** - *for Rnw documents (use quarto instead now)*
 - -> `Spelling`
